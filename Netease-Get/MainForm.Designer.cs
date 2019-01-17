@@ -89,7 +89,7 @@
             this.DownloadList.Location = new System.Drawing.Point(42, 142);
             this.DownloadList.Name = "DownloadList";
             this.DownloadList.Size = new System.Drawing.Size(635, 364);
-            this.DownloadList.TabIndex = 7;
+            this.DownloadList.TabIndex = 1;
             // 
             // RemoveSelected
             // 
@@ -100,7 +100,7 @@
             this.RemoveSelected.Location = new System.Drawing.Point(716, 308);
             this.RemoveSelected.Name = "RemoveSelected";
             this.RemoveSelected.Size = new System.Drawing.Size(196, 72);
-            this.RemoveSelected.TabIndex = 8;
+            this.RemoveSelected.TabIndex = 4;
             this.RemoveSelected.Text = "Remove Selected";
             this.RemoveSelected.UseVisualStyleBackColor = false;
             this.RemoveSelected.Click += new System.EventHandler(this.RemoveSelected_Click);
@@ -114,7 +114,7 @@
             this.RemoveAll.Location = new System.Drawing.Point(716, 432);
             this.RemoveAll.Name = "RemoveAll";
             this.RemoveAll.Size = new System.Drawing.Size(196, 72);
-            this.RemoveAll.TabIndex = 9;
+            this.RemoveAll.TabIndex = 5;
             this.RemoveAll.Text = "Remove All";
             this.RemoveAll.UseVisualStyleBackColor = false;
             this.RemoveAll.Click += new System.EventHandler(this.RemoveAll_Click);
