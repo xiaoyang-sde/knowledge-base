@@ -12,9 +12,15 @@ namespace Netease_Get
 {
     public partial class MainForm : Form
     {
+        
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void AddAlbum_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -28,90 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.downloadList = new System.Windows.Forms.CheckedListBox();
-            this.addSingle = new System.Windows.Forms.Button();
-            this.addPlayList = new System.Windows.Forms.Button();
-            this.addSearch = new System.Windows.Forms.Button();
-            this.downloadSelected = new System.Windows.Forms.Button();
+            this.DownloadList = new System.Windows.Forms.CheckedListBox();
+            this.AddSingle = new System.Windows.Forms.Button();
+            this.AddPlayList = new System.Windows.Forms.Button();
+            this.AddAlbum = new System.Windows.Forms.Button();
+            this.DownloadSelected = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // downloadList
+            // DownloadList
             // 
-            this.downloadList.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.downloadList.FormattingEnabled = true;
-            this.downloadList.Location = new System.Drawing.Point(25, 36);
-            this.downloadList.Name = "downloadList";
-            this.downloadList.Size = new System.Drawing.Size(607, 372);
-            this.downloadList.TabIndex = 0;
+            this.DownloadList.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DownloadList.FormattingEnabled = true;
+            this.DownloadList.Location = new System.Drawing.Point(25, 92);
+            this.DownloadList.Name = "DownloadList";
+            this.DownloadList.Size = new System.Drawing.Size(607, 368);
+            this.DownloadList.TabIndex = 0;
             // 
-            // addSingle
+            // AddSingle
             // 
-            this.addSingle.BackColor = System.Drawing.Color.White;
-            this.addSingle.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addSingle.Location = new System.Drawing.Point(652, 36);
-            this.addSingle.Name = "addSingle";
-            this.addSingle.Size = new System.Drawing.Size(197, 58);
-            this.addSingle.TabIndex = 1;
-            this.addSingle.Text = "Add Single";
-            this.addSingle.UseVisualStyleBackColor = false;
+            this.AddSingle.BackColor = System.Drawing.Color.White;
+            this.AddSingle.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.AddSingle.Location = new System.Drawing.Point(653, 36);
+            this.AddSingle.Name = "AddSingle";
+            this.AddSingle.Size = new System.Drawing.Size(197, 72);
+            this.AddSingle.TabIndex = 1;
+            this.AddSingle.Text = "Add Single";
+            this.AddSingle.UseVisualStyleBackColor = false;
             // 
-            // addPlayList
+            // AddPlayList
             // 
-            this.addPlayList.BackColor = System.Drawing.Color.White;
-            this.addPlayList.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addPlayList.Location = new System.Drawing.Point(653, 140);
-            this.addPlayList.Name = "addPlayList";
-            this.addPlayList.Size = new System.Drawing.Size(197, 58);
-            this.addPlayList.TabIndex = 2;
-            this.addPlayList.Text = "Add PlayList";
-            this.addPlayList.UseVisualStyleBackColor = false;
+            this.AddPlayList.BackColor = System.Drawing.Color.White;
+            this.AddPlayList.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.AddPlayList.Location = new System.Drawing.Point(653, 153);
+            this.AddPlayList.Name = "AddPlayList";
+            this.AddPlayList.Size = new System.Drawing.Size(197, 72);
+            this.AddPlayList.TabIndex = 2;
+            this.AddPlayList.Text = "Add PlayList";
+            this.AddPlayList.UseVisualStyleBackColor = false;
             // 
-            // addSearch
+            // AddAlbum
             // 
-            this.addSearch.BackColor = System.Drawing.Color.White;
-            this.addSearch.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addSearch.Location = new System.Drawing.Point(652, 244);
-            this.addSearch.Name = "addSearch";
-            this.addSearch.Size = new System.Drawing.Size(197, 58);
-            this.addSearch.TabIndex = 3;
-            this.addSearch.Text = "Search";
-            this.addSearch.UseVisualStyleBackColor = false;
+            this.AddAlbum.BackColor = System.Drawing.Color.White;
+            this.AddAlbum.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.AddAlbum.Location = new System.Drawing.Point(652, 270);
+            this.AddAlbum.Name = "AddAlbum";
+            this.AddAlbum.Size = new System.Drawing.Size(197, 72);
+            this.AddAlbum.TabIndex = 3;
+            this.AddAlbum.Text = "Add Album";
+            this.AddAlbum.UseVisualStyleBackColor = false;
+            this.AddAlbum.Click += new System.EventHandler(this.AddAlbum_Click);
             // 
-            // downloadSelected
+            // DownloadSelected
             // 
-            this.downloadSelected.BackColor = System.Drawing.Color.White;
-            this.downloadSelected.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.downloadSelected.Location = new System.Drawing.Point(653, 348);
-            this.downloadSelected.Name = "downloadSelected";
-            this.downloadSelected.Size = new System.Drawing.Size(197, 58);
-            this.downloadSelected.TabIndex = 4;
-            this.downloadSelected.Text = "Download Selected";
-            this.downloadSelected.UseVisualStyleBackColor = false;
+            this.DownloadSelected.BackColor = System.Drawing.Color.White;
+            this.DownloadSelected.Font = new System.Drawing.Font("DengXian Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DownloadSelected.Location = new System.Drawing.Point(652, 387);
+            this.DownloadSelected.Name = "DownloadSelected";
+            this.DownloadSelected.Size = new System.Drawing.Size(197, 72);
+            this.DownloadSelected.TabIndex = 4;
+            this.DownloadSelected.Text = "Download Selected";
+            this.DownloadSelected.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.textBox1.Location = new System.Drawing.Point(26, 36);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(606, 39);
+            this.textBox1.TabIndex = 5;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 450);
-            this.Controls.Add(this.downloadSelected);
-            this.Controls.Add(this.addSearch);
-            this.Controls.Add(this.addPlayList);
-            this.Controls.Add(this.addSingle);
-            this.Controls.Add(this.downloadList);
+            this.ClientSize = new System.Drawing.Size(876, 489);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.DownloadSelected);
+            this.Controls.Add(this.AddAlbum);
+            this.Controls.Add(this.AddPlayList);
+            this.Controls.Add(this.AddSingle);
+            this.Controls.Add(this.DownloadList);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox downloadList;
-        private System.Windows.Forms.Button addSingle;
-        private System.Windows.Forms.Button addPlayList;
-        private System.Windows.Forms.Button addSearch;
-        private System.Windows.Forms.Button downloadSelected;
+        private System.Windows.Forms.CheckedListBox DownloadList;
+        private System.Windows.Forms.Button AddSingle;
+        private System.Windows.Forms.Button AddPlayList;
+        private System.Windows.Forms.Button AddAlbum;
+        private System.Windows.Forms.Button DownloadSelected;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
