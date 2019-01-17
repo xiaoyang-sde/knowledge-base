@@ -3,7 +3,7 @@ Download Music Files from Netease Music
 
 Netease-Get is licensed under Apache License 2.0
 
-Environment: [.Net Framework 4.5.2](https://www.microsoft.com/en-us/download/details.aspx?id=42642)
+Runtime Environment: [.Net Framework 4.5.2](https://www.microsoft.com/en-us/download/details.aspx?id=42642)
 
 ---
 从网易云音乐歌单/专辑下载MP3文件
