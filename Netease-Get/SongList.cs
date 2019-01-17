@@ -8,16 +8,21 @@ namespace Netease_Get
 {
     class SongList
     {
-        private Dictionary<string, string> SongDict { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> SongDict { get; set; } = new Dictionary<string, string>();
 
         public void Add(string id,string name)
         {
             SongDict.Add(id, name);
         }
 
-        public void Del(string id)
+        public void Del(int index)
         {
-            SongDict.Remove(id);
+            SongDict.Remove(SongDict.ElementAt(index).Key);
+        }
+
+        public void DelAll()
+        {
+            SongDict =new Dictionary<string, string>();
         }
     }
 }

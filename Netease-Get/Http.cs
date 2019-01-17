@@ -11,6 +11,8 @@ namespace Netease_Get
 {
     class Http
     {
+        public int DownloadSize { get; set; } = 0;
+
         public async Task<string> GetFromUrl(string url)
         {
             HttpClient client = new HttpClient();
@@ -21,7 +23,8 @@ namespace Netease_Get
 
         public async Task<bool> DownloadFormUrl(string url, string path)
         {
-            var client = new HttpClient();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
             var response = await client.GetAsync(url);
 
             using (var stream = await response.Content.ReadAsStreamAsync())
