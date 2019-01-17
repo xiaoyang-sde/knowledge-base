@@ -10,7 +10,7 @@ namespace Netease_Get
     {
         public Dictionary<string, string> SongDict { get; set; } = new Dictionary<string, string>();
 
-        public void Add(string id,string name)
+        public void Add(string id, string name)
         {
             SongDict.Add(id, name);
         }
@@ -22,7 +22,7 @@ namespace Netease_Get
 
         public void DelAll()
         {
-            SongDict =new Dictionary<string, string>();
+            SongDict = new Dictionary<string, string>();
         }
     }
 }

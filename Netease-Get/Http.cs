@@ -15,26 +15,43 @@ namespace Netease_Get
 
         public async Task<string> GetFromUrl(string url)
         {
+
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
-            string response = await client.GetStringAsync(url);
-            return response;
+            try
+            {
+                string response = await client.GetStringAsync(url);
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
-        public async Task<bool> DownloadFormUrl(string url, string path)
+        public async Task<string> DownloadFormUrl(string url, string path)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
-            var response = await client.GetAsync(url);
-
-            using (var stream = await response.Content.ReadAsStreamAsync())
+            try
             {
-                var fileInfo = new FileInfo(path);
-                using (var fileStream = fileInfo.OpenWrite())
+                var response = await client.GetAsync(url);
+
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 {
-                    await stream.CopyToAsync(fileStream);
-                    return true;
+                    var fileInfo = new FileInfo(path);
+                    using (var fileStream = fileInfo.OpenWrite())
+                    {
+                        await stream.CopyToAsync(fileStream);
+                        return "";
+                    }
                 }
+            }
+
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
     }

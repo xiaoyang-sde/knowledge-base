@@ -55,42 +55,50 @@ namespace Netease_Get
 
         public async Task<bool> DownloadAll(string appPath)
         {
-
-            int Status = 0;
-            Dictionary<string, string> dict = SongList.SongDict;
-            int i = 1;
-            int all = dict.Count();
-
-            if (!Directory.Exists(appPath + "/Music/"))
+            try
             {
-                Directory.CreateDirectory(appPath + "/Music/");
-            }
+                int Status = 0;
+                Dictionary<string, string> dict = SongList.SongDict;
+                int i = 1;
+                int all = dict.Count();
 
-            foreach (var item in dict)
+                if (!Directory.Exists(appPath + "/Music/"))
+                {
+                    Directory.CreateDirectory(appPath + "/Music/");
+                }
+
+                foreach (var item in dict)
+                {
+                    string index = " ( " + i.ToString() + " / " + all.ToString() + " )";
+                    string id = item.Key;
+                    string name = item.Value;
+                    DownloadStatus = "Downloading: " + name + index;
+                    Update();
+                    Status = await Download(id, name, appPath);
+
+                    if (Status == 200)
+                    {
+                        DownloadStatus = "Download Completed: " + name + index;
+                    }
+                    else if (Status == 404)
+                    {
+                        DownloadStatus = "Download Failed: " + name + " has been removed." + index;
+                    }
+                    else if (Status == 503)
+                    {
+                        DownloadStatus = "Download Failed: API Error" + index;
+                    }
+                    Update();
+                    i = i + 1;
+                }
+                return true;
+            }
+            catch (Exception e)
             {
-                string index = " ( " + i.ToString() + " / " + all.ToString() + " )";
-                string id = item.Key;
-                string name = item.Value;
-                DownloadStatus = "Downloading: " + name + index;
+                DownloadStatus = e.Message;
                 Update();
-                Status = await Download(id, name, appPath);
-
-                if (Status == 200)
-                {
-                    DownloadStatus = "Download Completed: " + name + index;
-                }
-                else if (Status == 404)
-                {
-                    DownloadStatus = "Download Failed: " + name + " has been removed." + index;
-                }
-                else if (Status == 503)
-                {
-                    DownloadStatus = "Download Failed: API Error" + index;
-                }
-                Update();
-                i = i + 1;
+                return false;
             }
-            return true;
         }
 
         public async Task<List<string>> GetAlbum(string id)
@@ -103,19 +111,28 @@ namespace Netease_Get
             JObject jsonReader = JObject.Parse(json);
             if (jsonReader["code"].ToString() == "200")
             {
-                int count = jsonReader["album"]["songs"].Count();
-                for (int i = 0; i < count; i++)
+                if (jsonReader["code"].ToString() != "404")
                 {
-                    string name = jsonReader["album"]["songs"][i]["name"].ToString();
-                    string sid = jsonReader["album"]["songs"][i]["id"].ToString();
-                    string artist = jsonReader["album"]["songs"][i]["artists"][0]["name"].ToString();
-
-                    if (SongList.SongDict.ContainsKey(sid) == false)
+                    int count = jsonReader["album"]["songs"].Count();
+                    for (int i = 0; i < count; i++)
                     {
-                        nameList.Add(name + "       " + artist);
-                        SongList.Add(sid, name);
+                        string name = jsonReader["album"]["songs"][i]["name"].ToString();
+                        string sid = jsonReader["album"]["songs"][i]["id"].ToString();
+                        string artist = jsonReader["album"]["songs"][i]["artists"][0]["name"].ToString();
+
+                        if (SongList.SongDict.ContainsKey(sid) == false)
+                        {
+                            nameList.Add(name + "       " + artist);
+                            SongList.Add(sid, name);
+                        }
                     }
                 }
+
+            }
+            else
+            {
+                DownloadStatus = "Album Not Found";
+                Update();
             }
             return nameList;
         }
@@ -129,13 +146,22 @@ namespace Netease_Get
             JObject jsonReader = JObject.Parse(json);
             if (jsonReader["code"].ToString() == "200")
             {
-                name = jsonReader["songs"][0]["name"].ToString();
-                string artist = jsonReader["songs"][0]["ar"][0]["name"].ToString();
-                if (!SongList.SongDict.ContainsKey(id))
+                if (jsonReader["songs"].Count() != 0)
                 {
-                    SongList.Add(id, name);
-                    name = name + "      " + artist;
-                    return name;
+                    name = jsonReader["songs"][0]["name"].ToString();
+                    string artist = jsonReader["songs"][0]["ar"][0]["name"].ToString();
+                    if (!SongList.SongDict.ContainsKey(id))
+                    {
+                        SongList.Add(id, name);
+                        name = name + "      " + artist;
+                        return name;
+                    }
+                }
+                else
+                {
+                    DownloadStatus = "Single Not Found";
+                    Update();
+                    return "";
                 }
             }
             return "";
@@ -143,27 +169,39 @@ namespace Netease_Get
 
         public async Task<List<string>> GetPlayList(string id)
         {
-            string api = "http://api.javaswing.cn/playlist/detail?id=";
-            string url = api + id;
-            string json = await HttpClient.GetFromUrl(url);
-            JObject jsonReader = JObject.Parse(json);
             List<string> nameList = new List<string>();
-
-            int count = jsonReader["playlist"]["tracks"].Count();
-            for (int i = 0; i < count; i++)
+            try
             {
-                string name = jsonReader["playlist"]["tracks"][i]["name"].ToString();
-                string sid = jsonReader["playlist"]["tracks"][i]["id"].ToString();
-                string artist = jsonReader["playlist"]["tracks"][i]["ar"][0]["name"].ToString();
+                string api = "http://api.javaswing.cn/playlist/detail?id=";
+                string url = api + id;
+                string json = await HttpClient.GetFromUrl(url);
+                JObject jsonReader = JObject.Parse(json);
 
-                if (SongList.SongDict.ContainsKey(sid) == false)
+                if (jsonReader["code"].ToString() == "200")
                 {
-                    nameList.Add(name + "       " + artist);
-                    SongList.Add(sid, name);
-                }
+                    int count = jsonReader["playlist"]["tracks"].Count();
+                    for (int i = 0; i < count; i++)
+                    {
+                        string name = jsonReader["playlist"]["tracks"][i]["name"].ToString();
+                        string sid = jsonReader["playlist"]["tracks"][i]["id"].ToString();
+                        string artist = jsonReader["playlist"]["tracks"][i]["ar"][0]["name"].ToString();
 
+                        if (SongList.SongDict.ContainsKey(sid) == false)
+                        {
+                            nameList.Add(name + "       " + artist);
+                            SongList.Add(sid, name);
+                        }
+                    }
+
+                }
+                return nameList;
             }
-            return nameList;
+            catch
+            {
+                DownloadStatus = "PlayList Not Found";
+                Update();
+                return nameList;
+            }
         }
 
         public void RemoveAll()

@@ -35,12 +35,14 @@
             this.DownloadList = new System.Windows.Forms.ListBox();
             this.RemoveSelected = new System.Windows.Forms.Button();
             this.RemoveAll = new System.Windows.Forms.Button();
-            this.Minimize = new System.Windows.Forms.PictureBox();
-            this.Close = new System.Windows.Forms.PictureBox();
             this.Label = new System.Windows.Forms.Label();
             this.StatusLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Minimize)).BeginInit();
+            this.GithubBox = new System.Windows.Forms.PictureBox();
+            this.Close = new System.Windows.Forms.PictureBox();
+            this.Minimize = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.GithubBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Close)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Minimize)).BeginInit();
             this.SuspendLayout();
             // 
             // Add
@@ -65,7 +67,7 @@
             this.Download.Name = "Download";
             this.Download.Size = new System.Drawing.Size(196, 72);
             this.Download.TabIndex = 3;
-            this.Download.Text = "Download";
+            this.Download.Text = "Download All";
             this.Download.UseVisualStyleBackColor = false;
             this.Download.Click += new System.EventHandler(this.Download_Click);
             // 
@@ -117,15 +119,39 @@
             this.RemoveAll.UseVisualStyleBackColor = false;
             this.RemoveAll.Click += new System.EventHandler(this.RemoveAll_Click);
             // 
-            // Minimize
+            // Label
             // 
-            this.Minimize.Image = global::Netease_Get.Properties.Resources.MinimizeW;
-            this.Minimize.Location = new System.Drawing.Point(865, 6);
-            this.Minimize.Name = "Minimize";
-            this.Minimize.Size = new System.Drawing.Size(47, 48);
-            this.Minimize.TabIndex = 10;
-            this.Minimize.TabStop = false;
-            this.Minimize.Click += new System.EventHandler(this.Minimize_Click);
+            this.Label.AutoSize = true;
+            this.Label.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.Label.Location = new System.Drawing.Point(37, 20);
+            this.Label.Name = "Label";
+            this.Label.Size = new System.Drawing.Size(203, 30);
+            this.Label.TabIndex = 12;
+            this.Label.Text = "Netsease-Get 1.01";
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusLabel.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.StatusLabel.Location = new System.Drawing.Point(37, 527);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(221, 30);
+            this.StatusLabel.TabIndex = 13;
+            this.StatusLabel.Text = "Apache License 2.0";
+            // 
+            // GithubBox
+            // 
+            this.GithubBox.Image = global::Netease_Get.Properties.Resources.github;
+            this.GithubBox.ImageLocation = "";
+            this.GithubBox.Location = new System.Drawing.Point(827, 12);
+            this.GithubBox.Name = "GithubBox";
+            this.GithubBox.Size = new System.Drawing.Size(32, 32);
+            this.GithubBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.GithubBox.TabIndex = 14;
+            this.GithubBox.TabStop = false;
+            this.GithubBox.Click += new System.EventHandler(this.GithubBox_Click);
             // 
             // Close
             // 
@@ -137,33 +163,23 @@
             this.Close.TabStop = false;
             this.Close.Click += new System.EventHandler(this.Close_Click);
             // 
-            // Label
+            // Minimize
             // 
-            this.Label.AutoSize = true;
-            this.Label.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.Label.Location = new System.Drawing.Point(37, 20);
-            this.Label.Name = "Label";
-            this.Label.Size = new System.Drawing.Size(159, 30);
-            this.Label.TabIndex = 12;
-            this.Label.Text = "Netsease-Get";
-            // 
-            // StatusLabel
-            // 
-            this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusLabel.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.StatusLabel.Location = new System.Drawing.Point(37, 527);
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(55, 30);
-            this.StatusLabel.TabIndex = 13;
-            this.StatusLabel.Text = "Null";
+            this.Minimize.Image = global::Netease_Get.Properties.Resources.MinimizeW;
+            this.Minimize.Location = new System.Drawing.Point(865, 6);
+            this.Minimize.Name = "Minimize";
+            this.Minimize.Size = new System.Drawing.Size(47, 48);
+            this.Minimize.TabIndex = 10;
+            this.Minimize.TabStop = false;
+            this.Minimize.Click += new System.EventHandler(this.Minimize_Click);
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(972, 566);
+            this.Controls.Add(this.GithubBox);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.Label);
             this.Controls.Add(this.Close);
@@ -181,12 +197,12 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
-            ((System.ComponentModel.ISupportInitialize)(this.Minimize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GithubBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Close)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Minimize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,6 +219,7 @@
         private System.Windows.Forms.PictureBox Close;
         private System.Windows.Forms.Label Label;
         private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.PictureBox GithubBox;
     }
 }
 

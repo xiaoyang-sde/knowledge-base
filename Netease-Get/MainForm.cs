@@ -17,7 +17,7 @@ namespace Netease_Get
 {
     public partial class MainForm : Form
     {
-        private readonly API api = new API(); 
+        private readonly API api = new API();
         private bool isMouseDown = false;
         private Point FormLocation;
         private Point mouseOffset;
@@ -33,55 +33,95 @@ namespace Netease_Get
 
         private async void Add_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string url = InputBox.Text;
+                if (url.Contains("song?id=") | url.Contains("song/"))
+                {
+                    Regex re = new Regex(@"(song\?id=)\d+", RegexOptions.Compiled);
+                    string id = re.Match(url).ToString();
 
-            string url = InputBox.Text;
-            if (url.Contains("song?id="))
-            {
-                Regex re = new Regex(@"(song\?id=)\d+", RegexOptions.Compiled);
-                string id = re.Match(url).ToString();
-                id = id.Replace("song?id=", "");
-                string name = "";
-                name = await api.GetSingle(id);
-                if (name != "")
-                {
-                    DownloadList.Items.Add(name);
-                }
-            }
-            else if (url.Contains("playlist?id="))
-            {
-                Regex re = new Regex(@"(playlist\?id=)\d+", RegexOptions.Compiled);
-                string id = re.Match(url).ToString();
-                id = id.Replace("playlist?id=", "");
-                List<string> nameList = new List<string>();
-                nameList = await api.GetPlayList(id);
-                foreach (string name in nameList)
-                {
-                    DownloadList.Items.Add(name);
-                }
-            }
-            else if (url.Contains("album?id="))
-            {
-                Regex re = new Regex(@"(album\?id=)\d+", RegexOptions.Compiled);
-                string id = re.Match(url).ToString();
-                id = id.Replace("album?id=", "");
+                    if (id != "")
+                    {
+                        id = id.Replace("song?id=", "");
+                    }
+                    else
+                    {
+                        re = new Regex(@"(song/)\d+", RegexOptions.Compiled);
+                        id = re.Match(url).ToString();
+                        id = id.Replace("song/", "");
+                    }
 
-                List<string> nameList = new List<string>();
-                nameList = await api.GetAlbum(id);
-                foreach (string name in nameList)
+                    string name = "";
+                    name = await api.GetSingle(id);
+                    if (name != "")
+                    {
+                        DownloadList.Items.Add(name);
+                    }
+                }
+                else if (url.Contains("playlist?id=") | url.Contains("playlist/"))
                 {
-                    DownloadList.Items.Add(name);
+                    Regex re = new Regex(@"(playlist\?id=)\d+", RegexOptions.Compiled);
+                    string id = re.Match(url).ToString();
+                    if (id != "")
+                    {
+                        id = id.Replace("playlist?id=", "");
+                    }
+                    else
+                    {
+                        re = new Regex(@"(playlist/)\d+", RegexOptions.Compiled);
+                        id = re.Match(url).ToString();
+                        id = id.Replace("playlist/", "");
+                    }
+
+                    List<string> nameList = new List<string>();
+                    nameList = await api.GetPlayList(id);
+                    foreach (string name in nameList)
+                    {
+                        DownloadList.Items.Add(name);
+                    }
+                }
+                else if (url.Contains("album?id=")| url.Contains("album/"))
+                {
+                    Regex re = new Regex(@"(album\?id=)\d+", RegexOptions.Compiled);
+                    string id = re.Match(url).ToString();
+                    if (id != "")
+                    {
+                        id = id.Replace("album?id=", "");
+                    }
+                    else
+                    {
+                        re = new Regex(@"(album/)\d+", RegexOptions.Compiled);
+                        id = re.Match(url).ToString();
+                        id = id.Replace("album/", "");
+                    }
+
+                    List<string> nameList = new List<string>();
+                    nameList = await api.GetAlbum(id);
+                    foreach (string name in nameList)
+                    {
+                        DownloadList.Items.Add(name);
+                    }
                 }
             }
-            InputBox.Clear();
+            catch (Exception ex)
+            {
+                StatusLabel.Text = ex.Message;
+            }
+            finally
+            {
+                InputBox.Clear();
+            }
         }
 
         private async void Download_Click(object sender, EventArgs e)
         {
             if (DownloadList.Items.Count != 0)
             {
-               
+                Download.Enabled = false;
                 string appPath = Application.StartupPath;
                 await api.DownloadAll(appPath);
+                Download.Enabled = true;
             }
 
         }
@@ -89,11 +129,6 @@ namespace Netease_Get
         public void UpdateLabel()
         {
             StatusLabel.Text = api.DownloadStatus;
-        }
-
-        private void HeardIt(API a, EventArgs e)
-        {
-            System.Console.WriteLine("HEARD IT");
         }
 
         private void RemoveSelected_Click(object sender, EventArgs e)
@@ -114,11 +149,6 @@ namespace Netease_Get
                 DownloadList.Items.Clear();
                 api.RemoveAll();
             }
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            StatusLabel.Text = "";
         }
 
         public static int IgnoreDPI()
@@ -188,6 +218,11 @@ namespace Netease_Get
         private void MainForm_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
+        }
+
+        private void GithubBox_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/xAsiimov/Netease-Get");
         }
     }
 }
