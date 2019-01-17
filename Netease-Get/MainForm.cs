@@ -224,6 +224,18 @@ namespace Netease_Get
         {
             System.Diagnostics.Process.Start("https://github.com/xAsiimov/Netease-Get");
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "zh-CN")
+            {
+                Add.Text = "添加歌曲";
+                Download.Text = "下载全部歌曲";
+                RemoveSelected.Text = "移除选择歌曲";
+                RemoveAll.Text = "移除全部歌曲";
+                StatusLabel.Text = "开源协议: Apache 2.0";
+            }
+        }
     }
 }
 
