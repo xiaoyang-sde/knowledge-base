@@ -33,7 +33,7 @@
             this.AddPlayList = new System.Windows.Forms.Button();
             this.AddAlbum = new System.Windows.Forms.Button();
             this.DownloadSelected = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.InputBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // DownloadList
@@ -55,6 +55,7 @@
             this.AddSingle.TabIndex = 1;
             this.AddSingle.Text = "Add Single";
             this.AddSingle.UseVisualStyleBackColor = false;
+            this.AddSingle.Click += new System.EventHandler(this.AddSingle_Click);
             // 
             // AddPlayList
             // 
@@ -66,6 +67,7 @@
             this.AddPlayList.TabIndex = 2;
             this.AddPlayList.Text = "Add PlayList";
             this.AddPlayList.UseVisualStyleBackColor = false;
+            this.AddPlayList.Click += new System.EventHandler(this.AddPlayList_Click);
             // 
             // AddAlbum
             // 
@@ -90,21 +92,21 @@
             this.DownloadSelected.Text = "Download Selected";
             this.DownloadSelected.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // InputBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBox1.Location = new System.Drawing.Point(26, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(606, 39);
-            this.textBox1.TabIndex = 5;
+            this.InputBox.Font = new System.Drawing.Font("Microsoft YaHei Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.InputBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.InputBox.Location = new System.Drawing.Point(26, 36);
+            this.InputBox.Name = "InputBox";
+            this.InputBox.Size = new System.Drawing.Size(606, 39);
+            this.InputBox.TabIndex = 5;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(876, 489);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.InputBox);
             this.Controls.Add(this.DownloadSelected);
             this.Controls.Add(this.AddAlbum);
             this.Controls.Add(this.AddPlayList);
@@ -125,7 +127,7 @@
         private System.Windows.Forms.Button AddPlayList;
         private System.Windows.Forms.Button AddAlbum;
         private System.Windows.Forms.Button DownloadSelected;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox InputBox;
     }
 }
 
