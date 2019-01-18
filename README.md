@@ -1,7 +1,7 @@
 # Netease-Get
-![alt text](https://img.shields.io/github/license/xAsiimov/Netease-Get.svg)
-![alt text](https://img.shields.io/github/release/xAsiimov/Netease-Get.svg)
-![alt text](https://img.shields.io/github/downloads/xAsiimov/Netease-Get/total.svg)
+[![alt text](https://img.shields.io/github/license/xAsiimov/Netease-Get.svg)](https://github.com/xAsiimov/Netease-Get/blob/master/LICENSE)
+[![alt text](https://img.shields.io/github/release/xAsiimov/Netease-Get.svg)](https://github.com/xAsiimov/Netease-Get/releases/latest)
+[![alt text](https://img.shields.io/github/downloads/xAsiimov/Netease-Get/total.svg)](https://github.com/xAsiimov/Netease-Get/releases/latest)
 
 ---
 Download Music Files from Netease Music
