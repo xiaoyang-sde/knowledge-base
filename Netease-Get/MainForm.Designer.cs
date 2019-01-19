@@ -124,11 +124,11 @@
             this.Label.AutoSize = true;
             this.Label.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.Label.Location = new System.Drawing.Point(37, 20);
+            this.Label.Location = new System.Drawing.Point(37, 14);
             this.Label.Name = "Label";
-            this.Label.Size = new System.Drawing.Size(203, 30);
+            this.Label.Size = new System.Drawing.Size(207, 30);
             this.Label.TabIndex = 12;
-            this.Label.Text = "Netsease-Get 1.01";
+            this.Label.Text = "Netsease-Get 1.02";
             // 
             // StatusLabel
             // 
@@ -217,7 +217,7 @@
         private System.Windows.Forms.Button RemoveSelected;
         private System.Windows.Forms.Button RemoveAll;
         private System.Windows.Forms.PictureBox Minimize;
-        private System.Windows.Forms.PictureBox Close;
+        private new System.Windows.Forms.PictureBox Close;
         private System.Windows.Forms.Label Label;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.PictureBox GithubBox;

@@ -103,7 +103,7 @@ namespace Netease_Get
 
         public async Task<List<string>> GetAlbum(string id)
         {
-            string api = "https://music.163.com/api/album/";
+            string api = "http://api.javaswing.cn/album?id=";
             string url = api + id;
             string json = await HttpClient.GetFromUrl(url);
             List<string> nameList = new List<string>();
@@ -111,31 +111,29 @@ namespace Netease_Get
             JObject jsonReader = JObject.Parse(json);
             if (jsonReader["code"].ToString() == "200")
             {
-                if (jsonReader["code"].ToString() != "404")
+                int count = jsonReader["songs"].Count();
+                for (int i = 0; i < count; i++)
                 {
-                    int count = jsonReader["album"]["songs"].Count();
-                    for (int i = 0; i < count; i++)
-                    {
-                        string name = jsonReader["album"]["songs"][i]["name"].ToString();
-                        string sid = jsonReader["album"]["songs"][i]["id"].ToString();
-                        string artist = jsonReader["album"]["songs"][i]["artists"][0]["name"].ToString();
+                    string name = jsonReader["songs"][i]["name"].ToString();
+                    string sid = jsonReader["songs"][i]["id"].ToString();
+                    string artist = jsonReader["songs"][i]["ar"][0]["name"].ToString();
 
-                        if (SongList.SongDict.ContainsKey(sid) == false)
-                        {
-                            nameList.Add(name + "       " + artist);
-                            SongList.Add(sid, name);
-                        }
+                    if (SongList.SongDict.ContainsKey(sid) == false)
+                    {
+                        nameList.Add(name + "       " + artist);
+                        SongList.Add(sid, name);
                     }
                 }
-
             }
-            else
+
+            else if (jsonReader["code"].ToString() == "404")
             {
                 DownloadStatus = "Album Not Found";
                 Update();
             }
             return nameList;
         }
+
 
         public async Task<string> GetSingle(string id)
         {
@@ -170,7 +168,6 @@ namespace Netease_Get
         public async Task<List<string>> GetPlayList(string id)
         {
             List<string> nameList = new List<string>();
-            try
             {
                 string api = "http://api.javaswing.cn/playlist/detail?id=";
                 string url = api + id;
@@ -192,14 +189,14 @@ namespace Netease_Get
                             SongList.Add(sid, name);
                         }
                     }
-
                 }
-                return nameList;
-            }
-            catch
-            {
-                DownloadStatus = "PlayList Not Found";
-                Update();
+                else if (jsonReader["code"].ToString() == "404")
+                {
+                    DownloadStatus = "PlayList  Not Found";
+                    Update();
+                }
+
+
                 return nameList;
             }
         }

@@ -76,9 +76,12 @@ namespace Netease_Get
 
                     List<string> nameList = new List<string>();
                     nameList = await api.GetPlayList(id);
-                    foreach (string name in nameList)
+                    if (nameList.Count() != 0)
                     {
-                        DownloadList.Items.Add(name);
+                        foreach (string name in nameList)
+                        {
+                            DownloadList.Items.Add(name);
+                        }
                     }
                 }
                 else if (url.Contains("album?id=")| url.Contains("album/"))
@@ -98,9 +101,12 @@ namespace Netease_Get
 
                     List<string> nameList = new List<string>();
                     nameList = await api.GetAlbum(id);
-                    foreach (string name in nameList)
+                    if (nameList.Count() != 0)
                     {
-                        DownloadList.Items.Add(name);
+                        foreach (string name in nameList)
+                        {
+                            DownloadList.Items.Add(name);
+                        }
                     }
                 }
             }

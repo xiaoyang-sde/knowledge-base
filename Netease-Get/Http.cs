@@ -24,9 +24,9 @@ namespace Netease_Get
 
                 return response;
             }
-            catch (Exception e)
+            catch
             {
-                return e.Message;
+                return "{\"code\":404}";
             }
         }
 
@@ -49,9 +49,9 @@ namespace Netease_Get
                 }
             }
 
-            catch (Exception e)
+            catch
             {
-                return e.Message;
+                return "";
             }
         }
     }
