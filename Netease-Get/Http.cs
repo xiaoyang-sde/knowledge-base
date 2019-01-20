@@ -44,14 +44,14 @@ namespace Netease_Get
                     using (var fileStream = fileInfo.OpenWrite())
                     {
                         await stream.CopyToAsync(fileStream);
-                        return "";
+                        return null;
                     }
                 }
             }
 
             catch
             {
-                return "";
+                return null;
             }
         }
     }

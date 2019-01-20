@@ -111,6 +111,16 @@ namespace Netease_Get
             JObject jsonReader = JObject.Parse(json);
             if (jsonReader["code"].ToString() == "200")
             {
+                string title = jsonReader["album"]["name"].ToString();
+                string author = jsonReader["album"]["artist"]["name"].ToString();
+                if (jsonReader["album"]["alias"].Count() != 0)
+                {
+                    string alias = jsonReader["album"]["alias"][0].ToString();
+                    DownloadStatus = title + "(" + alias + ")      " + author;
+                }
+                else { DownloadStatus = title + "      " + author; }
+                Update();
+
                 int count = jsonReader["songs"].Count();
                 for (int i = 0; i < count; i++)
                 {
@@ -176,6 +186,11 @@ namespace Netease_Get
 
                 if (jsonReader["code"].ToString() == "200")
                 {
+                    string title = jsonReader["playlist"]["name"].ToString();
+                    string creator = jsonReader["playlist"]["creator"]["nickname"].ToString();
+                    DownloadStatus = title + "      " + creator;
+                    Update();
+
                     int count = jsonReader["playlist"]["tracks"].Count();
                     for (int i = 0; i < count; i++)
                     {
