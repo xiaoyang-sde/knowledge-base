@@ -21,7 +21,7 @@ namespace Netease_Get
 
         private async Task<int> Download(string id, string name, string appPath)
         {
-            string api = "http://api.javaswing.cn/song/url?id=";
+            string api = "https://api.imjad.cn/cloudmusic/?type=song&id=";
             string url = api + id;
             string json = await HttpClient.GetFromUrl(url);
             JObject jsonReader = JObject.Parse(json);
@@ -103,7 +103,7 @@ namespace Netease_Get
 
         public async Task<List<string>> GetAlbum(string id)
         {
-            string api = "http://api.javaswing.cn/album?id=";
+            string api = "https://api.imjad.cn/cloudmusic/?type=album&id=";
             string url = api + id;
             string json = await HttpClient.GetFromUrl(url);
             List<string> nameList = new List<string>();
@@ -147,7 +147,7 @@ namespace Netease_Get
 
         public async Task<string> GetSingle(string id)
         {
-            string api = "http://api.javaswing.cn/song/detail?ids=";
+            string api = "https://api.imjad.cn/cloudmusic/?type=detail&id=";
             string url = api + id;
             string json = await HttpClient.GetFromUrl(url);
             string name = "";
@@ -179,7 +179,7 @@ namespace Netease_Get
         {
             List<string> nameList = new List<string>();
             {
-                string api = "http://api.javaswing.cn/playlist/detail?id=";
+                string api = "https://api.imjad.cn/cloudmusic/?type=playlist&id=";
                 string url = api + id;
                 string json = await HttpClient.GetFromUrl(url);
                 JObject jsonReader = JObject.Parse(json);
