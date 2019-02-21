@@ -179,24 +179,24 @@ namespace Netease_Get
         {
             List<string> nameList = new List<string>();
             {
-                string api = "https://api.imjad.cn/cloudmusic/?type=playlist&id=";
+                string api = "https://api.bzqll.com/music/netease/songList?key=579621905&limit=0&offset=0&id=";
                 string url = api + id;
                 string json = await HttpClient.GetFromUrl(url);
                 JObject jsonReader = JObject.Parse(json);
 
                 if (jsonReader["code"].ToString() == "200")
                 {
-                    string title = jsonReader["playlist"]["name"].ToString();
-                    string creator = jsonReader["playlist"]["creator"]["nickname"].ToString();
-                    DownloadStatus = title + "      " + creator;
+                    string title = jsonReader["data"]["songListName"].ToString();
+                    //string creator = jsonReader["data"]["creator"]["nickname"].ToString();
+                    DownloadStatus = title; //+ "      " + creator;
                     Update();
 
-                    int count = jsonReader["playlist"]["tracks"].Count();
+                    int count = jsonReader["data"]["songs"].Count();
                     for (int i = 0; i < count; i++)
                     {
-                        string name = jsonReader["playlist"]["tracks"][i]["name"].ToString();
-                        string sid = jsonReader["playlist"]["tracks"][i]["id"].ToString();
-                        string artist = jsonReader["playlist"]["tracks"][i]["ar"][0]["name"].ToString();
+                        string name = jsonReader["data"]["songs"][i]["name"].ToString();
+                        string sid = jsonReader["data"]["songs"][i]["id"].ToString();
+                        string artist = jsonReader["data"]["songs"][i]["singer"].ToString();
 
                         if (SongList.SongDict.ContainsKey(sid) == false)
                         {
@@ -205,7 +205,7 @@ namespace Netease_Get
                         }
                     }
                 }
-                else if (jsonReader["code"].ToString() == "404")
+                else if (jsonReader["code"].ToString() == "2333")
                 {
                     DownloadStatus = "PlayList  Not Found";
                     Update();
