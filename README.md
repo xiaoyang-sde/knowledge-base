@@ -6,3 +6,4 @@
 ### Chapter 3: Code quality
 ### Chapter 4: Objects: the basics
 ### Chapter 5: Data types
+### Chapter 6: Advanced working with functions
