@@ -10,3 +10,4 @@
 ### Chapter 6: Advanced working with functions
 ### Chapter 7: Object properties configuration
 ### Chapter 8: Prototypes, inheritance
+### Chapter 9: Classes
