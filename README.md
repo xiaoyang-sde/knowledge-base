@@ -14,3 +14,4 @@
 ### Chapter 10: Error handling
 ### Chapter 11: Promises, async/await
 ### Chapter 12: Generators, advanced iteration
+### Chapter 13: Modules
