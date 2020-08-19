@@ -13,3 +13,4 @@
 ### Chapter 9: Classes
 ### Chapter 10: Error handling
 ### Chapter 11: Promises, async/await
+### Chapter 12: Generators, advanced iteration
