@@ -208,3 +208,105 @@ When a function is specified as a class or object method, its `[[HomeObject]]` p
 ### Methods, not function properties
 
 `[[HomeObject]]` is defined for methods both in classes and in plain objects. For objects, methods must be specified exactly as `method()`, not as `"method: function()"`.
+
+## 9.4 Private and protected properties and methods
+
+It’s always convenient when implementation details are hidden, and a simple, well-documented external interface is available.
+
+### Internal and external interface
+
+- Public: accessible from anywhere. They comprise the external interface.
+- Private: accessible only from inside the class. These are for the internal interface.
+
+### Protected properties
+
+Protected properties are usually prefixed with an underscore `_`. That is not enforced on the language level, but there’s a well-known convention.
+
+Protected fields are inherited.
+
+### Private properties
+
+The recent JavaScript proposal provides language-level support for private properties and methods.
+
+- Privates should start with `#`. 
+- They are only accessible from inside the class. 
+- We can’t access them from outside or from inheriting classes. 
+- Private fields do not conflict with public ones.
+- Private fields are not available as `this[name]`.
+
+## 9.5 Extending built-in classes
+
+Built-in classes like `Array`, `Map` and others are extendable.
+
+```js
+class PowerArray extends Array {
+  isEmpty() {
+    return this.length === 0;
+  }
+}
+```
+
+Built-in methods like `filter`, `map` and others return new objects of exactly the inherited type `PowerArray`. Their internal implementation uses the object’s `constructor` property for that.
+
+We can add a special static getter `Symbol.species` to the class. If it exists, it should return the constructor that JavaScript will use internally to create new entities in `map`, `filter` and so on.
+
+There's no static inheritance in built-ins.
+
+## 9.6 Class checking: "instanceof"
+
+### The instanceof operator
+
+```js
+obj instanceof Class
+```
+
+It returns `true` if `obj` belongs to the `Class` or a class inheriting from it.
+
+Normally, `instanceof` examines the prototype chain for the check. We can also set a custom logic in the static method `Symbol.hasInstance`.
+
+### Workflow of "instanceof"
+
+1. If there’s a static method `Symbol.hasInstance`, then just call it: `Class[Symbol.hasInstance](obj)`.
+2. Checks whether `Class.prototype` is equal to one of the prototypes in the `obj` prototype chain.
+
+### Symbol.toStringTag
+
+The behavior of Object `toString` can be customized using a special object property `Symbol.toStringTag`.
+
+```js
+let user = {
+  [Symbol.toStringTag]: "User"
+};
+
+alert({}.toString.call(user)); // [object User]
+```
+
+## 9.7 Mixins
+
+Mixin: a class that contains methods for other classes. JavaScript does not support multiple inheritance, but mixins can be implemented by copying methods into prototype.
+
+### A mixin example
+
+```js
+// mixin
+let sayHiMixin = {
+  sayHi() {
+    alert(`Hello ${this.name}`);
+  },
+  sayBye() {
+    alert(`Bye ${this.name}`);
+  }
+};
+
+// usage:
+class User extends Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+// copy the methods
+Object.assign(User.prototype, sayHiMixin);
+```
+
+Mixins can also make use of inheritance inside themselves. `super` looks for parent methods in `[[HomeObject]].[[Prototype]]`.
