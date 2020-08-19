@@ -11,3 +11,5 @@
 ### Chapter 7: Object properties configuration
 ### Chapter 8: Prototypes, inheritance
 ### Chapter 9: Classes
+### Chapter 10: Error handling
+### Chapter 11: Promises, async/await
