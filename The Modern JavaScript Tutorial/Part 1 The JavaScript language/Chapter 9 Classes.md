@@ -209,6 +209,18 @@ When a function is specified as a class or object method, its `[[HomeObject]]` p
 
 `[[HomeObject]]` is defined for methods both in classes and in plain objects. For objects, methods must be specified exactly as `method()`, not as `"method: function()"`.
 
+## 9.3 Static properties and methods
+
+We can also assign a method to the class function itself, not to its `prototype`.
+
+```js
+class User {
+  static staticMethod() {
+    alert(this === User);
+  }
+}
+```
+
 ## 9.4 Private and protected properties and methods
 
 It’s always convenient when implementation details are hidden, and a simple, well-documented external interface is available.
