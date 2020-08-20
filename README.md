@@ -15,3 +15,4 @@
 ### Chapter 11: Promises, async/await
 ### Chapter 12: Generators, advanced iteration
 ### Chapter 13: Modules
+### Chapter 14: Miscellaneous
