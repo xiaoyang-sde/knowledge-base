@@ -233,3 +233,318 @@ For non-element nodes, `nodeValue` and `data` are used to get the content.
 ### textContent: pure text
 
 The `textContent` provides access to the text inside the element. Writing to `textContent` is much more useful, because it allows to write text the “safe way”.
+
+
+## 1.6 Attributes and properties
+
+### DOM properties
+
+```js
+Element.prototype.sayHi = function() {
+  alert(`Hello, I'm ${this.tagName}`);
+};
+```
+
+DOM properties and methods behave just like those of regular JavaScript objects:
+
+- They can have any value.
+- They are case-sensitive.
+
+### HTML attributes
+
+When the browser parses the HTML to create DOM objects for tags, it recognizes standard attributes and creates DOM properties from them.
+
+```html
+<body id="test" something="non-standard">
+  <script>
+    alert(document.body.id); // test
+    // non-standard attribute does not yield a property
+    alert(document.body.something); // undefined
+  </script>
+</body>
+```
+
+To access all attributes:
+- `elem.attributes`: A collection of objects that belong to a built-in `Attr` class.
+- `elem.hasAttribute(name)`
+- `elem.getAttribute(name)`
+- `elem.setAttribute(name, value)`
+- `elem.removeAttribute(name)`
+
+HTML attributes have the following features:
+
+- Their name is case-insensitive (`id` is same as `ID`).
+- Their values are always strings.
+
+### Property-attribute synchronization
+
+When a standard attribute changes, the corresponding property is auto-updated, and vice versa.
+
+`input.value` synchronizes only from attribute to property, but not back.
+
+### DOM properties are typed
+
+DOM properties are not always strings.
+
+The `style` attribute is a string, but the `style` property is an object:
+
+```html
+<div id="div" style="color:red;font-size:120%">Hello</div>
+
+<script>
+  // string
+  alert(div.getAttribute('style')); // color:red;font-size:120%
+
+  // object
+  alert(div.style); // [object CSSStyleDeclaration]
+  alert(div.style.color); // red
+</script>
+```
+
+The `href` DOM property is always a full URL, even if the attribute contains a relative URL or just a `#hash`.
+
+### Non-standard attributes, dataset
+
+All attributes starting with `data-` are reserved for programmers’ use. They are available in the `dataset` property.
+
+```html
+<body data-about="Elephants">
+<script>
+  alert(document.body.dataset.about); // Elephants
+</script>
+```
+
+Multiword attributes like `data-order-state` become camel-cased: `dataset.orderState`.
+
+## 1.7 Modifying the document
+
+### Creating an element
+
+- `document.createElement(tag)`
+- `document.createTextNode(text)`
+
+### Creating the message
+
+- `div.className = "alert";`
+- `div.innerHTML = "<strong>Hi there!</strong> You've read an important message.";`
+
+### Insertion methods
+
+- `node.append(...nodes or strings)` – append nodes or strings at the end of node.
+- `node.prepend(...nodes or strings)` – insert nodes or strings at the beginning of node.
+- `node.before(...nodes or strings)` - insert nodes or strings before node.
+- `node.after(...nodes or strings)` - insert nodes or strings after node.
+- `node.replaceWith(...nodes or strings)` - replaces node with the given nodes or strings.
+
+The text is inserted “as text”, not “as HTML”, with proper escaping of characters such as `<`, `>`.
+
+### insertAdjacentHTML/Text/Element
+
+To insert an HTML string “as html”, with all tags and stuff working:
+
+- `elem.insertAdjacentHTML(where, html)`
+- - `beforebegin`
+- - `afterbegin`
+- - `beforeend`
+- - `afterend`
+
+- `elem.insertAdjacentText(where, text)`
+- `elem.insertAdjacentElement(where, elem)`
+
+### Node removal
+
+To remove a node, there’s a method `node.remove()`.
+
+All insertion methods automatically remove the node from the old place.
+
+### Cloning nodes: cloneNode
+
+- `elem.cloneNode(true)` creates a deep clone of the element with all attributes and subelements.
+- `elem.cloneNode(false)` creates a clone without child elements.
+
+### DocumentFragment
+
+`DocumentFragment` is a special DOM node that serves as a wrapper to pass around lists of nodes. When we insert it somewhere, then its content is inserted instead.
+
+```js
+function getListContent() {
+  let fragment = new DocumentFragment();
+
+  for(let i=1; i<=3; i++) {
+    let li = document.createElement('li');
+    li.append(i);
+    fragment.append(li);
+  }
+
+  return fragment;
+}
+
+ul.append(getListContent()); // (*)
+```
+
+### Old-school insert/remove methods
+
+This information helps to understand old scripts.
+
+- `parentElem.appendChild(node)`: Appends `node` as the last child of `parentElem`.
+- `parentElem.insertBefore(node, nextSibling)`: Inserts `node` before `nextSibling` into `parentElem`.
+- `parentElem.replaceChild(node, oldChild)`: 
+Replaces `oldChild` with `node` among children of `parentElem`.
+- `parentElem.removeChild(node)`: Removes `node` from `parentElem`.
+
+### A word about “document.write”
+
+There’s one more, very ancient method of adding something to a web-page: `document.write`. The method comes from times when there was no DOM, no standards.
+
+The call to `document.write` only works while the page is loading. If we call it afterwards, the existing document content is erased.
+
+## 1.8 Styles and classes
+
+### className and classList
+
+- `elem.className`
+- `elem.classList`
+- - `add/remove`
+- - `toggle`
+- - `contains`
+
+### Element style
+
+```js
+background-color  => elem.style.backgroundColor
+z-index           => elem.style.zIndex
+-moz-border-radius => elem.style.MozBorderRadius
+```
+
+### Resetting the style property
+
+`elem.style.display = "none"`: Set a style property.
+`elem.style.display = ""`: Reset a style property to default.
+`elem.style.cssText`: Full rewrite the CSS string.
+
+### Computed styles: getComputedStyle
+
+The style property operates only on the value of the `style` attribute, without any CSS cascade.
+
+- `getComputedStyle(element, [pseudo])`
+- - `element`
+- - `pseudo`: Example: `::before`
+
+Visited links may be colored using `:visited` CSS pseudoclass. `getComputedStyle` can't access that color because of privacy concerns.
+
+## 1.9 Element size and scrolling
+
+### offsetParent, offsetLeft/Top
+
+The `offsetParent` is the nearest ancestor that the browser uses for calculating coordinates during rendering.
+
+Properties `offsetLeft`/`offsetTop` provide x/y coordinates relative to offsetParent upper-left corner.
+
+### offsetWidth/Height
+
+They provide the “outer” width/height of the element or its full size including borders. Geometry properties are zero/null for elements that are not displayed.
+
+### clientTop/Left
+
+- `clientLeft = 25` – left border width
+- `clientTop = 25` – top border width
+
+### clientWidth/Height
+
+They include the content width together with paddings, but without the scrollbar.
+
+If there are no paddings, then `clientWidth`/`clientHeight` is exactly the content area, inside the borders and the scrollbar.
+
+### scrollWidth/Height
+
+These properties are like `clientWidth`/`clientHeight`, but they also include the scrolled out parts.
+
+### scrollLeft/scrollTop
+
+Properties `scrollLeft`/`scrollTop` are the width/height of the hidden, scrolled out part of the element.
+
+Don’t take width/height from CSS
+
+## 1.10 Window sizes and scrolling
+
+### Width/height of the window
+
+- `document.documentElement.clientWidth`
+- `document.documentElement.clientHeight`
+
+They provide the width/height without the scrollbar.
+
+In modern HTML we should always write `DOCTYPE`. Without it, top-level geomtry properties may work a little bit different.
+
+### Width/height of the document
+
+To reliably obtain the full document height:
+
+```js
+let scrollHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
+```
+
+### Get the current scroll
+
+```js
+alert('Current scroll from the top: ' + window.pageYOffset);
+alert('Current scroll from the left: ' + window.pageXOffset);
+```
+
+### Scrolling: scrollTo, scrollBy, scrollIntoView
+
+To scroll the page from JavaScript, its DOM must be fully built.
+
+Regular elements can be scrolled by changing `scrollTop`/`scrollLeft`.
+
+For the whole window, use these methods:
+
+```js
+window.scrollBy(x,y); // scroll relative to its current position
+window.scrollTo(x,y); // scroll to absolute coordinates
+```
+
+### scrollIntoView
+
+The call to `elem.scrollIntoView(top)` scrolls the page to make `elem` visible.
+
+- `top=true`: scroll to make `elem` appear on the top of the window
+- `top=false`: scroll to make `elem` appear at the bottom
+
+### Forbid the scrolling
+
+The page will freeze on its current scroll.
+
+```js
+document.body.style.overflow = "hidden"
+```
+
+If the scrollbar occupied some space, then that space is now free, and the content fill it.
+
+## 1.11 Coordinates
+
+- Relative to the window (`clientX`/`clientY`) (`position:fixed`)
+- Relative to the document (`pageX`/`pageY`) (`position:absolute`)
+
+### Element coordinates: getBoundingClientRect
+
+The method `elem.getBoundingClientRect()` returns window coordinates for a minimal rectangle that encloses `elem` as an object of built-in `DOMRect` class.
+
+- `x/y` – X/Y-coordinates of the rectangle origin relative to window,
+- `width/height` – width/height of the rectangle (can be negative).
+- `top/bottom/left/right`
+
+Coordinates `right`/`bottom` are different from CSS position properties. In CSS positioning, `right` property means the distance from the right edge, and `bottom` property means the distance from the bottom edge.
+
+### elementFromPoint(x, y)
+
+The call to `document.elementFromPoint(x, y)` returns the most nested element at window coordinates `(x, y)`. It only works if (x,y) are inside the visible area.
+
+### Document coordinates
+
+- `pageY` = `clientY` + height of the scrolled-out vertical part of the document.
+- `pageX` = `clientX` + width of the scrolled-out horizontal part of the document.
