@@ -261,3 +261,106 @@ request.onsuccess = function() { // (4)
 - `put(value, [key])`: Replaces the existing key.
 - `add(value, [key])`: Raises `ConstraintError` if exists.
 
+### Transactions’ autocommit
+
+When all transaction requests are finished, and the microtasks queue is empty, it is committed automatically.
+
+Transactions are closed before the browser starts doing macrotasks, so we can't use `Promise` to schedule furtuer tasks.
+
+If one part of application initiated `readwrite` on an object store, then another part has to wait.
+
+To manually abort the transaction:
+
+```js
+transaction.abort();
+```
+
+### Error handling
+
+A failed request automatically aborts the transaction, canceling all its changes.
+
+The `request.onerror` handler is able to prevent the abort by calling `event.preventDefault()`.
+
+#### Event delegation
+
+IndexedDB events bubble: `request` - `transaction` - `database`.
+
+```js
+db.onerror = function(event) {
+  let request = event.target; // the request that caused the error
+
+  console.log("Error", request.error);
+};
+```
+
+### Searching by keys
+
+- By a key or a key range.
+- By another object field, e.g. `book.price`.
+
+Methods that involve searching support either exact keys or so-called “range queries”: `IDBKeyRange` objects that specify a “key range”.
+
+- `IDBKeyRange.lowerBound(lower, [open])`: `≥lower` or `>lower` if `open`
+- `IDBKeyRange.upperBound(upper, [open])`
+- `IDBKeyRange.bound(lower, upper, [lowerOpen], [upperOpen])`
+- `IDBKeyRange.only(key)`: a range that consists of only one `key`
+
+All searching methods accept a `query` argument that can be either an exact key or a key range.
+
+- `store.get(query)`: first value by key or range.
+- `store.getAll([query], [count])`: all values limited by count.
+- `store.getKey(query)`: the first key that satisfies the query, usually a range.
+- `store.getAllKeys([query], [count])`: search for all keys that satisfy the query limited by count.
+- `store.count([query])`: get the total count of keys that satisfy the query.
+
+Object store sorts values by key internally.
+
+### Searching by any field with an index
+
+To search by other object fields, we need to create an additional data structure named “index”.
+
+An index is an “add-on” to the store that tracks a given object field.
+
+```js
+objectStore.createIndex(name, keyPath, [options]);
+```
+
+- `name`
+- `keyPath`: path to the object field that the index should track
+- `option`
+- - `unique`: one object in the store with the given value at the `keyPath`.
+- - `multiEntry`: the index will treat the whole array as the key.
+
+```js
+openRequest.onupgradeneeded = function() {
+  let books = db.createObjectStore('books', {keyPath: 'id'});
+  let index = inventory.createIndex('price_idx', 'price');
+};
+```
+
+The index will track `price` field. Each index keeps a list of keys that have the given price.
+
+### Deleting from store
+
+- `delete(query)`: delete matching values by query.
+- `clear()`: delete everything.
+
+### Cursors
+
+A cursor is a special object that traverses the object storage, given a query, and returns one key/value at a time, thus saving memory.
+
+```js
+let request = store.openCursor(query, [direction]);
+```
+
+- `query`: a key or a key range.
+- `direction`
+- - `next`, `prev`
+- - `nextunique`, `prevunique`
+
+Ffor cursors, `request.onsuccess` triggers multiple times, once for each result.
+
+#### methods
+
+- `advance(count)`: advance the cursor `count` times, skipping values.
+- `continue([key])`: advance the cursor to the next value in range matching.
