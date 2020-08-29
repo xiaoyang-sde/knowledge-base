@@ -471,10 +471,323 @@ To terminate the request, call `xhr.abort()`.
 
 If in the `open` method the third parameter `async` is set to `false`, the request is made synchronously. JavaScript execution pauses at `send()` and resumes when the response is received.
 
+However, if a synchronous call takes too much time, the browser may suggest to close the “hanging” webpage.
+
+### HTTP-headers
+
+```js
+setRequestHeader(name, value)
+
+xhr.setRequestHeader('Content-Type', 'application/json');
+```
+
+Several headers are managed exclusively by the browser, e.g. `Referer` and `Host`. It can’t undo `setRequestHeader`.
+
+```js
+xhr.setRequestHeader('X-Auth', '123');
+xhr.setRequestHeader('X-Auth', '456');
+
+// the header will be:
+// X-Auth: 123, 456
+```
+
+```js
+getResponseHeader(name)
+xhr.getResponseHeader('Content-Type')
+```
+
+```js
+getAllResponseHeaders()
+
+Cache-Control: max-age=31536000
+Content-Length: 4260
+Content-Type: image/png
+Date: Sat, 08 Sep 2012 16:53:16 GMT
+```
+
+### POST, FormData
+
+To make a POST request, we can use the built-in `FormData` object, which is sent with `multipart/form-data` encoding.
+
+```js
+let formData = new FormData([form]); // creates an object, optionally fill from <form>
+formData.append(name, value); // appends a field
+```
+
+### Upload progress
+
+The `progress` event triggers only on the downloading stage. We can use `xhr.upload` to track upload events.
+
+It generates these events:
+
+- `loadstart` – upload started.
+- `progress` – triggers periodically during the upload.
+- `abort` – upload aborted.
+- `error` – non-HTTP error.
+- `load` – upload finished successfully.
+- `timeout` – upload timed out (if timeout property is set).
+- `loadend` – upload finished with either success or error.
+
+```js
+xhr.upload.onprogress = function(event) {
+  alert(`Uploaded ${event.loaded} of ${event.total} bytes`);
+};
+```
+
 ## 3.9 Resumable file upload
+
+### Not-so-useful progress event
+
+The event triggers when the data is sent, instead of receving by the server. Maybe it was buffered by a local network proxy, or maybe the remote server process just died and couldn’t process them.
+
+### Algorithm
+
+1. Create an id to uniquely identify the file.
+2. Send a request to the server, asking how many bytes it already has.
+3. Use `Blob` method `slice` to send the file from the break point.
 
 ## 3.10 Long polling
 
+Long polling is the simplest way of having persistent connection with server, that doesn’t use any specific protocol like WebSocket or Server Side Events.
+
+### Regular polling
+
+The simplest way to get new information from the server is periodic polling.
+- Messages are passed with a delay up to the period.
+- The server may have too many requests to handle.
+
+### Long pooling
+
+Long polling works great in situations when messages are rare.
+
+Every message is a separate request, supplied with headers and authentication overhead.
+
+1. A request is sent to the server.
+2. The server doesn’t close the connection until it has a message to send.
+3. When a message appears – the server responds to the request with it.
+4. The browser makes a new request immediately.
+
+```js
+async function subscribe() {
+  let response = await fetch("/subscribe");
+
+  if (response.status == 502) {
+    await subscribe();
+  } else if (response.status != 200) {
+    showMessage(response.statusText);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    await subscribe();
+  } else {
+    let message = await response.text();
+    showMessage(message);
+    await subscribe();
+  }
+}
+```
+
 ## 3.11 WebSocket
 
+The `WebSocket` protocol provides a way to exchange data between browser and server via a persistent connection.
+
+### A simple example
+
+```js
+let socket = new WebSocket("wss://javascript.info");
+```
+
+Use `wss://` protocol is encrypted and more reliable than `ws://`.
+
+### Events
+
+- `open` – connection established,
+- `message` – data received,
+- `error` – websocket error,
+- `close` – connection closed.
+
+### Opening a websocket
+
+When `new WebSocket(url)` is created, it starts connecting immediately.
+
+Here’s an example of browser headers for request:
+
+```
+GET /chat
+Host: javascript.info
+Origin: https://javascript.info
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Key: Iv8io/9s+lYFgZWcXczP8Q==
+Sec-WebSocket-Version: 13
+```
+
+- `Origin`: It allows the server to decide whether or not to talk `WebSocket` with this website.
+- `Connection: Upgrade`: The signal to change to protocol.
+- `Upgrade: websocket`: The requested protocol.
+- `Sec-WebSocket-Key`: Random security key.
+- `Sec-WebSocket-Version`: WebSocket protocol version. (Current: 13)
+
+The server should send code `101` response:
+
+```
+101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: hsBlbuDTkk24srzEOTBUlZAlC2g=
+```
+
+Then the connection is made. WebSocket handshake can’t be emulated.
+
+#### Extensions and subprotocols
+
+The additional headers `Sec-WebSocket-Extensions` and `Sec-WebSocket-Protocol` describe extensions and subprotocols.
+
+- `Sec-WebSocket-Extensions: deflate-frame`: the browser supports data compression.
+- `Sec-WebSocket-Protocol: soap, wamp`: we’d like to transfer the data in SOAP or WAMP ("The WebSocket Application Messaging Protocol") protocols.
+
+```js
+let socket = new WebSocket("wss://javascript.info/chat", ["soap", "wamp"]);
+```
+
+The server should respond with a list of protocols and extensions that it agrees to use.
+
+### Data transfer
+
+WebSocket communication consists of “frames” – data fragments, that can be sent from either side, and can be of several kinds:
+
+- text frames
+- binary data frames
+- ping/pong frames: used to check the connection (sent by server and responded automatically by browser)
+- connection close frame
+
+WebSocket `.send()` method can send either text or binary data.
+
+When we receive the data, text always comes as string. And for binary data, we can choose between `Blob` and `ArrayBuffer` formats.
+
+### Rate limiting
+
+The `socket.bufferedAmount` property stores how many bytes are buffered at this moment, waiting to be sent over the network.
+
+### Connection close
+
+```js
+socket.close([code], [reason]);
+```
+
+- `code`: a special WebSocket closing code.
+- `reason`: a string that describes the reason of closing.
+
+Most common codes:
+
+- `1000`: the default closure
+- `1006`: connection was lost (can't be sent manually)
+- `1001`: the party is going away (server shuts down or user leaves the page)
+- `1009`: the message is too big to process
+- `1011`: unexpected error on server
+
+### Connection state
+
+There's the `socket.readyState` property with values:
+
+- `0`: CONNECTING
+- `1`: OPEN
+- `2`: CLOSING
+- `3`: CLOSED
+
 ## 3.12 Server Sent Events
+
+The `Server-Sent Events` specification describes a built-in class `EventSource`, that keeps connection with the server and allows to receive events from it.
+
+It's simpler than `WebSocket`:
+
+- Only server sends data
+- Only text
+- Regular HTTP protocol
+- Auto-reconnect
+
+### Getting messages
+
+To start receiving messages, we just need to create `new EventSource(url)`.
+
+The server should respond with status 200 and the header Content-Type: `text/event-stream`.
+
+```js
+data: Message 1
+
+data: Message 2
+
+data: Message 3
+```
+
+- A message text goes after `data:`, the space after the colon is optional.
+- Messages are delimited with double line breaks `\n\n`.
+- To send a line break `\n`, we can immediately send one more data.
+
+```js
+eventSource.onmessage = function(event) {
+  console.log("New message", event.data);
+};
+```
+
+### Cross-origin requests
+
+`EventSource` supports cross-origin requests. The remote server will get the `Origin` header and must respond with `Access-Control-Allow-Origin` to proceed.
+
+```js
+let source = new EventSource("https://another-site.com/events", {
+  withCredentials: true
+});
+```
+
+### Reconnection
+
+There’s a small delay between reconnections, a few seconds by default. The server can set the recommended delay using `retry:` in response.
+
+```
+retry: 15000
+```
+
+- If the browser knows that there’s no network connection at the moment, it may wait until the connection appears, and then retry.
+- If the server wants the browser to stop reconnecting, it should respond with HTTP status `204`.
+If the browser wants to close the connection, it should call `eventSource.close()`.
+
+### Message id
+
+When a connection breaks due to network problems, either side can’t be sure which messages were received. To correctly resume the connection, each message should have an `id` field.
+
+```
+data: Message 1
+id: 1
+```
+
+When a message with `id:` is received, the browser:
+- Sets the property `eventSource.lastEventId `to its value.
+- Sends the header `Last-Event-ID` with that `id` when reconnecting.
+
+### Connection status: readyState
+
+The `EventSource` object has `readyState` property.
+
+- `0`: Connecting
+- `1`: Open
+- `2`: Closed
+
+### Event types
+
+- `message` – a message received, available as `event.data`.
+- `open` – the connection is open.
+- `error` – the connection could not be established.
+
+The server may specify another type of event with `event: ...` at the event start.
+
+```
+event: join
+data: Bob
+```
+
+To handle custom events, we must use `addEventListener`:
+
+```js
+eventSource.addEventListener('join', event => {
+  alert(`Joined ${event.data}`);
+});
+```
