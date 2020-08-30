@@ -61,7 +61,7 @@ let response = await fetch('/article/fetch/post/user', {
 });
 ```
 
-## 1.2 FormData
+## 3.2 FormData
 
 ```js
 let formData = new FormData([form]);
@@ -76,7 +76,7 @@ If HTML `form` element is provided, it automatically captures its fields. It has
 - `formData.has(name)`
 - `formData.set(name, value)`: remove other `name` and add the new one (guaranteed unique)
 
-## 1.3 Fetch: Download progress
+## 3.3 Fetch: Download progress
 
 The `fetch` method allows to track download progress.
 
@@ -94,7 +94,7 @@ while(true) {
 }
 ```
 
-## 1.4 Fetch: Abort
+## 3.4 Fetch: Abort
 
 `AbortController` can be used to abort not only fetch, but other asynchronous tasks as well.
 
