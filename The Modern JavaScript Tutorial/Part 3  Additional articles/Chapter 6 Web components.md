@@ -232,11 +232,100 @@ Shadow DOM supports `<slot>` elements, that are automatically filled by the cont
 
 ### Named slots
 
+```js
+this.shadowRoot.innerHTML = `
+  <div>Name:
+    <slot name="username"></slot>
+  </div>
+  <div>Birthday:
+    <slot name="birthday"></slot>
+  </div>
+`;
+```
+
+```html
+<user-card>
+  <span slot="username">John Smith</span>
+  <span slot="birthday">01.01.2001</span>
+</user-card>
+```
+
+```html
+<div>Name:
+  <slot name="username">
+    <span slot="username">John Smith</span>
+  </slot>
+</div>
+<div>Birthday:
+  <slot name="birthday">
+    <span slot="birthday">01.01.2001</span>
+  </slot>
+</div>
+```
+
+The flattened DOM exists only for rendering and event-handling purposes. JavaScript won't see it.
+
+The `slot="..."` attribute is only valid for direct children of the shadow host.
+
+If we put something inside a `<slot>`, it becomes the fallback, “default” content.
+
+```html
+<div>Name:
+  <slot name="username">Anonymous</slot>
+</div>
+```
+
+### Default slot: first unnamed
+
+The first `<slot>` in shadow DOM that doesn’t have a name is a “default” slot. It gets all nodes from the light DOM that aren’t slotted elsewhere.
+
+### Updating slots
+
+The browser monitors slots and updates the rendering if slotted elements are added or removed. The `slotchange` event is triggered.
+
+### Slot API
+
+- `node.assignedSlot`: returns the `<slot>` element that the node is assigned to.
+- `slot.assignedNodes({flatten: true/false})`: DOM nodes assigned to the slot.
+- `slot.assignedElements({flatten: true/false})`: only element nodes.
 
 ## 6.6 Shadow DOM styling
 
+### :host
 
+The `:host` selector allows to select the shadow host.
+
+### Cascading
+
+If there’s a property styled both in `:host` locally, and in the document, then the document style takes precedence.
+
+### :host(selector)
+
+Same as `:host`, but applied only if the shadow host matches the `selector`.
+
+### :host-context(selector)
+
+Same as `:host`, but applied only if the shadow host or any of its ancestors in the outer document matches the `selector`.
+
+### Styling slotted content
+
+Slotted elements come from light DOM, so they use document styles. Local styles do not affect slotted content.
+
+### CSS hooks with custom properties
+
+Custom CSS properties exist on all levels, both in light and shadow.
 
 ## 6.7 Shadow DOM and events
 
+Events that happen in shadow DOM have the host element as the target, when caught outside of the component.
 
+
+Event retargeting is a great thing to have, because the outer document doesn’t have to know about component internals. Retargeting does not occur if the event occurs on a slotted element, that physically lives in the light DOM.
+
+### Bubbling, event.composedPath()
+
+For purposes of event bubbling, flattened DOM is used.
+
+### event.composed
+
+Most events successfully bubble through a shadow DOM boundary. If `event.composed` is `true`, then the event does cross the boundary.
