@@ -1,0 +1,33 @@
+{
+	"name": "Job Application Autofill",
+	"permissions": [ 
+		"http://*/*", 
+		"https://*/*", 
+		"contextMenus", 
+		"storage", 
+		"unlimitedStorage", 
+		"webNavigation" 
+	],
+	"manifest_version": 2,
+	"version": "0.01",
+	"description": "An extension that makes filling job application easier than ever",
+
+	//logo for the extension
+	"icons": {
+		//to be made later
+	},
+
+	//it can put icons in the main Google Chrome toolbar, to the right of the address bar. 
+	//In addition to its icon, a browser action can have a tooltip, a badge, and a popup.
+	"browser_action": {
+		//to be made later
+	},
+
+	//what the extension do when load the page
+	"content_scripts": [
+		{
+			"matches" :["<all_urls>"],
+			//to be made later.
+		}
+	]
+}
