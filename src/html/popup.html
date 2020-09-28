@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script type="text/javascript" src="saveData.js"></script>
+    <!-- Bootstrap CSS -->
+    <!--<div class="form-group">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+      <form id = "userInfo">
+        <div>
+          <label for="firstName">First Name:</label>
+          <input type="text" name="firstName" placeholder="Enter First Name">
+        </div>
+        <div>
+          <label for="lastName">Last Name:</label>
+          <input type="text"  name="lastName" placeholder="Enter Last Name">
+        </div>
+        <div>
+          <label for="emailAddress">Email:</label>
+          <input type="email"  name="emailAddress" placeholder="Enter Email address">
+        </div>
+        <div>
+          <label for="Phone">Phone:</label>
+          <input type="text"  name="phoneNumber" placeholder="Enter Phone Number">
+        </div>
+        <div>
+          <label for="workauth">Are you legally authorized to work in the U.S.?</label>
+          <input type="text"  name="workauth" placeholder="Your answer here">
+        </div>
+        <div>
+          <label for="visa">Will you require sponsorship for employment visa status?</label>
+          <input type="text"  name="visa" placeholder="if applicable">
+        </div>
+      </form>
+      <button onclick="saveData()">Submit</button>
+    </body>
+     
+
+  </html>

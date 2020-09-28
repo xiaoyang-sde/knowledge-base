@@ -1,0 +1,38 @@
+{
+  "name": "easy-apply",
+  "version": "1.0.0",
+  "description": "Fills out job application form automatically with user-registered data",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.1.1",
+    "css-loader": "^4.3.0",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.5.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js src",
+    "fix": "eslint --fix --ext .js src",
+    "watch": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaoyang-liu-cs/easy-apply.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiaoyang-liu-cs/easy-apply/issues"
+  },
+  "homepage": "https://github.com/xiaoyang-liu-cs/easy-apply#readme"
+}

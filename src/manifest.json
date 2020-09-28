@@ -1,0 +1,26 @@
+{
+    "name": "Easy Apply",
+    "version": "1.0.0",
+    "description": "Fills out job application form automatically with user-registered data",
+    "icons": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    },
+    "permissions": ["storage"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "browser_action": {
+      "default_popup": "popup.html"
+      
+    },
+    "manifest_version": 2,
+    "content_scripts": [
+      {
+        "matches" :["<all_urls>"],
+        "js": ["contentScript.js"]
+      }
+    ]
+  }
