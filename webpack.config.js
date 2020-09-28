@@ -21,6 +21,16 @@ const options = {
   module: {
     rules: [
       {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+      {
         test: /\.css$/,
         loader: 'style-loader!css-loader',
         exclude: /node_modules/,
@@ -40,16 +50,19 @@ const options = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new CopyWebpackPlugin([{
-      from: 'src/manifest.json',
-      transform(content) {
-        return Buffer.from(JSON.stringify({
-          description: process.env.npm_package_description,
-          version: process.env.npm_package_version,
-          ...JSON.parse(content.toString()),
-        }));
-      },
-    }]),
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: 'src/manifest.json',
+        to: 'build/',
+        transform(content) {
+          return Buffer.from(JSON.stringify({
+            description: process.env.npm_package_description,
+            version: process.env.npm_package_version,
+            ...JSON.parse(content.toString()),
+          }));
+        },
+      }],
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'html', 'popup.html'),
       filename: 'popup.html',
