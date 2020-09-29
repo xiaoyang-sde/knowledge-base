@@ -15,8 +15,8 @@ const options = {
     'content-script': path.join(__dirname, 'src', 'js', 'content-script.js'),
   },
   output: {
-    path: path.join(__dirname, 'build'),
-    filename: '[name].bundle.js',
+    path: path.join(__dirname, 'build', 'js'),
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -64,19 +64,25 @@ const options = {
       }],
     }),
     new HtmlWebpackPlugin({
+      title: 'Easy Apply - Popup',
       template: path.join(__dirname, 'src', 'html', 'popup.html'),
-      filename: 'popup.html',
+      filename: 'html/popup.html',
       chunks: ['popup'],
+      minify: true,
     }),
     new HtmlWebpackPlugin({
+      title: 'Easy Apply - Options',
       template: path.join(__dirname, 'src', 'html', 'options.html'),
-      filename: 'options.html',
+      filename: 'html/options.html',
       chunks: ['options'],
+      minify: true,
     }),
     new HtmlWebpackPlugin({
+      title: 'Easy Apply - Background',
       template: path.join(__dirname, 'src', 'html', 'background.html'),
-      filename: 'background.html',
+      filename: 'html/background.html',
       chunks: ['background'],
+      minify: true,
     }),
   ],
 };
