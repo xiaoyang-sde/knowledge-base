@@ -1,24 +1,45 @@
 {
-    "name": "Easy Apply",
-    "version": "1.0.0",
-    "description": "Fills out job application form automatically with user-registered data",
-    "icons": {
-
-    },
-    "permissions": ["storage"],
-    "background": {
-      "scripts": ["/js/background.js"],
-      "persistent": false
-    },
-    "browser_action": {
-      "default_popup": "/html/popup.html"
-      
-    },
-    "manifest_version": 2,
-    "content_scripts": [
-      {
-        "matches" :["<all_urls>"],
-        "js": ["/js/content-scripts.js"]
-      }
-    ]
-  }
+  "name": "Easy Apply",
+  "version": "1.0.0",
+  "description": "Fills out job application form automatically with user-registered data",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon_16.png",
+    "32": "img/icon_32.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_title": "Easy Apply",
+    "default_icon": {
+      "16": "img/icon_16.png",
+      "32": "img/icon_32.png",
+      "48": "img/icon_48.png",
+      "128": "img/icon_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://boards.greenhouse.io/*"
+      ],
+      "js": ["js/content-scripts.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "html/options.html",
+	"options_ui": {
+		"page": "html/options.html",
+		"chrome_style": true
+  },
+  "default_locale": "en"
+}
