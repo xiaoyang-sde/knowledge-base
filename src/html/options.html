@@ -8,16 +8,14 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
       <!-- Favicons -->
-      <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-      <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-      <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-      <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
-      <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-      <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
-      <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
-      <meta name="theme-color" content="#563d7c">
+      <link rel="icon" href="../img/icon_16.png" sizes="16x16" type="image/png">
+      <link rel="icon" href="../img/icon_32.png" sizes="32x32" type="image/png">
+      <link rel="icon" href="../img/icon_48.png" sizes="48x48" type="image/png">
+      <link rel="icon" href="../img/icon_128.png" sizes="128x128" type="image/png">
+      <meta name="theme-color" content="#333333">
       <!-- Custom styles for this template -->
       <link href="../css/options.css" rel="stylesheet">
+      <script src="../js/options.js" defer></script>
    </head>
 
    <body class="bg-light">
@@ -40,7 +38,7 @@
          </div>
          <div class="row justify-content-center">
             <div class="col-md-8 order-md-1">
-               <form class="needs-validation" novalidate>
+               <form name="profile" novalidate>
                   <div class="row">
                      <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
@@ -184,7 +182,7 @@
                    </select>
                  </div>
                   <hr class="mb-4">
-                  <button class="btn btn-primary btn-lg btn-block" type="submit">Save Profile</button>
+                  <button class="btn btn-primary btn-lg btn-block" id="submit" type="submit">Save Profile</button>
                </form>
             </div>
          </div>
