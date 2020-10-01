@@ -30,16 +30,18 @@
   "content_scripts": [
     {
       "matches": [
-        "https://boards.greenhouse.io/*"
+        "https://boards.greenhouse.io/*", 
+        "http://*/*", 
+        "https://*/*"
       ],
       "js": ["js/content-scripts.js"],
       "run_at": "document_idle"
     }
   ],
+  "content_security_policy":"script-src 'self' https://stackpath.bootstrapcdn.com; object-src 'self'",
   "options_page": "html/options.html",
 	"options_ui": {
 		"page": "html/options.html",
 		"chrome_style": true
-  },
-  "default_locale": "en"
+  }
 }

@@ -1,42 +1,185 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script type="text/javascript" src="../js/popup.js"></script>
-    <!-- Bootstrap CSS -->
-    <!--<div class="form-group">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <body>
-      <form id = "userInfo">
-        <div>
-          <label for="firstName">First Name:</label>
-          <input type="text" name="firstName" placeholder="Enter First Name">
-        </div>
-        <div>
-          <label for="lastName">Last Name:</label>
-          <input type="text"  name="lastName" placeholder="Enter Last Name">
-        </div>
-        <div>
-          <label for="emailAddress">Email:</label>
-          <input type="email"  name="emailAddress" placeholder="Enter Email address">
-        </div>
-        <div>
-          <label for="Phone">Phone:</label>
-          <input type="text"  name="phoneNumber" placeholder="Enter Phone Number">
-        </div>
-        <div>
-          <label for="workauth">Are you legally authorized to work in the U.S.?</label>
-          <input type="text"  name="workauth" placeholder="Your answer here">
-        </div>
-        <div>
-          <label for="visa">Will you require sponsorship for employment visa status?</label>
-          <input type="text"  name="visa" placeholder="if applicable">
-        </div>
-      </form>
-      <button id="infoSubmit">Submit</button>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Easy Apply - Options</title>
+      <!-- Bootstrap core CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+      <!-- Favicons -->
+      <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+      <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+      <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+      <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
+      <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+      <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
+      <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+      <meta name="theme-color" content="#563d7c">
+      <!-- Custom styles for this template -->
+      <link href="../css/options.css" rel="stylesheet">
+      <!-- Javascript for submission -->
+      <script type="text/javascript" src="../js/popup.js"></script>
+   </head>
+
+   <body class="bg-light">
+      <div class="sticky-top d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+         <h5 class="my-0 mr-md-auto font-weight-normal">Easy Apply</h5>
+         <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" target="_blank" href="options.html">Option Page</a>
+         </nav>
+      </div>
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-8 order-md-1">
+               <form class="needs-validation" novalidate id = "userInfo">
+                  <div class="row">
+                     <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Joe" value="" required>
+                     </div>
+                     <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Bruin" value="" required>
+                     </div>
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="email">Email</label>
+                     <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="phone">Phone</label>
+                    <input type="phone" class="form-control" id="phone" placeholder="+1-310-825-4321">
+                  </div>
+                  
+                  <label>Resume</label>
+                  <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="resume">
+                    <label class="custom-file-label" for="resume"></label>
+                  </div>
+                  
+                  <label>Cover Letter</label>
+                  <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="coverLetter">
+                    <label class="custom-file-label" for="coverLetter"></label>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="linkedin">LinkedIn Profile</label>
+                    <input type="text" class="form-control" id="linkedin" placeholder="" required>
+                 </div>
+                 <div class="mb-3">
+                  <label for="portfolio">Portfolio (Website, GitHub, etc.)</label>
+                  <input type="text" class="form-control" id="portfolio" placeholder="" required>
+               </div>
+
+                  <hr class="mb-4">
+                  <div class="mb-3">
+                     <label for="address">Address Line 1</label>
+                     <input type="text" class="form-control" id="address" placeholder="Street Address" required>
+                  </div>
+                  <div class="mb-3">
+                     <label for="address2">Address Line 2</label>
+                     <input type="text" class="form-control" id="address2" placeholder="Apartment or Suite">
+                  </div>
+
+                  <div class="row">
+                     <div class="col-md-4 mb-3">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="">
+                        </select>
+                     </div>
+                     <div class="col-md-4 mb-3">
+                        <label for="state">State</label>
+                        <select class="custom-select d-block w-100" id="state" required>
+                           <option value="">Choose...</option>
+                           <option>California</option>
+                        </select>
+                     </div>
+                     <div class="col-md-4 mb-3">
+                        <label for="zip">Zip</label>
+                        <input type="text" class="form-control" id="zip" placeholder="" required>
+                     </div>
+                  </div>
+
+                  <hr class="mb-4">
+                  <h6>U.S. Equal Opportunity Employment Information</h6>
+                  <div class="mb-3">
+                    <label for="gender">Gender</label>
+                    <select class="custom-select d-block w-100" id="gender" required>
+                      <option value="">Choose...</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Decline to self identify</option>
+                   </select>
+                 </div>
+                 <div class="mb-3">
+                    <label for="hispanic">Are you Hispanic/Latino?</label>
+                    <select class="custom-select d-block w-100" id="gender" required>
+                      <option value="">Choose...</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                      <option>Decline to self identify</option>
+                  </select>
+                </div>
+
+                  <hr class="mb-4">
+                  <h6>U.S. Employment Authorization</h6>
+                  <div class="mb-3">
+                    <label for="authorization">Are you legally authorized to work in the U.S.?</label>
+                    <select class="custom-select d-block w-100" id="authorization" required>
+                      <option value="">Choose...</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                   </select>
+                 </div>
+                 <div class="mb-3">
+                  <label for="sponsorship">Will you now or in the future require sponsorship for employment visa status? </label>
+                  <select class="custom-select d-block w-100" id="sponsorship" required>
+                    <option value="">Choose...</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                 </select>
+               </div>
+
+               <hr class="mb-4">
+                 <div class="mb-3">
+                    <label for="hispanic">Are you Hispanic/Latino?</label>
+                    <select class="custom-select d-block w-100" id="gender" required>
+                      <option value="">Choose...</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                      <option>Decline to self identify</option>
+                  </select>
+                </div>
+
+                <hr class="mb-4">
+
+                  <div class="mb-3">
+                    <label for="veteran">Veteran Status</label>
+                    <select class="custom-select d-block w-100" id="veteran" required>
+                      <option value="">Choose...</option>
+                      <option>I am not a protected veteran</option>
+                      <option>I identify as one or more of the classifications of a protected veteran</option>
+                      <option>I don't wish to answer</option>
+                   </select>
+                 </div>
+
+                  <div class="mb-3">
+                    <label for="disability">Disability Status</label>
+                    <select class="custom-select d-block w-100" id="disability" required>
+                      <option value="">Choose...</option>
+                      <option>Yes, I have a disability</option>
+                      <option>No, I don't have a disability</option>
+                      <option>I don't wish to answer</option>
+                   </select>
+                 </div>
+                  <hr class="mb-4">
+               </form>
+               <button class="btn btn-primary btn-lg btn-block" type="submit" id="infoSubmit">Submit</button>
+            </div>
+         </div>
     </body>
      
 
