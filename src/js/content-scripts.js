@@ -14,7 +14,7 @@ for (const element of allInput) {
     //Last Name
     if (element.autocomplete == "family-name") {
         chrome.storage.sync.get('lastName', function(data) {
-            element.value = "data.lastName";
+            element.value = data.lastName;
         });
     }
     //Email
