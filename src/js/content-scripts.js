@@ -4,35 +4,35 @@ console.log("content script run!");
 //get the information from user input
 const allInput = document.getElementsByTagName('input');
 console.log(allInput[3].value);
-for (i = 0; i < allInput.length; i++) {
+for (const element of allInput) {
     //First Name
-    if (allInput[i].autocomplete == "given-name") {
+    if (element.autocomplete == "given-name") {
         chrome.storage.sync.get('firstName', function(data) {
-            this.value = data.value;
+            element.value = data.firstName;
         });
     }
     //Last Name
-    if (allInput[i].autocomplete == "family-name") {
+    if (element.autocomplete == "family-name") {
         chrome.storage.sync.get('lastName', function(data) {
-            this.value = data.value;
+            element.value = "data.lastName";
         });
     }
     //Email
-    if (allInput[i].autocomplete == "email") {
+    if (element.autocomplete == "email") {
         chrome.storage.sync.get('email', function(data) {
-            this.value = data.value;
+            element.value = data.email;
         });
     }
     //address line
-    if (allInput[i].autocomplete == "street-address") {
+    if (element.autocomplete == "street-address") {
         chrome.storage.sync.get('address', function(data) {
-            this.value = data.value;
+            element.value = data.address;
         });
     }
     //zip-code
-    if (allInput[i].autocomplete == "postal-code") {
+    if (element.autocomplete == "postal-code") {
         chrome.storage.sync.get('zip', function(data) {
-            this.value = data.value;
+            element.value = data.zip;
         });
     }
 }
