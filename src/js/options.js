@@ -16,7 +16,7 @@ profileForm.addEventListener('submit', (event) => {
   event.preventDefault();
   for (const element of event.target.elements) {
     let value;
-    if (element.type === 'text' || element.type === 'file') {
+    if (element.type === 'text') {
       value = element.value;
     } else if (element.tagName === 'select') {
       value = element.selectedIndex;
@@ -29,15 +29,15 @@ profileForm.addEventListener('submit', (event) => {
 });
 
 for (const element of profileForm.elements) {
-  if (element.type === 'text' || element.type === 'file') {
+  if (element.type === 'text') {
     chrome.storage.sync.get([element.id],(result) => {
-      if (element.id) {
+      if (result[element.id]) {
         element.value = result[element.id];
       }
     });
   } else if (element.tagName === 'select') {
     chrome.storage.sync.get([element.id],(result) => {
-      if (element.id) {
+      if (result[element.id]) {
         element.selectedIndex = result[element.id];
       }
     });

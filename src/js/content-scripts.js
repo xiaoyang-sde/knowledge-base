@@ -15,16 +15,20 @@ function fill() {
   };
 
   const inputs = document.querySelectorAll('input');
-
   for (const input of inputs) {
+    if (!input.labels) {
+      continue;
+    }
+  
     const label = input.labels[0]?.textContent?.toLowerCase();
     for (const key in labelMap) {
-      if (label.includes(key)) {
-        chrome.storage.sync.get(labelMap[key], (result) => {
-          if (result[key] === undefined) {
+      if (label && label.includes(key)) {
+        const storageKey = labelMap[key];
+        chrome.storage.sync.get(storageKey, (result) => {
+          if (result[storageKey] === undefined) {
             return;
           }
-          input.value = result[key];
+          input.value = result[storageKey];
         });
       }
     }
@@ -35,6 +39,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action !== 'fill') {
     return;
   }
+
   chrome.storage.sync.get('status', (result) => {
     let status = result['status']
     if (status === undefined) {
@@ -44,8 +49,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       return;
     }
     fill();
-    sendResponse({
-      action: 'filled',
+    chrome.storage.sync.get('count', (result) => {
+      const count = result['count'];
+      chrome.storage.sync.set({
+        count: count + 1,
+      });
     });
   });
 });

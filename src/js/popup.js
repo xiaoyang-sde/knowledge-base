@@ -7,7 +7,7 @@ optionsButton.addEventListener('click', () => {
 });
 
 toggleButton.addEventListener('click', () => {
-  chrome.store.sync.get('status', (result) => {
+  chrome.storage.sync.get('status', (result) => {
     previousStatus = result['status'];
     if (previousStatus === undefined) {
       previousStatus = true;
@@ -22,31 +22,29 @@ toggleButton.addEventListener('click', () => {
       backgroundPage.enableContextItem();
     }
 
-    chrome.store.sync.set({
+    chrome.storage.sync.set({
       status: !previousStatus,
     });
   });
 });
 
-chrome.runtime.onMessage.addListener((request) => {
-  if (request.action === 'filled') {
-    chrome.store.sync.get('count', (result) => {
-      previousCount = result['previousCount'];
-      countBadge.textContent = previousCount + 1;
-      chrome.store.sync.set({
-        count: previousCount + 1,
-      });
-    });
-  }
-});
-
-chrome.store.sync.get('count', (result) => {
-  let count = result['count'];
+chrome.storage.sync.get('count', (result) => {
+  const count = result['count'];
+  console.log(count);
   if (count === undefined) {
-    chrome.store.sync.set({
+    chrome.storage.sync.set({
       count: 0,
     });
   } else {
     countBadge.textContent = count;
+  }
+});
+
+chrome.storage.sync.get('status', (result) => {
+  const status = result['status'];
+  if (status) {
+    toggleButton.textContent = 'Disable Auto Fill';
+  } else {
+    toggleButton.textContent = 'Enable Auto Fill';
   }
 });
