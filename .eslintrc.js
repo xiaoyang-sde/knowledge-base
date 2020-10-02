@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    webextension: true,
+    webextensions: true,
   },
   extends: [
     'airbnb-base',
@@ -10,9 +10,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'script',
-    "ecmaFeatures": {
-      "impliedStrict": true,
-    }
+    ecmaFeatures: {
+      impliedStrict: true,
+    },
   },
   rules: {
   },

@@ -1,39 +1,50 @@
-let countBadge = document.getElementById('count');
-let toggleButton = document.getElementById('toggle');
+const countBadge = document.getElementById('count');
+const toggleButton = document.getElementById('toggle');
+const optionsButton = document.getElementById('options');
 
-toggleButton.addEventListener('click', event => {
-  chrome.store.sync.get('status', previousStatus => {
+optionsButton.addEventListener('click', () => {
+  chrome.runtime.openOptionsPage();
+});
+
+toggleButton.addEventListener('click', () => {
+  chrome.store.sync.get('status', (result) => {
+    previousStatus = result['status'];
     if (previousStatus === undefined) {
       previousStatus = true;
     }
 
+    const backgroundPage = chrome.extension.getBackgroundPage();
     if (previousStatus) {
-      toggle.textContent = "Enable Auto Fill";
+      toggleButton.textContent = 'Enable Auto Fill';
+      backgroundPage.disableContextItem();
     } else {
-      toggle.textContent = "Disable Auto Fill";
+      toggleButton.textContent = 'Disable Auto Fill';
+      backgroundPage.enableContextItem();
     }
 
     chrome.store.sync.set({
-      status: !previousStatus
+      status: !previousStatus,
     });
-  })
+  });
 });
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action == "filled") {
-      chrome.store.sync.get('count', (previousCount) => {
-        countBadge.textContent = previousCount + 1;
-        chrome.store.sync.set({
-          count: previousCount + 1
-        });
+chrome.runtime.onMessage.addListener((request) => {
+  if (request.action === 'filled') {
+    chrome.store.sync.get('count', (result) => {
+      previousCount = result['previousCount'];
+      countBadge.textContent = previousCount + 1;
+      chrome.store.sync.set({
+        count: previousCount + 1,
       });
-    }
+    });
+  }
 });
 
-chrome.store.sync.get('count', count => {
+chrome.store.sync.get('count', (result) => {
+  let count = result['count'];
   if (count === undefined) {
     chrome.store.sync.set({
-      count: 0
+      count: 0,
     });
   } else {
     countBadge.textContent = count;

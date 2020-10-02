@@ -1,18 +1,24 @@
+function sendJobMessage() {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, { action: 'fill' });
+  });
+}
 
-//Right click to trigger auto-fill in context menu
+function enableContextItem() {
+  chrome.contextMenus.update('jobAutoFill', {
+    visible: true,
+  });
+}
 
-//put the option into the context menu
-var contextMenuItem = {
-  "id": "jobAutoFill",
-  "title": "Fill Job Application",
-  "contexts": ["all"]
-};
-chrome.contextMenus.create(contextMenuItem);
+function disableContextItem() {
+  chrome.contextMenus.update('jobAutoFill', {
+    visible: false,
+  });
+}
 
-//implement the onclick event on the context menu
-chrome.contextMenus.onClicked.addListener(function(clickData) {
-  if (clickData.menuItemId == "jobAutoFill") {
-    alert("Testing the Onclicked Event");
-  }
-    
+chrome.contextMenus.create({
+  id: 'jobAutoFill',
+  title: 'Fill Job Application',
+  contexts: ['page'],
+  onclick: sendJobMessage,
 });

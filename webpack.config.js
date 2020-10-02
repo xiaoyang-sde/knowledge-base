@@ -77,13 +77,6 @@ const options = {
       chunks: ['options'],
       minify: true,
     }),
-    new HtmlWebpackPlugin({
-      title: 'Easy Apply - Background',
-      template: path.join(__dirname, 'src', 'html', 'background.html'),
-      filename: 'html/background.html',
-      chunks: ['background'],
-      minify: true,
-    }),
   ],
 };
 
