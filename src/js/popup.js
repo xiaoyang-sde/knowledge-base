@@ -11,8 +11,7 @@ function saveData(e) {
   for (i = 0; i < elements.length; i++) {
     var key = elements[i].id;
     var { value } = elements[i];
-    chrome.storage.sync.set({[key]: value }, () => {
-      alert("Successful");
-    });
+    chrome.storage.sync.set({[key]: value });
   }
+  alert("Saved Successfully.")
 }
