@@ -1,17 +1,41 @@
-window.onload = function() {
-  //get the information from user input
-  var testing = document.getElementById("infoSubmit");
-  testing.addEventListener("click", saveData, false);
+let countBadge = document.getElementById('count');
+let toggleButton = document.getElementById('toggle');
 
-  
-}
+toggleButton.addEventListener('click', event => {
+  chrome.store.sync.get('status', previousStatus => {
+    if (previousStatus === undefined) {
+      previousStatus = true;
+    }
 
-function saveData(e) {
-  const { elements } = document.getElementById('userInfo');
-  for (i = 0; i < elements.length; i++) {
-    var key = elements[i].id;
-    var { value } = elements[i];
-    chrome.storage.sync.set({[key]: value });
+    if (previousStatus) {
+      toggle.textContent = "Enable Auto Fill";
+    } else {
+      toggle.textContent = "Disable Auto Fill";
+    }
+
+    chrome.store.sync.set({
+      status: !previousStatus
+    });
+  })
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action == "filled") {
+      chrome.store.sync.get('count', (previousCount) => {
+        countBadge.textContent = previousCount + 1;
+        chrome.store.sync.set({
+          count: previousCount + 1
+        });
+      });
+    }
+});
+
+chrome.store.sync.get('count', count => {
+  if (count === undefined) {
+    chrome.store.sync.set({
+      count: 0
+    });
+  } else {
+    countBadge.textContent = count;
   }
-  alert("Saved Successfully.")
-}
+});
