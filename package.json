@@ -1,7 +1,7 @@
 {
   "name": "easy-apply",
-  "version": "1.0.0",
-  "description": "Fills out job application form automatically with user-registered data",
+  "version": "0.0.1",
+  "description": "Automatically fill out repetitive fields on job applications.",
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.11.6",
@@ -17,6 +17,7 @@
     "file-loader": "^6.1.0",
     "html-loader": "^1.3.1",
     "html-webpack-plugin": "^4.5.0",
+    "style-loader": "^1.2.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },

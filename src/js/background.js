@@ -1,18 +1,34 @@
+function enableContextItem() {
+  chrome.contextMenus.update('jobAutoFill', {
+    visible: true,
+  });
+}
 
-//Right click to trigger auto-fill in context menu
+function disableContextItem() {
+  chrome.contextMenus.update('jobAutoFill', {
+    visible: false,
+  });
+}
 
-//put the option into the context menu
-var contextMenuItem = {
-  "id": "jobAutoFill",
-  "title": "Fill Job Application",
-  "contexts": ["all"]
-};
-chrome.contextMenus.create(contextMenuItem);
+chrome.contextMenus.removeAll(() => {
+  chrome.contextMenus.create({
+    id: 'jobAutoFill',
+    title: 'Fill Job Application',
+    contexts: ['page'],
+  });
+});
 
-//implement the onclick event on the context menu
-chrome.contextMenus.onClicked.addListener(function(clickData) {
-  if (clickData.menuItemId == "jobAutoFill") {
-    alert("Testing the Onclicked Event");
+chrome.contextMenus.onClicked.addListener((data) => {
+  if (data.menuItemId === 'jobAutoFill') {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, { action: 'fill' });
+    });
   }
-    
+});
+
+chrome.storage.sync.get('status', (result) => {
+  const status = result['status'];
+  if (!status) {
+    disableContextItem();
+  }
 });

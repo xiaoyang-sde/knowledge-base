@@ -1,7 +1,7 @@
 {
   "name": "Easy Apply",
-  "version": "1.0.0",
-  "description": "Fills out job application form automatically with user-registered data",
+  "version": "0.0.1",
+  "description": "Automatically fill out repetitive fields on job applications.",
   "manifest_version": 2,
   "icons": {
     "16": "img/icon_16.png",
@@ -10,6 +10,7 @@
     "128": "img/icon_128.png"
   },
   "permissions": [
+    "tabs",
     "storage",
     "contextMenus"
   ],
@@ -30,11 +31,11 @@
   "content_scripts": [
     {
       "matches": [
-        "https://boards.greenhouse.io/*", 
-        "http://*/*", 
-        "https://*/*"
+        "https://boards.greenhouse.io/*"
       ],
-      "js": ["js/content-scripts.js"],
+      "js": [
+        "js/content-scripts.js"
+      ],
       "run_at": "document_idle"
     }
   ],
@@ -42,6 +43,6 @@
   "options_page": "html/options.html",
 	"options_ui": {
 		"page": "html/options.html",
-		"chrome_style": true
+		"chrome_style": false
   }
 }

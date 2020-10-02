@@ -1,17 +1,50 @@
-window.onload = function() {
-  //get the information from user input
-  var testing = document.getElementById("infoSubmit");
-  testing.addEventListener("click", saveData, false);
+const countBadge = document.getElementById('count');
+const toggleButton = document.getElementById('toggle');
+const optionsButton = document.getElementById('options');
 
-  
-}
+optionsButton.addEventListener('click', () => {
+  chrome.runtime.openOptionsPage();
+});
 
-function saveData(e) {
-  const { elements } = document.getElementById('userInfo');
-  for (i = 0; i < elements.length; i++) {
-    var key = elements[i].id;
-    var { value } = elements[i];
-    chrome.storage.sync.set({[key]: value });
+toggleButton.addEventListener('click', () => {
+  chrome.storage.sync.get('status', (result) => {
+    previousStatus = result['status'];
+    if (previousStatus === undefined) {
+      previousStatus = true;
+    }
+
+    const backgroundPage = chrome.extension.getBackgroundPage();
+    if (previousStatus) {
+      toggleButton.textContent = 'Enable Auto Fill';
+      backgroundPage.disableContextItem();
+    } else {
+      toggleButton.textContent = 'Disable Auto Fill';
+      backgroundPage.enableContextItem();
+    }
+
+    chrome.storage.sync.set({
+      status: !previousStatus,
+    });
+  });
+});
+
+chrome.storage.sync.get('count', (result) => {
+  const count = result['count'];
+  console.log(count);
+  if (count === undefined) {
+    chrome.storage.sync.set({
+      count: 0,
+    });
+  } else {
+    countBadge.textContent = count;
   }
-  alert("Saved Successfully.")
-}
+});
+
+chrome.storage.sync.get('status', (result) => {
+  const status = result['status'];
+  if (status) {
+    toggleButton.textContent = 'Disable Auto Fill';
+  } else {
+    toggleButton.textContent = 'Enable Auto Fill';
+  }
+});
