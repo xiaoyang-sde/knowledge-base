@@ -69,4 +69,3 @@ However, passing an entire object in the parameters of a method, instead of pass
 If repeating data comprises the fields of a class, use Extract Class to move the fields to their own class.
 
 If the same data clumps are passed in the parameters of methods, use Introduce Parameter Object to set them off as a class.
-
