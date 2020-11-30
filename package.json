@@ -4,7 +4,7 @@
   "description": "Automatically fill out repetitive fields on job applications.",
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.12.7",
+    "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.7",
     "@babel/preset-env": "^7.12.7",
     "babel-loader": "^8.2.1",
