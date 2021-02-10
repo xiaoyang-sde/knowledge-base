@@ -151,9 +151,9 @@ let admin = user; // copy the reference
 
 ### Comparison by reference
 
-"==" and "===" works same for objects. Two objects are equal only if they are the same object.
+`==` and `===` works same for objects. Two objects are equal only if they are the same object.
 
-For comparisons like obj1 > obj2 or for a comparison against a primitive obj == 5, objects are converted to primitives.
+For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives.
 
 ### Cloning and merging, Object.assign
 
@@ -174,10 +174,10 @@ We can use the method Object.assign for that.
 Object.assign(dest, [src1, src2, src3...])
 ```
 
-- dest: target object
-- src1, ... srcN: source objects
-- It copies the properties of all source objects src1, ..., srcN into the target dest. (Overwritten if exists)
-- The call returns dest.
+- `dest`: target object
+- `src1, ... srcN`: source objects
+- It copies the properties of all source objects `src1, ..., srcN` into the target dest. (Overwritten if exists)
+- The call returns `dest`.
 
 ```js
 let user = { name: "John" };
@@ -224,9 +224,9 @@ The basic garbage collection algorithm is called "mark-and-sweep".
 
 ### Optimization
 
-- Generational collection – objects are split into two sets: "new ones" and "old ones". Many objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
-- Incremental collection – if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately.
-- Idle-time collection – the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+- **Generational collection**: Objects are split into two sets: "new ones" and "old ones". Many objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
+- **Incremental collection**: If there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately.
+- **Idle-time collection**: The garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
 
 ## 4.4 Object methods, "this"
 
@@ -273,7 +273,7 @@ user.f = sayHi;
 admin.f = sayHi;
 ```
 
-Its value is evaluated at call-time and does not depend on where the method was declared.
+The value is evaluated at call-time and does not depend on where the method was declared.
 
 Arrow functions are special: they don’t have their "own" this. It will take from the outer normal function.
 
@@ -341,16 +341,16 @@ We can add to this not only properties, but methods as well.
 
 ## 4.6 Optional chaining '?.'
 
-The optional chaining ?. is an error-proof way to access nested object properties, even if an intermediate property doesn’t exist.
+The optional chaining `?.` is an error-proof way to access nested object properties, even if an intermediate property doesn’t exist.
 
-The optional chaining ?. stops the evaluation and returns undefined if the part before ?. is undefined or null. The variable before ?. must be declared.
+The optional chaining `?.` stops the evaluation and returns undefined if the part before `?.` is `undefined` or `null`. The variable before `?.` must be declared.
 
 ```js
 let user = {};
 alert( user?.address?.street ); // undefined (no error)
 ```
 
-## Short-circuiting
+### Short-circuiting
 
 ```js
 let user = null;
@@ -361,20 +361,20 @@ user?.sayHi(x++); // nothing happens
 alert(x); // 0, value not incremented
 ```
 
-?.() is used to call a function that may not exist.
+`?.()` is used to call a function that may not exist.
 
 ```js
 let user2 = {};
 user2.admin?.();
 ```
 
-The ?.[] syntax also works, if we’d like to use brackets [] to access properties instead of dot.
+The `?.[]` syntax also works, if we’d like to use brackets `[]` to access properties instead of dot.
 
 ```js
 alert( user1?.[key] ); // John
 ```
 
-Also we can use ?. with delete:
+Also we can use `?.`` with delete`:
 
 ```js
 delete user?.name;
@@ -398,7 +398,7 @@ let id = Symbol("id"); // symbol name is "id"
 
 Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values.
 
-Symbols don't auto-convert to a string, because strings and symbols are fundamentally different and should not accidentally convert one into another. (Need to explititly call .toString() on it.)
+Symbols don't auto-convert to a string, because strings and symbols are fundamentally different and should not accidentally convert one into another. (Need to explititly call `.toString()` on it.)
 
 ### "Hidden" properties
 
@@ -414,9 +414,9 @@ let id = Symbol("id");
 user[id] = 1;
 ```
 
-A symbol cannot be accessed accidentally, the third-party code probably won’t even see it, so it's probably all right to do. To access  Symbols in a object, use `Object.getOwnPropertySymbols(obj)`. 
+A symbol cannot be accessed accidentally, the third-party code probably won’t even see it, so it's probably all right to do. To access Symbols in a object, use `Object.getOwnPropertySymbols(obj)`.
 
-If we want to use a symbol in an object literal {...}, we need square brackets around it.
+If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
 
 ```js
 let id = Symbol("id");
@@ -427,7 +427,7 @@ let user = {
 };
 ```
 
-Symbolic properties do not participate in for..in loop and not show in Object.keys(obj). If another script or a library loops over our object, it won’t unexpectedly access a symbolic property. In contrast, Object.assign copies both string and symbol properties.
+Symbolic properties do not participate in `for..in` loop and not show in `Object.keys(obj)`. If another script or a library loops over our object, it won’t unexpectedly access a symbolic property. In contrast, `Object.assign` copies both string and symbol properties.
 
 ### Global symbols
 
@@ -446,9 +446,9 @@ In order to read (create if absent) a symbol from the registry, use `Symbol.for
 
 ## 4.8 Object to primitive conversion
 
-1. All objects are true in a boolean context. There are only numeric and string conversions.
+1. All objects are `true` in a boolean context. There are only numeric and string conversions.
 2. The numeric conversion happens when we subtract objects or apply mathematical functions.
-3. As for the string conversion – it usually happens when we output an object like alert(obj).
+3. As for the string conversion, it usually happens when we output an object like `alert(obj)`.
 
 ### ToPrimitive
 
@@ -460,9 +460,9 @@ All built-in objects except for the Date object implement "default" conversio
 
 To do the conversion, JavaScript tries to find and call three object methods:
 
-1. Call obj[Symbol.toPrimitive](hint) – the method with the symbolic key Symbol.toPrimitive (system symbol), if such method exists.
-2. Otherwise if hint is "string", try obj.toString() and obj.valueOf(), whatever exists.
-3. Otherwise if hint is "number" or "default, try obj.valueOf() and obj.toString(), whatever exists.
+1. Call `obj[Symbol.toPrimitive](hint)` – the method with the symbolic key `Symbol.toPrimitive` (system symbol), if such method exists.
+2. Otherwise if hint is "string", try `obj.toString()` andthen  `obj.valueOf()`, whatever exists.
+3. Otherwise if hint is "number" or "default, try `obj.valueOf()` and then `obj.toString()`, whatever exists.
 
 ### Symbol.toPrimitive
 
@@ -477,8 +477,11 @@ obj[Symbol.toPrimitive] = function(hint) {
 
 ### toString/valueOf
 
-There is no control whether toString returns exactly a string, or whether Symbol.
+By default, a plain object has following `toString` and `valueOf` methods:
 
-toPrimitive method returns a number for a hint "number". These methods must return a primitive, not an object.
+- The `toString` method returns a string `"[object Object]"`.
+- The `valueOf` method returns the object itself.
 
-For historical reasons, if toString or valueOf returns an object, there’s no error, but such value is ignored.
+There is no control whether `toString` returns exactly a string, or whether Symbol.
+
+For historical reasons, if `toString` or `valueOf` returns an object, there’s no error, but such value is ignored.

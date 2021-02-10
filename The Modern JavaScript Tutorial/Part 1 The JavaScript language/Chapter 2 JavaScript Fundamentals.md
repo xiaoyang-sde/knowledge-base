@@ -4,29 +4,29 @@
 
 ### The "script" tag
 
-```javascript
+```html
 <script>
-   alert( 'Hello, world!' );
+  alert( 'Hello, world!' );
 </script>
 ```
 
 ### Modern Markup
 
-The \<script> tag has a few attributes that are rarely used nowadays but can still be found in old code:
-- The type attribute: <script type=…> (Now, it can be used for JavaScript modules.)
-- The language attribute: <script language=…> (No longer makes sense because JavaScript is the default language.)
+The `<script>` tag has a few attributes that are rarely used nowadays but can still be found in old code:
+- The type attribute: `<script type=…>` (Now, it can be used for JavaScript modules.)
+- The language attribute: `<script language=…>` (No longer makes sense because JavaScript is the default language.)
 - Comments before and after scripts.
 
 ### External Scripts
 
 If we have a lot of JavaScript code, we can put it into a separate file. As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files, since the browser will download it and store it in its cache.
 
-```javascript
+```html
 <script src="/path/to/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
-If src is set, the script content is ignored.
+If `src` is set, the script content is ignored.
 
 ## 2.2 Code structure
 
@@ -46,7 +46,7 @@ alert(3 +
 + 2);
 ```
 
-JavaScript does not assume a semicolon before square brackets [...]. This example will cause error:
+JavaScript does not assume a semicolon before square brackets `[...]`. This example will cause error:
 
 ```javascript
 alert("There will be an error")
@@ -74,7 +74,7 @@ JavaScript evolved without compatibility issues. Any mistake or an imperfect dec
 ...
 ```
 
-"use strict" can be put at the beginning of a function, but usually people use it for the whole script.
+`"use strict";` can be put at the beginning of a function, but usually people use it for the whole script.
 
 - Ensure that "use strict" is at the top
 - There"s no way to cancel "use strict"
@@ -107,7 +107,7 @@ Declaring twice triggers an error.
 
 ### Variable naming
 
-- The name must contain only letters, digits, or the symbols $ and _.
+- The name must contain only letters, digits, or the symbols `$` and `_`.
 - The first character must not be a digit.
 - camelCase is commonly used.
 - Case matters, and non-Latin letters are allowed, but not recommended.
@@ -138,6 +138,7 @@ A variable name should have a clean, obvious meaning, describing the data that i
 - An extra variable is good, not evil, as it won"t create performance issues.
 
 ## 2.5 Data types
+
 There are eight basic data types in JavaScript. We can put any type in a variable.
 
 ### Number
@@ -161,7 +162,7 @@ const bigInt = 1234567890123456789012345678901234567890n;
 In JavaScript, there are 3 types of quotes.
 1. Double quotes: "Hello".
 2. Single quotes: 'Hello'.
-3. Backticks: `Hello`.
+3. Backticks: \`Hello\`.
 
 - Double and single quotes are "simple" quotes.
 - Backticks are "extended functionality" quotes.
@@ -170,7 +171,7 @@ In JavaScript, there are 3 types of quotes.
 alert( `the result is ${1 + 2}` );
 ```
 
-- ${} can contains a variable like name or an arithmetical expression like 1 + 2 or something more complex.
+- `${}` can contains a variable like name or an arithmetical expression like 1 + 2 or something more complex.
 - There's no character type in JavaScript.
 
 ### Boolean (logical type)
@@ -194,19 +195,20 @@ It is possible to explicitly assign undefined to a variable.
 
 ### Objects and Symbols
 
-All other types are called "primitive" because their values can contain only a single thing. 
+All other types are called "primitive" because their values can contain only a single thing.
 Objects are used to store collections of data and more complex entities.
 
 The symbol type is used to create unique identifiers for objects.
 
 ### The typeof operator
 
-The call to typeof x returns a string with the type name.
+The call to `typeof x` returns a string with the type name.
 It supports two forms of syntax:
+
 1. As an operator: typeof x.
 2. As a function: typeof(x).
 
-```
+```js
 typeof "foo" // "string"
 
 typeof Symbol("id") // "symbol"
@@ -218,11 +220,11 @@ typeof null // "object"  (2)
 typeof alert // "function"  (3)
 ```
 
-1. Math is a built-in object that provides mathematical operations.
+1. `Math` is a built-in object that provides mathematical operations.
 
-2. The result of typeof null is "object". It's an officially recognized error but kept for compatibility.
+2. The result of `typeof null` is `"object"`. It's an officially recognized error but kept for compatibility.
 
-3. The result of typeof alert is "function", because alert is a function. Functions belong to the object type. That comes from the early days of JavaScript.
+3. The result of `typeof alert is "function"`, because `alert` is a function. Functions belong to the object type. That comes from the early days of JavaScript.
 
 ## 2.6. Interaction: alert, prompt, confirm
 
@@ -686,8 +688,8 @@ for (begin; condition; step) {
   // ... loop body ...
 }
 
-for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2 
-  alert(i); 
+for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
+  alert(i);
 }
 ```
 
@@ -835,10 +837,10 @@ function ask(question, yes, no) {
   else no();
 }
 
-ask( 
-  "Do you agree?", 
-  function() { alert("You agreed."); }, 
-  function() { alert("You canceled the execution."); } 
+ask(
+  "Do you agree?",
+  function() { alert("You agreed."); },
+  function() { alert("You canceled the execution."); }
 );
 ```
 

@@ -20,19 +20,19 @@ let str = "Hello";
 alert(str.toUpperCase()); // HELLO
 ```
 
-1. The string str is a primitive. So in the moment of accessing its property, a special object is created that knows the value of the string, and has useful methods, like toUpperCase().
+1. The string str is a primitive. So in the moment of accessing its property, a special object is created that knows the value of the string, and has useful methods, like `toUpperCase()`.
 2. That method runs and returns a new string (shown by alert).
 3. The special object is destroyed, leaving the primitive str alone.
 
-Don't use constructors like String, Number, Boolean:
+Don't use constructors like `String`, `Number`, `Boolean`:
 
 ```js
 alert(typeof new Number(0)); // "object"!
 ```
 
 - Objects are always truthy in if.
-- null/undefined have no methods.
-- Permitives (temporary objects) can't store additional data. (Error in strict mode, undefined in regular mode.)
+- `null`/`undefined` have no methods.
+- Permitives (temporary objects) can't store additional data. (Error in strict mode, `undefined` in regular mode.)
 
 ## 5.2 Numbers
 
@@ -69,10 +69,10 @@ alert( 123456..toString(36) ); // 2n9c
 
 ### Rounding
 
-- Math.floor (Rounds down)
-- Math.ceil (Rounds up)
-- Math.round (Nearst integer)
-- Math.trunc (Remove anything after the decimal point)
+- `Math.floor` (Rounds down)
+- `Math.ceil` (Rounds up)
+- `Math.round` (Nearst integer)
+- `Math.trunc` (Remove anything after the decimal point)
 
 To round a number into n-th digits:
 
@@ -99,15 +99,15 @@ Use `toFixed(n)` to solve this problem.
 
 ### Tests: isFinite and isNaN
 
-- Infinity (and -Infinity) is a special numeric value that is greater (less) than anything.
-- NaN represents an error.
+- `Infinity `(and `-Infinity`) is a special numeric value that is greater (less) than anything.
+- `NaN` represents an error.
 
-- isNaN(value) converts its argument to a number and then tests it for being NaN.
-- The value of NaN is unique, and it does not equal anything, including itself.
+- `isNaN(value)` converts its argument to a number and then tests it for being `NaN`.
+- The value of `NaN` is unique, and it does not equal anything, including itself.
 
 
-- isFinite(value) converts its argument to a number and returns true if it’s a regular number, not NaN/Infinity/-Infinity.
-- Sometimes isFinite is used to validate whether a string value is a regular number. (An empty or a space-only string is treated as 0.)
+- `isFinite(value)` converts its argument to a number and returns `true` if it’s a regular number, not `NaN/Infinity/-Infinity`.
+- Sometimes `isFinite` is used to validate whether a string value is a regular number. (An empty or a space-only string is treated as 0.)
 
 ## parseInt and parseFloat
 
@@ -131,7 +131,7 @@ The second argument of parseInt() is used to specifies the base of the numeral s
 - Strings can be enclosed within either single quotes, double quotes, or backticks.
 - It is still possible to create multiline strings with single and double quotes by using a so-called “newline character”, written as `\n`, which denotes a line break.
 - The length property has the string length.
-- To get a character at position pos, use square brackets [pos] or call the method `str.charAt(pos)`. Square brackets return undefind, but charAt returns an empty string. 
+- To get a character at position pos, use square brackets [pos] or call the method `str.charAt(pos)`. Square brackets return undefind, but charAt returns an empty string.
 - We can also iterate over characters using for..of.
 
 ```js
@@ -158,7 +158,6 @@ Methods `toLowerCase()` and `toUpperCase()` change the case.
 - `str.substr(start [, length])`
 - `str.trim()` – removes (“trims”) spaces from the beginning and end of the string.
 - `str.repeat(n)` – repeats the string n times.
-Comparing strings
 
 ### Comparing Strings
 
@@ -230,13 +229,13 @@ Methods push/pop run fast O(1), while shift/unshift are slow O(N).
 ### Loops
 
 ```js
-for (let fruit of fruits) { 
-  alert( fruit ); 
+for (let fruit of fruits) {
+  alert( fruit );
 }
 ```
 
 - The loop for..in iterates over all properties, not only the numeric ones.
-- The for..in loop is optimized for generic objects, not arrays, and thus is 10-100 times slower.
+- The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower.
 
 ### A word about "length"
 
@@ -278,11 +277,11 @@ alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-If an array-like object has a special Symbol.isConcatSpreadable property, then it’s treated as an array by concat.
+If an array-like object has a special `Symbol.isConcatSpreadable` property, then it’s treated as an array by `concat`.
 
 ### Iterate: forEach
 
-The arr.forEach method allows to run a function for every element of the array.
+The `arr.forEach` method allows to run a function for every element of the array.
 
 ```js
 arr.forEach(function(item, index, array) {
@@ -456,10 +455,10 @@ while (true) {
 
 ### Iterables and array-likes
 
-- Iterables are objects that implement the Symbol.iterator method, as described above.
-- Array-likes are objects that have indexes and length, so they look like arrays.
+- Iterables are objects that implement the `Symbol.iterator` method, as described above.
+- Array-likes are objects that have indexes and `length`, so they look like arrays.
 
-strings are both iterable (for..of works on them) and array-like (they have numeric indexes and length).
+Strings are both iterable (for..of works on them) and array-like (they have numeric indexes and length).
 
 ```js
 let arrayLike = { // has indexes and length => array-like
@@ -494,7 +493,7 @@ Map is a collection of keyed data items, just like an Object. Map allows keys of
 - `map.clear()` – removes everything from the map.
 - `map.size` – returns the current element count.
 
-Although `map[key]` also works, , this is treating map as a plain JavaScript object, so it implies all corresponding limitations.
+Although `map[key]` also works, this is treating map as a plain JavaScript object, so it implies all corresponding limitations.
 
 ### Iteration over Map
 
@@ -605,7 +604,6 @@ An object exists in the set while it is reachable from somewhere else.
 
 Like Set, it supports `add`, `has` and `delete`, but not `size`, `keys()` and no iterations.
 
-
 ## 5.9 Object.keys, values, entries
 
 - `Object.keys(obj)` – returns an array of keys.
@@ -657,7 +655,7 @@ for (let [key, value] of Object.entries(user)) {
 
 #### Swap varaibles trick
 
-```
+```js
 [guest, admin] = [admin, guest];
 ```
 
@@ -787,7 +785,7 @@ There’s a special method `Date.now()` that returns the current timestamp. It d
 
 ### Benchmarking
 
-For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times. 
+For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times.
 
 Modern JavaScript engines start applying advanced optimizations only to “hot code” that executes many times.
 

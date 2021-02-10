@@ -4,7 +4,7 @@
 
 ### [[Prototype]]
 
-objects have a special hidden property `[[Prototype]]` (as named in the specification), that is either null or references another object (prototype).
+Objects have a special hidden property `[[Prototype]]` (as named in the specification), that is either null or references another object (prototype).
 
 When we want to read a property from object, and it’s missing, JavaScript automatically takes it from the prototype, which is called “prototypal inheritance”.
 
@@ -44,7 +44,7 @@ Rabbit.prototype = animal;
 
 ### Default F.prototype, constructor property
 
-The default `prototype` is an object with the only property `constructor` that points back to the function itself. We can use `constructor` property to create a new object with the same constructor. 
+The default `prototype` is an object with the only property `constructor` that points back to the function itself. We can use `constructor` property to create a new object with the same constructor.
 
 ```js
 function Rabbit() {}

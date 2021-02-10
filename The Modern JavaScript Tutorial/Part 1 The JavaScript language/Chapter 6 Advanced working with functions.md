@@ -96,7 +96,7 @@ Every running function, code block `{...}`, and the script as a whole have an in
 2. A reference to the outer lexical environment, the one associated with the outer code.
 
 1. When the script starts, the Lexical Environment is pre-populated with all declared variables.
-2. Then `let phrase` definition changes the value to `undefined`. 
+2. Then `let phrase` definition changes the value to `undefined`.
 3. `phrase` is assigned a value.
 4. `phrase` changes the value.
 
@@ -126,7 +126,7 @@ function makeCounter() {
 
 When the code inside `counter()` looks for count variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where it finds and changes it.
 
-A variable is updated in the Lexical Environment where it lives.
+**A variable is updated in the Lexical Environment where it lives.**
 
 A closure is a function that remembers its outer variables and can access them. In JavaScript, they automatically remember where they were created using a hidden `[[Environment]]` property, and then their code can access outer variables.
 
@@ -202,7 +202,7 @@ Declarations are hoisted, but assignments are not. The assignment always works a
 Immediately-invoked function expressions: programmers invented a way to emulate the block-level visibility for `var`.
 
 ```js
-(function() { 
+(function() {
     // regular function declaration requires a name
     // use () to avoid that limitation
 
@@ -212,7 +212,6 @@ Immediately-invoked function expressions: programmers invented a way to emulate 
 
 })();
 ```
-
 
 ## 6.5 Global object
 
@@ -249,7 +248,7 @@ if (!window.Promise) {
 
 ## 6.6 Function object, NFE
 
-### The “name” property
+### The "name" property
 
 Function objects contain some useable properties.
 
@@ -313,7 +312,7 @@ let sum = new Function('a', 'b', 'return a + b');
 
 When a function is created using new Function, its `[[Environment]]` is set to reference not the current Lexical Environment, but the global one.
 
-If `new Function` had access to outer variables, it would have problems with minifiers. (Outer varaibles are renamed into shorter ones.)
+If `new Function` had access to outer variables, it would have problems with minifiers because outer varaibles are renamed into shorter ones.
 
 ## 6.8 Scheduling: setTimeout and setInterval
 
@@ -331,7 +330,7 @@ clearTimeout(timerId);
 let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
 ```
 
-The real delay between func calls for `setInterval` is less than in the code, because the time taken by func's execution “consumes” a part of or even higher than the interval.
+The real delay between func calls for `setInterval` is less than in the code, because the time taken by func's execution "consumes" a part of or even higher than the interval.
 
 The nested `setTimeout` guarantees the fixed delay.
 
