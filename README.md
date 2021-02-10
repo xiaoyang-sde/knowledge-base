@@ -1,5 +1,8 @@
-### The Modern JavaScript Tutorial
+# Programming Notes
 
-- Part 1: The JavaScript language
-- Part 2: Part 2 Browser Document, Events, Interfaces
-- Part 3: Additional articles
+- CS 61B Data Structures
+- JavaScript Testing
+- Refactoring
+- The Modern JavaScript Tutorial
+- Web Development - A Primer
+- You Don't Know JS
