@@ -9,13 +9,13 @@
 
 ### Online Courses
 
-* CS 61B Data Structures \| [Link \(Course Website\)](https://sp21.datastructur.es)
+* Berkeley CS 61B Data Structures \| [Link \(Course Website\)](https://sp21.datastructur.es)
+* Web Development - A Primer \| [Link \(Educative\)](https://www.educative.io/courses/web-development-a-primer)
 
 ## Books
 
 ### JavaScript
 
-* Web Development - A Primer \| [Link \(Educative\)](https://www.educative.io/courses/web-development-a-primer)
 * You Don't Know JS Yet - 2nd Edition \| [Link \(GitHub\)](https://github.com/getify/You-Dont-Know-JS)
 * The Modern JavaScript Tutorial \| [Link \(Website\)](https://javascript.info)
 
