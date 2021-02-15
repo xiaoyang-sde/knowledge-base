@@ -2,47 +2,6 @@
 
 * [Programming Notes](README.md)
 
-## Articles
-
-* [JavaScript Testing](articles/javascript-testing/README.md)
-  * [An Overview of JavaScript Testing in 2020](articles/javascript-testing/overview.md)
-
-## Courses
-
-* [CS 61B Data Structures](courses/cs-61b-data-structures/README.md)
-  * [CS 61B Week 01](courses/cs-61b-data-structures/week-01.md)
-  * [CS 61B Week 02](courses/cs-61b-data-structures/week-02.md)
-  * [CS 61B Week 03](courses/cs-61b-data-structures/week-03.md)
-  * [CS 61B Week 04](courses/cs-61b-data-structures/week-04.md)
-  * [CS 61B Week 05](courses/cs-61b-data-structures/week-05.md)
-  * [CS 61B Week 06](courses/cs-61b-data-structures/week-06.md)
-  * [CS 61B Week 07](courses/cs-61b-data-structures/week-07.md)
-  * [Week 08](courses/cs-61b-data-structures/week-08/README.md)
-    * [Range Searching and Multi-Dimensional Data](courses/cs-61b-data-structures/week-08/range-searching-and-multi-dimensional-data.md)
-    * [Heaps and PQs](courses/cs-61b-data-structures/week-08/heaps-and-pqs.md)
-    * [Prefix Operations and Tries](courses/cs-61b-data-structures/week-08/prefix-operations-and-tries.md)
-  * [Week 09](courses/cs-61b-data-structures/week-09/README.md)
-    * [Graph Traversals and Implementations](courses/cs-61b-data-structures/week-09/graph-traversals-and-implementations.md)
-    * [Tree and Graph Traversals](courses/cs-61b-data-structures/week-09/tree-and-graph-traversals.md)
-    * [Shortest Paths](courses/cs-61b-data-structures/week-09/shortest-paths.md)
-  * [Week 10](courses/cs-61b-data-structures/week-10/README.md)
-    * [Minimum Spanning Trees](courses/cs-61b-data-structures/week-10/minimum-spanning-trees.md)
-    * [Reductions and Decomposition](courses/cs-61b-data-structures/week-10/reductions-and-decomposition.md)
-  * [Week 11](courses/cs-61b-data-structures/week-11/README.md)
-    * [Basic Sorts](courses/cs-61b-data-structures/week-11/basic-sorts.md)
-    * [Quick Sort](courses/cs-61b-data-structures/week-11/quick-sort.md)
-  * [Week 12](courses/cs-61b-data-structures/week-12/README.md)
-    * [More Quick Sort, Sorting Summary](courses/cs-61b-data-structures/week-12/more-quick-sort-sorting-summary.md)
-    * [Sorting and Algorithmic Bounds](courses/cs-61b-data-structures/week-12/sorting-and-algorithmic-bounds.md)
-  * [Week 13](courses/cs-61b-data-structures/week-13/README.md)
-    * [Radix Sorts](courses/cs-61b-data-structures/week-13/radix-sorts.md)
-    * [Sorting and Data Structures Conclusion](courses/cs-61b-data-structures/week-13/sorting-and-data-structures-conclusion.md)
-  * [Week 14](courses/cs-61b-data-structures/week-14/README.md)
-    * [Compression](courses/cs-61b-data-structures/week-14/compression.md)
-    * [Compression, Complexity, and P=NP?](courses/cs-61b-data-structures/week-14/compression-complexity-and-p-np.md)
-* [Web Development - A Primer](courses/web-development-a-primer/README.md)
-  * [Web Development: A Primer](courses/web-development-a-primer/web-development-a-primer.md)
-
 ## Books
 
 * [You Don't Know JS](books/you-dont-know-js/README.md)
@@ -102,4 +61,45 @@
     * [Dispensables](books/refactoring/code-smells/dispensables.md)
     * [Bloaters](books/refactoring/code-smells/bloaters.md)
     * [Object-Orientation Abusers](books/refactoring/code-smells/object-orientation-abusers.md)
+
+## Courses
+
+* [CS 61B Data Structures](courses/cs-61b-data-structures/README.md)
+  * [CS 61B Week 01](courses/cs-61b-data-structures/week-01.md)
+  * [CS 61B Week 02](courses/cs-61b-data-structures/week-02.md)
+  * [CS 61B Week 03](courses/cs-61b-data-structures/week-03.md)
+  * [CS 61B Week 04](courses/cs-61b-data-structures/week-04.md)
+  * [CS 61B Week 05](courses/cs-61b-data-structures/week-05.md)
+  * [CS 61B Week 06](courses/cs-61b-data-structures/week-06.md)
+  * [CS 61B Week 07](courses/cs-61b-data-structures/week-07.md)
+  * [Week 08](courses/cs-61b-data-structures/week-08/README.md)
+    * [Range Searching and Multi-Dimensional Data](courses/cs-61b-data-structures/week-08/range-searching-and-multi-dimensional-data.md)
+    * [Heaps and PQs](courses/cs-61b-data-structures/week-08/heaps-and-pqs.md)
+    * [Prefix Operations and Tries](courses/cs-61b-data-structures/week-08/prefix-operations-and-tries.md)
+  * [Week 09](courses/cs-61b-data-structures/week-09/README.md)
+    * [Graph Traversals and Implementations](courses/cs-61b-data-structures/week-09/graph-traversals-and-implementations.md)
+    * [Tree and Graph Traversals](courses/cs-61b-data-structures/week-09/tree-and-graph-traversals.md)
+    * [Shortest Paths](courses/cs-61b-data-structures/week-09/shortest-paths.md)
+  * [Week 10](courses/cs-61b-data-structures/week-10/README.md)
+    * [Minimum Spanning Trees](courses/cs-61b-data-structures/week-10/minimum-spanning-trees.md)
+    * [Reductions and Decomposition](courses/cs-61b-data-structures/week-10/reductions-and-decomposition.md)
+  * [Week 11](courses/cs-61b-data-structures/week-11/README.md)
+    * [Basic Sorts](courses/cs-61b-data-structures/week-11/basic-sorts.md)
+    * [Quick Sort](courses/cs-61b-data-structures/week-11/quick-sort.md)
+  * [Week 12](courses/cs-61b-data-structures/week-12/README.md)
+    * [More Quick Sort, Sorting Summary](courses/cs-61b-data-structures/week-12/more-quick-sort-sorting-summary.md)
+    * [Sorting and Algorithmic Bounds](courses/cs-61b-data-structures/week-12/sorting-and-algorithmic-bounds.md)
+  * [Week 13](courses/cs-61b-data-structures/week-13/README.md)
+    * [Radix Sorts](courses/cs-61b-data-structures/week-13/radix-sorts.md)
+    * [Sorting and Data Structures Conclusion](courses/cs-61b-data-structures/week-13/sorting-and-data-structures-conclusion.md)
+  * [Week 14](courses/cs-61b-data-structures/week-14/README.md)
+    * [Compression](courses/cs-61b-data-structures/week-14/compression.md)
+    * [Compression, Complexity, and P=NP?](courses/cs-61b-data-structures/week-14/compression-complexity-and-p-np.md)
+* [Web Development - A Primer](courses/web-development-a-primer/README.md)
+  * [Web Development: A Primer](courses/web-development-a-primer/web-development-a-primer.md)
+
+## Articles
+
+* [JavaScript Testing](articles/javascript-testing/README.md)
+  * [An Overview of JavaScript Testing in 2020](articles/javascript-testing/overview.md)
 
