@@ -1,0 +1,2 @@
+# Scope and Closures
+
