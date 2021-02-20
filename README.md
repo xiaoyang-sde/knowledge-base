@@ -18,6 +18,7 @@
 
 * You Don't Know JS Yet - 2nd Edition \| [Link \(GitHub\)](https://github.com/getify/You-Dont-Know-JS)
 * The Modern JavaScript Tutorial \| [Link \(Website\)](https://javascript.info)
+* TypeScript Handbook \| [Link \(Website\)](https://www.typescriptlang.org/docs/handbook/)
 
 ### Software Engineering
 

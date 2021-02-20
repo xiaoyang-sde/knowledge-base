@@ -59,6 +59,8 @@
     * [Object-Orientation Abusers](books/refactoring/code-smells/object-orientation-abusers.md)
   * [Refactoring Techniques](books/refactoring/refactoring-techniques/README.md)
     * [Composing Methods](books/refactoring/refactoring-techniques/composing-methods.md)
+* [TypeScript Handbook](books/typescript-handbook/README.md)
+  * [Basic Type](books/typescript-handbook/basic-type.md)
 
 ## Courses
 
