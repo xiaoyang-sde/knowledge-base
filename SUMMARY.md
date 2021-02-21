@@ -61,6 +61,7 @@
     * [Composing Methods](books/refactoring/refactoring-techniques/composing-methods.md)
 * [TypeScript Handbook](books/typescript-handbook/README.md)
   * [Basic Type](books/typescript-handbook/basic-type.md)
+  * [Interfaces](books/typescript-handbook/interfaces.md)
 
 ## Courses
 
