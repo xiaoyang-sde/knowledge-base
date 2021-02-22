@@ -62,6 +62,7 @@
 * [TypeScript Handbook](books/typescript-handbook/README.md)
   * [Basic Type](books/typescript-handbook/basic-type.md)
   * [Interfaces](books/typescript-handbook/interfaces.md)
+  * [Functions](books/typescript-handbook/functions.md)
 
 ## Courses
 
@@ -102,4 +103,3 @@
 
 * [An Overview of JavaScript Testing in 2020](articles/javascript-testing.md)
 * [Webpack 5 Documentation](articles/webpack-5-docs.md)
-
