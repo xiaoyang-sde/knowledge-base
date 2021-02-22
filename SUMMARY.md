@@ -60,9 +60,10 @@
   * [Refactoring Techniques](books/refactoring/refactoring-techniques/README.md)
     * [Composing Methods](books/refactoring/refactoring-techniques/composing-methods.md)
 * [TypeScript Handbook](books/typescript-handbook/README.md)
-  * [Basic Type](books/typescript-handbook/basic-type.md)
+  * [Basic Types](books/typescript-handbook/basic-types.md)
   * [Interfaces](books/typescript-handbook/interfaces.md)
   * [Functions](books/typescript-handbook/functions.md)
+  * [Literal Types](books/typescript-handbook/literal-types.md)
 
 ## Courses
 
