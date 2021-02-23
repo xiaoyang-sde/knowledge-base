@@ -64,6 +64,9 @@
   * [Interfaces](books/typescript-handbook/interfaces.md)
   * [Functions](books/typescript-handbook/functions.md)
   * [Literal Types](books/typescript-handbook/literal-types.md)
+  * [Unions and Intersectoin Types](books/typescript-handbook/unions-intersection-types.md)
+  * [Enums](books/typescript-handbook/enums.md)
+  * [Generics](books/typescript-handbook/generics.md)
 
 ## Courses
 
