@@ -1,6 +1,6 @@
 # Vue Interview
 
-### SPA 单页面
+### Single Page Application
 
 SPA 仅在 Web 页面初始化时加载相应的 HTML,JavaScript, CSS. 使用路由机制改变 HTML 的内容, 避免页面重复加载.
 
@@ -126,7 +126,7 @@ Vue 实现了双向绑定, 即 ViewModel 的内容会实时展现在 View 层. V
 const app = new Vue({
   el: '#app',
   data: {
-      message: 'Hello Vue!',
+    message: 'Hello Vue!',
   }
 })
 </script>
@@ -140,3 +140,46 @@ const response = {
 }
 </script>
 ```
+
+### 数据双向绑定原理
+
+双向绑定指 View 变化更新 Data, Data 变化更新 View. View 变化更新 Data 可以通过事件监听的方式来实现.
+
+#### Vue 2 实现双向绑定
+
+1. 监听器: 遍历数据对象, 使用 `Object.defineProperty()` 对属性注入 Getter 与 Setter, 用于监听对象赋值.
+2. 解析器: 解析 Template, 将 Template 中的变量都替换成数据. 渲染页面视图, 将每个指令对应的节点绑定更新函数, 添加监听数据的 Watcher. 一旦数据有变动, Watcher 收到通知并调用更新函数进行数据更新.
+3. 订阅者: 订阅监听器中的属性值变化的消息, 当收到属性值变化的消息时, 触发解析器中对应的更新函数.
+4. 订阅器: 订阅器采用 "发布-订阅" 设计模式, 统一管理监听器与订阅者.
+
+#### Proxy 与 Object.defineProperty
+
+- `Proxy` 可以直接监听对象而非属性
+- `Proxy` 可以直接监听数组的变化
+- `Proxy` 不会直接修改原对象
+- `Object.defineProperty` 兼容性好, 支持 IE9. `Proxy` 兼容性差, 难以 Polyfill.
+
+#### Vue.set
+
+Vue 会在初始化实例时对属性执行 Getter/Setter 转化, 所以属性必须提前定义在 `data` 对象中. Vue 无法检测到添加或删除对象的属性, 也无法检测到使用 Index 对数组的直接赋值.
+
+```js
+this.$set(this.someObject, 'b', 2); // Object
+this.$set(this.items, 1, 'value'); // Array
+```
+
+- 如果目标是数组, 直接使用数组的 `splice` 方法触发响应式.
+- 如果目标是对象, 会先判读属性是否存在, 是否是响应式, 并注入 Getter/Setter.
+
+### 项目优化
+
+- `v-if` 与 `v-show` 区分使用场景
+- `computed` 和 `watch` 区分使用场景
+- `v-for` 遍历必须使用 `key`
+- 长列表性能优化
+- 事件的销毁
+- 图片资源懒加载
+- 路由懒加载
+- 第三方插件的按需引入
+- 优化无限列表性能
+- 服务端渲染
