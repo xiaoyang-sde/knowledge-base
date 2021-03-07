@@ -1,0 +1,142 @@
+# Vue Interview
+
+### SPA 单页面
+
+SPA 仅在 Web 页面初始化时加载相应的 HTML,JavaScript, CSS. 使用路由机制改变 HTML 的内容, 避免页面重复加载.
+
+- 用户体验好, 服务器压力小, 前后端分离
+- 初次加载较慢, 路由管理复杂, SEO 难度大
+
+### v-show 与 v-if 有什么区别
+
+- `v-show` 总是渲染元素, 调整 CSS 的 `display` 属性.
+- `v-if` 是条件渲染.
+
+### Class 与 Style 动态绑定
+
+```html
+<div
+  v-bind:class="{ active: isActive }"
+>
+</div>
+
+<div
+  v-bind:class="[isActive ? 'active' : '']"
+>
+</div>
+```
+
+### 单向数据流
+
+父级 `prop` 更新会向下流动到子组件中, 但是反过来则不行. 这样会防止从子组件意外改变父级组件的状态, 从而导致应用的数据流向难以理解.
+
+### computed 与 watch 的区别和运用的场景
+
+- `computed`: 计算属性, 缓存计算结果.
+- `watch`: 每当数据变化时执行回调函数.
+
+### Vue 生命周期
+
+- `beforeCreate`: 初始化 `Vue` 实例, `data`, `methods` 数据还未生效
+- `created`: 初始化 `data` 与 `methods`, 可以操作这些数据或调用方法
+- `beforeMount`: 执行模板中的指令, 最终模板字符串完成编译, 但尚未挂载到页面
+- `mounted`: 将内存中编译好的模板挂载到页面上, 此时可以操作组件中的 DOM 节点
+- `beforeUpdate`: 组件数据更新之前
+- `update`: 组件数据更新之后
+- `activated`: `keep-alive` 专属，组件被激活时调用
+- `deactivated`: `keep-alive` 专属，组件被销毁时调用
+- `beforeDestroy`: 组件销毁前, 尚未清除 `data` 与 `methods` 等属性
+- `destroy`: 组件销毁后
+
+#### 父组件与子组件生命周期顺序
+
+- 加载渲染过程: 父 `beforeCreate` -> 父 `created` -> 父 `beforeMount` -> 子 `beforeCreate` -> 子 `created` -> 子 `beforeMount` -> 子 `mounted` -> 父 `mounted`
+
+- 子组件更新过程: 父 `beforeUpdate` -> 子 `beforeUpdate` -> 子 `updated` -> 父 `updated`
+
+#### 异步请求
+
+异步请求可以在 `created`, `beforeMount`, `mounted` 中进行调用.
+
+#### 访问或操作 DOM
+
+在钩子函数 `mounted` 被调用前, Vue 已经将编译好的模板挂载到页面上, 所以在 `mounted` 中可以访问操作 DOM.
+
+#### 父组件监听子组件生命周期
+
+```html
+<Child
+  @hook:mounted="doSomething"
+>
+</Child>
+```
+
+### v-model 原理
+
+`v-model` 在内部为不同的输入元素使用不同的属性与事件.
+
+- `text`, `textarea` 元素使用 `value` 属性和 `input` 事件
+- `checkbox`, `radio`, `select` 使用 `checked` 属性和 `change` 事件
+
+在自定义组件中, `v-model` 默认会使用 `value` 的 `prop` 和名为 `input` 的事件.
+
+### 组件间通信方式
+
+- `props`, `$emit` (父子)
+- `ref`, `$parent/$children` (父子)
+- `$attrs`, `$listeners` (隔代)
+- Vuex (父子, 隔代, 兄弟)
+
+### Router 路由模式
+
+- `hash`: 使用 URL Hash 模拟完整 URL
+- `history`: 依赖 HTML5 History API 与服务器配置
+- `abstract`: 支持所有 JavaScript 运行环境 (包括 Node.js 服务端)
+
+#### hash 模式原理
+
+- hash 值 (`location.hash`) 是 URL 中 `#` 后面的内容
+- hash 值只是客户端的一种状态, 当向服务器端发出请求时, hash 部分不会被发送
+- 可以使用 `a` 标签或修改 `location.hash` 改变 hash 值
+- 可以使用 `hashchange` 事件来监听 hash 值的变化, 从而改变页面内容
+
+#### history 模式原理
+
+- `history.pushState()`: 新增浏览器历史记录
+- `history.repalceState()`: 替换浏览器历史记录
+- 使用 `popstate` 事件来监听 URL 的变化, 从而改变页面内容
+
+### Model–View–ViewModel (MVVM)
+
+- View: 视图层 (HTML, CSS)
+- Model: 数据模型 (API 接口)
+- ViewModel: 视图数据层 (ViewModel 封装出来的数据模型包括视图的状态与行为两部分, 而 Model 层的数据模型是只包含状态的)
+
+Vue 实现了双向绑定, 即 ViewModel 的内容会实时展现在 View 层. View 层展现的不是 Model 层的数据, 而是 ViewModel 的数据, 并由 ViewModel 负责与 Model 层交互.
+
+```html
+<!-- View -->
+<div id="app">
+    <p>{{message}}</p>
+    <button v-on:click="showMessage()">Click me</button>
+</div>
+
+<!-- ViewModel -->
+<script>
+const app = new Vue({
+  el: '#app',
+  data: {
+      message: 'Hello Vue!',
+  }
+})
+</script>
+
+<!-- Model -->
+<script>
+const response = {
+  "response": {
+    "success": true
+  }
+}
+</script>
+```
