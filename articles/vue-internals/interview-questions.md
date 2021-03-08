@@ -1,4 +1,4 @@
-# Vue Interview
+# Interview Questions
 
 ### Single Page Application
 
