@@ -10,20 +10,20 @@ Article Source: [深入剖析: Vue 核心之虚拟 DOM](https://juejin.cn/post/6
 4. 确定节点坐标 (Reflow): 根据 Render 树结构, 确定每个节点的坐标与大小. (生成 Box Model)
 5. 绘制页面: 根据 Render 树与坐标, 调用节点的 `paint` 方法, 绘制节点.
 
+### 解析顺序
+
 - DOM 树的构建与 HTML 加载同时进行.
 - Render 树, DOM 树, 样式表构建同时进行.
 - CSS 从右向左逆向解析, 嵌套标签越多, 解析越慢.
-- 原生 JavaScript 操作 DOM 时, 浏览器会重新构建 DOM 树. 例如需要更新 10 个节点, 浏览器收到首个请求时并不知道还有 9 次更新操作, 所以会执行 10 次操作. 操作 DOM (Repaint, Reflow) 非常消耗计算资源.
+- 原生 JavaScript 操作 DOM 时, 浏览器会重新构建 DOM 树. 例如需要更新 10 个节点, 浏览器收到首个请求时并不知道还有 9 次更新操作, 所以会重复执行 10 次. 操作 DOM (Repaint, Reflow) 非常消耗计算资源.
 
-## Virtual DOM 基础
+## Virtual DOM 算法实现
 
 Virtual DOM 使用 JavaScript 对象模拟 DOM. 页面更新首先将反映在此对象上, 等待更新完成后, 再将最终的对象映射成真实 DOM, 交给浏览器进行绘制.
 
 例如需要更新 10 个节点, 虚拟 DOM 将 10 次更新的 `diff` 储存在 JavaScript 对象中, 随后再将该对象一次性 `attach` 到 DOM 树上, 避免大量无意义的计算.
 
-### 算法实现
-
-#### JavaScript 对象模拟 DOM 树
+### JavaScript 对象模拟 DOM 树
 
 ```js
 function Element(tag, props, children) {
@@ -96,4 +96,124 @@ Element.prototype.render = function () {
 ```js
 const root = ul.render();
 document.body.appendChild(root);
+```
+
+### diff 算法 - 比较两棵 Virtual DOM 树的差异
+
+当完全比较两颗树时, `diff` 算法的时间复杂度为 `O(n^3)`. 在前端开发过程中, 很少会发生跨层级的元素移动, 所以 Virtual DOM 只会比较同一层级的元素, 将复杂度降为 `O(n)`.
+
+#### diff 类型
+
+- Replace: 替换节点
+- Reorder: 修改子节点的顺序
+- Props: 修改节点属性 (例如添加 `class`)
+- Text: 修改 Text 节点的内容
+
+#### Depth-first Search
+
+使用 Depth-first Search 将所有节点与新的树中对应节点进行对比, 将差异记录到指定对象中.
+
+```js
+const dfs = (oldNode, newNode, index, patches) => {
+  const patch = [];
+
+  if (
+    typeof oldNode === 'string' &&
+    typeof newNode === 'string' &&
+    oldNode !== newNode
+  ) {
+    // The text in the node has been changed
+    patch.push({
+      type: patch.TEXT,
+      content: newNode
+    });
+  } else if (
+    oldNode.tag === newNode?.tag &&
+    oldNode.key === newNode?.key
+  ) {
+    // The nodes are the same, but the props have been changed
+    const propsPatches = diffProps(oldNode, newNode);
+    patch.push({
+      type: patch.PROPS,
+      props: propsPatches
+    });
+
+    // Compare the children of the current node
+    diffChildren(
+      oldNode.children,
+      newNode.children,
+      index,
+      patches,
+      currentPatch
+    );
+  } else if (newNode !== null) {
+    // The nodes are different, so the oldNode should be replaced
+    patch.push({
+      type: patch.REPLACE,
+      props: newNode
+    });
+  }
+
+  patches[index] = patch;
+};
+
+const diff = (oldTree, newTree) => {
+  const index = 0;
+  const patches = {};
+  dfs(oldTree, newTree, index, patches);
+  return patches;
+};
+```
+
+#### 列表对比算法
+
+当子节点重新排序时, 如果按照同层级进行顺序对比, 它们都会被替换 (`REPLACE`) 掉. Levenshtein Distance 算法可以解决此问题. 通过 Dynamic Programming 求解, 时间复杂度为 `O(M*N)`.
+
+代码实现: [list-diff](https://github.com/livoras/list-diff)
+
+### patch - 更新实际 DOM 树
+
+由于 Virtual DOM 树的与实际 DOM 树结构相同, 我们可以使用 Depth-first Search 遍历 DOM 树, 并根据 Patch 的内容, 修改实际 DOM 节点.
+
+#### 更新指定节点
+
+```js
+const applyPatches = (node, patches) => {
+  patches.forEach(patch => {
+    switch (patch.type) {
+      case REPLACE:
+        var newNode = (typeof patch.node === 'string')
+          ? document.createTextNode(patch.node)
+          : patch.node.render();
+        node.parentNode.replaceChild(newNode, node);
+        break;
+      case REORDER:
+        reorderChildren(node, patch.moves);
+        break;
+      case PROPS:
+        setProps(node, patch.props);
+        break;
+      case TEXT:
+        node.textContent = patch.content;
+        break;
+    }
+  })
+};
+```
+
+#### Depth-first Search 遍历 DOM 树
+
+```js
+const patch = (node, patches) => {
+  dfsPatch(node, patches, { index: 0 });
+};
+
+const dfsPatch = (node, patches, walker) => {
+  const currentPatches = patches[walker.index];
+  for (const child of node.childNodes) {
+    walker.index += 1;
+    dfsPatch(child, patches, walker);
+  }
+  applyPatches(node, patches);
+};
 ```
