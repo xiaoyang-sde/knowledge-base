@@ -217,3 +217,236 @@ const dfsPatch = (node, patches, walker) => {
   applyPatches(node, patches);
 };
 ```
+
+## Vue Virtual DOM 解析
+
+### VNode 模拟 DOM 树
+
+Vue 借鉴 [snabbdom](https://github.com/snabbdom/snabbdom), 使用 `VNode` 模拟 DOM 树的节点.
+
+```js
+export default class VNode {
+  tag: string | void;
+  data: VNodeData | void;
+  children: ?Array<VNode>;
+  text: string | void;
+  elm: Node | void;
+  context: Component | void;
+  key: string | number | void;
+  ...
+}
+```
+
+- `tag`: HTML 标签 (`a`, `p`, etc.)
+- `data`: `class`, `style`, `attribute`, etc.
+- `children`: 子节点
+- `text`: 文本属性
+- `elm`: 对应的真实 DOM 节点
+- `key`: 提高 diff 的效率
+
+### 创建 VNode
+
+#### 初始化 Vue
+
+```js
+function Vue (options) {
+  this._init(options)
+}
+```
+
+#### 挂载实例
+
+```js
+Vue.prototype.$mount = function (
+  el?: string | Element,
+  hydrating?: boolean
+): Component {
+  el = el && inBrowser ? query(el) : undefined
+  return mountComponent(this, el, hydrating)
+}
+```
+
+`mountComponent` 实例化一个渲染 `Watcher`, 并传入一个 `updateComponent` 回调函数. 此回调函数调用 `vm._render` 方法生成 VNode 并使用 `vm._update` 更新 DOM.
+
+```js
+export function mountComponent (
+  vm: Component,
+  el: ?Element,
+  hydrating?: boolean
+): Component {
+  vm.$el = el
+  ...
+  let updateComponent = () => {
+    const vnode = vm._render()
+    vm._update(vnode, hydrating)
+  }
+
+  new Watcher(vm, updateComponent, noop, {
+    before () {
+      if (vm._isMounted && !vm._isDestroyed) {
+        callHook(vm, 'beforeUpdate')
+      }
+    }
+  }, true /* isRenderWatcher */)
+  hydrating = false
+
+  return vm
+}
+```
+
+#### 渲染 VNode
+
+`_render` 方法将实例渲染成 VNode.
+
+```js
+Vue.prototype._render = function (): VNode {
+  const vm: Component = this
+  const { render, _parentVnode } = vm.$options
+  let vnode
+  try {
+    ...
+
+    currentRenderingInstance = vm
+    // Call createElement method to generate the VNode
+    vnode = render.call(vm._renderProxy, vm.$createElement)
+  } catch (e) {
+    handleError(e, vm, `render`){}
+  }
+
+  vnode.parent = _parentVnode
+  return vnode
+}
+```
+
+`_createElement` 方法创建 VNode.
+
+- `context`: Context of VNode (Component)
+- `tag`: VNode 标签 (String 或 Component)
+- `data`: VNode 数据
+- `children`: VNode 子节点
+
+```js
+export function _createElement (
+  context: Component,
+  tag?: string | Class<Component> | Function | Object,
+  data?: VNodeData,
+  children?: any,
+  normalizationType?: number
+): VNode | Array<VNode> {
+  ...
+  let vnode, ns
+
+  if (typeof tag === 'string') {
+    let Ctor
+    ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag)
+    if (config.isReservedTag(tag)) {
+      vnode = new VNode(
+        config.parsePlatformTagName(tag), data, children,
+        undefined, undefined, context
+      )
+    } else if ((!data || !data.pre) && isDef(Ctor = resolveAsset(context.$options, 'components', tag))) {
+      vnode = createComponent(Ctor, data, context, children, tag)
+    } else {
+      vnode = new VNode(
+        tag, data, children,
+        undefined, undefined, context
+      )
+    }
+  } else {
+    vnode = createComponent(tag, data, context, children)
+  }
+
+  ...
+  return vnode
+}
+```
+
+### VNode diff 算法
+
+Vue 实例化 `watcher` 并将其添加到模板中所绑定的变量的依赖中. 当 `model` 中响应式数据发生变化, `dep` 数组将调用 `dep.notify()` 方法遍历所有依赖并更新视图 (调用 `updateComponent` 方法)
+
+`vm._update` 方法将更新视图. `vnode` 参数是刚创建的 VNode.
+
+```js
+Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
+  const vm: Component = this
+  const prevEl = vm.$el
+  const prevVnode = vm._vnode
+  const restoreActiveInstance = setActiveInstance(vm)
+  vm._vnode = vnode
+
+  // Compare prevVnode and vnode
+  vm.$el = vm.__patch__(prevVnode, vnode)
+
+  ...
+}
+```
+
+`vm.__patch__` 方法将 `prevVnode` 与 `vnode` 进行 diff 操作, 并根据需要记录 Patch, 然后生成新的 DOM 节点来完成视图更新.
+
+```js
+function patch (oldVnode, vnode, hydrating, removeOnly) {
+  if (isUndef(oldVnode)) {
+    // Create new node if oldVnode doesn't exist
+    isInitialPatch = true
+    createElm(vnode, insertedVnodeQueue)
+  } else {
+    // Compare oldVnode and vnode
+    const isRealElement = isDef(oldVnode.nodeType)
+    if (!isRealElement && sameVnode(oldVnode, vnode)) {
+      // Patch existing root node
+      patchVnode(oldVnode, vnode, insertedVnodeQueue, null, null, removeOnly)
+    }
+  }
+	...
+}
+```
+
+当 `oldVnode` 不存在时, 创建新的节点. 如果存在则将 `oldVnode` 与 `vnode` 进行 diff 与 patch. patch 过程中调用 `sameVnode` 方法比较两个 VNode 的属性, 判断是否局部更新. 如果两个 VNode 属性相同, 则发生了、局部更新, 将两个 VNode 进行 diff. 如果两个 VNode 属性不同则跳过 diff 过程, 并创建新的真实 DOM 节点来替换旧节点.
+
+```js
+function sameVnode (a, b) {
+  return (
+    a.key === b.key &&
+    a.tag === b.tag &&
+    a.isComment === b.isComment &&
+    isDef(a.data) === isDef(b.data) &&
+    sameInputType(a, b)
+  )
+}
+```
+
+`patchVnode` 方法对两个 VNode 进行 diff.
+
+- 对文本节点更新时, 如果文本不同则直接替换
+- 当 VNode 没有文本节点时, 开始 diff 子节点
+- 如果 `oldCh` 与 `ch` 都存在且不相同, 调用 `updateChildren` 对子节点进行 diff
+- 如果 `oldCh` 不存在, 清空 `oldVnode` 的文本节点, 并使用 `addVnodes` 方法将 `ch` 添加到 `elm` (真实 DOM 节点)
+- 如果 `oldCh` 存在, `ch` 不存在, 删除 `elm` 的 `oldChild` 子节点
+- 如果 `oldVnode` 有文本节点, `vnode` 没有, 则清空这个文本节点
+
+```js
+function patchVnode (oldVnode, vnode, insertedVnodeQueue, ownerArray, index, removeOnly) {
+  const elm = vnode.elm = oldVnode.elm
+  const oldCh = oldVnode.children
+  const ch = vnode.children
+
+  if (isUndef(vnode.text)) {
+    if (isDef(oldCh) && isDef(ch)) {
+      if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)
+    } else if (isDef(ch)) {
+      if (process.env.NODE_ENV !== 'production') {
+        checkDuplicateKeys(ch)
+      }
+      if (isDef(oldVnode.text)) nodeOps.setTextContent(elm, '')
+      addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)
+    } else if (isDef(oldCh)) {
+      removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+    } else if (isDef(oldVnode.text)) {
+      nodeOps.setTextContent(elm, '')
+    }
+  } else if (oldVnode.text !== vnode.text) {
+    nodeOps.setTextContent(elm, vnode.text)
+  }
+}
+```
