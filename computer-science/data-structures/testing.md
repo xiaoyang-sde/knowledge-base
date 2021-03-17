@@ -4,7 +4,7 @@ When you are writing programs, it's normal to have errors, and instead of using 
 
 We will write a test method `void testSort()` first to test a `sort()` method before we really implement the method.
 
-### Ad Hoc Testing
+## Ad Hoc Testing
 
 We could easily create a test, such as the code below, which will return nothing or the first mismatch of the provided arrays.
 
@@ -31,7 +31,7 @@ public class TestSort {
 }
 ```
 
-### JUnit
+## JUnit
 
 With the JUnit library, our test method could be simplified to the following codes:
 
@@ -44,7 +44,7 @@ public static void testSort() {
 }
 ```
 
-### Selection Sort
+## Selection Sort
 
 Basic steps of selection sort:
 
@@ -52,7 +52,7 @@ Basic steps of selection sort:
 * Move it to the front.
 * Selection sort the remaining N-1 items \(without touching the front item\).
 
-#### findSmallest\(\)
+### findSmallest\(\)
 
 Since `<` can't compare strings, we could use the `compareTo` method.
 
@@ -97,7 +97,7 @@ public static void testFindSmallest() {
 }
 ```
 
-#### Swap
+### Swap
 
 ```java
 public static void swap(String[] x, int a, int b) {
@@ -119,7 +119,7 @@ public static void testSwap() {
 }
 ```
 
-### Recursive Array Helper Method
+## Recursive Array Helper Method
 
 Since Java doesn't support array slicing \(`x[1:2]`\), we should add a helper method to recursively sort the whole array.
 
@@ -150,7 +150,7 @@ public static int findSmallest(String[] x, int start) {
 }
 ```
 
-### Enhanced JUnit Test
+## Enhanced JUnit Test
 
 To allow IntelliJ to automatically run the tests, we could modify our test structure as the following rules:
 
@@ -158,3 +158,4 @@ To allow IntelliJ to automatically run the tests, we could modify our test struc
 * Precede each method with `@Test` \(no semi-colon\).
 * Change each test method to be non-static.
 * Remove our main method from the `TestSort` class.
+

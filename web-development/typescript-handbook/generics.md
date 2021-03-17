@@ -8,7 +8,7 @@ The identity function is a function that will return back whatever is passed in.
 
 Without generics, we actually are losing the information about what that type was when the function returns.
 
-```ts
+```typescript
 function identity(arg: any): any {
   return arg;
 }
@@ -16,7 +16,7 @@ function identity(arg: any): any {
 
 We could use a type variable, which works on types rather than values.
 
-```ts
+```typescript
 function identity<T>(arg: T): T {
   return arg;
 }
@@ -31,7 +31,7 @@ const output1 = identity("myString");
 
 We could use `T[]` to denote an array of variables with type `T`.
 
-```ts
+```typescript
 function loggingIdentity<T>(arg: T[]): T[] {
   console.log(arg.length);
   return arg;
@@ -42,14 +42,14 @@ function loggingIdentity<T>(arg: T[]): T[] {
 
 The type of generic functions:
 
-```ts
+```typescript
 const myIdentity: <T>(arg: T) => T = identity;
 const myIdentitySignature: { <T>(arg: T): T } = identity;
 ```
 
 Generic Interface:
 
-```ts
+```typescript
 interface GenericIdentityFn {
   <T>(arg: T): T;
 }
@@ -57,7 +57,7 @@ interface GenericIdentityFn {
 
 We may want to move the generic parameter to be a parameter of the whole interface.
 
-```ts
+```typescript
 interface GenericIdentityFn<T> {
   (arg: T): T;
 }
@@ -65,13 +65,13 @@ interface GenericIdentityFn<T> {
 let myIdentity: GenericIdentityFn<number> = identity;
 ```
 
-Instead of describing a generic function, we now have a non-generic function signature that is a part of a generic type. When we use `GenericIdentityFn`, we now will also need to specify the corresponding type argument (here: `number`), effectively locking in what the underlying call signature will use.
+Instead of describing a generic function, we now have a non-generic function signature that is a part of a generic type. When we use `GenericIdentityFn`, we now will also need to specify the corresponding type argument \(here: `number`\), effectively locking in what the underlying call signature will use.
 
 ## Generic Classes
 
-Generic classes have a generic type parameter list in angle brackets (`<>`) following the name of the class.
+Generic classes have a generic type parameter list in angle brackets \(`<>`\) following the name of the class.
 
-```ts
+```typescript
 class GenericNumber<T> {
   zeroValue: T;
   add: (x: T, y: T) => T;
@@ -87,7 +87,7 @@ Generic classes are only generic over their instance side rather than their stat
 
 Instead of working with any and all types, we’d like to constrain this function to work with any and all types that also have the `.length` property.
 
-```ts
+```typescript
 interface Lengthwise {
   length: number;
 }
@@ -99,7 +99,7 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 
 ### Using Type Parameters in Generic Constraints
 
-```ts
+```typescript
 function getProperty<T, K extends keyof T>(obj: T, key: K) {
   return obj[key];
 }
@@ -112,8 +112,9 @@ getProperty(x, "a");
 
 When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions.
 
-```ts
+```typescript
 function create<T>(c: { new (): T }): T {
   return new c();
 }
 ```
+

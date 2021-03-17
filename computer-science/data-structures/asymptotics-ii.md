@@ -104,3 +104,4 @@ Mergesort has worst case runtime: `C = Theta(NlogN)`, since it has `logN` levels
 * One more level down: ~N/4 + ~N/4 + ~N/4 + ~N/4 = ~N.
 
 `Theta(NlogN)` is better than `Theta(N^2)`, so that merge sort is better than selection sort.
+

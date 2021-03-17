@@ -1,8 +1,8 @@
 # References, Recursion, and Lists
 
-### Primitive Types
+## Primitive Types
 
-#### Mystery of Walrus
+### Mystery of Walrus
 
 The code below will both change the weight of Walrus a and b.
 
@@ -26,7 +26,7 @@ System.out.println("x is: " + x);
 System.out.println("y is: " + y);
 ```
 
-#### Bits
+### Bits
 
 Information are stored in memory of computers, which is a sequence of ones and zeros. The identical sequence may have different meanings, since each Java type has a different way to interpret bits. For instance, '01001000' may represent integer 72 or character 'H'.
 
@@ -35,30 +35,30 @@ Java has 8 **primitive types**: `byte`, `short`, `int`, `long`, `float`, `double
 * Java creates an internal table that maps each variable name to a location.
 * Java does not write anything into the boxes, and does not allow access to an uninitialiized variable.
 
-### Reference Types
+## Reference Types
 
 Every type not included in the primitive types is a **reference type**, such as `Array`.
 
-#### Object Instantiation
+### Object Instantiation
 
 When we instantiate an object, Java first allocates a box of bits for each instance variable of the class and fills them with a default value. The constructer usually fill them with other values.
 
 Typically, object will have overheads in addition to the memory used by its instance variables.
 
-#### Reference Variable Declaration
+### Reference Variable Declaration
 
 When we declare a variable of any reference type:
 
 * Java allocates a box of size 64 bits.
 * These bits can be either set to Null or the address of a specific instance of that class \(returned by `new`\).
 
-### The Golden Rule of Equals
+## The Golden Rule of Equals
 
 When you write `y = x`, you are telling the Java interpreter to **copy the bits** from x into y.
 
 Just as with primitive types, the equals sign copies th bits stored in the reference variable, which is the address of a specific instance. Moreover, passing parameters will obey the rule.
 
-### Arrays
+## Arrays
 
 Arrays are also objects, which are instantiated using the `new` keyword.
 
@@ -72,7 +72,7 @@ new int[] {0, 1, 2, 3}; // Instantiation
 int[] x = new int[] {0, 1, 2, 3}; // Declaration, Instantiation, Assignment
 ```
 
-### IntLists
+## IntLists
 
 Here's a very basic linked list:
 
@@ -104,7 +104,7 @@ L = new IntList(5, L);
 
 We will add methods to the IntList class to let it perform basic tasks.
 
-#### size\(\) and iterativeSize\(\)
+### size\(\) and iterativeSize\(\)
 
 We could either use recursive or iterative methods to get the size of the IntList.
 
@@ -128,7 +128,7 @@ public int iterativeSize() {
 }
 ```
 
-#### get\(\)
+### get\(\)
 
 Write a method `get(int i)` that returns the ith item of the list.
 
@@ -141,3 +141,4 @@ public int get(int i) {
     }
 }
 ```
+

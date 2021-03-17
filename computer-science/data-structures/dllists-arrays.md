@@ -2,7 +2,7 @@
 
 Although SLList provides a efficient way for us to manipulate the list, it's really slow when we want to add an item to the end of the list.
 
-### addLast\(\)
+## addLast\(\)
 
 Similar to `size()`, we could cache the last pointer; however, remove it will be still really slow because we will iterate to the second last item.
 
@@ -12,7 +12,7 @@ Thus, we could add a second sentinel at the end of the list, and point it with `
 
 Alternatively, we may just use a single sentinel and make the list circular.
 
-### Generic List
+## Generic List
 
 We could improve our IntList to make it available for other types.
 
@@ -38,9 +38,9 @@ DLList<String> d2 = new DLList<>("hello");
 d2.addLast("world");
 ```
 
-### Array Overview
+## Array Overview
 
-### Definition and Creation
+## Definition and Creation
 
 Array is a special kind of object which consists of a numbered sequence of memory boxes. An array consists of:
 
@@ -55,7 +55,7 @@ x = new int[]{1, 2, 3, 4, 5};
 int[] w = {9, 10, 11, 12, 13};
 ```
 
-#### Arraycopy
+### Arraycopy
 
 Two ways to copy arrays:
 
@@ -66,7 +66,7 @@ Two ways to copy arrays:
 System.arraycopy(b, 0, x, 3, 2);
 ```
 
-#### 2D Array
+### 2D Array
 
 We could create a 2-dimensional array with the following codes.
 
@@ -79,7 +79,7 @@ matrix[0] = new int[]{1};
 int[][] pascalAgain = new int[][]{{1}, {1, 1},{1, 2, 1}, {1, 3, 3, 1}};
 ```
 
-#### Arrays and Classes
+### Arrays and Classes
 
 Both arrays and classes can be used to organize a bunch of memory boxes. In both cases, the number of memory boxes is fixed, i.e. the length of an array cannot be changed, just as class fields cannot be added or removed.
 

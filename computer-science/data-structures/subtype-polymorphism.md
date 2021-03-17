@@ -1,6 +1,6 @@
 # Subtype Polymorphism vs. HoFs
 
-### Max Function
+## Max Function
 
 Suppose we will write a method `max` that will take an array of objects and return the maximum one.
 
@@ -41,7 +41,7 @@ public static Dog maxDog(Dog[] dogs) {
 
 However, another problem is that we couldn't generalize this function to other type of objects.
 
-### compareTo
+## compareTo
 
 We can create an interface that guarantees that any implementing class, like `Dog`, contains a comparison method, which we'll call `compareTo`.
 
@@ -95,7 +95,7 @@ public static OurComparable max(OurComparable[] items) {
 }
 ```
 
-### Comparables
+## Comparables
 
 Although `OurComparable` interface seems solved the issue, it's awkward to use and there's no existing classes implement `OurComparable`. The solution is that we could use the existed interface `Comparable`.
 
@@ -116,7 +116,7 @@ public class Dog implements Comparable<Dog> {
 }
 ```
 
-### Comparator
+## Comparator
 
 We could only implement one `compareTo` method for each class. However, if we want to add more orders of comparasion, we could implement `Comparator` interface.
 
@@ -154,3 +154,4 @@ public class Dog implements Comparable<Dog> {
 ```java
 Comparator<Dog> nc = Dog.getNameComparator();
 ```
+

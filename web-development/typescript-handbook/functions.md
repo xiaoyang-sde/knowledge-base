@@ -8,7 +8,7 @@ In TypeScript, while there are classes, namespaces, and modules, functions still
 
 We can add types to each of the parameters and then to the function itself to add a return type.
 
-```ts
+```typescript
 const add = function (x: number, y: number): number {
   return x + y;
 };
@@ -20,7 +20,7 @@ Let’s write the full type of the function out by looking at each piece of the 
 
 A function’s type has the same two parts: the type of the arguments and the return type. When writing out the whole function type, both parts are required.
 
-```ts
+```typescript
 const add: (x: number, y: number) => number = function(
   x: number,
   y: number
@@ -33,7 +33,7 @@ const add: (x: number, y: number) => number = function(
 
 The TypeScript compiler can figure out the type even if you only have types on one side of the equation. This is called "contextual typing", a form of type inference.
 
-```ts
+```typescript
 let inferredAdd: (baseValue: number, increment: number) => number = function (x, y) {
   return x + y;
 };
@@ -47,7 +47,7 @@ However, every parameter in JavaScript is optional, and users may leave them off
 
 We can get this functionality in TypeScript by adding a `?` to the end of parameters we want to be optional. Any optional parameters must follow required parameters.
 
-```ts
+```typescript
 function buildName(firstName: string, lastName?: string) {
   if (lastName) return firstName + " " + lastName;
   else return firstName;
@@ -58,7 +58,7 @@ const result = buildName("Bob");
 
 In TypeScript, we can also set a value that a parameter will be assigned if the user does not provide one, or if the user passes `undefined` in its place.
 
-```ts
+```typescript
 function buildName(firstName: string, lastName = "Smith") {
   return firstName + " " + lastName;
 }
@@ -74,7 +74,7 @@ In JavaScript, you can work with the arguments directly using the `arguments` va
 
 In TypeScript, you can gather these arguments together into a single variable. The compiler will build an array of the arguments passed in with the name given after the ellipsis `(...)`, allowing you to use it in your function.
 
-```ts
+```typescript
 function buildName(firstName: string, ...restOfName: string[]) {
   return firstName + " " + restOfName.join(" ");
 }
@@ -88,7 +88,7 @@ ypeScript lets you catch incorrect uses of `this` with a couple of techniques.
 
 `this` parameters are fake parameters that come first in the parameter list of a function:
 
-```ts
+```typescript
 function f(this: void) {
   // make sure `this` is unusable in this standalone function
 }
@@ -96,7 +96,7 @@ function f(this: void) {
 
 ### this parameters in callbacks
 
-```ts
+```typescript
 interface UIElement {
   addClickListener(onclick: (this: void, e: Event) => void): void;
 }
@@ -104,7 +104,7 @@ interface UIElement {
 
 `this: void` means that `addClickListener` expects `onclick` to be a function that does not require a `this` type.
 
-```ts
+```typescript
 class Handler {
   info: string;
   onClickBad(this: Handler, e: Event) {
@@ -118,7 +118,7 @@ With `this` annotated, you make it explicit that `onClickBad` must be called on 
 
 However, arrow functions use the outer `this`, so you can always pass them to something that expects `this: void`.
 
-```ts
+```typescript
 class Handler {
   info: string;
   onClickGood = (e: Event) => {
@@ -133,7 +133,7 @@ It's not uncommon for a single JavaScript function to return different types of 
 
 We could describe this behavior in the type system by supplying multiple function types for the same function as a list of overloads.
 
-```ts
+```typescript
 function pickCard(x: { suit: string; card: number }[]): number;
 function pickCard(x: number): { suit: string; card: number };
 function pickCard(x: any): any {
@@ -154,3 +154,4 @@ function pickCard(x: any): any {
 In order for the compiler to pick the correct type check, it follows a similar process to the underlying JavaScript. It looks at the overload list and, proceeding with the first overload, attempts to call the function with the provided parameters. If it finds a match, it picks this overload as the correct overload.
 
 Note that the function `pickCard(x): any` piece is not part of the overload list, so it only has two overloads. Thus, calling `pickCard` with other parameter types would cause an error.
+

@@ -6,7 +6,7 @@ A literal is a more concrete sub-type of a collective type. There are three sets
 
 Using `const` to declare a variable will inform TypeScript that this object will never change.
 
-```ts
+```typescript
 // TypeScript sets the type to be string
 let hiWorld = "Hi World";
 
@@ -18,7 +18,7 @@ const helloWorld = "Hello World";
 
 In practice string literal types combine nicely with union types, type guards, and type aliases.
 
-```ts
+```typescript
 type Easing = "ease-in" | "ease-out" | "ease-in-out";
 
 animate(dx: number, dy: number, easing: Easing) {
@@ -30,7 +30,7 @@ animate(0, 0, "test"); // Error
 
 String literal types can be used in the same way to distinguish overloads:
 
-```ts
+```typescript
 function createElement(tagName: "img"): HTMLImageElement;
 function createElement(tagName: "input"): HTMLInputElement;
 
@@ -43,7 +43,7 @@ function createElement(tagName: string): Element {
 
 TypeScript also has numeric literal types, which act the same as the string literals above.
 
-```ts
+```typescript
 function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {
   return (Math.floor(Math.random() * 6) + 1) as 1 | 2 | 3 | 4 | 5 | 6;
 }
@@ -59,7 +59,7 @@ interface MapConfig {
 
 TypeScript also has boolean literal types. You might use these to constrain object values whose properties are interrelated.
 
-```ts
+```typescript
 interface ValidationSuccess {
   isValid: true;
   reason: null;
@@ -70,3 +70,4 @@ interface ValidationFailure {
   reason: string;
 }
 ```
+

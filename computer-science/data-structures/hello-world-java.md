@@ -1,15 +1,15 @@
 # Intro, Hello World Java
 
-### Introduction
+## Introduction
 
 **What is 61B about?**
 
 * Writing codes that runs efficiently. \(Algorithms and data structures.\)
 * Writing code efficiently.
 
-### First Java Program
+## First Java Program
 
-#### Hello World
+### Hello World
 
 ```java
 public class HelloWorld {
@@ -25,7 +25,7 @@ public class HelloWorld {
 * Functions must have a return type or declared as void function.
 * The compiler ensures type consistency.
 
-#### Compilation
+### Compilation
 
 The common way to run a Java program is to run it through two programs: `javac` and `java`.
 
@@ -35,7 +35,7 @@ $ java HelloWorld
 Hello World!
 ```
 
-#### Defining Functions
+### Defining Functions
 
 Since all Java code is part of a class, we must define functions so that they belong to some class. Functions that are part of a class are commonly called "methods".
 
@@ -56,7 +56,7 @@ public class LargerDemo {
 }
 ```
 
-#### Code Style
+### Code Style
 
 In this course, we will aim to make our code readable. Here are some tips to achieve that goal:
 
@@ -66,3 +66,4 @@ In this course, we will aim to make our code readable. Here are some tips to ach
 * Descriptive naming \(variables, functions, classes\)
 
 Moreover, we could use [Javadoc](https://en.wikipedia.org/wiki/Javadoc) to automatically generate documents.
+

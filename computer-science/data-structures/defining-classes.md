@@ -1,6 +1,6 @@
 # Defining and Using Classes
 
-### Defining Classes
+## Defining Classes
 
 * Every method is associated with some class.
 * To run a class, we must define a main method.
@@ -30,7 +30,7 @@ $ java DogLauncher
 Bark!
 ```
 
-### Object Instantiation
+## Object Instantiation
 
 * Classes can contain not just methods, but also data, such as the `size` of each dog.
 * Classes can be instantiated as objects. For example, we will create a single Dog class, and then create instances of this Dog.
@@ -73,7 +73,7 @@ public class DogLauncher {
 }
 ```
 
-### Array of Objects
+## Array of Objects
 
 To create an array of objects:
 
@@ -87,7 +87,7 @@ dogs[1] = new Dog(20);
 dogs[0].makeNoise();
 ```
 
-### Staitc vs. Non-static
+## Staitc vs. Non-static
 
 Key difference between static and non-static methods:
 
@@ -126,7 +126,7 @@ public static String binomen = "Cans famliiaris";
 * Non-static members cannot be invoked using class name.
 * Static methods must access instance variables via **a specific instance**.
 
-### public static void main\(String\[\] args\)
+## public static void main\(String\[\] args\)
 
 * `public`: So far, all of our methods start with this keyword.
 * `static`: It is a static method, not associated with any particular instance.
@@ -149,7 +149,7 @@ $ java ArgsDemo these are command line arguments
 these
 ```
 
-### Using Libraries
+## Using Libraries
 
 In CS 61B, we will use libraries include:
 

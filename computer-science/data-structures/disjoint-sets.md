@@ -104,3 +104,4 @@ We could modify Quick Union to avoid tall trees: Track tree size and link root o
 Thus, the `connect` and `isConnected` operation will never be slower than `log N`, which is fast enough for most programs.
 
 Although we could track the height instead of weight, we will find out that the performance is similar.
+

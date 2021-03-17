@@ -1,2 +1,2 @@
-# CS 61B Data Structures
+# Data Structures
 

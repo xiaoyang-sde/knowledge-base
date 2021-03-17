@@ -40,3 +40,4 @@ We could use a red link to convert a 3-node to BST tree. We choose arbitrarily t
 ### Runtime
 
 Because a LLRB tree has a 1-1 correspondence with a 2-3 tree and will always remain within 2x the height of its 2-3 tree, the runtimes of the operations will take `log N` time.
+

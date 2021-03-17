@@ -42,3 +42,4 @@ The worst case runtime of searching a B-tree:
 * Traverse all the way to bottom
 
 The amount of operations will be `L log N`. Since `L` is constant, the runtime is `O(log N)`. B-tree is complex, but it could handle insertion operations in any order.
+

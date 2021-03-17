@@ -1,4 +1,4 @@
-# Unions and Intersection Types
+# Unions and Intersectoin Types
 
 Intersection and Union types are one of the ways in which you can compose types.
 
@@ -6,19 +6,19 @@ Intersection and Union types are one of the ways in which you can compose types.
 
 We can use a union type in a function to support different type of parameters.
 
-```ts
+```typescript
 function padLeft(value: string, padding: string | number) {
   ...
 }
 ```
 
-We use the vertical bar (`|`) to separate each type, so `number | string | boolean` is the type of a value that can be a `number`, a `string`, or a `boolean`.
+We use the vertical bar \(`|`\) to separate each type, so `number | string | boolean` is the type of a value that can be a `number`, a `string`, or a `boolean`.
 
 ## Unions with Common Fields
 
 If we have a value that is a union type, we can only access members that are common to all types in the union.
 
-```ts
+```typescript
 interface Bird {
   fly(): void;
   layEggs(): void;
@@ -43,7 +43,7 @@ If a value has the type `A | B`, we only know for certain that it has members th
 
 A common technique for working with unions is to have a single field which uses literal types which you can use to let TypeScript narrow down the possible current type.
 
-```ts
+```typescript
 type NetworkLoadingState = {
   state: "loading";
 };
@@ -70,7 +70,7 @@ type NetworkState =
 
 All of the above types have a field named `state`, so we can compare the value of `state` to the equivalent string and TypeScript will know which exact type is used.
 
-```ts
+```typescript
 function logger(state: NetworkState): string {
   swtich (state.state) {
     case "loading":
@@ -87,10 +87,10 @@ function logger(state: NetworkState): string {
 
 We would like the compiler to tell us when we don’t cover all variants of the discriminated union.
 
-- Turn on `--strictNullChecks` and specify a return type.
-- Use the `never` type that the compiler uses to check for exhaustiveness.
+* Turn on `--strictNullChecks` and specify a return type.
+* Use the `never` type that the compiler uses to check for exhaustiveness.
 
-```ts
+```typescript
 function assertNever(x: never): never {
   throw new Error("Unexpected object: " + x);
 }
@@ -112,7 +112,7 @@ For example, `Person & Serializable & Loggable` is a type which is all of `Perso
 
 If you had networking requests with consistent error handling then you could separate out the error handling into its own type which is merged with types which correspond to a single response type.
 
-```ts
+```typescript
 interface ErrorHandling {
   success: boolean;
   error?: { message: string };
@@ -129,3 +129,4 @@ interface ArtistsData {
 type ArtworksResponse = ArtworksData & ErrorHandling;
 type ArtistsResponse = ArtistsData & ErrorHandling;
 ```
+

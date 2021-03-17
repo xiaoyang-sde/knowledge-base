@@ -2,20 +2,20 @@
 
 Article Source: [深入剖析: Vue 核心之虚拟 DOM](https://juejin.cn/post/6844903895467032589)
 
-## 真实 DOM 解析流程 (WebKit 渲染引擎)
+## 真实 DOM 解析流程 \(WebKit 渲染引擎\)
 
 1. 构建 DOM 树: 用 HTML 分析器解析 HTML 元素, 构建 DOM 树.
 2. 生成 CSSOM 样式表: 用 CSS 分析器解析 CSS 文件与元素上的 `inline` 样式, 生成页面的样式表.
-3. 构建 Render 树: 关联 DOM 树与样式表 (Attachment), 构建 Render 树. 调用每个节点的 `attach`方法, 返回 Render 对象, 用于构建此树.
-4. 确定节点坐标 (Reflow): 根据 Render 树结构, 确定每个节点的坐标与大小. (生成 Box Model)
+3. 构建 Render 树: 关联 DOM 树与样式表 \(Attachment\), 构建 Render 树. 调用每个节点的 `attach`方法, 返回 Render 对象, 用于构建此树.
+4. 确定节点坐标 \(Reflow\): 根据 Render 树结构, 确定每个节点的坐标与大小. \(生成 Box Model\)
 5. 绘制页面: 根据 Render 树与坐标, 调用节点的 `paint` 方法, 绘制节点.
 
 ### 解析顺序
 
-- DOM 树的构建与 HTML 加载同时进行.
-- Render 树, DOM 树, 样式表构建同时进行.
-- CSS 从右向左逆向解析, 嵌套标签越多, 解析越慢.
-- 原生 JavaScript 操作 DOM 时, 浏览器会重新构建 DOM 树. 例如需要更新 10 个节点, 浏览器收到首个请求时并不知道还有 9 次更新操作, 所以会重复执行 10 次. 操作 DOM (Repaint, Reflow) 非常消耗计算资源.
+* DOM 树的构建与 HTML 加载同时进行.
+* Render 树, DOM 树, 样式表构建同时进行.
+* CSS 从右向左逆向解析, 嵌套标签越多, 解析越慢.
+* 原生 JavaScript 操作 DOM 时, 浏览器会重新构建 DOM 树. 例如需要更新 10 个节点, 浏览器收到首个请求时并不知道还有 9 次更新操作, 所以会重复执行 10 次. 操作 DOM \(Repaint, Reflow\) 非常消耗计算资源.
 
 ## Virtual DOM 算法实现
 
@@ -25,7 +25,7 @@ Virtual DOM 使用 JavaScript 对象模拟 DOM. 页面更新首先将反映在�
 
 ### JavaScript 对象模拟 DOM 树
 
-```js
+```javascript
 function Element(tag, props, children) {
   this.tag = tag;
   this.props = props;
@@ -53,7 +53,7 @@ function createElement(tag, props, children) {
 export default createElement;
 ```
 
-```js
+```javascript
 import Element from 'VirtualDOM';
 
 const ul = Element('div', { id: 'virtual-dom' }, [
@@ -71,7 +71,7 @@ const ul = Element('div', { id: 'virtual-dom' }, [
 
 根据 `tag` 属性构造真实 DOM 节点并设置该节点属性, 最终通过递归构建子节点:
 
-```js
+```javascript
 Element.prototype.render = function () {
   const el = document.createElement(this.tag);
   const props = this.props;
@@ -93,7 +93,7 @@ Element.prototype.render = function () {
 
 将构建好的节点添加到 DOM 树中:
 
-```js
+```javascript
 const root = ul.render();
 document.body.appendChild(root);
 ```
@@ -104,16 +104,16 @@ document.body.appendChild(root);
 
 #### diff 类型
 
-- Replace: 替换节点
-- Reorder: 修改子节点的顺序
-- Props: 修改节点属性 (例如添加 `class`)
-- Text: 修改 Text 节点的内容
+* Replace: 替换节点
+* Reorder: 修改子节点的顺序
+* Props: 修改节点属性 \(例如添加 `class`\)
+* Text: 修改 Text 节点的内容
 
 #### Depth-first Search
 
 使用 Depth-first Search 将所有节点与新的树中对应节点进行对比, 将差异记录到指定对象中.
 
-```js
+```javascript
 const dfs = (oldNode, newNode, index, patches) => {
   const patch = [];
 
@@ -167,7 +167,7 @@ const diff = (oldTree, newTree) => {
 
 #### 列表对比算法
 
-当子节点重新排序时, 如果按照同层级进行顺序对比, 它们都会被替换 (`REPLACE`) 掉. Levenshtein Distance 算法可以解决此问题. 通过 Dynamic Programming 求解, 时间复杂度为 `O(M*N)`.
+当子节点重新排序时, 如果按照同层级进行顺序对比, 它们都会被替换 \(`REPLACE`\) 掉. Levenshtein Distance 算法可以解决此问题. 通过 Dynamic Programming 求解, 时间复杂度为 `O(M*N)`.
 
 代码实现: [list-diff](https://github.com/livoras/list-diff)
 
@@ -177,7 +177,7 @@ const diff = (oldTree, newTree) => {
 
 #### 更新指定节点
 
-```js
+```javascript
 const applyPatches = (node, patches) => {
   patches.forEach(patch => {
     switch (patch.type) {
@@ -203,7 +203,7 @@ const applyPatches = (node, patches) => {
 
 #### Depth-first Search 遍历 DOM 树
 
-```js
+```javascript
 const patch = (node, patches) => {
   dfsPatch(node, patches, { index: 0 });
 };
@@ -224,7 +224,7 @@ const dfsPatch = (node, patches, walker) => {
 
 Vue 借鉴 [snabbdom](https://github.com/snabbdom/snabbdom), 使用 `VNode` 模拟 DOM 树的节点.
 
-```js
+```javascript
 export default class VNode {
   tag: string | void;
   data: VNodeData | void;
@@ -237,18 +237,18 @@ export default class VNode {
 }
 ```
 
-- `tag`: HTML 标签 (`a`, `p`, etc.)
-- `data`: `class`, `style`, `attribute`, etc.
-- `children`: 子节点
-- `text`: 文本属性
-- `elm`: 对应的真实 DOM 节点
-- `key`: 提高 diff 的效率
+* `tag`: HTML 标签 \(`a`, `p`, etc.\)
+* `data`: `class`, `style`, `attribute`, etc.
+* `children`: 子节点
+* `text`: 文本属性
+* `elm`: 对应的真实 DOM 节点
+* `key`: 提高 diff 的效率
 
 ### 创建 VNode
 
 #### 初始化 Vue
 
-```js
+```javascript
 function Vue (options) {
   this._init(options)
 }
@@ -256,7 +256,7 @@ function Vue (options) {
 
 #### 挂载实例
 
-```js
+```javascript
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
@@ -268,7 +268,7 @@ Vue.prototype.$mount = function (
 
 `mountComponent` 实例化一个渲染 `Watcher`, 并传入一个 `updateComponent` 回调函数. 此回调函数调用 `vm._render` 方法生成 VNode 并使用 `vm._update` 更新 DOM.
 
-```js
+```javascript
 export function mountComponent (
   vm: Component,
   el: ?Element,
@@ -298,7 +298,7 @@ export function mountComponent (
 
 `_render` 方法将实例渲染成 VNode.
 
-```js
+```javascript
 Vue.prototype._render = function (): VNode {
   const vm: Component = this
   const { render, _parentVnode } = vm.$options
@@ -320,12 +320,12 @@ Vue.prototype._render = function (): VNode {
 
 `_createElement` 方法创建 VNode.
 
-- `context`: Context of VNode (Component)
-- `tag`: VNode 标签 (String 或 Component)
-- `data`: VNode 数据
-- `children`: VNode 子节点
+* `context`: Context of VNode \(Component\)
+* `tag`: VNode 标签 \(String 或 Component\)
+* `data`: VNode 数据
+* `children`: VNode 子节点
 
-```js
+```javascript
 export function _createElement (
   context: Component,
   tag?: string | Class<Component> | Function | Object,
@@ -363,11 +363,11 @@ export function _createElement (
 
 ### VNode diff 算法
 
-Vue 实例化 `watcher` 并将其添加到模板中所绑定的变量的依赖中. 当 `model` 中响应式数据发生变化, `dep` 数组将调用 `dep.notify()` 方法遍历所有依赖并更新视图 (调用 `updateComponent` 方法)
+Vue 实例化 `watcher` 并将其添加到模板中所绑定的变量的依赖中. 当 `model` 中响应式数据发生变化, `dep` 数组将调用 `dep.notify()` 方法遍历所有依赖并更新视图 \(调用 `updateComponent` 方法\)
 
 `vm._update` 方法将更新视图. `vnode` 参数是刚创建的 VNode.
 
-```js
+```javascript
 Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
   const vm: Component = this
   const prevEl = vm.$el
@@ -384,7 +384,7 @@ Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
 
 `vm.__patch__` 方法将 `prevVnode` 与 `vnode` 进行 diff 操作, 并根据需要记录 Patch, 然后生成新的 DOM 节点来完成视图更新.
 
-```js
+```javascript
 function patch (oldVnode, vnode, hydrating, removeOnly) {
   if (isUndef(oldVnode)) {
     // Create new node if oldVnode doesn't exist
@@ -398,13 +398,13 @@ function patch (oldVnode, vnode, hydrating, removeOnly) {
       patchVnode(oldVnode, vnode, insertedVnodeQueue, null, null, removeOnly)
     }
   }
-	...
+    ...
 }
 ```
 
 当 `oldVnode` 不存在时, 创建新的节点. 如果存在则将 `oldVnode` 与 `vnode` 进行 diff 与 patch. patch 过程中调用 `sameVnode` 方法比较两个 VNode 的属性, 判断是否局部更新. 如果两个 VNode 属性相同, 则发生了、局部更新, 将两个 VNode 进行 diff. 如果两个 VNode 属性不同则跳过 diff 过程, 并创建新的真实 DOM 节点来替换旧节点.
 
-```js
+```javascript
 function sameVnode (a, b) {
   return (
     a.key === b.key &&
@@ -418,14 +418,14 @@ function sameVnode (a, b) {
 
 `patchVnode` 方法对两个 VNode 进行 diff.
 
-- 对文本节点更新时, 如果文本不同则直接替换
-- 当 VNode 没有文本节点时, 开始 diff 子节点
-- 如果 `oldCh` 与 `ch` 都存在且不相同, 调用 `updateChildren` 对子节点进行 diff
-- 如果 `oldCh` 不存在, 清空 `oldVnode` 的文本节点, 并使用 `addVnodes` 方法将 `ch` 添加到 `elm` (真实 DOM 节点)
-- 如果 `oldCh` 存在, `ch` 不存在, 删除 `elm` 的 `oldChild` 子节点
-- 如果 `oldVnode` 有文本节点, `vnode` 没有, 则清空这个文本节点
+* 对文本节点更新时, 如果文本不同则直接替换
+* 当 VNode 没有文本节点时, 开始 diff 子节点
+* 如果 `oldCh` 与 `ch` 都存在且不相同, 调用 `updateChildren` 对子节点进行 diff
+* 如果 `oldCh` 不存在, 清空 `oldVnode` 的文本节点, 并使用 `addVnodes` 方法将 `ch` 添加到 `elm` \(真实 DOM 节点\)
+* 如果 `oldCh` 存在, `ch` 不存在, 删除 `elm` 的 `oldChild` 子节点
+* 如果 `oldVnode` 有文本节点, `vnode` 没有, 则清空这个文本节点
 
-```js
+```javascript
 function patchVnode (oldVnode, vnode, insertedVnodeQueue, ownerArray, index, removeOnly) {
   const elm = vnode.elm = oldVnode.elm
   const oldCh = oldVnode.children
@@ -450,3 +450,4 @@ function patchVnode (oldVnode, vnode, insertedVnodeQueue, ownerArray, index, rem
   }
 }
 ```
+

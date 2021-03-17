@@ -1,16 +1,16 @@
 # ALists, Resizing, vs. SLists
 
-### Limitation of DLists
+## Limitation of DLists
 
 Suppose we added `get(int i)`, which returns the ith item of the list. While we have a quite long DList, this operation will be significantly slow.
 
 By instead, we could use Array to build a list without links.
 
-### Random Access in Arrays
+## Random Access in Arrays
 
 Retrieval from any position of an array is very fast, which is independent of the size of it.
 
-### Naive AList Code
+## Naive AList Code
 
 ```java
 public class AList {
@@ -47,7 +47,7 @@ Here are some invariants of this piece of code:
 * `size` is always the number of items in the AList.
 * The last item in the list is always in position `size - 1`.
 
-### Delete Operation
+## Delete Operation
 
 ```java
 public int removeLast() {
@@ -58,7 +58,7 @@ public int removeLast() {
 }
 ```
 
-### Naive Resizing Arrays
+## Naive Resizing Arrays
 
 The limitation of the above data structure is that the size of array is fixed.
 
@@ -90,13 +90,13 @@ public void addLast(int x) {
 }
 ```
 
-### Memory Performance
+## Memory Performance
 
 Our AList is almost done, but we have one major issue. Suppose we insert 1,000,000,000 items, then later remove 990,000,000 items. In this case, we'll be using only 10,000,000 of our memory boxes, leaving 99% completely unused.
 
 To fix this issue, we can also downsize our array when it starts looking empty. Specifically, we define a "usage ratio" R which is equal to the size of the list divided by the length of the `items` array. For example, in the figure below, the usage ratio is 0.04.
 
-### Generic Array
+## Generic Array
 
 When creating an array of references to Item:
 
@@ -104,3 +104,4 @@ When creating an array of references to Item:
 * Causes a compiler warning, which you should ignore.
 
 The another change to our code is that we will delete an item by setting it to `null` instead of `0`, which could be collected by Java Garbage Collector.
+

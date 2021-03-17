@@ -4,7 +4,7 @@ One of TypeScript’s core principles is that type checking focuses on the shape
 
 ## Our First Interface
 
-```ts
+```typescript
 function printLabel(labeledObj: { label: string }) {
   console.log(labeledObj.label);
 }
@@ -15,7 +15,7 @@ printLabel(myObj);
 
 The printLabel function has a single parameter that requires that the object passed in has a property called `label` of type string. If the object passed in has more properties than this, the compiler will ignore it.
 
-```ts
+```typescript
 interface LabeledValue {
   label: string;
 }
@@ -31,7 +31,7 @@ The interface `LabeledValue` is a name we can now use to describe the requiremen
 
 Interfaces with optional properties are written similar to other interfaces, with each optional property denoted by a ? at the end of the property name in the declaration.
 
-```ts
+```typescript
 interface SquareConfig {
   color?: string;
   width?: number;
@@ -42,7 +42,7 @@ The advantage of optional properties is that you can describe these possibly ava
 
 ## Readonly properties
 
-```ts
+```typescript
 interface Point {
   readonly x: number;
   readonly y: number;
@@ -63,7 +63,7 @@ Object literals get special treatment and undergo excess property checking when 
 
 If an object literal has any properties that the “target type” doesn’t have, you’ll get an error.
 
-```ts
+```typescript
 interface SquareConfig {
   color?: string;
   width?: number;
@@ -79,11 +79,10 @@ let mySquare = createSquare(myObj); // No Error
 
 We could solve this by adding a string index signature if you’re sure that the object can have some extra properties that are used in some special way.
 
-```ts
+```typescript
 interface SquareConfig {
   color?: string;
   width?: number;
-  [propName: string]: any;
 }
 ```
 
@@ -91,13 +90,13 @@ interface SquareConfig {
 
 To describe a function type with an interface, we give the interface a call signature.
 
-```ts
+```typescript
 interface SearchFunc {
   (source: string, subString: string): boolean;
 }
 ```
 
-```ts
+```typescript
 let mySearch: SearchFunc = function (source, subString) {
   return source.search(subString) > -1;
 };
@@ -107,9 +106,8 @@ let mySearch: SearchFunc = function (source, subString) {
 
 Indexable types have an index signature that describes the types we can use to index into the object.
 
-```ts
+```typescript
 interface StringArray {
-  [index: number]: string;
 }
 ```
 
@@ -117,9 +115,8 @@ There are two types of supported index signatures: `string` and `number`. It is 
 
 While string index signatures are a powerful way to describe the "dictionary" pattern, they also enforce that all properties match their return type.
 
-```ts
+```typescript
 interface NumberDictionary {
-  [index: string]: number;
   length: number;
   name: string;
   // Error, since obj.name is the same as obj['name']
@@ -128,7 +125,7 @@ interface NumberDictionary {
 
 You can make index signatures readonly in order to prevent assignment to their indices.
 
-```ts
+```typescript
 interface ReadonlyStringArray {
   readonly [index: number]: string;
 }
@@ -138,7 +135,7 @@ interface ReadonlyStringArray {
 
 ### Implementing an interface
 
-```ts
+```typescript
 interface ClockInterface {
   currentTime: Date;
   setTime(d: Date): void;
@@ -157,7 +154,7 @@ class Clock implements ClockInterface {
 
 To work with the static side of the class directly, we should define two interfaces.
 
-```ts
+```typescript
 interface ClockConstructor {
   new (hour: number, minute: number): ClockInterface;
 }
@@ -180,7 +177,7 @@ const clock = new Clock(12, 17);
 
 Like classes, interfaces can extend each other. An interface can extend multiple interfaces, creating a combination of all of the interfaces.
 
-```ts
+```typescript
 interface Shape {
   color: string;
 }
@@ -198,7 +195,7 @@ interface Square extends Shape, PenStroke {
 
 An object could act as both a function and an object, with additional properties.
 
-```ts
+```typescript
 interface Counter {
   (start: number): string;
   interval: number;
@@ -212,3 +209,4 @@ function getCounter(): Counter {
   return counter;
 }
 ```
+

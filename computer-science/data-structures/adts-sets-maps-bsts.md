@@ -1,6 +1,6 @@
 # ADTs, Sets, Maps, BSTs
 
-### Abstract Data Type
+## Abstract Data Type
 
 An Abstract Data Type \(ADT\) is defined only by its operations, not by its implementation. For instance, we say that `ArrayDeque` and `LinkedListDeque` are implementations of the `Deque` ADT. Here are a few commonly used ADTs.
 
@@ -24,7 +24,7 @@ An Abstract Data Type \(ADT\) is defined only by its operations, not by its impl
 * put\(K key, V value\): puts a key value pair into the map
 * V get\(K key\): gets the value corresponding to the key
 
-### Binary Search Trees
+## Binary Search Trees
 
 Linked List is unefficient in searching for items since it will cost linear time even if the list is sorted.
 
@@ -32,7 +32,7 @@ We can optimize by adding pointers to the middle of each recursive half of the l
 
 ![BST](https://joshhug.gitbooks.io/hug61b/content/assets/Screen%20Shot%202019-02-28%20at%2012.59.39%20AM.png)
 
-#### Properties of trees
+### Properties of trees
 
 Trees are composed of:
 
@@ -70,7 +70,7 @@ private class BST<Key> {
 }
 ```
 
-#### Search
+### Search
 
 * Start from root note.
 * If searched item is larger, move to the child at right.
@@ -92,7 +92,7 @@ static BST find(BST T, Key sk) {
 
 If our tree is relatively "bushy", the find operation will run in `log N` time because the height of the tree is `log N`.
 
-### Insert
+## Insert
 
 We always insert at a leaf node.
 
@@ -111,13 +111,13 @@ static BST insert(BST T, Key ik) {
 }
 ```
 
-### Delete
+## Delete
 
-#### No children
+### No children
 
 If the node has no children, it is a leaf, and we can just delete its parent pointer and the node will eventually be swept away by the garbage collector.
 
-#### 1 child
+### 1 child
 
 If the node only has one child, we know that the child maintains the BST property with the parent of the node because the property is recursive to the right and left subtrees.
 
@@ -125,7 +125,7 @@ Therefore, we can just reassign the parent's child pointer to the node's child a
 
 ![Delete 1 child](https://joshhug.gitbooks.io/hug61b/content/assets/Screen%20Shot%202019-02-28%20at%2010.35.56%20AM.png)
 
-#### 2 children
+### 2 children
 
 If the deleted node has two chldren, we choose a new node to replace the deleted one.
 
@@ -138,7 +138,7 @@ We can just take the right-most node in the left subtree or the left-most node i
 
 ![Delete 2 children](https://joshhug.gitbooks.io/hug61b/content/assets/Screen%20Shot%202019-02-28%20at%2010.43.45%20AM.png)
 
-### BSTs as Sets and Maps
+## BSTs as Sets and Maps
 
 We can use BST to implement `Set` ADT, which is better than using ArraySet, since the worst-case runtime cost `log N` is faster than `N`.
 

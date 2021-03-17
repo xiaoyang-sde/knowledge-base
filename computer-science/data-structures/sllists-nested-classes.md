@@ -2,7 +2,7 @@
 
 The IntList class we've already created is called a 'naked' data structure which is hard to use.
 
-### Rebranding
+## Rebranding
 
 ```java
 public class IntNode {
@@ -30,7 +30,7 @@ public class SLList {
 
 Thus, we could create a list by using `new SLList(10);`, which is easier to instantiate, instead of using `new IntNode(10, null);`.
 
-### Private
+## Private
 
 However, our `SLList` can be bypassed and the naked data structure can be accessed. In order to solve this problem, we could make the `first` from public to private. Thus, it could be only accessed within the same class.
 
@@ -44,7 +44,7 @@ public class SLList {
 * Safe for you to change private methods.
 * Nothing to do with protection against hackers or other evil entities.
 
-### Nested Classes
+## Nested Classes
 
 * Java provides a simple way to combine two classes within one file.
 * Having a nested class has no meaningful effect on code performance, and is simply a tool for keeping code organized.
@@ -69,9 +69,9 @@ public class SLList {
 ...
 ```
 
-### Methods
+## Methods
 
-#### addFirst\(\)
+### addFirst\(\)
 
 ```java
 /** Adds x to the front  of the list. */
@@ -80,7 +80,7 @@ public void addFirst(int x) {
 }
 ```
 
-#### getFirst\(\)
+### getFirst\(\)
 
 ```java
 /** Returns the first item in the list. */
@@ -89,7 +89,7 @@ public int getFirst() {
 }
 ```
 
-#### addLast\(\)
+### addLast\(\)
 
 ```java
 public void addLast(int x) {
@@ -101,7 +101,7 @@ public void addLast(int x) {
 }
 ```
 
-#### size\(\)
+### size\(\)
 
 ```java
 /** Returns the size of the list that starts at IntNode p. */
@@ -117,7 +117,7 @@ public int size() {
 }
 ```
 
-### Caching
+## Caching
 
 Obviously, the `size()` method is unefficient, so we will add a integer variable to track the size of the list.
 
@@ -144,7 +144,7 @@ public int size() {
 }
 ```
 
-### Empty List
+## Empty List
 
 Here is a simple way to create an empty list, but it has subtle bugs: The program will crash when you add an item to the last of the list.
 
@@ -157,7 +157,7 @@ public SLList() {
 
 In order to fix the bug, we could either fix the `addLast()` method, which is not simple, or add a sentinel node.
 
-### Sentinel Node
+## Sentinel Node
 
 We could create a special node that is always there, which is called a "sentinel node".
 
@@ -195,10 +195,11 @@ public void addLast(inx x) {
 }
 ```
 
-### Invariants
+## Invariants
 
 A `SLList` with a sentinel node has at least the following invariants:
 
 * The `sentinel` reference always points to a sentinel node.
 * The front item \(if it exists\), is always at `sentinel.next.item`.
 * The `size` variable is always the total number of items that have been added.
+
