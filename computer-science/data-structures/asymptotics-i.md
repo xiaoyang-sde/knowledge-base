@@ -1,6 +1,4 @@
-# CS 61B Week 05
-
-## Asymptotics1
+# Asymptotics I
 
 ### Writing Efficient Programs
 
@@ -34,8 +32,8 @@ public static boolean dup1(int[] A) {
 
 public static boolean dup2(int[] A) {
   for (int i = 0; i < A.length - 1; i += 1) {
-    if (A[i] == A[i + 1]) { 
-      return true; 
+    if (A[i] == A[i + 1]) {
+      return true;
     }
   }
   return false;
