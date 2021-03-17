@@ -66,4 +66,3 @@ In this course, we will aim to make our code readable. Here are some tips to ach
 * Descriptive naming \(variables, functions, classes\)
 
 Moreover, we could use [Javadoc](https://en.wikipedia.org/wiki/Javadoc) to automatically generate documents.
-

@@ -155,4 +155,3 @@ In CS 61B, we will use libraries include:
 
 * The built-in Java libraries such as Math, String, Integer, List, Map.
 * The Princeton standard library such as StdDraw, StdAudio, In.
-

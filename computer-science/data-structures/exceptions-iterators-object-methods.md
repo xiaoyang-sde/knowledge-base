@@ -24,7 +24,7 @@ public class Example {
 }
 ```
 
-### Sets
+## Sets
 
 Sets are a collection of unique elements, which means that you can only have one copy of each element. There is also no sense of order.
 
@@ -38,7 +38,7 @@ s.add("Lagos");
 System.out.println(S.contains("Tokyo"));
 ```
 
-### ArraySet
+## ArraySet
 
 Our goal is to make our own set with `ArrayList` we built before, which has the following methods.
 
@@ -85,7 +85,7 @@ public class ArraySet<T>  {
 }
 ```
 
-### Exceptions
+## Exceptions
 
 When we add `null` to our `ArraySet`, the program will crash since we are calling `null.equals(x)` and will throw a `NullPointerException`.
 
@@ -104,7 +104,7 @@ public void add(T x) {
 }
 ```
 
-### Iterations
+## Iterations
 
 We could use enhanced loop in Java's `HashSet`:
 
@@ -239,7 +239,7 @@ public class ArraySet<T> implements Iterable<T> {
 }
 ```
 
-### toString
+## toString
 
 If we want to print out the whole class, we have to override `toString` method, or we will only get the name and the address of the object.
 
@@ -270,7 +270,7 @@ public String toString() {
 }
 ```
 
-### equals
+## equals
 
 In order to check whether a given object is equal to another object, we have to implement the `equals` method, since `==` will only compare the memory address.
 

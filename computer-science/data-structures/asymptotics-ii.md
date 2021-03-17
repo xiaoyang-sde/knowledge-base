@@ -21,7 +21,7 @@ The number of comparisons is: `C = 1+2+3+...+(N−3)+(N−2)+(N−1) = N(N−1)/
 
 Thus, since `==` is a constant time operation, the overall runtime in the worst case is Theta\(N^2\).
 
-### printParty
+## printParty
 
 ```java
 public static void printParty(int N) {
@@ -40,7 +40,7 @@ Let's create a visualization to find out the runtime cost of the function above.
 
 We could conclude that `C(N) = 1 + 2 + 4 + ... + N = 2N - 1 (if N is a power of 2)`, which is in the linear family.
 
-### Recursion \(f3\)
+## Recursion \(f3\)
 
 ```java
 public static int f3(int n) {
@@ -56,7 +56,7 @@ Here's a visualization of the function above.
 
 We could conclude that the runtime cost of the function is `C(1)=1 C(2) = 1 + 2C(2)=1+2 C(3) = 1 + 2 + 4C(3)=1+2+4 C(N) = 1 + 2 + 4 + ... +C(N) = 1+2+4+...+ ??? = 2^(N−1)`, which is in the `2^N` family.
 
-### Binary Search
+## Binary Search
 
 Binary search is a practical way to find an item in a sorted list. To do a binary search, we start in the middle of the list, and check if that's our desired element.
 
@@ -81,7 +81,7 @@ We can be even more precise: `C(N) = ⌊log_2 (N)⌋+1`. Because `⌊f(N)⌋ = �
 
 Log time is faster than linear time and even as better as constant time, which makes binary search an efficient algorithm.
 
-### Merge Sort
+## Merge Sort
 
 Selection sort works off two basic steps:
 
@@ -104,4 +104,3 @@ Mergesort has worst case runtime: `C = Theta(NlogN)`, since it has `logN` levels
 * One more level down: ~N/4 + ~N/4 + ~N/4 + ~N/4 = ~N.
 
 `Theta(NlogN)` is better than `Theta(N^2)`, so that merge sort is better than selection sort.
-

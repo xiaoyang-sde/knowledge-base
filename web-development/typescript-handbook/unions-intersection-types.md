@@ -1,4 +1,4 @@
-# Unions and Intersectoin Types
+# Unions and Intersection Types
 
 Intersection and Union types are one of the ways in which you can compose types.
 

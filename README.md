@@ -1,32 +1,11 @@
 # Programming Notes
 
-## Courses
+> We think we are creating the system for our own purposes. We believe we are making it in our own image... But the computer is not really like us. It is a projection of a very slim part of ourselves: that portion devoted to logic, order, rule, and clarity.
 
-### University of California, Los Angeles
+## Introduction
 
-* CS 31 Introduction to Computer Science I
-* CS 32 Introduction to Computer Science II
+This notebook is a collection of the notes I kept for the courses and documentations I learned in my Computer Science degree at UCLA. The notebook includes various topics (Web Development, Software Engineering, etc.), but these notes are by no means intended to be comprehensive. That being said, I will keep updating it until I graduate or leave this industry.
 
-### Online Courses
+## License
 
-* Berkeley CS 61B Data Structures \| [Link \(Course Website\)](https://sp21.datastructur.es)
-* Web Development - A Primer \| [Link \(Educative\)](https://www.educative.io/courses/web-development-a-primer)
-
-## Books
-
-### JavaScript
-
-* You Don't Know JS Yet - 2nd Edition \| [Link \(GitHub\)](https://github.com/getify/You-Dont-Know-JS)
-* The Modern JavaScript Tutorial \| [Link \(Website\)](https://javascript.info)
-* TypeScript Handbook \| [Link \(Website\)](https://www.typescriptlang.org/docs/handbook/)
-
-### Software Engineering
-
-* Refactoring \| [Link \(Website\)](https://refactoring.guru/refactoring)
-
-## Articles
-
-### JavaScript
-
-* An Overview of JavaScript Testing in 2020 \| [Link \(Medium\)](https://medium.com/welldone-software/an-overview-of-javascript-testing-7ce7298b9870)
-
+This notebook is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).

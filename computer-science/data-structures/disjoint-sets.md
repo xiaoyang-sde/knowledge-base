@@ -2,8 +2,6 @@
 
 ## Dynamic Connectivity and the Disjoint Sets Problem
 
-### Introduction
-
 Our data structure will implement these operations:
 
 * connect\(x, y\): Connects x and y.
@@ -26,7 +24,7 @@ ds.connect(3, 6)
 ds.isConnected(3, 0) //true
 ```
 
-#### Disjoint Sets Interface
+## Disjoint Sets Interface
 
 ```java
 public interface DisjointSets {
@@ -48,7 +46,7 @@ Naive Approach: Record all the connections in a data structure, and do some iter
 
 Better Approaach: Ignore how things are connected, and only record sets that each belongs to.
 
-### Quick Find
+## Quick Find
 
 To find whether two items are connected, here are two ways:
 
@@ -89,7 +87,7 @@ public class QuickFindDS implements DisjointSets {
 
 However, connecting is still slow.
 
-### Quick Union
+## Quick Union
 
 Instead of using random number to represent the index of sets, we could let each entry to be its parent, which results in a tree-like shape.
 
@@ -97,11 +95,10 @@ To connect two items, simply change the root of one item to the root of another 
 
 However, this method is still slow since the tree might be quite tall and the cost of the worst case is proportional to the height.
 
-### Weighted Quick Union
+## Weighted Quick Union
 
 We could modify Quick Union to avoid tall trees: Track tree size and link root of smaller tree to the larger one.
 
 Thus, the `connect` and `isConnected` operation will never be slower than `log N`, which is fast enough for most programs.
 
 Although we could track the height instead of weight, we will find out that the performance is similar.
-
