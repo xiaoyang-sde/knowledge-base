@@ -59,6 +59,7 @@
   * [Generics](web-development/typescript-handbook/generics.md)
 * [Vue Internals](web-development/vue-internals/README.md)
   * [Virtual DOM](web-development/vue-internals/virtual-dom.md)
+  * [Reactivity in Depth (Vue 2)](web-development/vue-internals/reactivity.md)
   * [Vue Interview](web-development/vue-internals/vue-interview.md)
 * [Testing](web-development/testing/README.md)
   * [An Overview of JavaScript Testing in 2020](web-development/testing/javascript-testing.md)
