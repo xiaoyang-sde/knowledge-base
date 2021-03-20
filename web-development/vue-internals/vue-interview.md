@@ -170,6 +170,22 @@ this.$set(this.items, 1, 'value'); // Array
 * 如果目标是数组, 直接使用数组的 `splice` 方法触发响应式.
 * 如果目标是对象, 会先判读属性是否存在, 是否是响应式, 并注入 Getter/Setter.
 
+## Virtual DOM 优点
+
+- 保证性能下限: 框架提供的 Virtual DOM 保证无需手动优化的情况下提供不错的性能.
+- 无需手动操作 DOM: 开发者只需要写好 View-Model 的代码逻辑, 框架会利用 Virtual DOM 与数据双向绑定帮助我们以可预期的方式更新视图, 提高开发效率.
+- 跨平台: Virtual DOM 本质是 JavaScript 对象, 而 DOM 依赖于浏览器. Virtual DOM 可以用于服务端渲染, Weex 开发等.
+
+## Virtual DOM 实现原理
+
+1. 用 JavaScript 对象模拟 DOM 树
+2. diff 算法 - 比较两颗 Virtual DOM 树的差异
+3. patch 算法 - 将差异更新到真实 DOM 树
+
+## key 的作用
+
+`key` 是 VNode 的唯一标记, 用于优化 diff 操作的性能.
+
 ## 项目优化
 
 * `v-if` 与 `v-show` 区分使用场景

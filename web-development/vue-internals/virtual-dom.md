@@ -451,3 +451,50 @@ function patchVnode (oldVnode, vnode, insertedVnodeQueue, ownerArray, index, rem
 }
 ```
 
+### 子节点 diff 算法
+
+`updateChildren` 方法是 diff 的最重要环节. 在开始遍历前, 首先给 `oldCh` 与 `newCh` 分配一个 `startIndex` 与 `endIndex` 作为遍历的索引. 当 `oldCh` 或 `newCh` 遍历完成后 (`startIndex >= endIndex`), 停止 diff 过程.
+
+```js
+function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
+  let oldStartIdx = 0
+  let newStartIdx = 0
+  let oldEndIdx = oldCh.length - 1
+  let oldStartVnode = oldCh[0]
+  let oldEndVnode = oldCh[oldEndIdx]
+  let newEndIdx = newCh.length - 1
+  let newStartVnode = newCh[0]
+  let newEndVnode = newCh[newEndIdx]
+  let oldKeyToIdx, idxInOld, vnodeToMove, refElm
+
+  while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
+    ...
+  }
+}
+```
+
+### patch (nodeOps)
+
+在 `diff` 算法中, Vue 使用 `nodeOps` 封装的方法操作真实 DOM 结构.
+
+```js
+export function createElementNS (namespace: string, tagName: string): Element {
+  return document.createElementNS(namespaceMap[namespace], tagName)
+}
+
+export function createTextNode (text: string): Text {
+  return document.createTextNode(text)
+}
+
+export function createComment (text: string): Comment {
+  return document.createComment(text)
+}
+
+export function insertBefore (parentNode: Node, newNode: Node, referenceNode: Node) {
+  parentNode.insertBefore(newNode, referenceNode)
+}
+
+export function removeChild (node: Node, child: Node) {
+  node.removeChild(child)
+}
+```
