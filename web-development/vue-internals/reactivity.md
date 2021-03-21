@@ -11,14 +11,14 @@ Vue 内部通过 `Object.defineProperty` 方法进行属性拦截, 将 `data` �
 
 数据双向绑定步骤:
 
-1. 实现监听器 Observer, 劫持并监听所有属性, 当属性发生变化时通知 Watcher.
-2. 实现订阅器 Dep, 收集订阅者, 对 Observer 与 Watcher 进行统一管理.
-3. 实现订阅者 Watcher, 收到属性变化时执行相应的方法, 更新视图.
-4. 实现解析器 Compiler, 解析每个节点的指令, 初始化模版数据与 Watcher.
+1. 监听器: 劫持并监听所有属性, 当属性发生变化时通知 订阅者.
+2. 订阅器: 收集订阅者, 对监听器与订阅者进行统一管理.
+3. 订阅者: 收到属性变化时执行相应的方法, 更新视图.
+4. 解析器: 解析每个节点的指令, 初始化模版数据与订阅者.
 
-## 监听器 Observer
+## 监听器 (Observer)
 
-监听器 Observer 让 `data` 对象变得可以观测. Vue 2 使用 `Object.defineProperty()` 劫持每个属性的 `getter` 与 `setter`, 让数据被读写时能够通知 Watcher.
+监听器让 `data` 对象变得可以观测. Vue 2 使用 `Object.defineProperty()` 劫持每个属性的 `getter` 与 `setter`, 让数据被读写时能够通知 Watcher.
 
 ### Object.defineProperty() 定义对象
 
@@ -41,7 +41,7 @@ const person = Object.defineProperty({}, 'name', {
 当 `data` 的属性较多时, 我们可以遍历 Object, 劫持所有属性.
 
 ```js
-const observable = (obj) => {
+const observe = (obj) => {
   if (!obj || typeof obj !== 'object') {
     return;
   }
@@ -51,6 +51,8 @@ const observable = (obj) => {
 
 const defineReactive = (obj, key, val) => {
   Object.defineProperty(obj, key, {
+    enumerable: true,
+    configurable: false,
     get() {
       console.log(`Read ${key}`);
       return val;
@@ -83,12 +85,11 @@ const person = observable({
 
 ### 代码实现
 
-我们需要创建一个订阅器 Dep 来收集所有依赖 (订阅者), 并且当数据变化时执行对应订阅者的更新函数. `watcher` 静态属性是全局唯一的 订阅者.
+我们需要创建一个订阅器来收集所有依赖 (订阅者), 并且当数据变化时执行对应订阅者的更新函数. `watcher` 静态属性是即将被添加到订阅器的订阅者.
 
 ```js
 class Dep {
   static watcher = null;
-  static initialized = false;
   subs = [];
 
   addSub(sub) {
@@ -108,9 +109,8 @@ const defineReactive = (obj, key, val) => {
   const dep = new Dep();
   Object.defineProperty(obj, key, {
     get() {
-      if (!Dep.initialized) {
+      if (Dep.watcher !== null) {
         dep.addSub(Dep.watcher);
-        Dep.initialized = true;
       }
       return val;
     },
@@ -126,17 +126,17 @@ const defineReactive = (obj, key, val) => {
 }
 ```
 
-## 订阅者 Watcher
+## 订阅者
 
-订阅者 Watcher 在初始化的时候需要将自己添加进订阅器 Dep 中. 通过遍历 `data` 对象并获取属性值, 我们触发所有 `get` 函数来执行添加订阅者的操作.
+订阅者在初始化的时候需要将自己添加进订阅器 Dep 中. 通过遍历 `data` 对象并获取属性值, 我们触发所有 `get` 函数来执行添加订阅者的操作.
 
-在订阅者初始化时, 我们将对应订阅器上的 `initialized` 属性设置为 `false`, 并访问属性强行执行 `get` 函数, 将订阅者添加到订阅器中, 随后将 `initialized` 属性设置为 `true`, 避免后续调用 `get` 函数时重新触发订阅操作.
+在订阅者初始化时, 我们将对应订阅器上的 `wacther` 静态属性设置为当前订阅者, 并通过访问属性强行执行 `get` 函数, 将订阅者添加到订阅器. 随后将 `watcher` 属性设置为 `null`, 避免后续调用 `get` 函数时重新触发订阅操作.
 
 ### 代码实现
 
 - `vm`: Vue 实例对象
 - `exp`: Text interpolation (`{{ }}`) 或 `v-bind` 等指令中的属性值.
-- `cb`: 订阅者绑定的更新函数.
+- `cb`: 用于更新订阅者的回调函数.
 
 ```js
 class Watcher {
@@ -145,9 +145,9 @@ class Watcher {
     this.exp = exp;
     this.cb = cb;
 
-    Dep.initialized = false;
     Dep.watcher = this;
     this.value = this.vm.data[this.exp];
+    Dep.watcher = null;
   }
 
   update() {
@@ -158,5 +158,25 @@ class Watcher {
       this.cb.call(this.vm, value, oldValue);
     }
   }
+}
+```
+
+## 解析器
+
+- 将模板指令对应的节点绑定对应的更新函数, 初始化相应的订阅器.
+- 解析模板指令, 替换模板数据, 初始化视图.
+
+```js
+class Compiler {
+  ...
+  compileText: function(node, exp) {
+    const initText = this.vm[exp];
+    this.updateText(node, initText); // Initialize the template
+    const callback = (value) => {
+      self.updateText(node, value);
+    };
+    new Watcher(this.vm, exp, callback);
+  },
+  ...
 }
 ```
