@@ -60,6 +60,7 @@
 
 * [React Internals](web-development/react-internals/README.md)
   * [React Hooks](web-development/react-internals/react-hooks.md)
+  * [Reconcialiation](web-development/react-internals/reconciliation.md)
   * [JSX In Depth](web-development/react-internals/jsx-in-depth.md)
   * [Fragments](web-development/react-internals/fragments.md)
   * [Typechecking With PropTypes](web-development/react-internals/prop-types.md)
