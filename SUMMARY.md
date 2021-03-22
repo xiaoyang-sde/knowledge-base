@@ -57,6 +57,14 @@
   * [Unions and Intersection Types](web-development/typescript-handbook/unions-intersection-types.md)
   * [Literal Types](web-development/typescript-handbook/literal-types.md)
   * [Generics](web-development/typescript-handbook/generics.md)
+
+* [React Internals](web-development/react-internals/README.md)
+  * [React Hooks](web-development/react-internals/react-hooks.md)
+  * [JSX In Depth](web-development/react-internals/jsx-in-depth.md)
+  * [Fragments](web-development/react-internals/fragments.md)
+  * [Typechecking With PropTypes](web-development/react-internals/prop-types.md)
+  * [Strict Mode](web-development/react-internals/strict-mode.md)
+
 * [Vue Internals](web-development/vue-internals/README.md)
   * [Virtual DOM](web-development/vue-internals/virtual-dom.md)
   * [Reactivity in Depth (Vue 2)](web-development/vue-internals/reactivity.md)
