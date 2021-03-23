@@ -60,10 +60,11 @@
 
 * [React Internals](web-development/react-internals/README.md)
   * [React Hooks](web-development/react-internals/react-hooks.md)
-  * [Reconcialiation](web-development/react-internals/reconciliation.md)
+  * [Reconciliation](web-development/react-internals/reconciliation.md)
+  * [Context](web-development/react-internals/context.md)
   * [JSX In Depth](web-development/react-internals/jsx-in-depth.md)
   * [Fragments](web-development/react-internals/fragments.md)
-  * [Typechecking With PropTypes](web-development/react-internals/prop-types.md)
+  * [Type Checking With PropTypes](web-development/react-internals/prop-types.md)
   * [Strict Mode](web-development/react-internals/strict-mode.md)
 
 * [Vue Internals](web-development/vue-internals/README.md)

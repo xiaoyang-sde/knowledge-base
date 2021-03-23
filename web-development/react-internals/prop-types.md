@@ -1,4 +1,4 @@
-# Typechecking With PropTypes
+# Type Checking With PropTypes
 
 React has some built-in typechecking abilities for props of a component. We could assign the `propTypes` property. When an invalid value is provided for a prop, a warning will be shown in the JavaScript console.
 

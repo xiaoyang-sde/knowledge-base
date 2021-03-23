@@ -150,3 +150,50 @@ If you want to run an effect and clean it up only once (on mount and unmount), y
 
 - Only Call Hooks at the Top Level - Don’t call Hooks inside loops, conditions, or nested functions.
 - Only Call Hooks from React Functions: Components or custom Hooks)
+
+## Context Hook
+
+```jsx
+const value = useContext(MyContext);
+```
+
+Accepts a `Context` object and returns the current context value for that context. The current context value is determined by the value prop of the nearest `<MyContext.Provider>`.
+
+When the nearest `<MyContext.Provider>` above the component updates, this Hook will trigger a rerender with the latest context value passed to that MyContext provider.
+
+## Reducer Hook
+
+```jsx
+const [state, dispatch] = useReducer(reducer, initialArg, init);
+```
+
+Accepts a reducer of type `(state, action) => newState`, and returns the current state paired with a `dispatch` method.
+
+```jsx
+const initialState = {count: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      throw new Error();
+  }
+}
+
+const Counter = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  dispatch({type: 'decrement'});
+  ...
+}
+```
+
+## Memo Hook
+
+```jsx
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+```
+
+The Memo Hook returns a memoized value. It accepts an array of dependencies. `useMemo` will only recompute the memoized value when one of the dependencies has changed. This optimization helps to avoid expensive calculations on every render.
