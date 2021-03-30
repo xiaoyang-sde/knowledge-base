@@ -81,7 +81,10 @@
 
 ## Computer Science
 
-* [Data Structures (Berkeley)](computer-science/data-structures/README.md)
+* [Computer Systems (CMU 15-213)](computer-science/computer-systems/README.md)
+  * [Bits, Bytes, and Integers](computer-science/computer-systems/bits-bytes-integers.md)
+
+* [Data Structures (Berkeley CS 61B)](computer-science/data-structures/README.md)
   * [Intro, Hello World Java](computer-science/data-structures/hello-world-java.md)
   * [Defining and Using Classes](computer-science/data-structures/defining-classes.md)
   * [References, Recursion, and Lists](computer-science/data-structures/references-recursion-lists.md)
