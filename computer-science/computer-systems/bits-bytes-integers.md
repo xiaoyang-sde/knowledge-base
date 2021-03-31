@@ -21,7 +21,7 @@ Each byte is 8 bits.
 
 ## Bit-level manipulations
 
-### Boolean	Algebra
+### Boolean Algebra
 
 Encode `true` as 1 and `false` as 0.
 
@@ -42,3 +42,48 @@ Operations `&`, `|`, `~`, `^` in C applies to any integral data type: `long`, `i
 - Right Shift (`x >> y`): Shift bit-vector x right y positions.
 - - Logical: Fill with 0's on the left.
 - - Arithmetic: Replicate the most significant bit on the left.
+
+## Integers
+
+### Representation: unsigned and signed
+
+- Unsigned: $$ \sum^{w-1}_{i=0} x_{i} \cdot 2^{i} $$
+- Two's Complement: $$ -x_{w-1} \cdot 2^{2-1} + \sum^{w-2}_{i=0} x_{i} \cdot 2^{i} $$ (The most significant bit indicates the sign.)
+
+#### Numeric Ranges
+
+- UMin = 0 (000...0)
+- UMax = $$ 2^{w} - 1 $$ (111...1)
+- TMin = $$ -2^{w - 1} $$ (100...0)
+- TMax = $$ 2^{w - 1} - 1 $$ (011...1)
+
+- | TMin | = TMax + 1
+- UMax = 2 * TMax + 1
+
+### Conversion (Signed and Unsigned)
+
+- Bit pattern is maintained
+- The interpretation is changed.
+
+#### Constants
+
+- Constants in C are considered to be signed integers by default.
+- Unsigned integers have `U` as suffix. (Example: `114514U`)
+
+#### Expression Evaluation
+
+- If there's a mix of unsigned and signed integers in a single expression, singed values implicitly cast to unsigned.
+- These expressions includes comparison operations.
+
+### Expanding and truncating
+
+#### Expading (e.g. short int to int)
+
+- Unsigned: Add zeros to the front of the array of bits.
+- Signed: Fill the front of the array of bits with the most significant bit.
+
+#### Truncating (e.g. unsigned to unsigned short)
+
+- Unsigned or signed: Bits are truncated
+- Unsigned: mod operation
+- Signed: similar to mod operation
