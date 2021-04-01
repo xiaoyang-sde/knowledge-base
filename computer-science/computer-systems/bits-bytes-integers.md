@@ -87,3 +87,61 @@ Operations `&`, `|`, `~`, `^` in C applies to any integral data type: `long`, `i
 - Unsigned or signed: Bits are truncated
 - Unsigned: mod operation
 - Signed: similar to mod operation
+
+### Arithmetic Operation
+
+#### Addition
+
+- Operands: w bits
+- True Sum: w bits or w + 1 bits
+- Discard Carry: w bits ($$ s = UAdd_{w} (u,v) = u + v mod 2^{w} $$)
+
+Example:
+
+- Operands: u = 1101, v = 0101
+- True Sum: 1101 + 0101 = 10010 (18)
+- Discard Carry: 0010 (18 mod 16 = 2)
+
+Two's complement addition and unsigned addition have idential bit-level behavior.
+
+- If true sum $$ >= 2^{w - 1} $$, the actual result becomes negative.
+- If true sum $$ < -2^{w - 1} $$, the actual result becomes positive.
+
+#### Multiplication
+
+- Operands: w bits
+- True Product: 2 * w bits
+- Discard Carry: w bits ($$ s = UMult_{w} (u,v) = u \cdot v mod 2^{w} $$)
+
+#### Power-of-2 Multiply with Shift
+
+Most machines shift and add faster than multiply. The compiler might convert some multiplication operation to shift operation.
+
+- Operands: w bits
+- True Product: w + k bits ($$ u << k = u * 2^{k} $$)
+- Discard k bits: w bits ($$ TMult_{w} (u, 2^{k}) = u * 2^{k} mod 2^{k} $$)
+
+#### Power-of-2 Divide with Shift
+
+- Operands: $$ u / 2 ^{k} $$
+- True Division: $$ u / 2 ^{k} $$ ($$ u >> k = u / 2^{k} $$)
+- Discard k bits: $$ \lfloor u / 2 ^{k} \rfloor $$
+
+## Representations in Memory, Pointers, Strings
+
+### Byte-Oriented Memory Organization
+
+Programs refer to data by address. We could conceptually envision the memory as a very large array of bytes. An address is like an index to the array.
+
+#### Machine Words
+
+Any given computer has a "Word Size" - the normal size of integer-valued data. Most machines use 64-bit word size, or 18 exabytes of addressable memory.
+
+#### Byte Ordering
+
+- Big Endian: Least significant byte has highest address. (Internet, Sun, PowerPC)
+- Little Endian: Least significant byte has lowest address. (x86, ARM, Windows)
+
+### Representing Strings
+
+Strings in C are represented by array of characters. Each character is encoded in ASCII format. The array of characters is null-terminated.
