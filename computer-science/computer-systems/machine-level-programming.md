@@ -54,7 +54,7 @@ x86-64 Integer Registers are 16 named locations storing 64-bit values: `%rax`, `
 
 #### Moving Data
 
-```as
+```s
 movq Source, Dest
 ```
 
@@ -83,14 +83,14 @@ Example: `0x8(%rdx, rcx, 4)` => `0xf000 + 4 * 0x100 + 0x8`
 
 #### Address Computation Instruction
 
-```as
+```s
 leaq Src, Dst
 ```
 
 - Computing addresses without a memory reference
 - Computing arithmetic expressions of the form `x + k * y`
 
-```
+```s
 leaq 4(%rdi, %rdi, 2), %rax # t <- x + 2 * x + 4
 ```
 
@@ -112,3 +112,165 @@ leaq 4(%rdi, %rdi, 2), %rax # t <- x + 2 * x + 4
 - `decq`: Dest = Dest - 1
 - `negq`: Dest = -Dest
 - `notq`: Dest = ~Dest
+
+## Control
+
+- Temporary data (`%rax`, ...)
+- Location of runtime stack (`%rsp`)
+- Location of current code control point (`%rip`, ...)
+- Status of recent tests (CF, ZF, SF, OF)
+
+### Condition Codes
+
+- CF: Carry Flag (for unsigned)
+- SF: Sign Flag (for signed)
+- ZF: Zero Flag
+- OF: Overflow Flag (for signed)
+
+#### Implicitly Set
+
+- CF: If unsigned overflow
+- ZF: If `t == 0`
+- SF: If `t < 0`
+- OF: If signed overflow
+
+#### Explicitly Set
+
+```s
+cmpq Src2, Src1
+```
+
+`cmpq` computes `a - b` and changes the condition codes without setting destination.
+
+- CF: If unsigned overflow
+- ZF: If `a == b`
+- SF: If `(a - b) < 0`
+- OF: If signed overflow
+
+```as
+testq Src2, Src1
+```
+
+`testq` computes `a & b` and changes the condition codes without setting destination.
+
+- ZF: If `a & b == 0`
+- SF: If `a & b < 0`
+
+#### Reading Condition Codes
+
+SetX instructions set lower-order byte of destination to 0 or 1 based on combinations of condition codes.
+
+- `sete`: Equal
+- `setne`: Not equal
+- `setg`: Greater (Signed)
+...
+
+```s
+cmpq %rsi, %rdi # Compare x, y
+setg %al # Set the lowest bit of %al to 1 if x > y
+movzbl %al, %eax
+ret
+```
+
+### Conditional Branches
+
+#### Jumping
+
+JX instructions jump to different part of code depending on conditional codes.
+
+- `jmp`: Unconditional
+- `je`: Equal
+- `jne`: Not equal
+- `js`: Negative
+- `jns`: Non-negative
+...
+
+#### Conditional Moves
+
+Conditional moves compute the result of both conditional branches, and save the result based on the condition. GCC tries to use conditional moves since branches are very disruptive to instruction flow through pipelines. The branches must be side-effect free and only contain simple computations.
+
+### Loops
+
+#### Do-While Loop
+
+```c
+loop:
+  Body
+  if (Test)
+    goto loop
+```
+
+#### While Loop
+
+```c
+if (!Test):
+  goto done
+
+loop:
+  Body
+  if (Test)
+    goto loop
+
+done:
+  ...
+```
+
+#### For Loop
+
+```c
+for (init; test; update)
+
+init
+while (test)
+  Body
+  update
+```
+
+### Switch Statements
+
+#### Jump Table Structure
+
+##### Switch Form
+
+```c
+switch (x) {
+  case 0:
+    Block 0
+  case 1:
+    Block 1
+  case 2:
+    Block 2
+  ...
+  case 6:
+    Block 6
+}
+```
+
+##### Jump Table
+
+```s
+.section .rodata
+  .align 8
+
+.L4:
+  .quad .L8 # x = 0 (goto: default)
+  .quad .L3 # x = 1
+  .quad .L5 # x = 2
+  .quad .L9 # x = 3
+  .quad .L8 # x = 4 (goto: default)
+  .quad .L7 # x = 5
+  .quad .L7 # x = 6
+```
+
+#### Assembly Code for Switch Statement
+
+- Direct Jump: Jump directely to the target. (`jmp .L8`)
+- Indirect Jump: Fetch target from effective address. (`jmp *.L4(, %rdi, 8)`)
+
+```s
+switch_eg:
+  movq %rdx, %rcx
+  cmpq $6, %rdi # Compare x and 6 (Suppose the max case is 6)
+  ja .L8 # Jump to the default if x is greater than 6 or less than 0
+  jmp *.L4(, %rdi, 8) # goto *JTab[x]
+```

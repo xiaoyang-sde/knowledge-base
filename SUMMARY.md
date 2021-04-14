@@ -83,6 +83,7 @@
 
 * [Computer Systems (CMU 15-213)](computer-science/computer-systems/README.md)
   * [Bits, Bytes, and Integers](computer-science/computer-systems/bits-bytes-integers.md)
+  * [Machine Level Programming](computer-science/computer-systems/machine-level-programming.md)
 
 * [Algorithms and Complexity (UCLA CS 180)](computer-science/algorithms-complexity/README.md)
   * [Introduction](computer-science/algorithms-complexity/introduction.md)
