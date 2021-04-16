@@ -274,3 +274,63 @@ switch_eg:
   ja .L8 # Jump to the default if x is greater than 6 or less than 0
   jmp *.L4(, %rdi, 8) # goto *JTab[x]
 ```
+
+## Procedures
+
+### Stack Structure
+
+#### x86-64 Stack
+
+- The region of memory managed with stack discipline
+- Grows towards lower addresses
+- The `%rsp` register contains lowest stack address
+
+#### Stack Push
+
+```s
+pushq src
+```
+
+Fetch operand at `src`, decrement `%rsp` by 8, and then write operand at addreses given by `%rsp`.
+
+#### Stack Pop
+
+```s
+popq dest
+```
+
+Read value at address given by `%rsp`, increment `%rsp` by 8, and store the value at `dest` (register).
+
+### Calling Conventions
+
+#### Passing Control
+
+- Procedure control flow: Use stack to support procedure call and return.
+- Procedure call: `call label`, push return address on stack and then jump to `label`.
+- Return address: Save the address of next instruction right after `call` to the stack.
+- Procedure return: `ret`: Pop address from stack and then jump to it.
+
+#### Passing Data
+
+- First 6 arguments: `%rdi`, `%rsi`, `%rdx`, `%rcx`, `%r8`, `%r9`
+- Other arguments: The stack
+- Return value: `%rax`
+
+#### Managing Local Data
+
+Stack allocates the state for single procedure instantiation in frames.
+
+- Contents: Return information, local storage, temporary space
+- Management: Space allocated when enter procedure (`call`), and deallocated when return (`ret`)
+- Current stack frame: Parameters for function about to call, local variables, saved register context, old frame pointer (optional)
+- Caller stack frame: Return address pushed by `call` instruction, arguments for this cal
+
+##### Register Saving Conventions
+
+Contents in register may be overwritten by other functions.
+- Caller saved: Caller saves temporary values in its frame before the call. (`%r10`, `%r11`)
+- Callee saved: Callee saves temporary values in its frame before using and restores them before returning. (`%rbx`, `%r12`, `%r13`, `%r14`, `%rbp`)
+
+### Illustration of Recursion
+
+Recursions are handled without special consideration. Stack frames mean that each function call has private storage to save registers and local variables. Register saving conventions prevent one function call from corrupting another's data.
