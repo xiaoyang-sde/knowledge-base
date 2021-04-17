@@ -334,3 +334,70 @@ Contents in register may be overwritten by other functions.
 ### Illustration of Recursion
 
 Recursions are handled without special consideration. Stack frames mean that each function call has private storage to save registers and local variables. Register saving conventions prevent one function call from corrupting another's data.
+
+## Data
+
+### Arrays
+
+#### Allocation
+
+```c
+T A[L];
+```
+
+- Array of data type `T` and length `L`
+- Contigunously allocated region of `L * sizeof(T)` bytes in memory
+- Identifier `A` is also the pointer to the first element
+- `A[1]` is equivalent to `*(A + 1)`
+
+#### Access
+
+```c
+int get_digit (int[] z, int digit) {
+  return z[digit];
+}
+```
+
+```s
+# %rdi = z
+# %rsi = digit
+movl (%rdi, %rsi, 4) %eax # z[digit]
+```
+
+### Nested Arrays
+
+#### Allocation
+
+```c
+T A[R][C];
+```
+
+- 2D array of data type T with R rows and C columns
+
+#### Access
+
+- Row vectors: `A[i]` is an array of C elements, and each element of type T requires K bytes. The starting address is `A + i * (C * K)`.
+- Array elements: `A[i][j]` is an element of type T, which requires K bytes. The address is `A + i * (C * K) + j * K = A + (i * C + j) * K`.
+
+### Structures
+
+#### Allocation
+
+```c
+struct rec {
+  int a[4];
+  size_t i;
+  struct rec *next;
+};
+```
+
+- Structure represented as block of memory to hold all of the fields
+- Fields ordered according to declaration
+- Compiler determines overall size and positions of fields
+
+#### Alignment
+
+- Aligned data: Primitive data type requires K bytes, and address must be multiple of K.
+- Motivation: Memory accessed by aligned chunks of 4 or 8 bytes, so it's inefficient to load or store datu mthat spans quad word bondaries.
+- Compiler: Insert gaps in structure to ensure correct alignment of fields.
+- Optimization: Put large data types first to save space.
