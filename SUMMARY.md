@@ -126,6 +126,9 @@
   * [Compression](computer-science/data-structures/compression.md)
   * [Compression, Complexity, and P=NP?](computer-science/data-structures/compression-complexity-and-p-np.md)
 
+* [LeetCode](computer-science/leetcode/README.md)
+  * [Linked List](computer-science/leetcode/linked-list.md)
+
 ## Software Engineering
 
 * [Refactoring](software-engineering/refactoring/README.md)
