@@ -1,5 +1,41 @@
 # Microsoft
 
+## 33. Search in Rotated Sorted Array
+
+```py
+class Solution:
+  def search(self, nums: List[int], target: int) -> int:
+    lo = 0
+    hi = len(nums) - 1
+    while lo < hi:
+      mid = lo + (hi - lo) // 2
+      if nums[mid] == target:
+        return mid
+      if nums[lo] <= nums[mid]:
+        if nums[mid] > target >= nums[lo]:
+          hi = mid - 1
+        else:
+          lo = mid + 1
+      else:
+        if nums[mid] > target:
+```
+
+## 153. Find Minimum in Rotated Sorted Array
+
+```py
+class Solution:
+  def findMin(self, nums: List[int]) -> int:
+    lo = 0
+    hi = len(nums) - 1
+    while lo < hi:
+      mid = lo + (hi - lo) // 2
+      if nums[mid] > nums[hi]:
+        lo = mid + 1
+      else:
+        hi = mid
+    return nums[lo]
+```
+
 ## 236. Lowest Common Ancestor of a Binary Tree
 
 ```py
@@ -47,6 +83,58 @@ class Solution:
     result = []
     backtrack([], sorted(nums))
     return result
+```
+
+## 48. Rotate Image
+
+```py
+class Solution:
+  def rotate(self, matrix: List[List[int]]) -> None:
+    """
+    Do not return anything, modify matrix in-place instead.
+    """
+    for i in range(len(matrix)):
+      for j in range(i):
+        matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+    for i in range(len(matrix)):
+      for j in range(len(matrix) // 2):
+        matrix[i][j], matrix[i][len(matrix) - j - 1] = matrix[i][len(matrix) - j - 1], matrix[i][j]
+```
+
+## 69. Sqrt(x)
+
+```py
+class Solution:
+  def mySqrt(self, x: int) -> int:
+    lo = 0
+    hi = x - 1
+    if x == 1:
+      return 1
+
+    while lo <= hi:
+      mid = (lo + hi) // 2
+      if mid ** 2 <= x < (mid + 1) ** 2:
+        return mid
+      elif mid ** 2 < x:
+        lo = mid + 1
+      else:
+        hi = mid
+    return lo
+```
+
+## 206. Reverse Linked List
+
+```py
+class Solution:
+  def reverseList(self, head: ListNode) -> ListNode:
+    prev = None
+    while head:
+      next = head.next
+      head.next = prev
+      prev = head
+      head = next
+    return prev
 ```
 
 ## 207. Course Schedule
