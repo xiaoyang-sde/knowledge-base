@@ -33,9 +33,10 @@
 #### Assembly Code View
 
 - Program Counter: The address in memory of the next instruction to be executed
-- Register file: 16 named locations storing 64-bit values
-- Condition codes: Status information about most recent arithmetic or logical operation
-- Memory: Store code and user data (Byte addressable array)
+- Integer register file: 16 named locations storing 64-bit values (addresses or integer data)
+- Condition codes: Status information about most recent arithmetic or logical operation (implement if and while statements)
+- Vector register: Hold one or more integer or floating-point values
+- Memory (Addressable byte array): The executable machine code for the program, information required by the OS, a run-time stack for managing procedure calls and returns, and blocks of memory allocated by user (`malloc`)
 
 #### Turning C into Object Code
 
@@ -43,34 +44,36 @@
 gcc -Og p1.c p2.c -o p
 ```
 
-1. C program (p1.c p2.c)
-2. Compiler (`gcc -Og -S`) -> Asm program (p1.s p2.s)
-3. Assembler (`gcc` or `as`) -> Object program (p1.o p2.o)
+1. C program (p1.c, p2.c)
+2. Compiler (`gcc -Og -S`) -> Asm program (p1.s, p2.s)
+3. Assembler (`gcc` or `as`) -> Object program (p1.o, p2.o)
 4. Linker (`gcc` or `ld`) -> Executable program (p)
 
 ### Assembly Basics: Registers, Operands, Move
 
 x86-64 Integer Registers are 16 named locations storing 64-bit values: `%rax`, `%rbx`, `%rcx`, `%rdx`, `%rsi`, `%rdi`, `%rsp`, `%rbp`, `%r8`, `%r9`, `%r10`, `%r11`, `%r12`, `%r13`, `%r14`, `%r15`.
 
-#### Moving Data
+#### Data Formats
 
-```s
-movq Source, Dest
-```
+- byte: 1 byte (b)
+- word: 2 bytes (w)
+- double word: 4 bytes (l)
+- quad word: 8 bytes (q)
+
+#### Operand Specifiers
 
 - **Immediate**: Constant integer data. Example: `$0x400`
 - **Register**: One of 16 integer registers. Example: `%rax`
 - **Memory**: 8 consecutive bytes of memory at address given by register. Example: `(%rax)`
 
-`movq` could save immediate data into register or memory, move data from register to register or memory, and from memory to register.
+Memory Addressing Modes:
 
-#### Simple Memory Addressing Modes
+- **Register**: `R` => `Reg[R]`
+- **Normal**: `(R)` => `Mem[Reg[R]]`
+- **Displacement**: `D(R)` => `Mem[Reg[R] + D]`
+- **General Form**: `D(Rb, Ri, S)` => `Mem[Reg[Rb] + S * Reg[Ri] + D]`
 
-**Normal**: `(R)` => `Mem[Reg[R]]`
-
-**Displacement**: `D(R)` => `Mem[Reg[R] + D]`
-
-**General Form**: `D(Rb, Ri, S)` => `Mem[Reg[Rb] + S * Reg[Ri] + D]`
+Operand forms:
 
 - D: Constant displacement
 - Rb: Base register
@@ -78,6 +81,59 @@ movq Source, Dest
 - S: Scale: 1, 2, 4, 8
 
 Example: `0x8(%rdx, rcx, 4)` => `0xf000 + 4 * 0x100 + 0x8`
+
+#### Data Movement Instructions
+
+```s
+mov Src, Dest
+```
+
+- `movb`: Move byte
+- `movw`: Move word
+- `movl`: Move double word (and fill the upper 4 bytes with zeros)
+- `movq`: Move quad word
+- `movabsq`: Move absolute quad word
+
+`mov` could save immediate data into register or memory, move data from register to register or memory, and from memory to register.
+
+`movabsq` can move an arbitrary 64-bit immediate value to a register. (`movq` only support 32-bit immediate value and extend it to 64-bit with sign extension)
+
+```s
+movz Src, Dest
+```
+
+Instructions in the `movz` class fill out the remaining bytes of the destination with zeros.
+
+- `movzbw`: Move zero-extended byte to word
+- `movzbl`: Move zero-extended byte to double word
+- `movzwl`: Move zero-extended word to double word
+- `movzbq`: Move zero-extended byte to quad word
+- `movzwq`: Move zero-extended word to quad word
+
+```s
+movs Src, Dests
+```
+
+- `movsbw`: Move sign-extended byte to word
+- `movsbl`: Move sign-extended byte to double word
+- `movswl`: Move sign-extended word to double word
+- `movsbq`: Move sign-extended byte to quad word
+- `movswq`: Move sign-extended word to quad word
+- `movslq`: Move sign-extended double word to quad word
+
+Instructions in the `movs` class fill out the remaining bytes of the destination with sign extension.
+
+
+#### Pushing and Popping Stack Data
+
+```s
+pushq Src
+popq Dest
+```
+
+Pushing a quad word value onto the stack involves decrementing the stack pointer (`%rsp`) by 8 and writing the value at the new top-of-stack address.
+
+Popping a quad word value involves reading from the top-of-stack location and incrementing the stack pointer (`%rsp`) by 8.
 
 ### Arithmetic and Logical Operations
 
@@ -91,27 +147,33 @@ leaq Src, Dst
 - Computing arithmetic expressions of the form `x + k * y`
 
 ```s
-leaq 4(%rdi, %rdi, 2), %rax # t <- x + 2 * x + 4
+# t = x + 2 * x + 4 = 3 * x + 4
+leaq 4(%rdi, %rdi, 2), %rax
 ```
 
-#### Arithmetic Operations
+#### Shift Operations
 
-- `addq Src, Dest`: Dest = Dest + Src
-- `subq Src, Dest`: Dest = Dest - Src
-- `imulq Src, Dest`: Dest = Dest * Src
-- `salq Src, Dest`: Dest = Dest << Src
-- `sarq Src, Dest`: Dest = Dest >> Src (Arithmetic)
-- `shrq Src, Dest`: Dest = Dest >> Src (Logical)
-- `xorq Src, Dest`: Dest = Dest ^ Src
-- `andq Src, Dest`: Dest = Dest & Src
-- `orq Src, Dest`: Dest = Dest | Src
+- `sal Src, Dest`: Dest = Dest << Src
+- `shl Src, Dest`: Dest = Dest << Src (Same as `sal`)
+- `sar Src, Dest`: Dest = Dest >> Src (Arithmetic)
+- `shr Src, Dest`: Dest = Dest >> Src (Logical)
 
-#### One Operand Instructions
+#### Unary Instructions
 
-- `incq`: Dest = Dest + 1
-- `decq`: Dest = Dest - 1
-- `negq`: Dest = -Dest
-- `notq`: Dest = ~Dest
+- `inc`: Dest = Dest + 1
+- `dec`: Dest = Dest - 1
+- `neg`: Dest = -Dest
+- `not`: Dest = ~Dest
+
+#### Binary Operations
+
+- `add Src, Dest`: Dest = Dest + Src
+- `sub Src, Dest`: Dest = Dest - Src
+- `imul Src, Dest`: Dest = Dest * Src
+
+- `xor Src, Dest`: Dest = Dest ^ Src
+- `and Src, Dest`: Dest = Dest & Src
+- `or Src, Dest`: Dest = Dest | Src
 
 ## Control
 
