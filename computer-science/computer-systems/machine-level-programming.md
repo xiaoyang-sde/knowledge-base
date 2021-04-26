@@ -53,6 +53,25 @@ gcc -Og p1.c p2.c -o p
 
 x86-64 Integer Registers are 16 named locations storing 64-bit values: `%rax`, `%rbx`, `%rcx`, `%rdx`, `%rsi`, `%rdi`, `%rsp`, `%rbp`, `%r8`, `%r9`, `%r10`, `%r11`, `%r12`, `%r13`, `%r14`, `%r15`.
 
+|8 bytes|4 bytes|2 bytes|1 byte|Function|
+|-|:-:|:-:|:-:|-:|
+|`%rax`|`%eax`|`%ax`|`%al`|Return value|
+|`%rbx`|`%ebx`|`%bx`|`%bl`|Callee saved|
+|`%rcx`|`%ecx`|`%cx`|`%cl`|4th argument|
+|`%rdx`|`%edx`|`%dx`|`%dl`|3rd argument|
+|`%rsi`|`%esi`|`%si`|`%sil`|2nd argument|
+|`%rdi`|`%edi`|`%di`|`%dil`|1st argument|
+|`%rbp`|`%ebp`|`%bp`|`%bpl`|Callee saved|
+|`%rsp`|`%esp`|`%sp`|`%spl`|Stack pointer|
+|`%r8`|`%r8d`|`%r8w`|`%r8b`|5th argument|
+|`%r9`|`%r9d`|`%r9w`|`%r9b`|6th argument|
+|`%r10`|`%r10d`|`%r10w`|`%r10b`|Caller saved|
+|`%r11`|`%r11d`|`%r11w`|`%r11b`|Caller saved|
+|`%r12`|`%r12d`|`%r12w`|`%r12b`|Callee saved|
+|`%r13`|`%r13d`|`%r13w`|`%r13b`|Callee saved|
+|`%r14`|`%r14d`|`%r14w`|`%r14b`|Callee saved|
+|`%r15`|`%r15d`|`%r15w`|`%r15b`|Callee saved|
+
 #### Data Formats
 
 - byte: 1 byte (b)
@@ -123,7 +142,6 @@ movs Src, Dests
 
 Instructions in the `movs` class fill out the remaining bytes of the destination with sign extension.
 
-
 #### Pushing and Popping Stack Data
 
 ```s
@@ -177,85 +195,141 @@ leaq 4(%rdi, %rdi, 2), %rax
 
 ## Control
 
-- Temporary data (`%rax`, ...)
-- Location of runtime stack (`%rsp`)
-- Location of current code control point (`%rip`, ...)
-- Status of recent tests (CF, ZF, SF, OF)
+- Conditional control transfer: jump to specific branch based on the condition
+- Conditional data transfer: compute the result of both conditional branches, and save the result based on the condition
 
 ### Condition Codes
 
-- CF: Carry Flag (for unsigned)
-- SF: Sign Flag (for signed)
-- ZF: Zero Flag
-- OF: Overflow Flag (for signed)
+CPU maintains a set of single-bit condition code registers describing the attributes of the most recent arithmetic or logical operation. `leaq` instruction doesn't alter any condition codes.
 
-#### Implicitly Set
+- CF: Carry flag, if the most recent operation caused an unsigned overflow
+- OF: Overflow flag, if the most recent operation caused a two's-complement overflow
+- SF: Sign flag, if the most recent operation is negative
+- ZF: Zero flag, if the most recent operation is zero
 
-- CF: If unsigned overflow
-- ZF: If `t == 0`
-- SF: If `t < 0`
-- OF: If signed overflow
+For the logical operations (XOR, etc.), CF and OF are 0. For the shift operations, CF is the last bit shifted out, and OF is 0.
 
-#### Explicitly Set
+#### Explicitly Set (cmp instructions)
 
 ```s
-cmpq Src2, Src1
+cmp Src1, Src2
 ```
 
-`cmpq` computes `a - b` and changes the condition codes without setting destination.
+`cmp` (`cmpb`, `cmpw`, `cmpl`, `cmpq`) computes `Src2 - Src1` and changes the condition codes without setting destination.
 
 - CF: If unsigned overflow
-- ZF: If `a == b`
-- SF: If `(a - b) < 0`
 - OF: If signed overflow
+- ZF: If `Src2 == Src1`
+- SF: If `(Src2 - Src1) < 0`
 
-```as
-testq Src2, Src1
+```s
+test Src1, Src2
 ```
 
-`testq` computes `a & b` and changes the condition codes without setting destination.
+`test` (`testb`, `testw`, `testl`, `testq`) computes `Src2 & Src1` and changes the condition codes without setting destination.
 
-- ZF: If `a & b == 0`
-- SF: If `a & b < 0`
+- CF: 0
+- OF: 0
+- ZF: If `Src2 & Src1 == 0`
+- SF: If `Src2 & Src1 < 0`
 
-#### Reading Condition Codes
+#### Accessing the Condition Codes
 
-SetX instructions set lower-order byte of destination to 0 or 1 based on combinations of condition codes.
+`set` instructions set lower-order byte of destination to 0 or 1 based on combinations of condition codes.
 
 - `sete`: Equal
 - `setne`: Not equal
+- `sets`: Negative
+- `setns`: Non-negative
+
 - `setg`: Greater (Signed)
-...
+- `setge`: Greater or equal (Signed)
+- `setl`: Less (Signed)
+- `setle`: Less or equal (Signed)
+
+- `seta`: Above (Unigned)
+- `setae`: Above or equal (Unigned)
+- `setb`: Below (Unigned)
+- `setbe`: Below or equal (Unigned)
 
 ```s
-cmpq %rsi, %rdi # Compare x, y
-setg %al # Set the lowest bit of %al to 1 if x > y
-movzbl %al, %eax
-ret
+comp:
+  cmpq %rsi, %rdi # Compare x, y
+  setg %al # Set the low-order byte of %eax to 1 if x > y
+  movzbl %al, %eax # Clear the rest of %eax (and rest of %rax)
+  ret
 ```
 
-### Conditional Branches
+### Conditional Control Transfer
 
-#### Jumping
+#### Jump Instructions
 
-JX instructions jump to different part of code depending on conditional codes.
+`jump` instructions jump to different part of code depending on conditional codes. The target for `jmp` could be a label or a value in register or memory. (`jmp *%rax`)
 
 - `jmp`: Unconditional
 - `je`: Equal
 - `jne`: Not equal
 - `js`: Negative
 - `jns`: Non-negative
-...
 
-#### Conditional Moves
+- `jg`: Greater (Signed)
+- `jge`: Greater or equal (Signed)
+- `jl`: Less (Signed)
+- `jle`: Less or equal (Signed)
 
-Conditional moves compute the result of both conditional branches, and save the result based on the condition. GCC tries to use conditional moves since branches are very disruptive to instruction flow through pipelines. The branches must be side-effect free and only contain simple computations.
+- `ja`: Above (Unigned)
+- `jae`: Above or equal (Unigned)
+- `jb`: Below (Unigned)
+- `jbe`: Below or equal (Unigned)
+
+#### Jump Instruction Encodings
+
+- **PC relative**: Encode the difference between the address of the target instruction and the address of the instruction immediately following the jump.
+- **Absolute address**: Using 4 bytes to directly specify the target.
+
+### Conditional Data Tranfser
+
+Conditional data tranfser moves compute the result of both conditional branches, and save the result based on the condition. GCC tries to use conditional moves since branches are very disruptive to instruction flow through pipelines. The branches must be side-effect free and only contain simple computations.
+
+#### Conditional Move Instructions
+
+The source and destination values of `cmov` can be 16, 32, or 64 bits long. Unlike the unconditional instructions, the assembler can infer the operand length of a conditional move insturction from the name of the destination register.
+
+```s
+cmov Src, Dest
+```
+
+- `cmove`: Equal
+- `cmovne`: Not equal
+- `cmovs`: Negative
+- `cmovns`: Non-negative
+
+- `cmovg`: Greater (Signed)
+- `cmovge`: Greater or equal (Signed)
+- `cmovl`: Less (Signed)
+- `cmovle`: Less or equal (Signed)
+
+- `cmova`: Above (Unigned)
+- `cmovae`: Above or equal (Unigned)
+- `cmovb`: Below (Unigned)
+- `cmovbe`: Below or equal (Unigned)
+
+```cpp
+long cread(long *xp) {
+  // may raise null pointer dereferencing error
+  return (xp ? *xp :0);
+}
+```
+
+If one of the two conditional expressions could possibly generate an error condition, side effect, or require significant computation, the compiler will switch back to conditionial control transfer.
 
 ### Loops
 
 #### Do-While Loop
 
-```c
+The general form of do-while loop could be translated into conditional and `goto` statements as follows:
+
+```cpp
 loop:
   Body
   if (Test)
@@ -264,20 +338,36 @@ loop:
 
 #### While Loop
 
-```c
-if (!Test):
-  goto done
+The general form of while loop could be translated into conditional and `goto` statements as these ways:
+
+```cpp
+goto test;
 
 loop:
   Body
-  if (Test)
-    goto loop
+
+test:
+  if (Test):
+    goto loop;
+...
+```
+
+```cpp
+if (!Test):
+  goto done;
+
+loop:
+  Body
+  if (Test):
+    goto loop;
 
 done:
   ...
 ```
 
 #### For Loop
+
+The general form of while loop could be translated into while loop as follows:
 
 ```c
 for (init; test; update)
@@ -288,30 +378,25 @@ while (test)
   update
 ```
 
-### Switch Statements
-
-#### Jump Table Structure
-
-##### Switch Form
-
 ```c
-switch (x) {
-  case 0:
-    Block 0
-  case 1:
-    Block 1
-  case 2:
-    Block 2
-  ...
-  case 6:
-    Block 6
-}
+init
+goto test
+loop:
+  body-statement
+  update
+test:
+  if (Test):
+    goto loop
 ```
 
-##### Jump Table
+### Switch Statements
+
+#### Jump Table
+
+Jump table is an array where entry `i` is the address of a code segment implementing the action the program should take when the switch idnex equals `i`.
 
 ```s
-.section .rodata
+.section .rodata # read-only data
   .align 8
 
 .L4:
@@ -324,7 +409,9 @@ switch (x) {
   .quad .L7 # x = 6
 ```
 
-#### Assembly Code for Switch Statement
+The compiler selects the method of trasnlating a switch statement based on the number of cases and the sparsity of the case values. Jump tables are used when there are a nubmer of cases and they span a small range of values. Otherwise, the compiler will use a sequence of if-else statements.
+
+#### Assembly Code
 
 - Direct Jump: Jump directely to the target. (`jmp .L8`)
 - Indirect Jump: Fetch target from effective address. (`jmp *.L4(, %rdi, 8)`)
@@ -334,64 +421,71 @@ switch_eg:
   movq %rdx, %rcx
   cmpq $6, %rdi # Compare x and 6 (Suppose the max case is 6)
   ja .L8 # Jump to the default if x is greater than 6 or less than 0
-  jmp *.L4(, %rdi, 8) # goto *JTab[x]
+  jmp *.L4(, %rdi, 8) # goto *jump_table[x]
+
+  .L7:
+    imulq %rdi, %rdi
+    jmp .L2 # goto done
+
+  .L5:
+    addq $11, %rdi
+    # fall through
+  .L6:
+    addq $11, %rdi,
+    jmp .L2 # goto done
+
+  .L8 # default
+    addq $1, %rdi
+
+  .L2 # done
+    movq %rdi, (%rdx)
+    ret
 ```
 
 ## Procedures
 
-### Stack Structure
-
-#### x86-64 Stack
+### The Run-Time Stack
 
 - The region of memory managed with stack discipline
 - Grows towards lower addresses
 - The `%rsp` register contains lowest stack address
 
-#### Stack Push
+**Stack frame**: When an x86-64 procedure requires storage beyond what it can hold in registers, it alloates a specific space on the stack.
+
+### Control Transfer
 
 ```s
-pushq src
+call Label # direct
+
+call *Operand # indirect
 ```
 
-Fetch operand at `src`, decrement `%rsp` by 8, and then write operand at addreses given by `%rsp`.
+- Procedure control flow: Use stack to support procedure call and return
+- Procedure call: `call label`, push return address on stack and then jump to `label`
+- Return address: Save the address of next instruction right after `call` to the stack
+- Procedure return: `ret`: Pop address from stack and then jump to it
 
-#### Stack Pop
-
-```s
-popq dest
-```
-
-Read value at address given by `%rsp`, increment `%rsp` by 8, and store the value at `dest` (register).
-
-### Calling Conventions
-
-#### Passing Control
-
-- Procedure control flow: Use stack to support procedure call and return.
-- Procedure call: `call label`, push return address on stack and then jump to `label`.
-- Return address: Save the address of next instruction right after `call` to the stack.
-- Procedure return: `ret`: Pop address from stack and then jump to it.
-
-#### Passing Data
+### Data Transfer
 
 - First 6 arguments: `%rdi`, `%rsi`, `%rdx`, `%rcx`, `%r8`, `%r9`
-- Other arguments: The stack
+- Other arguments: The stack (the argument 7 locates at the top of the stack)
 - Return value: `%rax`
 
-#### Managing Local Data
+### Local Storage on the Stack
 
 Stack allocates the state for single procedure instantiation in frames.
 
 - Contents: Return information, local storage, temporary space
 - Management: Space allocated when enter procedure (`call`), and deallocated when return (`ret`)
-- Current stack frame: Parameters for function about to call, local variables, saved register context, old frame pointer (optional)
-- Caller stack frame: Return address pushed by `call` instruction, arguments for this cal
+- Current stack frame: `%rsp` (Stack top) -> Parameters for function about to call, local variables, saved register context, old frame pointer (optional)
+- Caller stack frame: Return address pushed by `call` instruction, argument 7, ..., argument n
 
-##### Register Saving Conventions
+#### Local Storage in Registers
 
-Contents in register may be overwritten by other functions.
-- Caller saved: Caller saves temporary values in its frame before the call. (`%r10`, `%r11`)
-- Callee saved: Callee saves temporary values in its frame before using and restores them before returning. (`%rbx`, `%r12`, `%r13`, `%r14`, `%rbp`)
+Contents in register may be overwritten by other functions. The function could save the content of registers on stack (saved register context), alter them, and retrieve them back from stack before returning.
+
+- Callee saved: Callee must preserve the values of these registers, ensuring that they have the same values before and after the function is executed. (`%rbx`, `%r12`, `%r13`, `%r14`, `%rbp`)
+- Caller saved: All other registers except for `%rsp` could be modified by any functin. The caller should save the data before making the call when necessary. (`%r10`, `%r11`)
 
 ### Illustration of Recursion
 
@@ -409,7 +503,7 @@ T A[L];
 
 - Array of data type `T` and length `L`
 - Contigunously allocated region of `L * sizeof(T)` bytes in memory
-- Identifier `A` is also the pointer to the first element
+- Identifier `A` is the pointer to the first element
 - `A[1]` is equivalent to `*(A + 1)`
 
 #### Access
@@ -459,7 +553,7 @@ struct rec {
 
 #### Alignment
 
-- Aligned data: Primitive data type requires K bytes, and address must be multiple of K.
-- Motivation: Memory accessed by aligned chunks of 4 or 8 bytes, so it's inefficient to load or store datu mthat spans quad word bondaries.
-- Compiler: Insert gaps in structure to ensure correct alignment of fields.
-- Optimization: Put large data types first to save space.
+- Aligned data: Primitive data type requires K bytes, and address must be multiple of K (1 for `char`, 2 for `short`, 4 for `int` and `float`, 8 for `long`, `double`, and pointers)
+- Motivation: Memory accessed by aligned chunks of 4 or 8 bytes, so it's inefficient to load or store datu mthat spans quad word bondaries
+- Compiler: Insert gaps in structure to ensure correct alignment of fields
+- Optimization: Put large data types first to save space
