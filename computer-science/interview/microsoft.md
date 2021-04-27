@@ -9,8 +9,10 @@ class Solution:
     hi = len(nums) - 1
     while lo < hi:
       mid = lo + (hi - lo) // 2
+
       if nums[mid] == target:
         return mid
+
       if nums[lo] <= nums[mid]:
         if nums[mid] > target >= nums[lo]:
           hi = mid - 1
@@ -18,6 +20,50 @@ class Solution:
           lo = mid + 1
       else:
         if nums[mid] > target:
+```
+
+## 113. Path Sum II
+
+```py
+class Solution:
+  def pathSum(self, root: TreeNode, targetSum: int) -> List[List[int]]:
+    def dfs(node, target, cur):
+      if not node:
+        return
+      if not node.left and not node.right and target == node.val:
+        result.append(cur + [node.val])
+
+      dfs(node.left, target - node.val, cur + [node.val])
+      dfs(node.right, target - node.val, cur + [node.val])
+
+    result = []
+    dfs(root, targetSum, [])
+    return result
+```
+
+## 450. Delete Node in a BST
+
+```py
+class Solution:
+  def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+    if not root:
+      return
+
+    if key < root.val:
+      root.left = self.deleteNode(root.left, key)
+    elif key > root.val:
+      root.right = self.deleteNode(root.right, key)
+    else:
+      if not root.right:
+        return root.left
+
+      temp = root.right
+      while temp.left:
+        temp = temp.left
+      root.val = temp.val
+      root.right = self.deleteNode(root.right, root.val)
+
+    return root
 ```
 
 ## 153. Find Minimum in Rotated Sorted Array
@@ -56,6 +102,7 @@ class Solution:
 ## 215. Kth Largest Element in an Array
 
 ```py
+# Heap Sort
 class Solution:
   def findKthLargest(self, nums: List[int], k: int) -> int:
     heap = []
@@ -65,6 +112,34 @@ class Solution:
       elif num > heap[0]:
         heappushpop(heap, num)
     return heap[0]
+
+# Quick select
+class Solution:
+  def findKthLargest(self, nums: List[int], k: int) -> int:
+    def partition(nums, left, right):
+      next = left
+
+      for i in range(left, right):
+        if nums[i] >= nums[right]:
+          continue
+
+        nums[next], nums[i] = nums[i], nums[next]
+        next += 1
+
+      nums[next], nums[right] = nums[right], nums[next]
+      return next
+
+    def select(nums, k, left, right):
+      p = partition(nums, left, right)
+
+      if p > k:
+        return select(nums, k, left, p - 1)
+      elif p < k:
+        return select(nums, k, p + 1, right)
+      else:
+        return nums[p]
+
+    return select(nums, len(nums) - k, 0, len(nums) - 1)
 ```
 
 ## 47. Permutations II
