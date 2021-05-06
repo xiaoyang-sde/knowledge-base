@@ -84,11 +84,13 @@
 * [Computer Systems (CMU 15-213)](computer-science/computer-systems/README.md)
   * [Bits, Bytes, and Integers](computer-science/computer-systems/bits-bytes-integers.md)
   * [Machine Level Programming](computer-science/computer-systems/machine-level-programming.md)
+  * [Optimizing Program Performance](computer-science/computer-systems/optimization.md)
 
 * [Algorithms and Complexity (UCLA CS 180)](computer-science/algorithms-complexity/README.md)
   * [Introduction](computer-science/algorithms-complexity/introduction.md)
   * [Basics of Algorithm Analysis](computer-science/algorithms-complexity/algorithm-analysis.md)
   * [Graphs](computer-science/algorithms-complexity/graphs.md)
+  * [Greedy Algorithms](computer-science/algorithms-complexity/greedy.md)
 
 * [Data Structures (Berkeley CS 61B)](computer-science/data-structures/README.md)
   * [Intro, Hello World Java](computer-science/data-structures/hello-world-java.md)
