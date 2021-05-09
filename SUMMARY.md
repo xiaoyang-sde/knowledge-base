@@ -91,6 +91,7 @@
   * [Basics of Algorithm Analysis](computer-science/algorithms-complexity/algorithm-analysis.md)
   * [Graphs](computer-science/algorithms-complexity/graphs.md)
   * [Greedy Algorithms](computer-science/algorithms-complexity/greedy.md)
+  * [Divide and Conquer](computer-science/algorithms-complexity/divide-conquer.md)
 
 * [Data Structures (Berkeley CS 61B)](computer-science/data-structures/README.md)
   * [Intro, Hello World Java](computer-science/data-structures/hello-world-java.md)
