@@ -85,6 +85,7 @@
   * [Bits, Bytes, and Integers](computer-science/computer-systems/bits-bytes-integers.md)
   * [Machine Level Programming](computer-science/computer-systems/machine-level-programming.md)
   * [Optimizing Program Performance](computer-science/computer-systems/optimization.md)
+  * [The Memory Hierarchy](computer-science/computer-systems/memory-hierarchy.md)
 
 * [Algorithms and Complexity (UCLA CS 180)](computer-science/algorithms-complexity/README.md)
   * [Introduction](computer-science/algorithms-complexity/introduction.md)
