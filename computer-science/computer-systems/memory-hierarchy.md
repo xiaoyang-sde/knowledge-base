@@ -169,3 +169,107 @@ The approach of organizing memory and storage systems is known as a memory hiera
 - - **Cold miss**: The cache is empty.
 - - **Conflict miss**: The cache is large enough, but multiple data objects all map to the same block.
 - - **Capacity miss**: The active cache blocks is larger than the cache.
+
+## Cache Memories
+
+### Generic Cache Memory Organization
+
+In general, a cache's organization can be represented by `(S, E, B, m)`. The capacity of cache is `C = S x E x B`.
+
+- Suppose the memory address has `m` bits that form `M = 2 ^ m` unique addresses.
+- The cache is organized as an array of `S = 2 ^ s` cache sets.
+- Each set has `E` cache lines.
+- Each line has a data block of `B = 2 ^ b` bytes, a valid bit that indicates whether the line contains meaningful information, and `t = m - (b + s)` tag bits that identify the block in the cache line.
+
+To find whether an address is in the cache, the `m` address bits is partitioned into three fields:
+
+1. Tag: `t` bits
+2. Set index: `s` bits
+3. Block offset: `b` bits
+
+### Direct-Mapped Caches
+
+The direct-mapped cache refers to a cache with exactly one line per set.
+
+- Set selection: The cache extracts the `s` set index bits from the address for `w` as an unsigned interger for the set number.
+- Line matching: The cache determines whether the valid bit for this line (the only line in the set) is set and the tag in the line matches the tag in the address of `w`.
+- Word selection: The block offset bits indicate the offset of the first byte in the desired word.
+- Line replacement: If the cache misses, it has to retrieve the requested block from the next level of hierarchy. If the set is full of valid lines, one of them must be evicted.
+
+### Set Associative Caches
+
+If each set holds more than one cache line, the cache is defined as the set associative cache. A cache with `1 < E < C/B` is called E-way set associative cache.
+
+- Set selection: Identical to direct-mapped cache.
+- Line matching and word selection: The cache checks multiple line to find matched tag and whether the line is valid.
+- Line replacement: The cache uses least frequently used (LFU) policy to replace the line that has been referenced the fewest times or least recently used (LRU) policy to replace the line that was last accessed in the past.
+
+### Fully Associative Caches
+
+If there's only one set in a cache that contains all of the cache lines, the set is defined as the fully associative cache.
+
+- Set selection: There's only one set, so there are no set index bits in the address.
+- Line matching and word selection: Identical to set associative cache. Since the cache has to search for many tags in parallel, fully associative caches are only suitable for small caches.
+
+### Issues with Writes
+
+- Write hit
+- - Write-through: Immediately write `w`'s cache block to the next lower level
+- - Write-back: Write the cache block to the next level only when it's evicted from the cache by replacement algorithm
+- Write miss
+- - No-write-allocate: Bypasses the cache and writes the word directly to the next level
+- - Write-allocate: Loads the corresponding block from the next lower level into the cache and updates the cache block
+
+### Performance Impact of Cache Parameters
+
+- Miss rate: The fraction of memory refrences that miss. (`#misses / #references`)
+- Hit rate: `1 - Miss rate`
+- Hit time: The time to deliver a word in the cache to the CPU, including set selection, line identification, and word selection.
+- Miss penalty: Any additional line required because of a miss. The penalty for L1 misses served from L2 is on the order of 10 cycles.
+
+#### Impact of Cache Size
+
+- Higher hit rate
+- Higher hit time, since it's harder to make large memories run faster
+
+#### Impact of Block Size
+
+- Smaller hit rate in program with more temporal locality
+- Higher miss penalty, since it takes more time to retrieve the block from the next level of cache
+
+### Impact of Associativity
+
+- Decrease the vulnerability of the cache to thrashing due to conflict misses
+- Higher hit time, since it takes time to find the matched tag
+- Higher miss penalty, since it takes time to decide which block should be evicted
+- Difficult to implement
+
+## Writing Cache-Friendly Code
+
+In general, if a cache has a block size of `B` bytes, then a stride-k reference pattern results in an average of `min(1, (word size * k) / B)` misses per loop iteration.
+
+- Repeated references to local variables (cache them in the register file)
+- Stride-1 reference patterns (all levels of memory hierarchy store data as contiguous blocks)
+
+```cpp
+int sumarrayrows(int a[M][N]) {
+  int i, j, sum = 0;
+  for (i = 0; i < M; i++) {
+    for (j = 0; j < N; j++) {
+      sum += a[i][j];
+    }
+  }
+  return sum;
+}
+```
+
+## Impact of Caches on Program Performance
+
+### The Memory Mountain
+
+Read throughput (bandwith) is defined as the rate that a program reads data from the memory system. (MB/s)
+
+The memory mountain characterizes the capabilities of its memory system. It's a two-dimensional function of read throughput versus temporal (size of working set) and spatial locality (number of strides).
+
+- Perpendicular to the `size` axis are four ridges that refers to the temporal locality where the working set fits entirely in the L1, L2, L3 cache, and main memory.
+- On each of the memory ridges, there's a slope of spatial locality that falls downhill as the stride increases. Once the stride reaches 8, every read request misses and therefore the slope becomes flat.
