@@ -86,6 +86,7 @@
   * [Machine Level Programming](computer-science/computer-systems/machine-level-programming.md)
   * [Optimizing Program Performance](computer-science/computer-systems/optimization.md)
   * [The Memory Hierarchy](computer-science/computer-systems/memory-hierarchy.md)
+  * [Concurrent Programming](computer-science/computer-systems/concurrent-programming.md)
 
 * [Algorithms and Complexity (UCLA CS 180)](computer-science/algorithms-complexity/README.md)
   * [Introduction](computer-science/algorithms-complexity/introduction.md)
@@ -93,6 +94,7 @@
   * [Graphs](computer-science/algorithms-complexity/graphs.md)
   * [Greedy Algorithms](computer-science/algorithms-complexity/greedy.md)
   * [Divide and Conquer](computer-science/algorithms-complexity/divide-conquer.md)
+  * [Dynamic Programming](computer-science/algorithms-complexity/dynamic-programming.md)
 
 * [Data Structures (Berkeley CS 61B)](computer-science/data-structures/README.md)
   * [Intro, Hello World Java](computer-science/data-structures/hello-world-java.md)
