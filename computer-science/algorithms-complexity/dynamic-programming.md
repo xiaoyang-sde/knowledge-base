@@ -167,7 +167,7 @@ If we only care about the value of the optimal alignment, it's easy to reduce th
 
 To construct the alignment, we could use a backward formulation of the dynamic programming algorithm. Let $$ g(i, j) $$ denotes the length of the shortest path from $$ (i, j) $$ to $$ (m, n) $$, and starts with $$ g(m, n) = 0 $$.
 
-For $$ i < m $$ and $$ j < n $$, we have $$ g(i, j) = min(a_{x+1, y+1} + g(i + 1, j + 1), \epsilon + g(i, j + 1), \epsilon + g(i + 1, j)). The space complexity backward formulation could also be reduced to $$ O(n) $$ by using an array of $$ 2 \times n $$.
+For $$ i < m $$ and $$ j < n $$, we have $$ g(i, j) = min(a_{x+1, y+1} + g(i + 1, j + 1), \epsilon + g(i, j + 1), \epsilon + g(i + 1, j))$$. The space complexity backward formulation could also be reduced to $$ O(n) $$ by using an array of $$ 2 \times n $$.
 
 The length of the shortest corner-to-corner path in $$ G_{xy} $$ that passes through $$ (i, j) $$ is $$ f(i, j) + g(i, j) $$.
 
@@ -186,3 +186,32 @@ Let $$ T(m, n) $$ denote the maximum running time of the algorithm on strings of
 - $$ T(2, n) \leq cn $$
 
 Suppose that $$ m = n $$ and $$ p $$ is exactly in the middle, we could write $$ T(\dot) $$ in terms of the single variable $$ n $$, and let $$ q = n / 2 $$. Therefore, $$ T(n) \leq 2T(n / 2) + cn^2 $$, which implies $$ T(n) = O(n ^ 2) $$. Therefore, the time complexity is $$ O(mn) $$.
+
+## Shortest Paths in a Graph
+
+Let $$ G = (V, E) $$ be a directed graph, and each edge $$ (i, j) \in E $$ has a weight $$ c_{ij} $$. Dijkstra's Algorithm could only find shortest paths with non-negative weights.
+
+Negative cycles is a directed cycle $$ C $$ such that $$ \sum_{ij \in C} c_ij < 0 $$. If the graph has no negative cycles, find a path from $$ s $$ to $$ t $$ with minimum total cost $$ \sum_{ij \ in P} c_ij $$.
+
+### The Bellman-Ford Algorithm
+
+If $$ G $$ has no negative cycles, then there's a shortest path from $$ s $$ to $$ t $$ that is simple, and hense has at most $$ n - 1 $$ edges.
+
+Let $$ OPT(i, v) $$ be the minimum cost of a $$ v-t $$ path with at most $$ i $$ edges. The original problem is $$ OPT(n - 1, s) $$.
+
+- If a path uses at most $$ i - 1 $$ edges, then $$ OPT(i, v) = OPT(i - 1, v) $$.
+- If a path uses $$ i $$ edges, and the first edge is $$ (v, w) $$, then $$ OPT(i, v) = c_{vw} + OPT(i - 1, w) $$.
+
+Therefore, the recursive formula is $$ OPT(i, v) = min(OPT(i - 1, v), min_{w \in V} (OPT(i - 1, w + c_{vw}))) $$.
+
+### Analyzing the Algorithm
+
+Let $$ G $$ be a graph with $$ m $$ edges and $$ n $$ nodes. Let $$ n_v $$ be the number of nodes $$ w $$ which $$ v $ has an edge to $$ w $$, thus it takes $$ O(n_v) $$ to compute $$ OPT(i, v) $$. Since $$ 0 \leq i \leq n - 1 $$, the total running time is $$ O(n \sum_{v \in V} n_v) $$. Since $$ \sum_{v \in V} n_v = m $$ in a directed graph, the total running time is $$ O(mn) $$.
+
+### Improving the Space Complexity
+
+Rather than recording $$ OPT(i, v) $$ for each value $$ i $$, the algorithm will use and update a single value $$ OPT(v) $$ for each node $$ v $$, the length of the shortest path from $$ v $$ to $$ t $$ that the algorithm have found so far. Therefore, the algorithm still runs for $$ i = 1, 2, \dots, n - 1 $$, and $$ OPT(v) = min(OPT(v), min_{w \in V} (c_{vw} + OPT(w))) $$.
+
+To recover the path, the algorithm maintains a map $$ first $$, in which $$ first[v] $$ is the first node (after itself) on the shortest path from $$ v $$ to $$ t $$.
+
+Let $$ P $$ be the dirrected pointer graph whose nodes are $$ V $$, and edges are $$ {(v, first[v])} $$. If the pointer graph contains a cycle, then this cycle must have negative cost. Since $$ G $$ doesn't have negative cycles, $$ P $$ will never have a cycle. Therefore, the shortest path from $$ v $$ to $$ t $$ is $$ first[v], first[first[v]], \dots, t $$.
