@@ -76,19 +76,17 @@
 * [Build Tools](web-development/build-tools/README.md)
   * [Web Development: A Primer](web-development/build-tools/web-development-a-primer.md)
   * [Webpack 5 Documentation](web-development/build-tools/webpack-5-docs.md)
-* [Interview Questions](web-development/interview-questions/README.md)
-  * [CSS Interview](web-development/interview-questions/css-interview.md)
 
 ## Computer Science
 
-* [Computer Systems (CMU 15-213)](computer-science/computer-systems/README.md)
+* [Computer Systems](computer-science/computer-systems/README.md)
   * [Bits, Bytes, and Integers](computer-science/computer-systems/bits-bytes-integers.md)
   * [Machine Level Programming](computer-science/computer-systems/machine-level-programming.md)
   * [Optimizing Program Performance](computer-science/computer-systems/optimization.md)
   * [The Memory Hierarchy](computer-science/computer-systems/memory-hierarchy.md)
   * [Concurrent Programming](computer-science/computer-systems/concurrent-programming.md)
 
-* [Algorithms and Complexity (UCLA CS 180)](computer-science/algorithms-complexity/README.md)
+* [Algorithm Design](computer-science/algorithms-complexity/README.md)
   * [Introduction](computer-science/algorithms-complexity/introduction.md)
   * [Basics of Algorithm Analysis](computer-science/algorithms-complexity/algorithm-analysis.md)
   * [Graphs](computer-science/algorithms-complexity/graphs.md)
@@ -97,7 +95,7 @@
   * [Dynamic Programming](computer-science/algorithms-complexity/dynamic-programming.md)
   * [NP and Computational Intractability](computer-science/algorithms-complexity/computational-intractability.md)
 
-* [Data Structures (Berkeley CS 61B)](computer-science/data-structures/README.md)
+* [Data Structures](computer-science/data-structures/README.md)
   * [Intro, Hello World Java](computer-science/data-structures/hello-world-java.md)
   * [Defining and Using Classes](computer-science/data-structures/defining-classes.md)
   * [References, Recursion, and Lists](computer-science/data-structures/references-recursion-lists.md)
@@ -132,10 +130,6 @@
   * [Sorting and Data Structures Conclusion](computer-science/data-structures/sorting-and-data-structures-conclusion.md)
   * [Compression](computer-science/data-structures/compression.md)
   * [Compression, Complexity, and P=NP?](computer-science/data-structures/compression-complexity-and-p-np.md)
-
-* [Interview](computer-science/interview/README.md)
-  * [Linked List](computer-science/interview/linked-list.md)
-  * [Microsoft](computer-science/interview/microsoft.md)
 
 ## Software Engineering
 
