@@ -95,6 +95,7 @@
   * [Greedy Algorithms](computer-science/algorithms-complexity/greedy.md)
   * [Divide and Conquer](computer-science/algorithms-complexity/divide-conquer.md)
   * [Dynamic Programming](computer-science/algorithms-complexity/dynamic-programming.md)
+  * [NP and Computational Intractability](computer-science/algorithms-complexity/computational-intractability.md)
 
 * [Data Structures (Berkeley CS 61B)](computer-science/data-structures/README.md)
   * [Intro, Hello World Java](computer-science/data-structures/hello-world-java.md)
