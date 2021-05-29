@@ -590,7 +590,21 @@ The code above reads the standard input into a character array. If the input is 
 - 24-31: Return address
 - 32+: Saved state in caller
 
+### x86-64 Linux Memory Layout
+
+- Stack: Runtime stack (e.g. local variables)
+- Heap: Dynamically allocated memories (e.g. `malloc()`)
+- Data: Statically allocated data (e.g. `static` vars, string constants)
+- Text and Shared Libraries: Read-only executable machine instructions
+
+#### Code Injection Attacks
+
 A pernicious use of buffer overflow is to get a program perform a function that it would otherwise be unwilling to do. The program is fed with a string that contains the byte encoding of some executable code, called exploit code, and some extra bytes that overwrite the return address with a pointer to the exploit code.
+
+#### Return-Oriented Programming Attacks
+
+- Challenge: Stack randomization makes it hard to predict buffer location, and marking stack nonexecutable makes it hard to insert binary code.
+- Alternative Strategy: String together fragments (gadgets) to achieve overall desired outcome.
 
 ### Thwarting Buffer Overflow Attacks
 
