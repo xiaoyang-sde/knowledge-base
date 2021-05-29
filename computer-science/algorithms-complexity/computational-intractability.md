@@ -98,3 +98,38 @@ $$ B $$ is an efficient certifier for a problem $$ X $$ if:
 $$ P \subseteq NP $$. Let $$ B = A $$, ignore $$ t $$, and then use $$ A $$ to directly solve the problem in polynomial time.
 
 The question of whether $$ P = NP $$, or whether every problem whose solution can be quickly verified can also be solved quickly, is one of the most famous unsolved problems in computer science.
+
+## NP-Complete Problems
+
+If $$ X $$ is an NP-complete problem, then $$ X \in NP $$ and for all $$ Y \in NP, Y \leq_{p} X $$. If $$ X $$ is solvable in polynomial time, then $$ P = NP $$.
+
+### Circuit Satisfiability
+
+The definition of a circuit is a labeled, directed acyclic graph.
+
+- The inputs (nodes without incoming edges) are labeled either 0 or 1.
+- Every other node is labeled with one of the boolean operators AND, OR, or NOT. Nodes labeled with AND or OR will have two incoming edges, and nodes labeled with NOT will have one incoming edge.
+- There's an output node without outgoing edges, which is the output computed by the circuit.
+
+The circuit satisfiability problem is to determine whether there's an assignment of values to the inputs that causes the output to be 1, given a circuit as input.
+
+Any algorithm that takes a fixed number of bits as input and produces a yes/no answer could be represented by a circuit. (1 -> yes, 0 -> no) If the algorith mtakes a number of steps that is polynomial, then the circuit has polynomial size. Algorithms implemented on physcial computers could be reduced to the boolean logic gates.
+
+To proof that $$ X \leq_{p} $$ circuit satisfiability, we know that $$ X $$ has an efficient certifier $$ B() $$. To determine whether an input (with length $$ n $$) $$ s \in X $$, we need to determine whether a $$ t $$ of length $$ p(n) $$ exists so that $$ B(s, t) = yes $$.
+
+The question could be answered with the black box for circuit satisfiability. Suppose there's a circuit with $$ n + p(n) $$ inputs, and the first $$ n $$ inputs are hard-coded with the value of $$ s $$. The remaining inputs will be labeled with variables representing $$ t $$. If there's a way to set the input so that the circuit produces an output of 1, then the $$ t $$ ($$ B(s, t) = yes $$) exists, and $$ s \in X $$. Therefore, $$ X \leq_{p} circuit satisfiability $$.
+
+### General Strategy for Proving NP-Complete
+
+If $$ Y $$ is an NP-complete problem, and $$ X $$ is a problem in NP with the property that $$ Y \leq_{p} X $$, then $$ X $$ is NP-complete.
+
+For a new problem $$ X $$:
+
+1. Prove that $$ X \in NP $$.
+2. Choose a problem $$ Y $$ that is known to be NP-complete.
+3. Consider an arbitrary instance $$ s_Y $$ of problem $$ Y $$, and show how to construct an instane $$ s_X $$ of problem $$ X $$ that satisfies the following properties:
+
+- If $$ s_Y $$ is a yes instance of $$ Y $$, then $$ s_X $$ is a yes instance of $$ X $$.
+- If $$ s_X $$ is a yes instance of $$ X $$, then $$ s_Y $$ is a yes instance of $$ Y $$.
+
+The circuit satisfiability problem could be reduced to an equivalent instance of 3-SAT problem, thus 3-SAT, Independent set, Set packing, Vertex cover, and Set cover are NP-complete.
