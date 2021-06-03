@@ -1,8 +1,6 @@
-# Introduction
+# Stable Matching
 
-## Stable Matching
-
-### The Problem
+## The Problem
 
 Consider a set M of n men, and a set W of n women. We denote the set of all possible ordered pairs of the form (m, w). Each man ranks all the women in order of his preference and each women ranks all the men in order of her preference.
 
@@ -10,7 +8,7 @@ Consider a set M of n men, and a set W of n women. We denote the set of all poss
 - Perfect matching: Each member of M and each member of W apprears in **exactly** one pair in S. (Everyone ends up matched to somebody.)
 - Stable matching: A perfect matching with no instability. No man prefers a women over the one he is matched, where that other woman also prefers that man over the one she is matched. Each set of preference lists has at least one stable matching.
 
-### The Algorithm
+## The Algorithm
 
 ```
 Initially all m and w are free
@@ -24,7 +22,7 @@ While there's a man m who is free and hasn't proposed to every women
     m' becomes free
 ```
 
-### Analyzing the Algorithm
+## Analyzing the Algorithm
 
 1. w remains engaged from the point at which she receives her first proposal. The sequence of partners to which she is engaged gets better and better.
 
@@ -38,6 +36,6 @@ While there's a man m who is free and hasn't proposed to every women
 
 6. Consider an execution of the algorithm that returns a set of pairs S. The set S is a stable matching.
 
-### Extension
+## Extension
 
 All executions of the algorithm yeild the same matching that each man ends up with the best possible partner. If a woman w is a valid partner of a man m if there's a stable matching that contains the pair (m, w). If no woman whom m ranks higher than w is a valid partner of his, w is the best valid partner. However, in the stable matching, each woman is paired with her worst valid partner.

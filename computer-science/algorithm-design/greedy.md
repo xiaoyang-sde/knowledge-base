@@ -8,11 +8,11 @@ The Interval Scheduling Problem consists of finding the compatible set of maximu
 
 ### Interval Scheduling Algorithm
 
-To design a greedy algorithm, the basic idea is to use a simple rule to select a first request $$ i_1 $$. Once a request $$ i_1 $$ is accepted, all requests that are not compatible with $$ i_1$$ are rejected. The algorithm terminates when all requests are either accepted or rejected.
+To design a greedy algorithm, the basic idea is to use a simple rule to select the first request $$ i_1 $$. Once a request $$ i_1 $$ is accepted, all requests that are not compatible with $$ i_1$$ are rejected. The algorithm terminates when all requests are either accepted or rejected.
 
 - (Incorrect) Accept the request that starts earliest.
 - (Incorrect) Accept the request that requires the smallest interval of time.
-- (Incorrect) Accept the request that has the fewest number of noncompatible requests.
+- (Incorrect) Accept the request that has the fewest number of non-compatible requests.
 - (Optimal) Accept the request that finishes first.
 
 ### Analyzing the Algorithm
@@ -37,7 +37,7 @@ def eraseOverlapIntervals(intervals):
   return result
 ```
 
-The sorting operation takes $$ O(nlogn) $$ time. The single pass iteration takes $$ O(n) $$ time. Therefore, the time complexity of the interval scheduling algorithm is $$ O(nlogn) $$.
+The sorting operation takes $$ O(nlogn) $$ time. The single-pass iteration takes $$ O(n) $$ time. Therefore, the time complexity of the interval scheduling algorithm is $$ O(nlogn) $$.
 
 ## Interval Partitioning
 
@@ -49,7 +49,7 @@ In any instance of interval partitioning, the number of resources needed is at l
 
 Let d be the depth of the set of intervals. The algorithm assigns a label $$ {1, 2, \dots, d} $$ to each interval, and overlapping intervals have different labels.
 
-The algorithm iterates through the intervals and try to assign to each interval a label that hasn't been assigned to any previous interval that overlaps it.
+The algorithm iterates through the intervals and tries to assign to each interval a label that hasn't been assigned to any previous interval that overlaps it.
 
 ### Analyzing the Algorithm
 
@@ -71,8 +71,8 @@ Consider the set $$ S $$ at any point in the algorithm's execution. For each $$ 
 
 **Induction**: The case $$ |S| = 1 $$ is trivial since $$ d(s) = 0 $$. Suppose the claim holds when $$ |S| = k $$ for $$ k \geq 1 $$. By induction hypothesis, $$ P_u $$ is the shortest $$ s-u $$ path for each $$ u \in S $$. In the iteration $$ k + 1 $$, the node $$ v $$ is added to $$ S $$ by the algorithm. If $$ P $$ is another path from $$ s $$ to $$ v $$ through a node $$ x $$ other than $$ v $$, it can't be shorter than $$ P_v $$. Otherwise, $$ x $$ will be added by the algorithm instead of $$ v $$.
 
-- The algorithm doesn't always find shortest paths if some of the edges can have negative lengths.
-- The algorithm is a continuous version of the breadth-first serach algorithm for traversing a graph.
+- The algorithm doesn't always find the shortest paths if some of the edges can have negative lengths.
+- The algorithm is a continuous version of the breadth-first search algorithm for traversing a graph.
 
 ### Implementation and Running Time
 
@@ -82,11 +82,11 @@ Use a priority queue to explicitly maintain the values of the minima $$ d'(v) = 
 
 For a connected graph $$ G = (V, E) $$, the Minimum Spanning Tree is to find a subset of the edges $$ T \subseteq E $$ so that the graph $$ (V, T) $$ is connected, and the total cost $$ \sum_{e \in T} c_e $$ is as small as possible.
 
-Let $$ T $$ be a minimum-cost solution to the problem defined above. If the cost of edge is positive, the graph $$ (V, T) $$ is a tree.
+Let $$ T $$ be a minimum-cost solution to the problem defined above. If the cost of the edge is positive, the graph $$ (V, T) $$ is a tree.
 
 ### Minimum Spanning Tree Algorithm
 
-- **Prim's Algorithm**: The algorithm starts with a root node $$ s $$ and greedily grow a tree from $$ s $$ outward. At each step, the algorithm will add the node that can be attached as cheaply as possible to the partial tree.
+- **Prim's Algorithm**: The algorithm starts with a root node $$ s $$ and greedily grows a tree from $$ s $$ outward. At each step, the algorithm will add the node that can be attached as cheaply as possible to the partial tree.
 
 - **Kruskal's Algorithm**: The algorithm starts without any edges and inserts edges in order of increasing cost. If inserting an edge $$ e $$ would result in a cycle, then $$ e $$ is discarded.
 
@@ -112,7 +112,7 @@ Assume that all edge costs are distinct. Let $$ C $$ be any cycle in $$ G $$, an
 
 ### Implementing Prim's Algorithm
 
-A priority queue could be used to maintain the attachment costs for each node in the graph. For each iteration, the algorithm selects a node with an `ExtractMin` operation, and update the attachment costs of its neighbors with `ChangeKey` operations. For a graph with n nodes and m edges, the algorithm costs $$ O(m log n) $$ time.
+A priority queue could be used to maintain the attachment costs for each node in the graph. For each iteration, the algorithm selects a node with an `ExtractMin` operation and updates the attachment costs of its neighbors with `ChangeKey` operations. For a graph with n nodes and m edges, the algorithm costs $$ O(m log n) $$ time.
 
 ## The Union-Find Data Structure
 

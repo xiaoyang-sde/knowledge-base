@@ -6,7 +6,7 @@ NP-complete problems is a set of problems that a polynomial-time algorithm for a
 
 To express the notation that a particular problem X is at least at hard as some other problem Y, we assume that there's a "black box" capable of solving X in a single step.
 
-If an instance of problem Y could be solved using a polynomial number of standard computational steps and a polynomiial number of calls to the black box that solves X, Y is polynomial-time reducible to X. ($$ Y \leq_{p} X $$)
+If an instance of problem Y could be solved using a polynomial number of standard computational steps and a polynomial number of calls to the black box that solves X, Y is polynomial-time reducible to X. ($$ Y \leq_{p} X $$)
 
 - If $$ Y \leq_{p} X $$ and X could be solved in polynomial time, then Y could be solved in polynomial time.
 - If $$ Y \leq_{p} X $$ and Y couldn't be solved in polynomial time, then X couldn't be solved in polynomial time.
@@ -26,17 +26,17 @@ In a graph $$ G = (V, E) $$, a set of nodes $$ S \subseteq V $$ is a vertex cove
 In a graph $$ G = (V, E) $$, $$ S $$ is an independent set if and only if its complement $$ V - S $$ is a vertex cover.
 
 - Independent set $$ \leq_{p} $$ vertex cover. If there's a black box to solve vertex cover, the independent set problem of size at least $$ k $$ is equivalent to the vertex problem of size at most $$ n - k $$.
-- Vertex cover $$ \leq_{p} $$ independent set. If there's a black box to solve independent set, the vertex cover problem of size at most $$ k $$ is equivalent to the independent set of size at least $$ n - k $$.
+- Vertex cover $$ \leq_{p} $$ independent set. If there's a black box to solve the independent set, the vertex cover problem of size at most $$ k $$ is equivalent to the independent set of size at least $$ n - k $$.
 
 ## Set Cover and Set Packing
 
 ### Set Cover
 
-Given a set $$ U $$ of elements, a collection $$ S_1, \dots, S_m $$ of subsets of $$ U $$, and a number $$ k $$, the problem is to determine if there exist a collection of at most $$ k $$ of these sets whose union is equal to all of $$ U $$.
+Given a set $$ U $$ of elements, a collection $$ S_1, \dots, S_m $$ of subsets of $$ U $$, and a number $$ k $$, the problem is to determine if there exists a collection of at most $$ k $$ of these sets whose union is equal to all of $$ U $$.
 
 ### Set Packing
 
-Given a set $$ U $$ of elements, a collection $$ S_1, \dots, S_m $$ of subsets of $$ U $$, and a number $$ k $$, the problem is to determine if there exist a collection of at least $$ k $$ of these sets with the property that no two of them intersect.
+Given a set $$ U $$ of elements, a collection $$ S_1, \dots, S_m $$ of subsets of $$ U $$, and a number $$ k $$, the problem is to determine if there exists a collection of at least $$ k $$ of these sets with the property that no two of them intersect.
 
 ### Reduction
 
@@ -57,9 +57,9 @@ The 3-SAT problem if a satisfying truth assignment exists for a set of clauses, 
 
 ### Reducing 3-SAT to Independent Set
 
-The 3-SAT problem could be interpreted as to choose one term from each clause without any conflict, then find a truth assignment that causes all of them to evaluate to 1, which satisfies all clauses. Two terms conflict if one is equal to a variable $$ x_i $$ and the other is equal to its negation $$ \overline{x_i} $$.
+The 3-SAT problem could be interpreted as choosing one term from each clause without any conflict, then find a truth assignment that causes all of them to evaluate to 1, which satisfies all clauses. Two terms conflict if one is equal to a variable $$ x_i $$ and the other is equal to its negation $$ \overline{x_i} $$.
 
-Let $$ G $$ be a graph with $$ 3k $$ nodes grouped into $$ k $$ triangles where each represents a clause. If two terms belongs to the same clause (triangle) or conflict, there's an edge that connects them. An independent set with size $$ k $$ in $$ G $$ is the set of terms without conflict, which is the solution to the 3-SAT problem. Therefore, 3-SAT $$ \leq_{p} $$ Independent set.
+Let $$ G $$ be a graph with $$ 3k $$ nodes grouped into $$ k $$ triangles where each represents a clause. If two terms belong to the same clause (triangle) or conflict, there's an edge that connects them. An independent set with size $$ k $$ in $$ G $$ is the set of terms without conflict, which is the solution to the 3-SAT problem. Therefore, 3-SAT $$ \leq_{p} $$ Independent set.
 
 ### Transitivity of Reductions
 
@@ -111,9 +111,9 @@ The definition of a circuit is a labeled, directed acyclic graph.
 - Every other node is labeled with one of the boolean operators AND, OR, or NOT. Nodes labeled with AND or OR will have two incoming edges, and nodes labeled with NOT will have one incoming edge.
 - There's an output node without outgoing edges, which is the output computed by the circuit.
 
-The circuit satisfiability problem is to determine whether there's an assignment of values to the inputs that causes the output to be 1, given a circuit as input.
+The circuit satisfiability problem is to determine whether there's an assignment of values to the inputs that cause the output to be 1, given a circuit as input.
 
-Any algorithm that takes a fixed number of bits as input and produces a yes/no answer could be represented by a circuit. (1 -> yes, 0 -> no) If the algorith mtakes a number of steps that is polynomial, then the circuit has polynomial size. Algorithms implemented on physcial computers could be reduced to the boolean logic gates.
+Any algorithm that takes a fixed number of bits as input and produces a yes/no answer could be represented by a circuit. (1 -> yes, 0 -> no) If the algorithm takes several polynomial steps, then the circuit has a polynomial size. Algorithms implemented on physical computers could be reduced to the boolean logic gates.
 
 To proof that $$ X \leq_{p} $$ circuit satisfiability, we know that $$ X $$ has an efficient certifier $$ B() $$. To determine whether an input (with length $$ n $$) $$ s \in X $$, we need to determine whether a $$ t $$ of length $$ p(n) $$ exists so that $$ B(s, t) = yes $$.
 
@@ -127,12 +127,10 @@ For a new problem $$ X $$:
 
 1. Prove that $$ X \in NP $$.
 2. Choose a problem $$ Y $$ that is known to be NP-complete.
-3. Consider an arbitrary instance $$ s_Y $$ of problem $$ Y $$, and show how to construct an instane $$ s_X $$ of problem $$ X $$ that satisfies the following properties:
+3. Consider an arbitrary instance $$ s_Y $$ of problem $$ Y $$, and show how to construct an instance $$ s_X $$ of problem $$ X $$ that satisfies the following properties:
 
 - If $$ s_Y $$ is a yes instance of $$ Y $$, then $$ s_X $$ is a yes instance of $$ X $$.
 - If $$ s_X $$ is a yes instance of $$ X $$, then $$ s_Y $$ is a yes instance of $$ Y $$.
-
-The circuit satisfiability problem could be reduced to an equivalent instance of 3-SAT problem, thus 3-SAT, Independent set, Set packing, Vertex cover, and Set cover are NP-complete.
 
 ## Graph Coloring
 
@@ -142,7 +140,7 @@ Let $$ G $$ be an undirected graph in which nodes are the regions to be colored 
 
 The graph $$ G $$ is 2-colorable if and only if it is bipartite. It could be solved efficiently with breadth-first search.
 
-3-coloring is NP-complete. The problem is NP because the solution could be verified efficiently by checking the number of colors and if there's a pair of node that receive the same color.
+3-coloring is NP-complete. The problem is NP because the solution could be verified efficiently by checking the number of colors and if there's a pair of nodes that receive the same color.
 
 To prove the NP-completeness, we could determine if 3-SAT could be solved using a black box for 3-coloring.
 
@@ -156,3 +154,5 @@ To begin, join each pair of nodes $$ v_i, \overline{v_i} $$ with an edge, and jo
 For each clause in the 3-SAT instance, attach a six-node subgraph to the nodes in the clause so that at least one of them must have $$ True $$ color. Therefore, the 3-SAT instance is satisfiable if and only if $$ G $$ has 3-coloring.
 
 k-coloring for $$ k > 3 $$ is NP-complete. Take an instance of 3-coloring, add $$ k - 3 $$ ne wnodes, and join them to each other and to every node in G. The resulting graph is k-colorable if and only if the original graph $$ G $$ is 3-colorable.
+
+The circuit satisfiability problem could be reduced to an equivalent instance of 3-SAT problem, thus 3-SAT, Independent set, Set packing, Vertex cover, and Set cover are NP-complete.
