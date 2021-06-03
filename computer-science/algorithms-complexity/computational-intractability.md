@@ -133,3 +133,26 @@ For a new problem $$ X $$:
 - If $$ s_X $$ is a yes instance of $$ X $$, then $$ s_Y $$ is a yes instance of $$ Y $$.
 
 The circuit satisfiability problem could be reduced to an equivalent instance of 3-SAT problem, thus 3-SAT, Independent set, Set packing, Vertex cover, and Set cover are NP-complete.
+
+## Graph Coloring
+
+Let $$ G $$ be an undirected graph in which nodes are the regions to be colored and edges are the pairs that are neighbors. The problem is to assign a color to each node of $$ G $$. If $$ (u, v) $$ is an edge, $$ u $$ and $$ v $$ are assigned different colors. The goal is to minimize the number of colors. If $$ G $$ has a k-coloring, then it's a k-colorable graph. The algorithmic version of the problem is that given a graph $$ G $$ and a bound $$ k $$, does $$ G $$ have a k-coloring?
+
+### The Computational Complexity
+
+The graph $$ G $$ is 2-colorable if and only if it is bipartite. It could be solved efficiently with breadth-first search.
+
+3-coloring is NP-complete. The problem is NP because the solution could be verified efficiently by checking the number of colors and if there's a pair of node that receive the same color.
+
+To prove the NP-completeness, we could determine if 3-SAT could be solved using a black box for 3-coloring.
+
+Let $$ G $$ be a graph with three special nodes $$ True $$, $$ False $$, and $$ Base $$, which are joined into a triangle.
+
+To begin, join each pair of nodes $$ v_i, \overline{v_i} $$ with an edge, and join both these nodes to $$ Base $$.
+
+- In any 3-coloring of $$ G $$, the nodes $$ v_i $$ and $$ \overline{v_i} $$ must get different colors, and must be different from $$ Base $$.
+- In any 3-coloring of $$ G $$, the nodes $$ True $$ $$ False $$, and $$ Base $$ must get all tree colors in some permutation. Therefore, one of $$ v_i $$ and $$ \overline{v_i} $$ gets the $$ True $$ color, and the other gets the $$ False $$ color.
+
+For each clause in the 3-SAT instance, attach a six-node subgraph to the nodes in the clause so that at least one of them must have $$ True $$ color. Therefore, the 3-SAT instance is satisfiable if and only if $$ G $$ has 3-coloring.
+
+k-coloring for $$ k > 3 $$ is NP-complete. Take an instance of 3-coloring, add $$ k - 3 $$ ne wnodes, and join them to each other and to every node in G. The resulting graph is k-colorable if and only if the original graph $$ G $$ is 3-colorable.
