@@ -85,6 +85,7 @@
   * [Optimizing Program Performance](computer-science/computer-systems/optimization.md)
   * [The Memory Hierarchy](computer-science/computer-systems/memory-hierarchy.md)
   * [Linking](computer-science/computer-systems/linking.md)
+  * [Exceptional Control Flow](computer-science/computer-systems/exceptional-control-flow.md)
   * [Concurrent Programming](computer-science/computer-systems/concurrent-programming.md)
 
 * [Algorithm Design](computer-science/algorithm-design/README.md)
@@ -95,6 +96,7 @@
   * [Divide and Conquer](computer-science/algorithm-design/divide-conquer.md)
   * [Dynamic Programming](computer-science/algorithm-design/dynamic-programming.md)
   * [NP and Computational Intractability](computer-science/algorithm-design/computational-intractability.md)
+  * [Randomized Algorithms](computer-science/algorithm-design/randomized-algorithms.md)
 
 * [Data Structures](computer-science/data-structures/README.md)
   * [Intro, Hello World Java](computer-science/data-structures/hello-world-java.md)
