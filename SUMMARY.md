@@ -137,6 +137,10 @@
 
 ## Software Engineering
 
+* [Agile Development](software-engineering/agile-development/README.md)
+  * [Agile Manifesto](software-engineering/agile-development/agile-manifesto.md)
+  * [Agile Manifesto](software-engineering/agile-development/scrum.md)
+
 * [Refactoring](software-engineering/refactoring/README.md)
   * [Code Smells](software-engineering/refactoring/code-smells/README.md)
     * [Other Smells](software-engineering/refactoring/code-smells/other-smells.md)
