@@ -66,6 +66,7 @@
   * [Fragments](web-development/react-internals/fragments.md)
   * [Type Checking With PropTypes](web-development/react-internals/prop-types.md)
   * [Strict Mode](web-development/react-internals/strict-mode.md)
+  * [TypeScript](web-development/react-internals/typescript.md)
 
 * [Vue Internals](web-development/vue-internals/README.md)
   * [Virtual DOM](web-development/vue-internals/virtual-dom.md)
