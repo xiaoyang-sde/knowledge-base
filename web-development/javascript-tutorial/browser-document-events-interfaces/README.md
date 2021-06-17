@@ -1,2 +1,0 @@
-# Browser Document, Events, Interfaces
-

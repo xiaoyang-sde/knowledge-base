@@ -1,11 +1,33 @@
-# Programming Notes
+# Website
 
-> We think we are creating the system for our own purposes. We believe we are making it in our own image... But the computer is not really like us. It is a projection of a very slim part of ourselves: that portion devoted to logic, order, rule, and clarity.
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-## Introduction
+## Installation
 
-This notebook is a collection of the notes I kept for the courses and documentations I learned in my Computer Science degree at UCLA. The notebook includes various topics (Web Development, Software Engineering, etc.), but these notes are by no means intended to be comprehensive. That being said, I will keep updating it until I graduate or leave this industry.
+```console
+yarn install
+```
 
-## License
+## Local Development
 
-This notebook is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
+```console
+yarn start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+## Build
+
+```console
+yarn build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+## Deployment
+
+```console
+GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
