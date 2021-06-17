@@ -17,6 +17,10 @@ module.exports = {
     'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
   ],
   themeConfig: {
+    googleAnalytics: {
+      trackingID: 'UA-156941792-1',
+      anonymizeIP: true,
+    },
     navbar: {
       title: 'Xiaoyang\'s Notes',
       logo: {
@@ -33,11 +37,6 @@ module.exports = {
         {
           to: '/blog',
           label: 'Blog',
-          position: 'left',
-        },
-        {
-          to: '/resume',
-          label: 'Resume',
           position: 'left',
         },
         {
@@ -124,4 +123,5 @@ module.exports = {
       },
     ],
   ],
+  plugins: ['@docusaurus/plugin-google-analytics'],
 };
