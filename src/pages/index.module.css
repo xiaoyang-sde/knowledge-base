@@ -6,20 +6,47 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 8rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+.flexContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+}
+
+.heroButton {
+  margin-right: 1rem;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.heroSvg {
+  height: 100%;
+  width: 100%;
+  padding-left: 4rem;
 }
 
 @media screen and (max-width: 966px) {
   .heroBanner {
     padding: 2rem;
   }
-}
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .flexContainer {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .heroSvg {
+    height: 75%;
+    width: 75%;
+  }
 }

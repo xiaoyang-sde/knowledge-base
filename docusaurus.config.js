@@ -3,79 +3,97 @@ const math = require('remark-math');
 const katex = require('rehype-katex');
 
 module.exports = {
-  title: 'Programming Notes',
+  title: 'Xiaoyang\'s Notes',
   tagline: 'Lecture notes on Computer Science, Web Development, and Software Engineering Philosophies.',
   url: 'https://xiaoyang-liu.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
   organizationName: 'xiaoyang-sde',
   projectName: 'programming-notes',
   stylesheets: [
+    'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap',
     'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
   ],
   themeConfig: {
     navbar: {
-      title: 'Programming Notes',
+      title: 'Xiaoyang\'s Notes',
       logo: {
         alt: 'Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
       },
       items: [
         {
           type: 'doc',
           docId: 'intro',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Notes',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/xiaoyang-sde/programming-notes',
+          to: '/blog',
+          label: 'Blog',
+          position: 'left',
+        },
+        {
+          to: '/resume',
+          label: 'Resume',
+          position: 'left',
+        },
+        {
+          href: 'https://github.com/xiaoyang-sde/',
           label: 'GitHub',
-          position: 'right',
+          position: 'left',
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
-          title: 'Docs',
+          title: 'Computer Science',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Algorithm Design',
+              to: 'docs/computer-science/algorithm-design/stable-matching',
+            },
+            {
+              label: 'Computer Systems',
+              to: 'docs/computer-science/computer-systems/bits-bytes-integers',
+            },
+            {
+              label: 'Data Structures',
+              to: 'docs/computer-science/data-structures/hello-world-java',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Web Development',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'The Modern JavaScript Tutorial',
+              to: 'docs/web-development/javascript-tutorial/the-javascript-language/an-introduction',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'You Don\'t Know JS',
+              to: 'docs/web-development/you-dont-know-js/get-started/what-is-javascript',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'TypeScript Handbook',
+              to: 'docs/web-development/typescript-handbook/basic-types',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'Software Engineering',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'Agile Development',
+              to: 'docs/software-engineering/agile-development/agile-manifesto',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'System Design',
+              to: 'docs/software-engineering/system-design/aws-csa-notes-2019/applications',
             },
           ],
         },
@@ -92,13 +110,13 @@ module.exports = {
           remarkPlugins: [math],
           rehypePlugins: [katex],
           editUrl:
-            'https://github.com/xiaoyang-sde/programming-notes/edit/master/website/',
+            'https://github.com/xiaoyang-sde/programming-notes/edit/master/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            'https://github.com/facebook/docusaurus/edit/master/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

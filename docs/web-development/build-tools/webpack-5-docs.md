@@ -10,7 +10,7 @@ Webpack is a static module bundler for modern JavaScript applications.
 
 An entry point indicates which module webpack should use to begin building out its internal dependency graph. webpack will figure out which other modules and libraries that entry point depends on.
 
-#### Single Entry \(Shorthand\) Syntax
+#### Single Entry (Shorthand) Syntax
 
 Single Entry Syntax is useful for quickly setup a configuration for an application or tool with one entry point, such as a library.
 
@@ -289,7 +289,7 @@ However, certain hashes change even when their content apparently does not. This
 
 ### Hot Module Replacement
 
-Hot Module Replacement \(HMR\) exchanges, adds, or removes modules while an application is running, without a full reload.
+Hot Module Replacement (HMR) exchanges, adds, or removes modules while an application is running, without a full reload.
 
 * Retain application state which is lost during a full reload.
 * Save valuable development time by only updating what's changed.
