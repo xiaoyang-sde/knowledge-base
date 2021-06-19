@@ -79,7 +79,7 @@ module.exports = {
             },
             {
               label: 'TypeScript Handbook',
-              to: 'docs/web-development/typescript-handbook/basic-types',
+              to: 'docs/web-development/typescript/basic-types',
             },
           ],
         },
