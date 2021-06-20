@@ -141,3 +141,59 @@ Implement a generic `TupleToUnion<T>` which covers the values of a tuple to its 
 ```ts
 type TupleToUnion<T extends unknown[]> = T[number];
 ```
+
+### Last of Array
+
+Implement a generic `Last<T>` that takes an Array `T` and returns it's last element's type.
+
+```ts
+type Last<T extends any[]> = T extends [...infer _placeholder, infer L] ? L : never;
+```
+
+### Pop
+
+Implement a generic `Pop<T>` that takes an Array `T` and returns an Array without it's last element.
+
+```ts
+type Pop<T extends any[]> = T extends [...infer R, infer _placeholder] ? R : never;
+```
+
+### Type Lookup
+
+In this challenge, we would like to get the corresponding type by searching for the common `type` field in the union `Cat | Dog`. In other words, we will expect to get `Dog` for `LookUp<Dog | Cat, 'dog'>` and `Cat` for `LookUp<Dog | Cat, 'cat'>` in the following example.
+
+```ts
+type LookUp<U, T> = U extends { type: T } ? U : never;
+```
+
+### Trim Left
+
+Implement `TrimLeft<T>` which takes an exact string type and returns a new string with the whitespace beginning removed.
+
+```ts
+type TrimLeft<S extends string> = S extends `${' ' | '\n' | '\t' }${infer T}` ? TrimLeft<T> : S;
+```
+
+### Trim
+
+Implement `Trim<T>` which takes an exact string type and returns a new string with the whitespace from both ends removed.
+
+```ts
+type Trim<S extends string> = S extends `${' ' | '\n' | '\t'}${infer R}` ? Trim<R> : S extends `${infer R}${' ' | '\n' | '\t'}` ? Trim<R> : S;
+```
+
+### Capitalize
+
+Implement `Capitalize<T>` which converts the first letter of a string to uppercase and leave the rest as-is.
+
+```ts
+type Capitalize<S extends string> = S extends `${infer C}${infer R}` ? `${Uppercase<C>}${R}` : S;
+```
+
+### Flatten
+
+In this challenge, you would need to write a type that takes an array and emitted the flatten array type.
+
+```ts
+type Flatten<T> = T extends [infer L, ...infer R] ? L extends unknown[] ? [...Flatten<L>, ...Flatten<R>] : [L, ...Flatten<R>] : T;
+```
