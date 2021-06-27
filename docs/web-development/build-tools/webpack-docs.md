@@ -1,6 +1,4 @@
-# Webpack 5 Documentation
-
-Article Source: [https://webpack.js.org/concepts/](https://webpack.js.org/concepts/)
+# Webpack Documentation
 
 Webpack is a static module bundler for modern JavaScript applications.
 
