@@ -1,4 +1,4 @@
-# TypeScript
+# TypeScript Integration
 
 ## Typing Component Props
 

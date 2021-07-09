@@ -12,7 +12,7 @@ RDS has two key features: Multi-Az for disaster recovery; Read replicas for perf
 
 **RedShift** (OLAP): Business analytics and data warehouse.
 
-**Elasticache** (Redis and Memcached): Speed up existing databases.  
+**Elasticache** (Redis and Memcached): Speed up existing databases.
 
 ## Relational Database Service (RDS)
 
