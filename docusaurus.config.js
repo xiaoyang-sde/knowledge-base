@@ -91,8 +91,8 @@ module.exports = {
               to: 'docs/software-engineering/agile-development/agile-manifesto',
             },
             {
-              label: 'System Design',
-              to: 'docs/software-engineering/system-design/aws-csa-notes-2019/applications',
+              label: 'Infrastructure',
+              to: 'docs/software-engineering/infrastructure/aws/applications',
             },
           ],
         },
