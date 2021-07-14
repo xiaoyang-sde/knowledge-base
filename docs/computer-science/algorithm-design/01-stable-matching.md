@@ -28,7 +28,7 @@ While there's a man m who is free and hasn't proposed to every women
 
 2. The sequence of women to whom m propses gets worse and worse.
 
-3. The algorithm terminates after at most $$ n^{2} $$ iterations of the while loop.
+3. The algorithm terminates after at most $$n^{2}$$ iterations of the while loop.
 
 4. If m is free at some point in the execution of the algorithm, then there's a woman to whom he has not yet proposed.
 
@@ -38,4 +38,4 @@ While there's a man m who is free and hasn't proposed to every women
 
 ## Extension
 
-All executions of the algorithm yeild the same matching that each man ends up with the best possible partner. If a woman w is a valid partner of a man m if there's a stable matching that contains the pair (m, w). If no woman whom m ranks higher than w is a valid partner of his, w is the best valid partner. However, in the stable matching, each woman is paired with her worst valid partner.
+All executions of the algorithm yeild the same matching that each man ends up with the best possible partner. If a woman w is a valid partner of a man m if there's a stable matching that contains the pair $(m, w)$. If no woman whom m ranks higher than w is a valid partner of his, w is the best valid partner. However, in the stable matching, each woman is paired with her worst valid partner.
