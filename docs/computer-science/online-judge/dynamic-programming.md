@@ -1,5 +1,44 @@
 # Dynamic Programming
 
+## Word Break
+
+[LeetCode 139](https://leetcode.com/problems/word-break/)
+
+> Given a string `s` and a dictionary of strings `wordDict`, return true if `s` can be segmented into a space-separated sequence of one or more dictionary words.
+
+```py
+class Solution:
+  def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    dp = [True] + [False] * len(s)
+
+    for i in range(1, len(s) + 1):
+      for word in wordDict:
+        if s[i - len(word):i] == word and dp[i - len(word)]:
+          dp[i] = True
+
+    return dp[-1]
+```
+
+## Word Break II
+
+> Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence where each word is a valid dictionary word. Return all such possible sentences in any order.
+
+[LeetCode 140](https://leetcode.com/problems/word-break-ii/)
+
+```py
+class Solution:
+  def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+    dp = [[[]]] + [[]] * len(s)
+
+    for i in range(1, len(s) + 1):
+      for word in wordDict:
+        if s[i - len(word):i] == word and len(dp[i - len(word)]) > 0:
+          for x in dp[i - len(word)]:
+            dp[i].append(x + [word])
+
+    return [' '.join(x) for x in dp[-1]]
+```
+
 ## Best Time to Buy and Sell Stock
 
 [LeetCode 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
