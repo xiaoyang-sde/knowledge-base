@@ -13,7 +13,7 @@ module.exports = {
   organizationName: 'xiaoyang-sde',
   projectName: 'programming-notes',
   stylesheets: [
-    'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap',
+    'https://fonts.googleapis.com/css2?family=Inter&display=swap',
     'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
   ],
   themeConfig: {
@@ -33,11 +33,6 @@ module.exports = {
           docId: 'intro',
           position: 'left',
           label: 'Notes',
-        },
-        {
-          to: '/blog',
-          label: 'Blog',
-          position: 'left',
         },
         {
           href: 'https://github.com/xiaoyang-sde/',
