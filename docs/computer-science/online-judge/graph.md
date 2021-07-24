@@ -317,7 +317,7 @@ class Solution:
       length = min(len(word1), len(word2))
       if word1[:length] == word2[:length] and len(word1) > len(word2):
         return ""
-      
+
       for j in range(length):
         if word1[j] == word2[j]:
           continue
@@ -336,3 +336,135 @@ class Solution:
       return ""
     return "".join(queue)
 ```
+
+## Number of Provinces
+
+[LeetCode 547](https://leetcode-cn.com/problems/number-of-provinces/)
+
+```py
+class Solution:
+  def findCircleNum(self, isConnected: List[List[int]]) -> int:
+    n = len(isConnected)
+    parent = {i: None for i in range(n)}
+    weight = defaultdict(lambda: 1)
+    def find(x):
+      if parent[x] == None:
+        return x
+      parent[x] = find(parent[x])
+      return parent[x]
+
+    def union(x, y):
+      rx = find(x)
+      ry = find(y)
+      if rx == ry:
+        return
+      if weight[rx] < weight[ry]:
+        parent[rx] = ry
+        weight[ry] += weight[rx]
+      else:
+        parent[ry] = rx
+        weight[rx] += weight[ry]
+
+    for i in range(n):
+      for j in range(n):
+        if not isConnected[i][j]:
+          continue
+        union(i, j)
+    return sum(1 for v in parent.values() if v == None)
+```
+
+## Is Graph Bipartite?
+
+[LeetCode 785](https://leetcode.com/problems/is-graph-bipartite/)
+
+```py
+class Solution:
+  def isBipartite(self, graph: List[List[int]]) -> bool:
+    s1 = set()
+    s2 = set()
+
+    for i in range(len(graph)):
+      if i in s1 or i in s2:
+        continue
+      queue = deque([i])
+      while queue:
+        for _ in range(len(queue)):
+          x = queue.popleft()
+          s1.add(x)
+          for n in graph[x]:
+            if n in s1:
+              return False
+            if n in s2:
+              continue
+            queue.append(n)
+        s1, s2 = s2, s1
+
+    return True
+```
+
+## Redundant Connection
+
+[LeetCode 684](https://leetcode.com/problems/redundant-connection/)
+
+```py
+class Solution:
+  def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+    parent = { n: None for n in range(len(edges)) }
+    weight = defaultdict(lambda: 1)
+    def find(x):
+      if parent[x] == None:
+        return x
+      parent[x] = find(parent[x])
+      return parent[x]
+    def union(x, y):
+      rx = find(x)
+      ry = find(y)
+      if rx == ry:
+        return False
+      if weight[rx] < weight[ry]:
+        parent[rx] = ry
+        weight[ry] += weight[rx]
+      else:
+        parent[ry] = rx
+        weight[rx] += weight[ry]
+      return True
+
+    for x, y in edges:
+      if not union(x, y):
+        return [x, y]
+
+```
+
+## Couples Holding Hands
+
+[LeetCode 765](https://leetcode.com/problems/couples-holding-hands/)
+
+```py
+class Solution:
+  def minSwapsCouples(self, row: List[int]) -> int:
+    parent = { n: None for n in range(len(row) // 2) }
+    weight = defaultdict(lambda: 1)
+    def find(x):
+      if parent[x] == None:
+        return x
+      parent[x] = find(parent[x])
+      return parent[x]
+    def union(x, y):
+      rx = find(x)
+      ry = find(y)
+      if rx == ry:
+        return False
+      if weight[rx] < weight[ry]:
+        parent[rx] = ry
+        weight[ry] += weight[rx]
+      else:
+        parent[ry] = rx
+        weight[rx] += weight[ry]
+      return True
+
+    result = 0
+    for i in range(0, len(row), 2):
+      
+    return result
+```
+
