@@ -464,7 +464,6 @@ class Solution:
 
     result = 0
     for i in range(0, len(row), 2):
-      
+
     return result
 ```
-
