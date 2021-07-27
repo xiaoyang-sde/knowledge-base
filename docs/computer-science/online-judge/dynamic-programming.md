@@ -263,9 +263,6 @@ class Solution:
 
 [LeetCode 312](https://leetcode.com/problems/burst-balloons/)
 
-- Let `dp[i][j]` be the maximum number of coins in the range `(i, j)`, not including `i` and `j`.
-- Let `k`
-
 ```py
 class Solution:
   def maxCoins(self, nums: List[int]) -> int:

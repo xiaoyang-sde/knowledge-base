@@ -1,5 +1,86 @@
 # Tree
 
+## Binary Tree Preorder Traversal
+
+[LeetCode 144](https://leetcode.com/problems/binary-tree-preorder-traversal/)
+
+```py
+class Solution:
+  def preorderTraversal(self, root: TreeNode) -> List[int]:
+    stack = []
+    result = []
+    while stack or root:
+      if root:
+        stack.append(root)
+        result.append(root.val)
+        root = root.left
+      else:
+        root = stack.pop()
+        root = root.right
+    return result
+```
+
+## Binary Tree Inorder Traversal
+
+[LeetCode 94](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+
+```py
+class Solution:
+  def inorderTraversal(self, root: TreeNode) -> List[int]:
+    stack = []
+    result = []
+    while stack or root:
+      if root:
+        stack.append(root)
+        root = root.left
+      else:
+        root = stack.pop()
+        result.append(root.val)
+        root = root.right
+    return result
+```
+
+## Binary Tree Postorder Traversal
+
+[LeetCode 145](https://leetcode.com/problems/binary-tree-postorder-traversal/)
+
+```py
+class Solution:
+  def postorderTraversal(self, root: TreeNode) -> List[int]:
+    stack = []
+    result = deque()
+    while stack or root:
+      if root:
+        stack.append(root)
+        result.appendleft(root.val)
+        root = root.right
+      else:
+        root = stack.pop()
+        root = root.left
+    return list(result)
+```
+
+## K-th Smallest Element in BST
+
+[LeetCode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+
+> Given the `root` of a binary search tree, and an integer `k`, return the `k-th` (1-indexed) smallest element in the tree.
+
+```py
+class Solution:
+  def kthSmallest(self, root: TreeNode, k: int) -> int:
+    stack = []
+    while stack and root:
+      while root:
+        stack.append(root)
+        root = root.left
+      root = stack.pop()
+      k -= 1
+      if k == 0:
+        return root.val
+      root = root.right
+```
+
 ## Maximum Depth of Binary Tree
 
 [LeetCode 104](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
@@ -304,7 +385,18 @@ class Solution:
 ```py
 class Solution:
   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-    pass
+    if not root:
+      return
+    if root == p or root == q:
+      return root
+    left = self.lowestCommonAncestor(root.left, p, q)
+    right = self.lowestCommonAncestor(root.right, p, q)
+    if left and right:
+      return root
+    if left:
+      return left
+    if right:
+      return right
 ```
 
 ## Lowest Common Ancestor of a Binary Search Tree
@@ -316,5 +408,9 @@ class Solution:
 ```py
 class Solution:
   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-    pass
+    if root.val < p.val and root.val < q.val:
+      return self.lowestCommonAncestor(root.right, p, q)
+    if root.val > p.val and root.val > q.val:
+      return self.lowestCommonAncestor(root.left, p, q)
+    return root
 ```
