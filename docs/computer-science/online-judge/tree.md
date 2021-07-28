@@ -40,6 +40,31 @@ class Solution:
     return result
 ```
 
+## Binary Search Tree Iterator
+
+[LeetCode 173](https://leetcode.com/problems/binary-search-tree-iterator)
+
+```py
+class BSTIterator:
+  def __init__(self, root: TreeNode):
+    self.stack = []
+    self._push(root)
+
+  def _push(self, node):
+    while node:
+      self.stack.append(node)
+      node = node.left
+
+  def next(self) -> int:
+    node = self.stack.pop()
+    result = node.val
+    self._push(node.right)
+    return result
+
+  def hasNext(self) -> bool:
+    return len(self.stack) > 0
+```
+
 ## Binary Tree Postorder Traversal
 
 [LeetCode 145](https://leetcode.com/problems/binary-tree-postorder-traversal/)
@@ -413,4 +438,107 @@ class Solution:
     if root.val > p.val and root.val > q.val:
       return self.lowestCommonAncestor(root.left, p, q)
     return root
+```
+
+## Binary Tree Maximum Path Sum
+
+[LeetCode 124](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+
+> Given the root of a binary tree, return the maximum path sum of any path.
+
+```py
+class Solution:
+  def maxPathSum(self, root: TreeNode) -> int:
+    self.max = float('-inf')
+    def dfs(node):
+      if not node:
+        return 0
+      left = dfs(node.left)
+      right = dfs(node.right)
+      self.max = max(self.max, left + right + node.val)
+      return max(0, max(left, right) + node.val)
+
+    dfs(root)
+    return self.max
+```
+
+## Longest Univalue Path
+
+[LeetCode 687](https://leetcode.com/problems/longest-univalue-path/)
+
+> Given the root of a binary tree, return the length of the longest path, where each node in the path has the same value. This path may or may not pass through the root.
+
+```py
+class Solution:
+  def longestUnivaluePath(self, root: TreeNode) -> int:
+    def longest(node, value):
+      if not node:
+        return 0
+      left = longest(node.left, node.val)
+      right = longest(node.right, node.val)
+      self.max = max(self.max, left + right)
+      if node.val == value:
+        return max(left, right) + 1
+      return 0
+
+    if not root:
+      return 0
+    self.max = 0
+    longest(root, root.val)
+    return self.max
+```
+
+## Path Sum II
+
+```py
+class Solution:
+  def pathSum(self, root: TreeNode, targetSum: int) -> List[List[int]]:
+    def dfs(node, target):
+      if not node:
+        return
+
+      path.append(node.val)
+
+      if not node.left and not node.right and node.val == target:
+        result.append(path[:])
+
+      dfs(node.left, target - node.val)
+      dfs(node.right, target - node.val)
+      path.pop()
+
+    path = []
+    result = []
+    dfs(root, targetSum)
+    return result
+```
+
+## Path Sum III
+
+[LeetCode 437](https://leetcode.com/problems/path-sum-iii/)
+
+> Given the `root` of a binary tree and an integer `targetSum`, return the number of paths where the sum of the values along the path equals `targetSum`.
+
+The `prefix_dict` records the count of nodes with specific prefix.
+
+```py
+class Solution:
+  def pathSum(self, root: TreeNode, targetSum: int) -> int:
+    self.result = 0
+    prefix_dict = defaultdict(int)
+
+    def dfs(node, target, prefix):
+      if not node:
+        return
+
+      s = prefix + node.val
+      self.result += prefix_dict[s - targetSum]
+
+      prefix_dict[s] += 1
+      dfs(node.left, target, s)
+      dfs(node.right, target, s)
+      prefix_dict[s] -= 1
+
+    prefix_dict[0] = 1
+    dfs(root, targetSum, 0)
+    return self.result
 ```
