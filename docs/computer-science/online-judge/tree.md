@@ -542,3 +542,29 @@ class Solution:
     dfs(root, targetSum, 0)
     return self.result
 ```
+
+## Verify Preorder Serialization of a Binary Tree
+
+```py
+class Solution:
+  def isValidSerialization(self, preorder: str) -> bool:
+class Solution:
+  def isValidSerialization(self, preorder: str) -> bool:
+    if not preorder:
+      return
+
+    index = 0
+    slot = 1
+    nodes = preorder.split(',')
+
+    for node in nodes:
+      if slot == 0:
+        return False
+
+      if node == '#':
+        slot -= 1
+      else:
+        slot += 1
+
+    return slot == 0
+```

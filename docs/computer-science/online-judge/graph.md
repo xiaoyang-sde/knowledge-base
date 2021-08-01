@@ -115,7 +115,7 @@ class Solution:
 
 ## Longest Consecutive Sequence
 
-[LeetCode](https://leetcode.com/problems/longest-consecutive-sequence/)
+[LeetCode 128](https://leetcode.com/problems/longest-consecutive-sequence/)
 
 ```py
 class Solution:
