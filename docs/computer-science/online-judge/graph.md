@@ -467,3 +467,72 @@ class Solution:
 
     return result
 ```
+
+## Making a Large Island
+
+```py
+class Solution:
+  def largestIsland(self, grid: List[List[int]]) -> int:
+    if not grid:
+      return 0
+    parent = {}
+    weight = {}
+    def find(x):
+      if not parent[x]:
+        return x
+      parent[x] = find(parent[x])
+      return parent[x]
+
+    def union(x, y):
+      rx = find(x)
+      ry = find(y)
+      if rx == ry:
+        return
+      if weight[rx] < weight[ry]:
+        parent[rx] = ry
+        weight[ry] += weight[rx]
+      else:
+        parent[ry] = rx
+        weight[rx] += weight[ry]
+
+    for i in range(len(grid)):
+      for j in range(len(grid[0])):
+        if grid[i][j] == 0:
+          continue
+        parent[(i, j)] = None
+        weight[(i, j)] = 1
+        if i > 0 and grid[i - 1][j] == 1:
+          union((i, j), (i - 1, j))
+        if j > 0 and grid[i][j - 1] == 1:
+          union((i, j), (i, j - 1))
+
+    if weight:
+      result = max(weight.values())
+    else:
+      result = 0
+
+    for i in range(len(grid)):
+      for j in range(len(grid[0])):
+        if grid[i][j] == 1:
+          continue
+
+        size = 1
+        v = set()
+
+        for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+          ni = i + di
+          nj = j + dj
+          if ni < 0 or ni >= len(grid) or nj < 0 or nj >= len(grid[0]):
+            continue
+          if grid[ni][nj] == 0:
+            continue
+
+          root = find((ni, nj))
+          if root in v:
+            continue
+          v.add(root)
+          size += weight[root]
+
+        result = max(result, size)
+    return result
+```
