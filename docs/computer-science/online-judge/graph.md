@@ -536,3 +536,30 @@ class Solution:
         result = max(result, size)
     return result
 ```
+
+## Find Eventual Safe States
+
+[LeetCode 802](https://leetcode.com/problems/find-eventual-safe-states/)
+
+```py
+class Solution:
+  def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+    degree = defaultdict(int)
+    parents = defaultdict(list)
+    for index, children in enumerate(graph):
+      for child in children:
+        degree[index] += 1
+        parents[child].append(index)
+
+    visited = set()
+    queue = deque([node for node in range(len(graph)) if degree[node] == 0])
+    while queue:
+      node = queue.popleft()
+      visited.add(node)
+      for parent in parents[node]:
+        degree[parent] -= 1
+        if degree[parent] == 0:
+          queue.append(parent)
+
+    return sorted(list(visited))
+```
