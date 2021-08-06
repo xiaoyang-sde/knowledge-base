@@ -215,7 +215,7 @@ Immediately-invoked function expressions: programmers invented a way to emulate 
 
 The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.
 
-* `window`: Browswer
+* `window`: Browser
 * `global`: Node.js
 * `globalThis`: Standard name for a global object \(Recent change\)
 
