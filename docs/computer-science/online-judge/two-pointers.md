@@ -38,3 +38,23 @@ class Solution:
         result += max(0, k - j - 1)
     return result
 ```
+
+## Arithmetic Slices
+
+[LeetCode 413](https://leetcode.com/problems/arithmetic-slices/)
+
+```py
+class Solution:
+  def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+    start = 0
+    window = 0
+    result = 0
+    for i in range(1, len(nums)):
+      diff = nums[i] - nums[i - 1]
+      if window == diff and i - start >= 2:
+        result += i - start - 1
+      else:
+        window = diff
+        start = i - 1
+    return result
+```

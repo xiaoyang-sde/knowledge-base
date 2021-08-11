@@ -363,3 +363,63 @@ class Solution:
 
     return dp[-1]
 ```
+
+## Ugly Number II
+
+[LeetCode 264](https://leetcode.com/problems/ugly-number-ii/)
+
+```py
+class Solution:
+  def nthUglyNumber(self, n: int) -> int:
+    dp = [1] * n
+    n2 = 0
+    n3 = 0
+    n5 = 0
+    for i in range(1, n):
+      dp[i] = min(dp[n2] * 2, dp[n3] * 3, dp[n5] * 5)
+      if dp[i] == dp[n2] * 2:
+        n2 += 1
+      if dp[i] == dp[n3] * 3:
+        n3 += 1
+      if dp[i] == dp[n5] * 5:
+        n5 += 1
+
+    return dp[-1]
+```
+
+## Super Ugly Number
+
+```py
+class Solution:
+  def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
+    pointer = [0] * len(primes)
+    dp = [1] * n
+    for i in range(1, n):
+      dp[i] = min(dp[pointer[index]] * primes[index] for index in pointer)
+      for index in pointer:
+        num = dp[pointer[index]] * primes[index]
+        if num == dp[i]:
+          pointer[index] += 1
+
+    return dp[-1]
+```
+
+## Flip String to Monotone Increasing
+
+[LeetCode 926](https://leetcode.com/problems/flip-string-to-monotone-increasing/)
+
+Let `dp[i]` be the number of flips required to make the string monotonne increasing if the pivot point is at `s[i + 1]`.
+
+```py
+class Solution:
+  def minFlipsMonoIncr(self, s: str) -> int:
+    dp = [0 for _ in range(len(s) + 1)]
+    dp[0] = s.count('0')
+    for index, c in enumerate(s):
+      if c == '1':
+        dp[index + 1] = dp[index] + 1
+      else:
+        dp[index + 1] = dp[index] - 1
+
+    return min(dp)
+```

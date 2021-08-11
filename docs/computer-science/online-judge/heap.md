@@ -71,3 +71,59 @@ class Solution:
 
     return list(heappop(heap)[1] for _ in range(k))
 ```
+
+## Merge k Sorted Lists
+
+[LeetCode 23](https://leetcode.com/problems/merge-k-sorted-lists/)
+
+```py
+class Solution:
+  def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+    if not lists:
+      return
+    dummy = head = ListNode()
+    heap = []
+    for index, node in enumerate(lists):
+      if not node:
+        continue
+      heappush(heap, (node.val, index))
+
+    while heap:
+      val, index = heappop(heap)
+      node = lists[index]
+      head.next = node
+      head = head.next
+
+      if not node.next:
+        continue
+      lists[index] = node.next
+      heappush(heap, (node.next.val, index))
+
+    return dummy.next
+```
+
+## Find Median from Data Stream
+
+[LeetCode 295](https://leetcode.com/problems/find-median-from-data-stream/)
+
+```py
+class MedianFinder:
+  def __init__(self):
+    self.left_heap = []
+    self.right_heap = []
+    self.count = 0
+
+  def addNum(self, num: int) -> None:
+    self.count += 1
+    left_max = heappushpop(self.left_heap, -num)
+    heappush(self.right_heap, -left_max)
+
+    if self.count % 2 == 1:
+      right_min = heappop(self.right_heap)
+      heappush(self.left_heap, -right_min)
+
+  def findMedian(self) -> float:
+    if self.count % 2 == 0:
+      return (-self.left_heap[0] + self.right_heap[0]) / 2
+    return -self.left_heap[0]
+```
