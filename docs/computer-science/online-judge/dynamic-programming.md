@@ -423,3 +423,45 @@ class Solution:
 
     return min(dp)
 ```
+
+## Arithmetic Slices
+
+[LeetCode 413](https://leetcode.com/problems/arithmetic-slices/)
+
+```py
+class Solution:
+  def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+    start = 0
+    window = 0
+    result = 0
+    for i in range(1, len(nums)):
+      diff = nums[i] - nums[i - 1]
+      if window == diff and i - start >= 2:
+        result += i - start - 1
+      else:
+        window = diff
+        start = i - 1
+    return result
+```
+
+## Arithmetic Slices II - Subsequence
+
+[LeetCode 446](https://leetcode.com/problems/arithmetic-slices-ii-subsequence/)
+
+- Let `dp[i]` be a dictionary of `diff`
+- Let `dp[i][diff]` be the number of subsequences (length >= 2) that ends with `nums[i]` with difference `diff`
+- Let `dp[i][nums[i] - nums[j]] = dp[j][nums[i] - nums[j]] + 1`
+
+```py
+class Solution:
+  def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+    dp = [defaultdict(int) for _ in nums]
+    result = 0
+    for i in range(1, len(nums)):
+      for j in range(i):
+        diff = nums[i] - nums[j]
+        dp[i][diff] += dp[j][diff] + 1
+        result += dp[j][diff]
+
+    return result
+```

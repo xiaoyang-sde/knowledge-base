@@ -1,5 +1,56 @@
 # Template
 
+## Dijkstra's algorithm
+
+- Let `k` be the starting node
+- Let `graph` be a graph implemented with dictionary (HashMap)
+
+```py
+weights = defaultdict(lambda: float('inf'))
+weights[k] = 0
+
+visited = set()
+queue = []
+heappush(queue, (0, k))
+
+while queue:
+  prev_weight, node = heappop(queue)
+  visited.add(node)
+  for child, weight in graph[node]:
+    if child in visited:
+      continue
+    total_weight = weight + prev_weight
+    if total_weight > weights[child]:
+      continue
+    weights[child] = total_weight
+    heappush(queue, (total_weight, child))
+```
+
+## Union Find
+
+```py
+parent = defaultdict(lambda: None)
+weight = defaultdict(lambda: 1)
+
+def find(x):
+  if parent[x] == None:
+    return x
+  parent[x] = find(parent[x])
+  return parent[x]
+
+def union(x, y):
+  rx = find(x)
+  ry = find(y)
+  if rx == ry:
+    return
+  if weight[rx] < weight[ry]:
+    parent[rx] = ry
+    weight[ry] += weight[rx]
+  else:
+    parent[ry] = rx
+    weight[rx] += weight[ry]
+```
+
 ## Quick Sort
 
 ```py
