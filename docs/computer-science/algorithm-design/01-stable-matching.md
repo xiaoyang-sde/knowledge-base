@@ -28,7 +28,7 @@ While there's a man m who is free and hasn't proposed to every women
 
 2. The sequence of women to whom m propses gets worse and worse.
 
-3. The algorithm terminates after at most $$n^{2}$$ iterations of the while loop.
+3. The algorithm terminates after at most $n^{2}$ iterations of the while loop.
 
 4. If m is free at some point in the execution of the algorithm, then there's a woman to whom he has not yet proposed.
 
