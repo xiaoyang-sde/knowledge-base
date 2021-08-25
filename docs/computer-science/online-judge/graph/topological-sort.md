@@ -100,3 +100,43 @@ class Solution:
           queue.append(parent)
     return sorted(result)
 ```
+
+## Alien Dictionary
+
+[LeetCode 269](https://leetcode-cn.com/problems/alien-dictionary/)
+
+```py
+class Solution:
+  def alienOrder(self, words: List[str]) -> str:
+    graph = defaultdict(list)
+    degree = defaultdict(int)
+    chars = set()
+    for word in words:
+      for c in word:
+        chars.add(c)
+
+    for i in range(len(words) - 1):
+      word1 = words[i]
+      word2 = words[i + 1]
+      length = min(len(word1), len(word2))
+      if word1[:length] == word2[:length] and len(word1) > len(word2):
+        return ""
+
+      for j in range(length):
+        if word1[j] == word2[j]:
+          continue
+        graph[word1[j]].append(word2[j])
+        degree[word2[j]] += 1
+        break
+
+    queue = [c for c in chars if degree[c] == 0]
+    for c in queue:
+      for n in graph[c]:
+        degree[n] -= 1
+        if degree[n] == 0:
+          queue.append(n)
+
+    if len(queue) != len(graph.keys()):
+      return ""
+    return "".join(queue)
+```

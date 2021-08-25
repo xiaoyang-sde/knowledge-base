@@ -1,5 +1,28 @@
 # Two Pointers
 
+## Boats to Save People
+
+If the heaviest person can share a boat with the lightest person, then do so. Otherwise, the heaviest person can't pair with anyone, so they get their own boat.
+
+- Time Complexity: $O(n \log n)$
+- Space Complexity: $O(n)$
+
+```py
+class Solution:
+  def numRescueBoats(self, people, limit: int) -> int:
+    people.sort()
+    result = 0
+    start = 0
+    end = len(people) - 1
+    
+    while start <= end:
+      if people[start] + people[end] <= limit:
+        start += 1
+      result += 1
+      end -= 1
+    return result
+```
+
 ## Valid Triangle Number
 
 ### Binary Search

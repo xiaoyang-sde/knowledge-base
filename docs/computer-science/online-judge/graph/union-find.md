@@ -1,48 +1,4 @@
-# Graph
-
-## Clone Graph
-
-[LeetCode 133](https://leetcode.com/problems/clone-graph/)
-
-```py
-class Solution:
-  def cloneGraph(self, root: 'Node') -> 'Node':
-    if not root:
-      return
-
-    clone = { root: Node(root.val) }
-    queue = deque([root])
-    while queue:
-      node = queue.popleft()
-      for n in node.neighbors:
-        if n not in clone:
-          clone[n] = Node(n.val)
-          queue.append(n)
-        clone[node].neighbors.append(clone[n])
-
-    return clone[root]
-```
-
-```py
-class Solution:
-  def cloneGraph(self, root: 'Node') -> 'Node':
-    if not root:
-      return
-
-    clone = { root: Node(root.val) }
-
-    def dfs(node):
-      if not node:
-        return
-      for n in node.neighbors:
-        if n not in clone:
-          clone[n] = Node(n.val)
-          dfs(n)
-        clone[node].neighbors.append(clone[n])
-
-    dfs(root)
-    return clone[root]
-```
+# Union Find
 
 ## Number of Islands
 
@@ -83,34 +39,6 @@ class Solution:
           union((i, j - 1), (i, j))
 
     return sum(1 for x in parent.values() if x == None)
-```
-
-## Pacific Atlantic Water Flow
-
-[LeetCode 417](https://leetcode.com/problems/pacific-atlantic-water-flow/)
-
-```py
-class Solution:
-  def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-    def bfs(queue):
-      directions = ((-1, 0), (1, 0), (0, 1), (0, -1))
-      while queue:
-        i, j = queue.popleft()
-        visited.add((i, j))
-        for di, dj in directions:
-          ni = i + di
-          nj = j + dj
-          if ni < 0 or ni >= len(heights) or nj < 0 or nj >= len(heights[0]) or heights[ni][nj] < heights[i][j] or (ni, nj) in visited:
-            continue
-          queue.append((ni, nj))
-      return visited
-
-    pacific_border = [(i, 0) for i in range(len(heights))] + [(0, j) for j in range(len(heights[0]))]
-    atlantic_border = [(i, len(heights[0]) - 1) for i in range(len(heights))] + [(len(heights) - 1, j) for j in range(len(heights[0]))]
-
-    pacific = bfs(deque(pacific_border))
-    atlantic = bfs(deque(atlantic_border))
-    return list(pacific & atlantic)
 ```
 
 ## Longest Consecutive Sequence
@@ -261,82 +189,6 @@ class Solution:
     return count
 ```
 
-## Graph Valid Tree
-
-[LeetCode 261](https://leetcode-cn.com/problems/graph-valid-tree/)
-
-```py
-class Solution:
-  def validTree(self, n: int, edges: List[List[int]]) -> bool:
-    parent = { k: None for k in range(n) }
-    weight = defaultdict(lambda: 1)
-
-    def find(x):
-      if parent[x] == None:
-        return x
-      parent[x] = find(parent[x])
-      return parent[x]
-
-    def union(x, y):
-      rx = find(x)
-      ry = find(y)
-      if rx == ry:
-        return
-      if weight[rx] < weight[ry]:
-        parent[rx] = ry
-        weight[ry] += weight[rx]
-      else:
-        parent[ry] = rx
-        weight[rx] += weight[ry]
-
-    for x, y in edges:
-      if find(x) == find(y):
-        return False
-      union(x, y)
-
-    return True
-```
-
-## Alien Dictionary
-
-[LeetCode 269](https://leetcode-cn.com/problems/alien-dictionary/)
-
-```py
-class Solution:
-  def alienOrder(self, words: List[str]) -> str:
-    graph = defaultdict(list)
-    degree = defaultdict(int)
-    chars = set()
-    for word in words:
-      for c in word:
-        chars.add(c)
-
-    for i in range(len(words) - 1):
-      word1 = words[i]
-      word2 = words[i + 1]
-      length = min(len(word1), len(word2))
-      if word1[:length] == word2[:length] and len(word1) > len(word2):
-        return ""
-
-      for j in range(length):
-        if word1[j] == word2[j]:
-          continue
-        graph[word1[j]].append(word2[j])
-        degree[word2[j]] += 1
-        break
-
-    queue = [c for c in chars if degree[c] == 0]
-    for c in queue:
-      for n in graph[c]:
-        degree[n] -= 1
-        if degree[n] == 0:
-          queue.append(n)
-
-    if len(queue) != len(graph.keys()):
-      return ""
-    return "".join(queue)
-```
-
 ## Number of Provinces
 
 [LeetCode 547](https://leetcode-cn.com/problems/number-of-provinces/)
@@ -373,31 +225,38 @@ class Solution:
     return sum(1 for v in parent.values() if v == None)
 ```
 
-## Is Graph Bipartite?
+## Graph Valid Tree
 
-[LeetCode 785](https://leetcode.com/problems/is-graph-bipartite/)
+[LeetCode 261](https://leetcode-cn.com/problems/graph-valid-tree/)
 
 ```py
 class Solution:
-  def isBipartite(self, graph: List[List[int]]) -> bool:
-    s1 = set()
-    s2 = set()
+  def validTree(self, n: int, edges: List[List[int]]) -> bool:
+    parent = { k: None for k in range(n) }
+    weight = defaultdict(lambda: 1)
 
-    for i in range(len(graph)):
-      if i in s1 or i in s2:
-        continue
-      queue = deque([i])
-      while queue:
-        for _ in range(len(queue)):
-          x = queue.popleft()
-          s1.add(x)
-          for n in graph[x]:
-            if n in s1:
-              return False
-            if n in s2:
-              continue
-            queue.append(n)
-        s1, s2 = s2, s1
+    def find(x):
+      if parent[x] == None:
+        return x
+      parent[x] = find(parent[x])
+      return parent[x]
+
+    def union(x, y):
+      rx = find(x)
+      ry = find(y)
+      if rx == ry:
+        return
+      if weight[rx] < weight[ry]:
+        parent[rx] = ry
+        weight[ry] += weight[rx]
+      else:
+        parent[ry] = rx
+        weight[rx] += weight[ry]
+
+    for x, y in edges:
+      if find(x) == find(y):
+        return False
+      union(x, y)
 
     return True
 ```
@@ -432,7 +291,6 @@ class Solution:
     for x, y in edges:
       if not union(x, y):
         return [x, y]
-
 ```
 
 ## Couples Holding Hands
@@ -535,31 +393,4 @@ class Solution:
 
         result = max(result, size)
     return result
-```
-
-## Find Eventual Safe States
-
-[LeetCode 802](https://leetcode.com/problems/find-eventual-safe-states/)
-
-```py
-class Solution:
-  def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-    degree = defaultdict(int)
-    parents = defaultdict(list)
-    for index, children in enumerate(graph):
-      for child in children:
-        degree[index] += 1
-        parents[child].append(index)
-
-    visited = set()
-    queue = deque([node for node in range(len(graph)) if degree[node] == 0])
-    while queue:
-      node = queue.popleft()
-      visited.add(node)
-      for parent in parents[node]:
-        degree[parent] -= 1
-        if degree[parent] == 0:
-          queue.append(parent)
-
-    return sorted(list(visited))
 ```
