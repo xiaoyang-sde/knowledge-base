@@ -1,10 +1,8 @@
 # Badge and Company
 
-We are working on a security system for a badged-access room in our company's building.
-
 ## Question 1
 
-Given an ordered list of employees who used their badge to enter or exit the room, write a function that returns two collections:
+We are working on a security system for a badged-access room in our company's building. Given an ordered list of employees who used their badge to enter or exit the room, write a function that returns two collections:
 
 - All employees who didn't use their badge while exiting the room – they recorded an enter without a matching exit.
 - All employees who didn't use their badge while entering the room – they recorded an exit without a matching enter.
