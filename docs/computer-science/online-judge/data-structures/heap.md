@@ -111,19 +111,15 @@ class MedianFinder:
   def __init__(self):
     self.left_heap = []
     self.right_heap = []
-    self.count = 0
 
   def addNum(self, num: int) -> None:
-    self.count += 1
-    left_max = heappushpop(self.left_heap, -num)
-    heappush(self.right_heap, -left_max)
-
-    if self.count % 2 == 1:
-      right_min = heappop(self.right_heap)
-      heappush(self.left_heap, -right_min)
+    max_num = -heappushpop(self.left_heap, -num)
+    heappush(self.right_heap, max_num)
+    if len(self.right_heap) > len(self.left_heap):
+      heappush(self.left_heap, -heappop(self.right_heap))
 
   def findMedian(self) -> float:
-    if self.count % 2 == 0:
-      return (-self.left_heap[0] + self.right_heap[0]) / 2
+    if len(self.right_heap) == len(self.left_heap):
+      return (self.right_heap[0] - self.left_heap[0]) / 2
     return -self.left_heap[0]
 ```

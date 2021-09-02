@@ -407,6 +407,12 @@ class Solution:
 
 > Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
+- `left == null` and `right == null`: The left subtree and right subtree don't contain `p` or `q`, thus return `null`.
+- `left != null` and `right != null`: `p` and `q` are in different subtree of `root`, thus `root` is the lowest common ancestor, thus return `root`.
+- `left == null` or `right == null`
+  - `p` or `q` is in one of the two subtrees
+  - `left` or `right` is the lowest common ancestor
+
 ```py
 class Solution:
   def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':

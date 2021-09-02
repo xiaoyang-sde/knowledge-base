@@ -80,10 +80,10 @@ from collections import defaultdict, Counter
 def build_resources(user_access_logs):
   user_actions = defaultdict(list)
   for time, user, resource in user_access_logs:
-    user_actions[user].append((int(time), resource))
+    user_actions[user].append((time, resource))
 
   next_counter = defaultdict(Counter)
-  for user, actions in user_actions.items():
+  for _, actions in user_actions.items():
     actions.sort()
     actions.insert(0, (0, 'START'))
     actions.append((float('inf'), 'END'))
