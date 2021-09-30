@@ -53,7 +53,7 @@ module.exports = {
             },
             {
               label: 'Computer Systems',
-              to: 'docs/computer-science/computer-systems/bits-bytes-integers',
+              to: 'docs/computer-science/computer-systems/representing-manipulating-information',
             },
             {
               label: 'Data Structures',

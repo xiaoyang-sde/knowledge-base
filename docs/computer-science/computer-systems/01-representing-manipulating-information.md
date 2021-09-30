@@ -1,4 +1,4 @@
-# Bits, Bytes, and Integers
+# Representing and Manipulating Information
 
 ## Representing Informantion as Bits
 
@@ -40,22 +40,22 @@ Operations `&`, `|`, `~`, `^` in C applies to any integral data type: `long`, `i
 
 - Left Shift (`x << y`): Shift bit-vector x left y positions and fill with 0's on the right.
 - Right Shift (`x >> y`): Shift bit-vector x right y positions.
-- - Logical: Fill with 0's on the left.
-- - Arithmetic: Replicate the most significant bit on the left.
+  - Logical: Fill with 0's on the left.
+  - Arithmetic: Replicate the most significant bit on the left.
 
 ## Integers
 
 ### Representation: unsigned and signed
 
-- Unsigned: $$ \sum^{w-1}_{i=0} x_{i} \cdot 2^{i} $$
-- Two's Complement: $$ -x_{w-1} \cdot 2^{2-1} + \sum^{w-2}_{i=0} x_{i} \cdot 2^{i} $$ (The most significant bit indicates the sign.)
+- Unsigned: $\sum^{w-1}_{i=0} x_{i} \cdot 2^{i}$
+- Two's Complement: $-x_{w-1} \cdot 2^{2-1} + \sum^{w-2}_{i=0} x_{i} \cdot 2^{i}$ (The most significant bit indicates the sign.)
 
 #### Numeric Ranges
 
 - UMin = 0 (000...0)
-- UMax = $$ 2^{w} - 1 $$ (111...1)
-- TMin = $$ -2^{w - 1} $$ (100...0)
-- TMax = $$ 2^{w - 1} - 1 $$ (011...1)
+- UMax = $2^{w} - 1$ (111...1)
+- TMin = $-2^{w - 1}$ (100...0)
+- TMax = $2^{w - 1} - 1$ (011...1)
 
 - | TMin | = TMax + 1
 - UMax = 2 * TMax + 1
@@ -63,7 +63,7 @@ Operations `&`, `|`, `~`, `^` in C applies to any integral data type: `long`, `i
 ### Conversion (Signed and Unsigned)
 
 - Bit pattern is maintained
-- The interpretation is changed.
+- The interpretation is changed
 
 #### Constants
 
@@ -94,7 +94,7 @@ Operations `&`, `|`, `~`, `^` in C applies to any integral data type: `long`, `i
 
 - Operands: w bits
 - True Sum: w bits or w + 1 bits
-- Discard Carry: w bits ($$ s = UAdd_{w} (u,v) = u + v mod 2^{w} $$)
+- Discard Carry: w bits ($s = UAdd_{w} (u,v) = u + v mod 2^{w}$)
 
 Example:
 
@@ -104,28 +104,28 @@ Example:
 
 Two's complement addition and unsigned addition have idential bit-level behavior.
 
-- If true sum $$ >= 2^{w - 1} $$, the actual result becomes negative.
-- If true sum $$ < -2^{w - 1} $$, the actual result becomes positive.
+- If true sum $>= 2^{w - 1}$, the actual result becomes negative.
+- If true sum $< -2^{w - 1}$, the actual result becomes positive.
 
 #### Multiplication
 
 - Operands: w bits
 - True Product: 2 * w bits
-- Discard Carry: w bits ($$ s = UMult_{w} (u,v) = u \cdot v mod 2^{w} $$)
+- Discard Carry: w bits ($s = UMult_{w} (u,v) = u \cdot v mod 2^{w}$)
 
 #### Power-of-2 Multiply with Shift
 
 Most machines shift and add faster than multiply. The compiler might convert some multiplication operation to shift operation.
 
 - Operands: w bits
-- True Product: w + k bits ($$ u << k = u * 2^{k} $$)
-- Discard k bits: w bits ($$ TMult_{w} (u, 2^{k}) = u * 2^{k} mod 2^{k} $$)
+- True Product: w + k bits ($u << k = u * 2^{k}$)
+- Discard k bits: w bits ($TMult_{w} (u, 2^{k}) = u * 2^{k} mod 2^{k}$)
 
 #### Power-of-2 Divide with Shift
 
-- Operands: $$ u / 2 ^{k} $$
-- True Division: $$ u / 2 ^{k} $$ ($$ u >> k = u / 2^{k} $$)
-- Discard k bits: $$ \lfloor u / 2 ^{k} \rfloor $$
+- Operands: $u / 2 ^{k}$
+- True Division: $u / 2 ^{k}$ ($u >> k = u / 2^{k}$)
+- Discard k bits: $\lfloor u / 2 ^{k} \rfloor$
 
 ## Representations in Memory, Pointers, Strings
 
