@@ -37,3 +37,186 @@ $$\text{course\_fall} \leftarrow \Pi_{\text{course\_id}} (\sigma_{\text{semester
 - **Rename**: The rename operator assigns a name to a relation. $\rho_{x}(E)$ returns the result of expression $E$ under the name $x$. This operation could be used to give unique names to the different occurrences of the same relation.
 
 $$\rho_{\text{i}}(instructor)$$
+
+## SQL Query Langauge
+
+### Data Definition
+
+The SQL standard supports a variety of built-in types. Each type includes the `null` value.
+
+#### String Data Types
+
+- `CHAR(n)`: The fixed-length character string with user-specified length `n`
+- `VARCHAR(n)`: The variable-length character string with user-specifed maximum length `n`
+- `SET(val1, val2, ...)`: The string object that could have 0 or more values chosen fom a list of possible values.
+
+#### Numeric Data Types
+
+- `INT`: The integer
+- `SMALLINT`: The subset of the integer type
+- `FLOAT(n)`: The floating-point number with precision of at least `n` digits
+- `DOUBLE`: Floating-point and double-precision floating-point numbers
+
+#### Date and Time Data Types
+
+- `DATE`: The date with format `YYYY-MM-DD`
+- `TIMESTAMP`: The timestamp or the number of seconds since the Unix epoch time.
+- `YEAR`: The year in four-digit format
+
+### Schema Definition
+
+The `create table` command defines an SQL relation. The definition specifies the name of attributes, the type and optional constraints of attributes, and optional integrity constraints.
+
+```sql
+CREATE TABLE IF NOT EXISTS department (
+  dept_name VARCHAR(20) PRIMARY KEY,
+  building_name VARCHAR(15) NOT NULL,
+  budget NUMERIC(12, 2),
+  PRIMARY KEY (dept_name),
+  FOREIGN KEY (building_name) REFERENCES building
+);
+```
+
+- `PRIMARY KEY`: The attributes `param1, param2` form the primary key of the relation. The primary-key attributes are required to be non-null and unique.
+- `FOREIGN KEY(param1, param2, ...) references s`: The foreign key specification defines that the values of `param1, param2` must correspond to values of the primary key
+atrributes in relation `s`.
+- `NOT NULL`: The constraint specifies that the null value is not allowed for the specific attribute.
+- `UNIQUE`: The values in this column have to be unique.
+- `AUTOINCREMENT`: The integer value is automatically filled in and incremented with each row insertion.
+
+The `ALTER TABLE` statement adds attriburtes to an existing relation. The new attributes is specified with `DEFAULT` or assigned `NULL` for all tuples in the relation.
+
+```sql
+ALTER TABLE relation ADD attribute domain DEFAULT default_value;
+
+ALTER TABLE relation DROP attribute;
+```
+
+The `DELETE FROM` statement deletes all tuples in `r` but preserves the relation.
+
+```sql
+DELETE FROM relation;
+```
+
+The `DROP TABLE` statement deletes a relation from an SQL database.
+
+```sql
+DROP TABLE IF EXISTS relation;
+```
+
+### Insert, Update, and Delete Rows
+
+The `INSERT` statement declares which table to write into, the columns of data that are filling, and one or more rows of data to insert.
+
+```sql
+INSERT INTO table_name (column_1, column_2, ...)
+VALUES
+  (value_or_expr, another_value_or_expr, …),
+  (value_or_expr_2, another_value_or_expr_2, …),
+  ...;
+```
+
+The `INSERT` statement takes multiple column-value pairs and applies the changes to each row that satisfies the constraint in the `WHERE` clause.
+
+```sql
+UPDATE table_name
+SET
+  column = value_or_expr,
+  other_column = another_value_or_expr,
+  ...
+WHERE condition;
+```
+
+The `DELETE` statement describes the table to act on, and the rows of the table to delete through the `WHERE` clause.
+
+```sql
+DELETE FROM table_name WHERE condition;
+```
+
+### Basic Query Structure
+
+The `SELECT` statment retrieves data from a database. The data returned is stored in a result table. The `DISTINCT` is used to discard duplicate value.
+
+```sql
+SELECT column1, column2, ... FROM table_name;
+
+SELECT DISTINCT column1, column2, ... FROM table_name;
+
+SELECT * FROM table_name;
+```
+
+The `WHERE` clause specifies the constraints to filter the result. The constraints could be constrcuted with `AND` or `OR` logical keywords.
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition
+  AND/OR another_condition
+  AND/OR ...;
+```
+
+- `IS NULL`: The value is `NULL`
+- `IS NOT NULL`: The value isn't `NULL`
+- `BETWEEN ... AND ...`: Number is within range of two values (inclusive)
+- `NOT BETWEEN ... AND ...`: Number isn't within range of two values (inclusive)
+- `IN (...)`: Number or string exists in a list
+- `NOT IN (...)`: Number or string doesn't in a list
+- `LIKE`: Case insensitive exact string comparison
+- `NOT LIKE`: Case insensitive exact string inequality comparison
+- `%`: Match a sequence of zero or more characters
+- `-`: Match a single character
+
+The `ORDER BY` clause sorts the result alphanumerically by a given column in ascending or descending order.
+
+The `LIMIT` clause limits the number of rows to return. The `OFFSET` clause specifies where to begin counting the rows.
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition(s)
+ORDER BY column ASC/DESC
+LIMIT num_limit OFFSET num_offset;
+```
+
+The `AS` keyword gives a descriptive alias to the result data.
+
+```sql
+SELECT column AS better_column_name, ...
+FROM a_long_widgets_table_name AS widgets
+INNER JOIN widget_sales ON widgets.id = widget_sales.widget_id;
+```
+
+### Multi-table Query with Join
+
+The `JOIN` clause combines row data across two separate tables using the unique key.
+
+- The `INNER JOIN` clause matches rows from th first table and the second table which have the same key to create a result row with the combined columns.
+- The `LEFT JOIN` clause includes rows from the first table regardless of whether a matching row is found in the second table.
+- The `RIGHT JOIN` clause includes rows from the second table regardless of whether a matching row is found in the first table.
+- The `FULL JOIN` clause inncludes all rows from both table regardless of whether a matching row exists in the other table.
+
+```sql
+SELECT column1, column2, ...
+FROM table_1
+INNER/LEFT/RIGHT/FULL JOIN another_table ON table_1.id = table_2.id
+```
+
+### Queries with Aggregates
+
+The aggregate expressions summarizes information about a group of rows of data.
+
+```sql
+SELECT AGG_FUNC(column_or_expression) AS aggregate_description, ...
+FROM table_name
+WHERE constraint_expression
+GROUP BY column
+HAVING group_condition;
+```
+
+- `COUNT(column)`: The count of number of non-NULL value in the specified column
+- `MIN(column)`: The smallest numerical value in the specified column
+- `MAX(column)`: The largest numerical value in the specified column
+- `AVG(column)`: The average numerical value in the specified column
+- `SUM(column)`: The sum of all numerical values in the specified column
+
+The `HAVING` clause filters the grouped rows in the result set. The constraints are written the same way as the `WHERE` clause constraints.
