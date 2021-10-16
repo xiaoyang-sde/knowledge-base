@@ -186,6 +186,22 @@ FROM a_long_widgets_table_name AS widgets
 INNER JOIN widget_sales ON widgets.id = widget_sales.widget_id;
 ```
 
+### Set Operations
+
+The `UNION` operation combines the result of two queries and eliminates duplicates. The `UNION ALL` operation retains all duplicates.
+
+The `INTERSECT` operation selects the intersected result of two queries and eliminates duplicates. The `INTERSECT ALL` operation retains all duplicates.
+
+The `EXCEPT` operation selects the items in the first query but not in the second query, and eliminates duplicates. The `INTERSECT ALL` operation retains all duplicates.
+
+```sql
+(
+  SELECT column_1 FROM table_name_1
+) UNION/INTERSECT/EXCEPT (
+  SELECT column_2 FROM table_name_2
+);
+```
+
 ### Multi-table Query with Join
 
 The `JOIN` clause combines row data across two separate tables using the unique key.
@@ -198,7 +214,7 @@ The `JOIN` clause combines row data across two separate tables using the unique 
 ```sql
 SELECT column1, column2, ...
 FROM table_1
-INNER/LEFT/RIGHT/FULL JOIN another_table ON table_1.id = table_2.id
+INNER/LEFT/RIGHT/FULL JOIN another_table ON table_1.id = table_2.id;
 ```
 
 ### Queries with Aggregates
@@ -220,3 +236,82 @@ HAVING group_condition;
 - `SUM(column)`: The sum of all numerical values in the specified column
 
 The `HAVING` clause filters the grouped rows in the result set. The constraints are written the same way as the `WHERE` clause constraints.
+
+### Nested Subqueries
+
+The result of the the subquery could appear at any place in a query that expects a relation.
+
+The `IN` clause returns true if the item exists in the result of the subquery.
+
+```sql
+SELECT DISTINCT course_id FROM section
+WHERE course_id IN (
+  'CS 143', 'CS 161', 'CS 181',
+);
+
+SELECT DISTINCT course_id FROM section
+WHERE course_id IN (
+  SELECT course_id FROM section
+  WHERE semester = 'Spring 2018')
+);
+```
+
+The `SOME` clause returns `true` if the condition satisfies for at least one item in the result of the subquery.
+
+The `ALL` clause returns `true` if the condition satisfies for all items in the result of the subquery..
+
+```sql
+SELECT DISTINCT salary FROM employee
+WHERE salary > SOME/ALL (
+  SELECT salary FROM employee
+  WHERE employee_id = '1')
+);
+```
+
+The `EXISTS` clause returns `true` if the result of the subquery is not empty.
+
+The `UNIQUE` clause returns `true` if the result of the subquery does not contain duplicate tuples.
+
+### Case Condition
+
+The `CASE` statement goes through conditions and returns a value when the first condition is met.
+
+```sql
+CASE
+  WHEN condition_1 THEN result_1
+  WHEN condition_2 THEN result_2
+  ...
+  ELSE default_result
+END;
+```
+
+### Modification of the Database
+
+The `DELETE` clause removes selected tuples from a table.
+
+```sql
+DELETE FROM table_name
+WHERE condition;
+```
+
+The `INSERTION` clause inserts tuples into a table. The attribute values for inserted tuples must be members of the corresponding attribute's domain.
+
+```sql
+INSERT INTO table_name (
+  column_1,
+  column_2,
+  ...
+) VALUES (
+  value_1,
+  value_2,
+  ...
+);
+```
+
+The `UPDATE` clause changes a value in a table.
+
+```sql
+UPDATE table_name
+SET column_1 = value_1
+WHERE condition;
+```
