@@ -42,7 +42,11 @@ $$\rho_{\text{i}}(instructor)$$
 
 ### Data Definition
 
-The SQL standard supports a variety of built-in types. Each type includes the `null` value.
+The SQL standard supports a variety of built-in types. Each type includes the `NULL` value.
+
+The `CAST(e AS t)` expression converts an expression `e` to the type `t`. (e.g. `CAST(ID AS NUMERIC(5))`)
+
+The `COALESCE(e_1, e_2, ...)` expression returns the first non-null value in `e_1, e_2, ...`.
 
 #### String Data Types
 
@@ -60,28 +64,32 @@ The SQL standard supports a variety of built-in types. Each type includes the `n
 #### Date and Time Data Types
 
 - `DATE`: The date with format `YYYY-MM-DD`
+- `TIME`: The time of day in hours, minutes, and seconds.
 - `TIMESTAMP`: The timestamp or the number of seconds since the Unix epoch time.
 - `YEAR`: The year in four-digit format
 
 ### Schema Definition
 
-The `create table` command defines an SQL relation. The definition specifies the name of attributes, the type and optional constraints of attributes, and optional integrity constraints.
+The `CREATE TABLE` command defines an SQL relation. The definition specifies the name of attributes, the type and optional constraints of attributes, and optional integrity constraints.
 
 ```sql
 CREATE TABLE IF NOT EXISTS department (
   dept_name VARCHAR(20) PRIMARY KEY,
   building_name VARCHAR(15) NOT NULL,
-  budget NUMERIC(12, 2),
+  budget NUMERIC(12, 2) DEFAULT 0,
   PRIMARY KEY (dept_name),
   FOREIGN KEY (building_name) REFERENCES building
 );
 ```
 
+Integrity constraints ensure that changes made to the database by authorized users do not result in a loss of data consistency.
+
 - `PRIMARY KEY`: The attributes `param1, param2` form the primary key of the relation. The primary-key attributes are required to be non-null and unique.
-- `FOREIGN KEY(param1, param2, ...) references s`: The foreign key specification defines that the values of `param1, param2` must correspond to values of the primary key
+- `FOREIGN KEY(param1, param2, ...) REFERENCES s`: The foreign key specification defines that the values of `param1, param2` must correspond to values of the primary key
 atrributes in relation `s`.
 - `NOT NULL`: The constraint specifies that the null value is not allowed for the specific attribute.
 - `UNIQUE`: The values in this column have to be unique.
+- `CHECK(predicate)`: The value in this column must satisfies the predicate. (e.g. `CHECK(budget > 0)`)
 - `AUTOINCREMENT`: The integer value is automatically filled in and incremented with each row insertion.
 
 The `ALTER TABLE` statement adds attriburtes to an existing relation. The new attributes is specified with `DEFAULT` or assigned `NULL` for all tuples in the relation.
@@ -202,20 +210,26 @@ The `EXCEPT` operation selects the items in the first query but not in the secon
 );
 ```
 
-### Multi-table Query with Join
+### Multi-table Queries with Join
 
 The `JOIN` clause combines row data across two separate tables using the unique key.
 
-- The `INNER JOIN` clause matches rows from th first table and the second table which have the same key to create a result row with the combined columns.
-- The `LEFT JOIN` clause includes rows from the first table regardless of whether a matching row is found in the second table.
-- The `RIGHT JOIN` clause includes rows from the second table regardless of whether a matching row is found in the first table.
-- The `FULL JOIN` clause inncludes all rows from both table regardless of whether a matching row exists in the other table.
+- The `JOIN` or `INNER JOIN` clause matches rows from th first table and the second table which have the same key to create a result row with the combined columns.
+- The `LEFT JOIN` or `LEFT OUTER JOIN` clause includes rows from the first table regardless of whether a matching row is found in the second table.
+- The `RIGHT JOIN` or `RIGHT OUTER JOIN` clause includes rows from the second table regardless of whether a matching row is found in the first table.
+- The `FULL JOIN` or `FULL OUTER JOIN` clause inncludes all rows from both table regardless of whether a matching row exists in the other table.
 
 ```sql
 SELECT column1, column2, ...
 FROM table_1
 INNER/LEFT/RIGHT/FULL JOIN another_table ON table_1.id = table_2.id;
 ```
+
+The `JOIN` clause supports several join conditions that specifies when to combine two tuples.
+
+- The `NATURAL` condition joins two tuples if all of their columns with the same name have the same value.
+- The `USING (column_1, column_2, ...)` condition joins two tuples if `column_1, column_2, ...` have the same value.
+- The `ON condtion_1 AND/OR condition_2 ...` condition joins two tuples if they matches `condtion_1 AND/OR condition_2 ...`.
 
 ### Queries with Aggregates
 
@@ -239,7 +253,7 @@ The `HAVING` clause filters the grouped rows in the result set. The constraints 
 
 ### Nested Subqueries
 
-The result of the the subquery could appear at any place in a query that expects a relation.
+The subquery expression could appear at any place in a query that expects a relation.
 
 The `IN` clause returns true if the item exists in the result of the subquery.
 
@@ -252,7 +266,7 @@ WHERE course_id IN (
 SELECT DISTINCT course_id FROM section
 WHERE course_id IN (
   SELECT course_id FROM section
-  WHERE semester = 'Spring 2018')
+  WHERE semester = 'Spring 2018'
 );
 ```
 
@@ -272,6 +286,33 @@ The `EXISTS` clause returns `true` if the result of the subquery is not empty.
 
 The `UNIQUE` clause returns `true` if the result of the subquery does not contain duplicate tuples.
 
+The subquery expression could also be used in the `FROM` clause.
+
+```sql
+SELECT dept_name, avg_salary
+FROM (
+  SELECT dept_name, AVG(salary)
+  FROM instructor
+  GROUP BY dept_name
+  AS dept_avg(dept_name, avg_salary)
+)
+WHERE avg_salary > 42000;
+```
+
+The `WITH` clause defines a temporary relation that is available to the query in which the clause occurs. The temporary relation could be used multiple times.
+
+```sql
+WITH max_budget(value) AS (
+  SELECT MAX(budget)
+  FROM department
+)
+SELECT budget
+FROM department, max_budget
+WHERE  deptartment.budget = max_budget.value;
+```
+
+The scalar subquery (subquery expression with result that only contains a single value) could be used in `SELECT`, `WHERE`, and `HAVING` clause as an expression.
+
 ### Case Condition
 
 The `CASE` statement goes through conditions and returns a value when the first condition is met.
@@ -285,33 +326,51 @@ CASE
 END;
 ```
 
-### Modification of the Database
+### Views
 
-The `DELETE` clause removes selected tuples from a table.
+The view in SQL is a virtual relation to be defined by a query, and is executed whenever the virtual relation is used.
 
 ```sql
-DELETE FROM table_name
-WHERE condition;
+CREATE VIEW view_name AS query_expression;
+
+CREATE VIEW view_name(column_1, column_2, ...) AS query_expression;
 ```
 
-The `INSERTION` clause inserts tuples into a table. The attribute values for inserted tuples must be members of the corresponding attribute's domain.
+If a view meets the following conditions, it supports tthe `UPDATE`, `INSERT`, and `DELETE` operations.
+
+- The `FROM` clause has only one database relation.
+- The `SELECT` clause contains only attribute names of the relation and does not have any expressions, aggregates, or distinct specification.
+- Any attribute not listed in the select clause does not have a `NOT NULL` constraint and is not part of a primary key.
+- The query does not have a `GROUP BY` or `HAVING` clause.
+
+### Transactions
+
+The transaction consists of a sequence of query or update statements. Each transaction must be terminated by a `COMMIT` or `ROLLBACK` statement. Each transaction is atomic, thus either all or none of the effects of the transaction are reflected in the database.
+
+Each single SQL statement is taken to be a transaction on its own, and it gets committed after it is executed. The transaction could also be defined with the `BEGIN` clause.
 
 ```sql
-INSERT INTO table_name (
-  column_1,
-  column_2,
-  ...
-) VALUES (
-  value_1,
-  value_2,
+BEGIN
+sql_statement_1
+sql_statement_2
+...
+COMMIT/ROLLBACK
+```
+
+### Index
+
+The index on an attribute of a relation is a data structure that allows the database system to find those tuples in the relation that have a specified value for that attribute efficiently, without scanning through all the tuples of the relation.
+
+```sql
+CREATE INDEX index_name
+ON relation_name (
+  search_key_1,
+  search_key_2,
   ...
 );
+
+DROP INDEX index_name;
 ```
 
-The `UPDATE` clause changes a value in a table.
+### Integrity Constraints
 
-```sql
-UPDATE table_name
-SET column_1 = value_1
-WHERE condition;
-```
