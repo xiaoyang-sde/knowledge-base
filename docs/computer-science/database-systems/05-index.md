@@ -40,3 +40,38 @@ The multi-level index is an index with two or more levels. Searching for records
 ### Secondary Index
 
 Secondary index improves the performance of queries that use keys other than the search key of the clustering index, but it impose a overhead on modification of the database. Secondary index must be dense, with an index entry for every search-key value, and a pointer to every record in the file. If the search key of a secondary index is not a candidate key, it should contain the pointers to all records for each unique search-key value.
+
+## Hash Index
+
+### Static Hashing
+
+Let $K$ denote the set of all search-key values, and let $B$ denote the set of all bucket addresses. The hash function $h$ is a function from $K$ to $B$. The $h(K_i)$ is the address of the bucket for the record $K_i$.
+
+Hash index could efficiently handle equality queries, but it could not handle range queries, since the value in a certain range are scattered across multiple buckets.
+
+- Insertion: Locate the bucket $h(K_i)$ and add the index entry for the record to the bucket. If the bucket doesn't have enough space, the system provides an overflow bucket and insert the record to it. The overflow buckets of a given bucket are chained together in a linked list.
+- Deletion: Locate the bucket $h(K_i)$ and delete the index entry for the record from the bucket.
+
+The set of buckets is fixed at the time the index is created. If the relation grows far beyond the expected size, hash index could be inefficient due to long overflow chains. The system could rebuild the index with a larger number of buckets, which could cause significant disruption to normal processing with large relations.
+
+### Extendable Hashing
+
+Extendable hashing copes with changes in database size by splitting and merging buckets as the database grows and shrinks. Extendable hashing requires an additional level of indirection, since the system must access the bucket address table before accessing the bucket itself.
+
+#### Data Structure
+
+The hash function generates values over $b$-bit binary integers, and the first $i$ bits are used by the table of bucket address. The value of $i$ grows and shrinks with the size of the database. Several consecutive table entires could point to the same bucket, thus each bucket $j$ has an integer $i_j$ that represents the length of the common hash prefix of its records.
+
+#### Query and Update
+
+To locate the bucket containing search-key value $K_l$, the system takes the first $i$ of $h(K_l)$, and locates the bucket $j$.
+
+- If the bucket will overflow, the system increments $i_j$, moves records in the bucket to new buckets based on the hash values.
+  - If $i = i_j$, the system increments $i$ and copy existing pointers to double the size of the address table.
+  - If $i > i_j$, the system updates the pointer in the table to points to the new buckets.
+- If the bucket will not overflow, the system inserts the record in the bucket.
+
+To delete a record with the search-key value $K_l$, the system locates the bucket $j$, and removes the search key from the bucket.
+
+- The bucket $j$ could be merged with other buckets if $i_j$ and the first $j - 1$ bits of its records is equal to other buckets.
+- The table could shrink if $i_j$ for each bucket $j$ in the table is smaller than $i$.
