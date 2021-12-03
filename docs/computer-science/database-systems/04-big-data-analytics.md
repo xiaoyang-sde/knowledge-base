@@ -1,9 +1,11 @@
-# MapReduce
+# Big Data Analytics
+
+## MapReduce
 
 MapReduce is a programming model and an associated implementation for processing and generating large
 data sets. The program written in the functional style are parallelized and executed on a large cluster of machines. The run-time system partitions the input data, schedules the execution, handles machine failures, and manages inter-machine communication.
 
-## Programming Model
+### Programming Model
 
 The computation takes a set of input key-value pairs, and
 produces a set of output key-value pairs.
@@ -26,7 +28,7 @@ space into `R` pieces using a partitioning function.
 
 When a MapReduce operation is close to completion, the master schedules backup executions of the remaining in-progress tasks. The tasks is marked as completed whenever either the primary or the backup execution completes.
 
-## Fault Tolerance
+### Fault Tolerance
 
 The master writes periodic checkpoints of the progress. If the master task dies, a new copy could be started from the last checkpointed state. The master pings each worker periodically, and if no response is received, the master marks the worker as failed.
 

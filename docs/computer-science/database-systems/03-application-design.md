@@ -1,10 +1,12 @@
-# MongoDB
+# Application Design and Development
+
+## MongoDB
 
 MongoDB is a document database designed for ease of development and scaling. A record in MongoDB is a document, which is a data structure composed of field and value pairs. The values of fields may include other documents, arrays, and arrays of documents. MongoDB stores documents in collections. Collections are analogous to tables in relational databases.
 
-## Retrieve Data
+### Retrieve Data
 
-### Find
+#### Find
 
 Read operations retrieve documents from a collection. The `find()` or `findOne()` method is called on the `Collection` object. The method accepts a query document that describes the documents to retrieve.
 
@@ -21,7 +23,7 @@ collection.find({
 });
 ```
 
-### Sort
+#### Sort
 
 The `sort()` method could change the order of the result.
 
@@ -32,7 +34,7 @@ The `sort()` method could change the order of the result.
 collection.find(query).sort({ length: -1 });
 ```
 
-### Skip
+#### Skip
 
 The `skip()` method could omit documents from the beginning of the list of returned documents. Using `skip` without `sort` omits arbitrary documents.
 
@@ -40,7 +42,7 @@ The `skip()` method could omit documents from the beginning of the list of retur
 collection.find(query).sort({ rating: -1 }).skip(2);
 ```
 
-### Limit
+#### Limit
 
 The `limit()` method could cap the number of documents that can be returned from a read operation.
 
@@ -48,7 +50,7 @@ The `limit()` method could cap the number of documents that can be returned from
 collection.find(query).sort({ rating: -1 }).limit(3);
 ```
 
-### Projection
+#### Projection
 
 The `projection()` method could control the fields that appear in the documents returned by read operations. The two methods of projection are mutually exclusive.
 
@@ -61,7 +63,7 @@ The `_id` field is included by default because it' a unique identifier for each 
 collection.find(query).project({ name: 1 });
 ```
 
-### Cursor
+#### Cursor
 
 Read operations that return multiple documents do not immediately return all values matching the query. The cursor fetches documents in batches to reduce memory consumption. The cursor could be accessed with different paradigms.
 
@@ -75,9 +77,9 @@ The cursor supports different utility methods.
 - `rewind()`: Reset to its initial position
 - `close()`: Free up the cursor's resources
 
-## Write Operation
+### Write Operation
 
-### Insert
+#### Insert
 
 MongoDB enforces the constraint that each document must contain a unique `_id` field.
 
@@ -91,7 +93,7 @@ collection.insertMany([
 ]);
 ```
 
-### Delete
+#### Delete
 
 - The `deleteOne()` method removes one existing document from a collection.
 - The `deleteMany()` method removes multiple existing documents from a collection.
@@ -105,7 +107,7 @@ collection.deleteOne({
 });
 ```
 
-### Update
+#### Update
 
 To perform an update to one or more documents, create an update document that specifies the update operator and the fields and values that describe the change.
 
@@ -131,7 +133,7 @@ collection.updateOne(filter, updateDocument, options);
 
 The `upsert` option controls whether to insert the document if there's no matched document in the collection.
 
-### Replace
+#### Replace
 
 To perform a replacement operation, create a replacement document that consists of the fields and values to insert in the replace operation.
 
@@ -145,11 +147,11 @@ collection.replaceOne(filter, replacementDocument, options);
 
 The `upsert` option controls whether to insert the document if there's no matched document in the collection.
 
-## Specify a Query
+### Specify a Query
 
 Query documents contain one or more query operators that apply to specific fields which determine which documents to include in the result set.
 
-### Literal Value
+#### Literal Value
 
 Literal values query data based on field-value pairs in a collection. Literal value queries are equivalent to the `$eq` comparison operator.
 
@@ -157,7 +159,7 @@ Literal values query data based on field-value pairs in a collection. Literal va
 collection.find({ name: 'apples' });
 ```
 
-### Comparison Operator
+#### Comparison Operator
 
 Comparison operators query data based on comparisons with values in a collection.
 
@@ -175,7 +177,7 @@ collection.find({
 });
 ```
 
-### Logical Operator
+#### Logical Operator
 
 Logical operators query data based on logic applied to the results of field-level operators. When a query document contains multiple elements, these elements are combined together with an implicit `$and` logical operator.
 
@@ -188,7 +190,7 @@ collection.find({
 })
 ```
 
-### Element Operator
+#### Element Operator
 
 Element operators query data based on the presence, absence, or type of a field.
 
@@ -203,7 +205,7 @@ collection.find({
 });
 ```
 
-### Evaluation Operator
+#### Evaluation Operator
 
 Evaluation operators query data based on the execution of higher level logic, like regular expression or text search.
 
@@ -215,7 +217,7 @@ collection.find({
 });
 ```
 
-## Compound Operation
+### Compound Operation
 
 Compound operations combine read and write operations in a single atomic statement, so there's no chance of data changing in between a read and a subsequent write.
 
@@ -223,11 +225,11 @@ Compound operations combine read and write operations in a single atomic stateme
 - `findOneAndUpdate()`: match multiple documents and update the first document
 - `findOneAndReplace()`: match multiple documents and replace the first document
 
-## Index
+### Index
 
 Index is a data structure that contains copies of parts of the data and supports the efficient execution of queries in MongoDB.
 
-### Single Field and Compound Index
+#### Single Field and Compound Index
 
 Single field index improves performance for queries that specify ascending or descending sort order on a single field of a document. (e.g. equality match or range query)
 
@@ -254,7 +256,7 @@ await collection.find({
 });
 ```
 
-### Unique Index
+#### Unique Index
 
 Unique index ensures that the indexed fields do not store duplicate values. By default, MongoDB creates a unique index on the `_id` field during the creation of a collection.
 
@@ -266,13 +268,13 @@ await collection.createIndex({
 });
 ```
 
-## Aggregation
+### Aggregation
 
 Aggregation operations process multiple documents and return computed results through aggregation pipelines.
 
 An aggregation pipeline consists of one or more stages that process documents. Each stage performs an operation on the input documents.
 
-### $match
+#### $match
 
 The `$match` stage could pass the documents that match the specified conditions from a collection to the next pipeline stage. The `$match` stage could limit the total number of documents in the aggregation pipeline, which will optimize the performance.
 
@@ -287,7 +289,7 @@ collection.aggregate([
 ]);
 ```
 
-### $project
+#### $project
 
 The `$project` stage could pass the requested fields in the documents to the next stage in the pipeline. The specified fields could be existing fields from the input documents or newly computed fields.
 
@@ -302,7 +304,7 @@ collection.aggregate([
 ]);
 ```
 
-### $group
+#### $group
 
 The `$group` stage could group input documents by the specified `_id` expression and for each distinct grouping, outputs a document.
 
@@ -329,7 +331,7 @@ collection.aggregrate([
 ]);
 ```
 
-### $out
+#### $out
 
 The `$out` stage takes the document returned by the aggregation pipeline and writes them to a specified collection. The `$out` stage must be the last stage in the pipeline.
 
@@ -349,7 +351,7 @@ collection.aggregrate([
 ]);
 ```
 
-### $unwind
+#### $unwind
 
 The `$unwind` stage deconstructs an array field from the input documents to output a document for each element. Each output document is the input document with the value of the array field replaced by the element.
 
@@ -367,7 +369,7 @@ collection.aggregate([
 ]);
 ```
 
-### $sort
+#### $sort
 
 The `$sort` stage sorts all input documents and returns them to the pipeline. `$sort` takes a document that specifies the fields to sort by and the respective sort order.
 
@@ -389,7 +391,7 @@ collection.aggregate([
 ]);
 ```
 
-### $limit
+#### $limit
 
 The `$limit` operator limits the number of documents passed to the next stage in the pipeline.
 

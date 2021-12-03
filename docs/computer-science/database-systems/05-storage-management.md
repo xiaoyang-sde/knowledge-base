@@ -1,6 +1,8 @@
-# Index
+# Storage Management
 
-## Ordered Index
+## Index
+
+### Ordered Index
 
 The ordered index stores the values of the search keys in sorted order and associates with each search key the records that contain it.
 
@@ -12,13 +14,13 @@ The index entry consists of a search-key value and pointers to one or more recor
 - Dense index: The index entry appears for every search-key values in the file.
 - Sparse index: The index entry appears for some of the search-key values in the file. Sparse index could be used only if the index is a primary index.
 
-### Multi-level Index
+#### Multi-level Index
 
 The multi-level index is an index with two or more levels. Searching for records with a multi-level index requires significantly fewer I/O operations than does searching for records by binary search.
 
-### Index Update
+#### Index Update
 
-#### Insertion
+##### Insertion
 
 - Dense index
   - If the search-key value does not appear in the index, the system inserts an index entry with the search-key value in the index at the appropriate position.
@@ -26,7 +28,7 @@ The multi-level index is an index with two or more levels. Searching for records
   - If the index entry stores a pointer to only the first record with the search-key value, the system places the record being inserted after the other records with the same search-key values.
 - Sparse index: If the system creates a new block, it inserts the first search-key value appearing in the new block into the index. If the new record has the least search-key value in its block, the system updates the index entry pointing to the block.
 
-#### Deletion
+##### Deletion
 
 - Dense index
   - If the deleted record was the only record with its particular search-key value, the system deletes the corresponding index entry from the index.
@@ -37,13 +39,13 @@ The multi-level index is an index with two or more levels. Searching for records
   - If the deleted record was the only record with its search key, the system replaces the corresponding index record with an index record for the next search-key value.
   - If the index entry for the search-key value points to the record being deleted, the system updates the index entry to point to the next record with the same search-key value.
 
-### Secondary Index
+#### Secondary Index
 
 Secondary index improves the performance of queries that use keys other than the search key of the clustering index, but it impose a overhead on modification of the database. Secondary index must be dense, with an index entry for every search-key value, and a pointer to every record in the file. If the search key of a secondary index is not a candidate key, it should contain the pointers to all records for each unique search-key value.
 
-## Hash Index
+### Hash Index
 
-### Static Hashing
+#### Static Hashing
 
 Let $K$ denote the set of all search-key values, and let $B$ denote the set of all bucket addresses. The hash function $h$ is a function from $K$ to $B$. The $h(K_i)$ is the address of the bucket for the record $K_i$.
 
@@ -54,15 +56,15 @@ Hash index could efficiently handle equality queries, but it could not handle ra
 
 The set of buckets is fixed at the time the index is created. If the relation grows far beyond the expected size, hash index could be inefficient due to long overflow chains. The system could rebuild the index with a larger number of buckets, which could cause significant disruption to normal processing with large relations.
 
-### Extendable Hashing
+#### Extendable Hashing
 
 Extendable hashing copes with changes in database size by splitting and merging buckets as the database grows and shrinks. Extendable hashing requires an additional level of indirection, since the system must access the bucket address table before accessing the bucket itself.
 
-#### Data Structure
+##### Data Structure
 
 The hash function generates values over $b$-bit binary integers, and the first $i$ bits are used by the table of bucket address. The value of $i$ grows and shrinks with the size of the database. Several consecutive table entires could point to the same bucket, thus each bucket $j$ has an integer $i_j$ that represents the length of the common hash prefix of its records.
 
-#### Query and Update
+##### Query and Update
 
 To locate the bucket containing search-key value $K_l$, the system takes the first $i$ of $h(K_l)$, and locates the bucket $j$.
 
