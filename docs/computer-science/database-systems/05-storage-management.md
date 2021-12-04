@@ -1,5 +1,14 @@
 # Storage Management
 
+## Physical Storage
+
+The hard disk drive contains the disk head and a few platters. The platters contains a few tracks. The track contains a few sectors or blocks. Data is transferred in the unit of disk block to amortize high access delay.
+
+- Seek time: The time to move the disk head between tracks. The average time is 10ms.
+- Rotational delay: For a disk with $n$ RPM, the average rotational delay is $\frac{1}{2} \cdot \frac{60}{n} \cdot 1000$ ms.
+- Transfer time: For a disk with $n$ RPM and $k$ sectors per track, the time to read a sector is $\frac{1}{k} \cdot \frac{60}{n} \cdot 1000$ ms.
+- Transfer rate: For a disk with $n$ RPM, $k$ sectors per track, and $m$ bytes per sector, the burst transfer rate is $\frac{n}{60} \cdot k \cdot m$.
+
 ## Index
 
 ### Ordered Index
