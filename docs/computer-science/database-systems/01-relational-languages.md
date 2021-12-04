@@ -372,5 +372,21 @@ ON relation_name (
 DROP INDEX index_name;
 ```
 
-### Integrity Constraints
+### Integrity Constraint
 
+Referencing attribute should be `PRIMARY KEY` or `UNIQUE` in the referenced attribute. When the foreign key is `NULL`, no referential integrity check is performed.
+
+- Referential integrity violation from the referencing table is not allowed.
+- Referential integrity violation from the referenced table is not allowed, but the system could fix the violation.
+  - `CASCADE`: The system deletes the row in the referencing table.
+  - `SET NULL`: The system sets the row to `NULL` in the referencing table.
+  - `SET DEFAULT`: The system sets the row to its default value in the referencing table.
+
+```sql
+CREATE TABLE Enroll (
+  student_id INT,
+  FOREIGN KEY (student_id) REFERENCES Student(id)
+  ON UPDATE { CASCADE | SET NULL | SET DEFAULT }
+  ON DELETE { CASCADE | SET NULL | SET DEFAULT }
+);
+```
