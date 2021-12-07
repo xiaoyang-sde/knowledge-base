@@ -11,7 +11,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
   organizationName: 'xiaoyang-sde',
-  projectName: 'programming-notes',
+  projectName: 'programming-note',
   stylesheets: [
     'https://fonts.googleapis.com/css2?family=Inter&display=swap',
     'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
@@ -104,7 +104,7 @@ module.exports = {
           remarkPlugins: [math],
           rehypePlugins: [katex],
           editUrl:
-            'https://github.com/xiaoyang-sde/programming-notes/edit/master/',
+            'https://github.com/xiaoyang-sde/programming-note/edit/master/',
         },
         blog: {
           showReadingTime: true,

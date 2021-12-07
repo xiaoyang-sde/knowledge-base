@@ -10,34 +10,33 @@ Kubernetes is a portable, extensible, open-source platform for managing containe
 
 ## Kubernetes Components
 
-- Pod: The set of running containers.
-- Node: The working machine that run containerized applications.
-- Cluster: The deployed Kubernetes that contains a set of nodes.
-- Control plane: The container orchestration layer that exposes the API and interfaces to manage the lifecycle of containers.
+The Kubernetes cluster consists of a set of working machines (nodes) that run containerized applications.
+
+The work nodes host the Pods that are the components of the application workload. The control plane manages the nodes and the Pods in the cluster.
 
 ### Control Plane Components
 
 The control plane's components make global decisions about the cluster and responde to cluster events.
 
-- kube-apiserver: The API server is a component of the Kubernetes control plane that exposes the Kubernetes API.
-- etcd: Consistent and highly-available key value store used as Kubernetes' backing store for all cluster data.
-- kube-scheduler: Control plane component that watches for newly created Pods with no assigned node, and selects a node for them to run on.
-- kube-controller-manager: Control plane component that runs controller processes.
-- cloud-controller-manager: A Kubernetes control plane component that embeds cloud-specific control logic.
+- kube-apiserver: The component that exposes the Kubernetes API
+- etcd: The component that servces as Kubernetes' backing store for all cluster data
+- kube-scheduler: The component that watches for newly created Pods with no assigned nodes and selects a node for them to run on
+- kube-controller-manager: The component that runs the controller (node controller, job controller, endpoints controller, service account and token controller) processes
+- cloud-controller-manager: The component that embeds cloud-specific control logic
 
 ### Node Components
 
-Node components run on every node, maintaining running pods and providing the Kubernetes runtime environment.
+Node components run on each node in the cluster, maintaining running Pods and providing the Kubernetes runtime environment.
 
-- kubelet: An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
-- kube-proxy: A network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
-- Container runtime: The software that is responsible for running containers. (e.g. Docker, containerd, CRI-O)
+- kubelet: The agent that makes sure that containers are running in a Pod
+- kube-proxy: The network proxy that implements part of the Kubernetes Service concept
+- Container runtime: The software that is responsible for running containers (e.g. Docker, containerd, CRI-O)
 
 ### Addons
 
 Addons use Kubernetes resources (DaemonSet, Deployment, etc) to implement cluster features.
 
-- DNS: Cluster DNS is a DNS server  which serves DNS records for Kubernetes services.
-- Web UI: Dashboard is a general purpose, web-based UI for Kubernetes clusters
-- Container Resource Monitoring: Container Resource Monitoring records generic time-series metrics about containers in a central database, and provides a UI for browsing that data.
-- Cluster-level Logging: A cluster-level logging mechanism is responsible for saving container logs to a central log store with search/browsing interface.
+- DNS: The required addon that serves DNS records for Kubernetes services
+- Web UI: The general purpose, web-based UI for Kubernetes clusters
+- Container Resource Monitoring: The addon that records generic time-series metrics about containers in a central database, and provides a UI for browsing that data
+- Cluster-level Logging: The addon that is responsible for saving container logs to a central log store with search and browsing interface

@@ -32,7 +32,7 @@ const Banner = (): JSX.Element => {
 
             <Link
               className={clsx('button button--secondary button--lg', styles.heroButton)}
-              to="https://github.com/xiaoyang-sde/programming-notes"
+              to="https://github.com/xiaoyang-sde/programming-note"
             >
               GitHub
             </Link>

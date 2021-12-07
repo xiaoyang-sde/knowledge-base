@@ -18,7 +18,7 @@ The files and directories in the `.git` directory in the workspace contain all i
 
 ## Git Object
 
-Git is a content-addressable filesystem. The core of Git is a key-value data store. Git stores content similar to a UNIX file system, such that all the content is stored as `tree` and `blob` objects, with trees corresponding to UNIX directory entries and blobs corresponding more or less to inodes or file contents. Git creates the `blob` from the file content, and creates the `tree` from the state of the staging area or index.
+Git is a content-addressable filesystem. The core of Git is a key-value data store. Git stores content similar to a UNIX file system, such that all the content is stored as `tree` and `blob` objects, with trees corresponding to UNIX directory entries (mode, type, SHA-1 checksum, file name) and blobs corresponding more or less to inodes or file contents. Git creates the `blob` from the file content, and creates the `tree` from the state of the staging area or index. The file type in the tree object could be `100644` (regular file), `100755` (executable file), `120000` (symbolic link), `040000` (tree object).
 
 - The `hash-object` command takes some data, stores it in the `.git/objects` directory (the object database), and returns the unique key (40-character checksum hash) that refers to that data object.
 - The `cat-file` command takes the checksum hash and returns the content of the file.
