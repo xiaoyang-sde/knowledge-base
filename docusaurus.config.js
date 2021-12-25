@@ -43,55 +43,6 @@ module.exports = {
     },
     footer: {
       style: 'light',
-      links: [
-        {
-          title: 'Computer Science',
-          items: [
-            {
-              label: 'Algorithm Design',
-              to: 'docs/computer-science/algorithm-design/stable-matching',
-            },
-            {
-              label: 'Computer Systems',
-              to: 'docs/computer-science/computer-systems/representing-manipulating-information',
-            },
-            {
-              label: 'Data Structures',
-              to: 'docs/computer-science/data-structures/hello-world-java',
-            },
-          ],
-        },
-        {
-          title: 'Web Development',
-          items: [
-            {
-              label: 'The Modern JavaScript Tutorial',
-              to: 'docs/web-development/javascript-tutorial/the-javascript-language/an-introduction',
-            },
-            {
-              label: 'You Don\'t Know JS',
-              to: 'docs/web-development/you-dont-know-js/get-started/what-is-javascript',
-            },
-            {
-              label: 'TypeScript Handbook',
-              to: 'docs/web-development/typescript/basic-types',
-            },
-          ],
-        },
-        {
-          title: 'Software Engineering',
-          items: [
-            {
-              label: 'Agile Development',
-              to: 'docs/software-engineering/agile-development/agile-manifesto',
-            },
-            {
-              label: 'Infrastructure',
-              to: 'docs/software-engineering/infrastructure/aws/applications',
-            },
-          ],
-        },
-      ],
       copyright: `Copyright © ${new Date().getFullYear()} Xiaoyang Liu. Built with Docusaurus.`,
     },
   },
