@@ -36,3 +36,28 @@ The `wait()` system call is used to wait for a process to change state. The chan
 ### The `exec()` System Call
 
 The `exec()` system call is used to run a program that is different from the calling program. The process loads the code from the executable, re-initializes the memory space, and overwrites the current code segment with it. The system runs the program without creating a new process, thus the successful `exec()` call never returns.
+
+## Mechanism: Limited Direct Execution
+
+The limited direct execution mechanism runs the program directly on the CPU with a few limitations to restrict unexpected behaviors and virtualize the CPU with time sharing.
+
+### Restricted Operation
+
+- User mode: The code that runs in the user mode is restricted from certain instructions, such as issuing I/O requests. The code should execute a system call to perform the privileged operations.
+- Kernel mode: The opearting system runs in the kernel mode could execute privileged operations and restricted insturctions.
+
+The kernel sets up a trap table at boot time to define the handlers of certain events (system call, keyboard interrupt, etc.) and inform the hardware of the locations of these trap handlers.
+
+The kernel initializes the environment (allocate memory, etc.) and use a `return-from-trap` instruction to switch to the user mode and start the execution of the process. The process could specify the system-call number and execute a `trap` instruction to execute the system call. The instruction jumps into the kernel and raises the privilege level to kernel mode. The system performs privileged operations, and calls the `return-from-trap` instruction to return to the calling user program.
+
+- The `trap` instruction informs the hardware to push the program counter, flags, and other registers to the per-process kernel stack.
+- The `return-from-trap` instruction pops these values off the kernel stack and resume execution of the user-mode program.
+
+### Switching Between Process
+
+The operating system regains control of the CPU to switch between processes with either of these two approaches:
+
+- Cooperative approach (Legacy): The system regains control by waiting for a system call or an illegal operation to take place.
+- Non-cooperative approach: The system regains control by defining a timer device that periodically raises a timer interrupt to halt the running process.
+
+The timer interrupt instructs the hardware to save the registers to the kernel stack of the running process A, and enters the kernel. The scheduler makes the decision to continue the current process or execute the context switch routine. The context switch saves current reigster values into the process structure of process A, and restores the registers of another process B from its process structure, and then changes the stack pointer. The `return-from-trap` instruction instructs the hardware to restore the registers of process B and starts running it.
