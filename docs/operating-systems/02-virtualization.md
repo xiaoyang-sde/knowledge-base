@@ -61,3 +61,17 @@ The operating system regains control of the CPU to switch between processes with
 - Non-cooperative approach: The system regains control by defining a timer device that periodically raises a timer interrupt to halt the running process.
 
 The timer interrupt instructs the hardware to save the registers to the kernel stack of the running process A, and enters the kernel. The scheduler makes the decision to continue the current process or execute the context switch routine. The context switch saves current reigster values into the process structure of process A, and restores the registers of another process B from its process structure, and then changes the stack pointer. The `return-from-trap` instruction instructs the hardware to restore the registers of process B and starts running it.
+
+## Scheduling: Introduction
+
+- Response time: $T_\text{response} = T_\text{first\_run} - T_\text{arrival}$
+- Turnaround time: $T_\text{turnaround} = T_\text{completion} - T_\text{arrival}$
+
+The trade-off exists between these two metrics: The system could run shorter processes to completion to improve turnaround time, or switch between processes to improve response time.
+
+- **FIFO** (first in, first out): The system queues the processes in the order that they arrive.
+- **SJF** (shortest job first): The system queues the processes in the order of their execution time.
+- **STCF** (shortest time-to-completion first): The system queues the processes in the order of **remaining** execution time, and preempts the running process if it receives a process that has shorter **remaining** execution time. (Optimal turnaround time)
+- **Round Robin**: The system runs each process for a time slice and then switches to the next process in the queue. The length of the time slice presents a trade-off that it should long enough to amortize the cost of context switching without making the system not responsive. (Optimal response time)
+
+The system could incorporate I/O by treating each CPU burst as a new job. While the interactive jobs are performing I/O, other CPU-intensive jobs could be scheduled to improve processor utilization.
