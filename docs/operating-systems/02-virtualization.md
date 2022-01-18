@@ -75,3 +75,14 @@ The trade-off exists between these two metrics: The system could run shorter pro
 - **Round Robin**: The system runs each process for a time slice and then switches to the next process in the queue. The length of the time slice presents a trade-off that it should long enough to amortize the cost of context switching without making the system not responsive. (Optimal response time)
 
 The system could incorporate I/O by treating each CPU burst as a new job. While the interactive jobs are performing I/O, other CPU-intensive jobs could be scheduled to improve processor utilization.
+
+## Scheduling: The Multi-Level Feedback Queue
+
+The multi-level feedback queue is a scheduling approach that optimizes turnaround time and response time without the knowledge of how long a job will run for. The MLFQ has a few distinct queues, each assigned a different priority level. The MLFQ varies the priority of a job based on its observed behavior, and it prioritizes short or I/O-intensive interactive jobs.
+
+- If $\text{Priority(A)} > \text{Priority(B)}$, $A$ runs.
+- If $\text{Priority(A)} = \text{Priority(B)}$, $A$ and $B$ run in round robin.
+- When a job enters the system, it is placed at the highest
+priority.
+- If a job uses up its time allotment at a given level (regardless of how many times it has given up the CPU), its priority is reduced.
+- After some time period $S$, move all the jobs in the system to the topmost queue to avoid the problem of starvation.
