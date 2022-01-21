@@ -1,4 +1,4 @@
-# Virtualization
+# CPU Virtualization
 
 ## The Abstraction: The Process
 
@@ -86,3 +86,12 @@ The multi-level feedback queue is a scheduling approach that optimizes turnaroun
 priority.
 - If a job uses up its time allotment at a given level (regardless of how many times it has given up the CPU), its priority is reduced.
 - After some time period $S$, move all the jobs in the system to the topmost queue to avoid the problem of starvation.
+
+## Multiprocessor Scheduling
+
+- **SQMS** (single-queue multiprocessor scheduling): The single queue handles the jobs to be scheduled. Each CPU picks the next job to run from the globally-shared queue.
+  - The approach requires the lock to ensure the scheduler on multiple CPUs could access the proper data. The lock reduces performance as the number of CPUs in the systems grows.
+  - The approach moves the job between different CPUs, which could affect cache affinity.
+- **MQMS** (multi-queue multiprocessor scheduling): The multiple queues with specific scheduling policies handle the jobs to be scheduled. Each CPU picks the next job from a specific queue.
+  - The approach does not require the lock and perserve cache affinity.
+  - The approach could cause load imbalance. The problem could be solved with migration. The work stealing approach enables the queue queue that is low on jobs to steal jobs from the target queues that are more full than the source queue.
