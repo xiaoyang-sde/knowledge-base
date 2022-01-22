@@ -87,6 +87,31 @@ priority.
 - If a job uses up its time allotment at a given level (regardless of how many times it has given up the CPU), its priority is reduced.
 - After some time period $S$, move all the jobs in the system to the topmost queue to avoid the problem of starvation.
 
+## Scheduling: Proportional Share
+
+The proportional-share scheduler tries to guarantee that each job obtains a certain percentage of CPU time. The lottery scheduling uses a ticket to represent the share of a resource that a process should receive. The scheduler picks a winning ticket and runs the winning process.
+
+- Ticket currency: The user could allocate tickets among their jobs in the currency they defined, and the system converts the currency into the global value.
+- Ticket transfer: The process could temporarily hand off its tickets to another process.
+- Ticket inflation: The process could temporarily raise or lower the number of tickets it owns.
+
+The stride scheduler is a deterministic proportional-share scheduler. Each process is assigned a stride value ($1 / \text{ticket\_value}$). When a process runs, its pass value is incremented by its stride value. The scheduler picks the process with the lowest pass value to run.
+
+### Linux Completely Fair Scheduler (CFS)
+
+The Linux system uses the Completely Fair Scheduler to implement proportional-share scheduling efficiently. The CFS uses a virtual runtime to track the runtime of each process and picks the process with lowest virtual runtime to run next.
+
+- **sched_latency**: the time that in which each process could expect to get a share of the processor
+- **min_granularity**: the minimal time slice allocated to each process
+
+The CFS enables users to give some processes a higher share of CPU with the **nice** parameter of a process, which ranges from $-20$ to $19$ and defautls to $0$. Positive nice values imply lower priority and negative nice values imply higher priority. The nice value of each process is mapped to a **weight**, which could be used to compute the effective time slice of each process. (e.g. a nice value of $0$ corresponds to a weight of $1024$)
+
+$$\text{time\_slice}_k = \frac{\text{weight}_k}{\sum_{i = 0}^{n - 1} \text{weight}_i} \cdot \text{sched\_latency}$$
+
+$$\text{vruntime}_k = \text{vruntime}_k + \frac{\text{weight}_0}{\text{weight}_k} \cdot \text{runtime}_k$$
+
+The CFS implements a red-black tree to keep running processes. If a process goes to sleep (e.g. wait for I/O), it's removed from the tree. The **vruntime** of a process is reset to the lowest value in the tree when it wakes up to prevent it from monopolize the CPU.
+
 ## Multiprocessor Scheduling
 
 - **SQMS** (single-queue multiprocessor scheduling): The single queue handles the jobs to be scheduled. Each CPU picks the next job to run from the globally-shared queue.
