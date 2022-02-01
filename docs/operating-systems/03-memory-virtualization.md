@@ -39,6 +39,20 @@ $$\text{physical\_address} = \text{segment\_offset} + \text{base}$$
 
 The system extracts the first few bits of a virtual address to determine which segment it is referring to. The system shares certain memory segments between address spaces with the protection bits, which specifies whether or not a process could read, write, or execute the segment.
 
+## Free-Space Management
+
+Free-space management in a system that implements the virtual memory with the segmentation technique is complicated because the free spaces are fragmented. The system maintains a **free list** data structure to manage the free space, which contains references to all of the free chunks of space in the managed region of memory. To track the length of the allocated chunk, the allocator stores extra information in the **header** block that contains the size of the allocated region in the memory.
+
+- **Splitting**: The allocator finds a free chunk of memory that can satisfy the request and split it into two.
+- **Coalescing**: The allocator merges newly returned free chunk with its adjencent free chunk.
+
+The ideal allocator is both fast and minimizes fragmentation. Because the stream of allocation and free requests can be arbitrary, any particular strategy can do quite badly given the wrong set of inputs.
+
+- **Best fit**: The allocator finds chunks of free memory that are larger than the requested size, and then returns the smallest (best-fit) chunk.
+- **Worst fit**: The allocator finds chunks of free memory that are larger than the requested size, and then returns the largest (worst-fit) chunk.
+- **First fit**: The allocator finds and returns the first block that is larger than the requested size.
+- **Next fit**: The allocator keeps an extra pointer to the location within the list where it was looking last and returns the next block that is larger than the requested size.
+
 ## Paging: Introduction
 
 The paging technique divides the virtual address space into fixed sized pages. The physical memory is an array of fixed-sized page frames, and each frame contains a single virtual-memory page. To translate the virtual address into the physical address, the system splits the virtual address into the **virtual page number** and the **offset** within the page, and then replaces the virtual page number with the **physical frame number** based on the page table. The technique could introduce extra memory accesseses and fill the memory with large page tables.
@@ -67,3 +81,19 @@ The TLB could hold translations from different processes at the same time since 
 The multi-level page table technique divides the page table into page-sized units and tracks the address of each page of the page table with the page directory structure. The multi-level page table allocates page-table space in proportion to the amount of address space the process is using to compact the size of the page table.
 
 The technique divides the virtual memory number into the **page-directory index** and the **page table index**. The system locates the page directory entry with the page-directory index and extracts the page-frame number. The system uses the page-frame number to retrieve a specific page of the page table and locates the page-table entry that holds the physical address with the page table index.
+
+## Swapping: Mechanisms
+
+The swap space on the disk are reserved for storing pages that could not fit in the physical memory. The **present bit** in the page table entry indicates whether a page is in physical memory or not. If the process tries to access a page that is not in the physical memory, the hardware will raise a page fault. The page-fault handler will block the process and issue a disk I/O request to retrieve the page from the swap space. When there are fewer than **low watermark** pages available, the swap daemon starts in the background to evict pages in the physical memory until there are at least **high watermark** pages available.
+
+## Swapping: Policies
+
+The page replacement policy defines which page the system will evict when little memory is free. The goal of page replacement policies is to reduce the number of cache misses, and its performance could be measured with the average memory access time (AMAT) or a program. The policies are based on principle of **spatial locality** and **temporal locality**.
+
+$$\text{AMAT} = T_{M} + (P_{\text{Miss}} \cdot T_M)$$
+
+- **Optimal** replaces the page that will be accessed furthest in the future (impossible to implement).
+- **FIFO** maintains a queue for the pages based on the order they enter the system, and replaces the oldest page.
+- **Random** replaces a random page.
+- **LRU** replaces the least recently accessed page.
+- **LFU** replaces the least frequently accessed page.
