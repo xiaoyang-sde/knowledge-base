@@ -17,9 +17,12 @@ module.exports = {
     'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
   ],
   themeConfig: {
-    googleAnalytics: {
-      trackingID: 'UA-156941792-1',
-      anonymizeIP: true,
+    algolia: {
+      appId: 'VI4IHQNLIL',
+      apiKey: 'af43094cb4b5d38f484b366cf389a142',
+      indexName: 'xiaoyang-liu',
+      contextualSearch: false,
+      facetFilters: [],
     },
     navbar: {
       title: 'Xiaoyang\'s Notes',
@@ -59,22 +62,16 @@ module.exports = {
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl:
             'https://github.com/facebook/docusaurus/edit/master/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      },
-    ],
-  ],
-  plugins: [
-    [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      {
-        hashed: true,
-        indexBlog: false,
+        googleAnalytics: {
+          trackingID: 'UA-156941792-1',
+          anonymizeIP: true,
+        },
       },
     ],
   ],
