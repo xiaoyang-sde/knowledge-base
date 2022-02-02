@@ -97,3 +97,32 @@ $$\text{AMAT} = T_{M} + (P_{\text{Miss}} \cdot T_M)$$
 - **Random** replaces a random page.
 - **LRU** replaces the least recently accessed page.
 - **LFU** replaces the least frequently accessed page.
+
+## The Linux Virtual Memory System
+
+### The Linux Address Space
+
+The Linux virtual address space consists of a user portion (user program code, stack, and heap) and a kernel portion (kernel code, stack, and heap) and preserves the kernel portion across context switches.
+
+The kernel virtual address space is divided into **kernel logical address**, which is the normal virtual address space of the kernel (page tables, per-process kernel stacks, etc.) and is directly mapped to a contiguous chunk of the physical memory, and **kernel virtual address**, which is mapped to non-contiguous physical memory.
+
+### Page Table Structure
+
+x86 provides a hardware managed, multi-level page table structure, with one page table per process. The system sets up mappings in its memory, points a privileged register at the start of the page directory, and the hardware handles the rest. In a 64-bit system, the top 16 bits of the virtual address are unused, and the bottom 12 bits are used as the offset (4096 bytes page size), leaving the middle 36 bits of virtual address to take part in the translation.
+
+### Large Page Support
+
+Linux allows application to use multiple page size that is larger than the standard 4-KB page to reduce the number of mappings in the page table and allow a process to access a large tract of memory without TLB misses. The technique could lead to internal fragmentation and increase the amount of I/O a system does.
+
+
+### The Page Cache
+
+The Linux page cache implements a **page cache hash table** to store pages from the memory-mapped files, heap pages, and stack pages. The page cache tracks if entries are **clean** or **dirty**. Dirty data is periodically written to the backing store by background threads.
+
+The Linux decides which pages to remove to free up space with the 2Q replacement algorithm. The algorithm keeps two LRU queues and divides memory between them. When accessed for the first time, a page is placed on the **inactive list** queue. When the page is re-referenced, the page is promoted to the **active list** queue. The system periodically moves pages from the bottom of the active list to the inactive list. When replacement needs to take place, the candidate for replacement is taken from the inactive list.
+
+### Security and Buffer Overflow
+
+The **buffer overflow** could happen when the program copies an input that is longer than the buffer and overwrites the target memory. The malicious programmer could inject their own code into the target system with specific input, which could cause privilege escalation. However, the system could set an NX bit in the PTEs of a certain regions of the page table to prevent injected code from being executed.
+
+The **return-oriented programming** could allow the attacker execute code sequences without injecting code. The attacker could use a lot of bits of code (**gadgets**) within a program's address space and then overwrite the stack to redirect the return address in the executing function to a malicious instruction, followed by a return instruction. However, the system could use the **addres space layout randomization** technique to place the code, stack, and heap into random locations.
