@@ -5,7 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 
-const Banner = (): JSX.Element => {
+function Banner(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
   return (
@@ -41,15 +41,17 @@ const Banner = (): JSX.Element => {
       </div>
     </header>
   );
-};
+}
 
-const Home = (): JSX.Element => (
-  <Layout
-    title="Home"
-    description="Description will go into a meta tag in <head />"
-  >
-    <Banner />
-  </Layout>
-);
+function Home(): JSX.Element {
+  return (
+    <Layout
+      title="Home"
+      description="Description will go into a meta tag in <head />"
+    >
+      <Banner />
+    </Layout>
+  );
+}
 
 export default Home;

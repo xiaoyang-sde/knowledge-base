@@ -2,6 +2,9 @@
 const math = require('remark-math');
 const katex = require('rehype-katex');
 
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+
 module.exports = {
   title: 'Xiaoyang\'s Notes',
   tagline: 'Lecture notes on Computer Science, Web Development, and Software Engineering Philosophies.',
@@ -14,15 +17,24 @@ module.exports = {
   projectName: 'programming-note',
   stylesheets: [
     'https://fonts.googleapis.com/css2?family=Inter&display=swap',
-    'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity: 'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
   ],
   themeConfig: {
     algolia: {
       appId: 'VI4IHQNLIL',
-      apiKey: 'af43094cb4b5d38f484b366cf389a142',
+      apiKey: '50eac323e30a25d563ef87b2dffbc928',
       indexName: 'xiaoyang-liu',
       contextualSearch: false,
       facetFilters: [],
+    },
+    prism: {
+      theme: lightCodeTheme,
+      darkTheme: darkCodeTheme,
     },
     navbar: {
       title: 'Xiaoyang\'s Notes',

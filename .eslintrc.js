@@ -4,26 +4,32 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'airbnb',
+    'airbnb-typescript',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
+    project: [
+      'tsconfig.json',
+    ],
     ecmaVersion: 12,
     sourceType: 'module',
   },
   plugins: [
-    'react',
     '@typescript-eslint',
   ],
   rules: {
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
+    'no-restricted-syntax': 0,
+    'import/prefer-default-export': 0,
+    'import/extensions': 0,
+    'class-methods-use-this': 0,
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.ts'],
+      },
+    },
   },
   globals: {
     React: true,
