@@ -46,3 +46,11 @@ Raft uses the election restriction to ensure the leader contains all committed e
 The leader won't commit log entries from previous term by counting replicas because these entries could still be overwritten by a future leader. When an entry in the current term is committed, all prior entries are committed indirectly.
 
 If the follower and candidate crashes, future RPCs will fail and be retried indefinitely until the crashed server restarts. Because the RPCs are idempotent, duplicated RPCs won't change the state of the server.
+
+To ensure the system is making process, the `boardcastTime` should be an order of magnitude less than the `electionTimeout`, and the `electionTimeout` should be a few order of magnitude less than the `MTBF`, the average time between failures for a single server.
+
+### Log compaction
+
+Snapshotting is the simplest approach to log compaction. The entire current system state is written to a snapshot on stable storagee, then the entire log up to that point is discarded. Each server takes snapshots that contain the committed entries in the log, the last included index, and the last included term.
+
+The leader must send `InstallSnapshot` to followers that lag behind when the leader has discarded the next log entry that it needs to send to a follower. If the snapshot contains new or conflict information, the follower could discard its entire log. If the snapshot is a prefix of its log, the follower deletes the log entries covered by the snapshot and retains the following entries.
