@@ -160,4 +160,56 @@ void unlock(lock_t *m) {
 ### Concurrent Queue
 
 - The simple concurrent queue maintains a lock for all the elements in the queue. The thread acquires the lock, modifies the queue, and releases the lock.
-- The scalable concurrent queue maintains a lock for the head and a lock for the tail to enable enqueue and dequeue operations.
+- The scalable concurrent queue maintains a lock for the head and a lock for the tail to enable enqueue and dequeue operations.`
+
+## Condition Variable
+
+The condition variable is an explicit queue that threads could put themselves on when some condition is not as desired.
+
+- The `wait()` routine is executed when a thread wishes to put itself to sleep. The routine assumes the mutex is locked, releases the lock, and puts the calling thread to sleep. When the thread wakes up, it re-acquires the lock before returning to the caller. The lock should be held before calling `wait()` to prevent the race condition. If other thread modifies the condition after the thread checks the condition but before it sleeps, the thread will sleep forever.
+- The `signal()` routine is executed when a thread has changed the state and wants to wake a sleeping thread waiting on this condition. The lock should be held before calling `signal()` to prevent race condition.
+- The `broadcast()` routine is executed when a thread has changed the state and wants to wake all sleeping threads waiting on this condition.
+
+## Semaphore
+
+The semaphore is an object with an integer value that could be manipulated with the `sem_wait()` and `sem_post()` routines. The semaphore is initialized to a specifc integer that represents the number of resources that will be given away immediately after initialization.
+
+- The `sem_wait()` routine decrements the value of the semaphore by 1 and waits if the value of the semaphore is negative.
+- The `sem_post()` routine increments the value of the semaphore by 1 and wakes a waiting thread.
+
+```c
+#include <semaphore.h>
+
+sem_t s;
+sem_init(&s, 0, 1);
+sem_wait(&s);
+sem_post(&s);
+```
+
+### Implementation
+
+The semaphore could be implemented with a lock and a condition variable, and a state variable to track the value of the semaphore. The semaphore value in the implementation won't be negative as it's easier to implement.
+
+```c
+typedef struct __sem_t {
+  int value;
+  pthread_cond_t cond;
+  pthread_mutex_t lock;
+} sem_t;
+
+void sem_wait(sem_t *s) {
+  Mutex_lock(&s->lock);
+  while (s->value <= 0) {
+    Cond_wait(&s->cond, &s->lock);
+  }
+  s->value--;
+  Mutex_unlock(&s->lock);
+}
+
+void sem_post(sem_t *s) {
+  Mutex_lock(&s->lock);
+  s->value++;
+  Cond_signal(&s->cond);
+  Mutex_unlock(&s->lock);
+}
+```
