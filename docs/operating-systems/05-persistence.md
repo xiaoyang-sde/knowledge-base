@@ -66,7 +66,7 @@ The abstraction of the file system enables multiple processes to share the same 
 
 The section describes the implementation details of **vsfs** (very simple file system). The vsfs partitions the disk into multiple fixed-size blocks.
 
-- Superblock: The block that contains information about the file system (e.g. the number of inodes and data blocks)
+- Super block: The block that contains information about the file system (e.g. the number of inodes and data blocks)
 - Inode bitmap: The bitmap that indicates whether the corresponding inode is free (0) or in-use (1)
 - Data bitmap: The bitmap that indicates whether the corresponding data block is free (0) or in-use (1)
 - Inode table: The list of on-disk inodes
@@ -92,3 +92,21 @@ The **directory** is a list of (entry name, inode number) pairs. For each file o
 - **Static partitioning cache**: The system uses a fixed-size cache to hold popular blocks with strategies such as LRU. The fixed-size cache is allocated at boot time.
 - **Dynamic partitioning cache**: The system integrates the virtual memory pages and file system pages into a unified page cache.
 - **Write buffer**: The system batches updates into a smaller set of I/O operations and schedules these operations to improve performance.
+
+## Locality and The Fast File System
+
+The fast file system (FFS) implements the file system structures and allocation policies to be disk aware to improve performance.
+
+FFS divides the disk into a number of cylinder groups. Each cylinder is a set of tracks on different surfaces of a hard drive that are the same distance from the center of the drive. If the files are located in the same group, FFS ensures that accessing these files won't result in long seeks across the disk.
+
+Each cylinder group contains multiple data blocks. FFS includes the super block, inode bitmap, data bitmap, inodes, and user data into each cylinder group.
+
+### Allocation
+
+FFS keeps related files together to improve performance and uses a few heuristics to determine where to place the files and directories.
+
+- Placement of directories: FFS finds the cylinder group with a low number of allocated directories and a high number of free inodes, and puts the directory data into that group.
+- Placement of files: FFS allocates the data blocks of a file in the same group as its inode. FFS places all files in the same directory in the same cylinder group.
+- Placement of large files: FFS places the direct blocks in the same group as the inode and places each indirect block of the file in a different block group.
+
+To prevent internal fragmentation of 4-KB blocks, FFS introduces 512 byte sub-blocks that could be allocated. If a file grows to 4 KB, the file system copies the sub-blocks into a new 4 KB block and removes the sub-blocks.
