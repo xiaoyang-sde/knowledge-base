@@ -148,3 +148,21 @@ The journaling method could recover from a crash happened after the transaction 
 When the system boots, the file system recovery process scans the log and replays the incomplete transactions that have committed to the disk. The file system buffers updates and commits them into a global transaction to avoid excessive writes.
 
 To avoid the high cost of writing data block to disk twice, the **metadata journaling** writes the data block to the final location, and then writes only the metadata to the log. By forcing the data write first, the file system could guarantee that a pointer will never point to garbage.
+
+## Log-structured File System
+
+The log-structured file system buffers all updates of data and metadata in an in-memory segment and writes the segment to disk in one long, sequential transfer when the segment is full. LFS never overwrites existing data, but rather always writes segments to free locations.
+
+Assume that rotation and seek overheads before each write takes $T_{\text{position}}$ seconds and the disk transfer rate is $R_{\text{peak}}$ MB/s. The time to write a chunk of $D$ MB is $T_{\text{write}} = T_{\text{position}} + \frac{D}{R_{\text{peak}}}$. Therefore, $R_{\text{effective}} = \frac{D}{T_{\text{position}} + \frac{D}{R_{\text{peak}}}}$. Assume $F$ is the fraction of peak bandwidth, $D = \frac{F}{1 - F} \cdot R_{\text{peak}} \cdot T_{\text{position}}$.
+
+### Inode Map
+
+LFS implements an **inode map** to map the inode numbers and the disk address of each inode. Each time an inode is written to disk, the inode map is updated with its new location. LFS places chunks of the inode map next to where it's writing all of the new information. LFS implements the **checkpoint region** that contains pointers to the latest pieces of the inode map.
+
+To read a file from the disk, the file system reads the checkpoint region to find the latest inode map, reads the inode map to memory, and looks up the inode map to find specific inodes.
+
+### Garbage Collection
+
+The LFS garbage collector reads in a number of old segments, determines which blocks are live, writes out a new set of segments with the lives blocks, and them frees up the old segments for writing.
+
+For each data block $D$, LFS includes its inode number and its offset (the index of the block of the file) in the segment summary block at the head of the segment. For a block $D$ located on disk at address $A$, LFS looks in the segment summary block, finds its inode number $N$ and offset $T$, and checks the inode to find the actual address $A'$ of the $T$-th block of the file. If $A \neq A'$, the block $D$ could be garbage collected.
