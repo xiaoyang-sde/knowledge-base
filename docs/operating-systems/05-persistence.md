@@ -66,7 +66,7 @@ The abstraction of the file system enables multiple processes to share the same 
 
 The section describes the implementation details of **vsfs** (very simple file system). The vsfs partitions the disk into multiple fixed-size blocks.
 
-- Super block: The block that contains information about the file system (e.g. the number of inodes and data blocks)
+- Superblock: The block that contains information about the file system (e.g. the number of inodes and data blocks)
 - Inode bitmap: The bitmap that indicates whether the corresponding inode is free (0) or in-use (1)
 - Data bitmap: The bitmap that indicates whether the corresponding data block is free (0) or in-use (1)
 - Inode table: The list of on-disk inodes
@@ -99,7 +99,7 @@ The fast file system (FFS) implements the file system structures and allocation 
 
 FFS divides the disk into a number of cylinder groups. Each cylinder is a set of tracks on different surfaces of a hard drive that are the same distance from the center of the drive. If the files are located in the same group, FFS ensures that accessing these files won't result in long seeks across the disk.
 
-Each cylinder group contains multiple data blocks. FFS includes the super block, inode bitmap, data bitmap, inodes, and user data into each cylinder group.
+Each cylinder group contains multiple data blocks. FFS includes the superblock, inode bitmap, data bitmap, inodes, and user data into each cylinder group.
 
 ### Allocation
 
@@ -110,3 +110,41 @@ FFS keeps related files together to improve performance and uses a few heuristic
 - Placement of large files: FFS places the direct blocks in the same group as the inode and places each indirect block of the file in a different block group.
 
 To prevent internal fragmentation of 4-KB blocks, FFS introduces 512 byte sub-blocks that could be allocated. If a file grows to 4 KB, the file system copies the sub-blocks into a new 4 KB block and removes the sub-blocks.
+
+## Crash Consistency: FSCK and Journaling
+
+The system could crash or lose power between two writes, and thus the on-disk state could partially get updated. The crash consistency tries to ensure that the file system keeps the on-disk image in a reasonable state.
+
+For example, the workload that appends a single data block to an existing file is accomplished by updating the inode, the new data block, and the data bitmap.
+
+- The data block is written to disk: The data is on the disk, but there's no inode that points to it and no bitmap that marks the block as allocated. The write seems like never occured.
+- The inode is written to disk: The inode points to the new data block, but the data block is not exist. The system could read garbage data from the location of the new data block. There's also an inconsistency between the data bitmap and the inode.
+- The bitmap is written to disk: The bitmap indicates that the block is allocated, but there's no inode that points to it. There's a space leak since the location of the new block could never be used by the file system.
+- The inode and bitmap are written to disk: The system could read garbage data from the location of the new data block.
+- The inode and the data block are written to disk: There's an inconsistency between the data bitmap and the inode.
+- The bitmap and the data block are written to disk: There's an inconsistency between the data bitmap and the inode.
+
+### The File System Checker
+
+`fsck` is a tool for finding and reparing inconsistencies in the file system metadata. The tool is run before the file system is mounted and made available.
+
+- Superblock: `fsck` checks if the superblock looks reasonable with sanity checks.
+- Free blocks: `fsck` scans the inodes, indirect blocks, and multi-level indirect blocks to identify the allocated blocks. It compares the allocated blocks with the bitmap to find inconsistencies.
+- Inode state: `fsck` scans the each inode to check for corruption.
+- Inode link: The link count indicates the number of different directories that contain a reference to the file. `fsck` scans the directory tree to build the link count for each file and compares it with the link count stored in each inode.
+- Duplicate: `fsck` checks for duplicate pointers such as two different inodes refer to the same block.
+- Bad block: `fsck` checks for bad block pointers such as pointers points to a block greater than the partition size.
+- Directory check: `fsck` performs integrity checks on the contents of each directory to make sure each inode in the directory is allocated.
+
+### Journaling
+
+The journaling method could recover from a crash happened after the transaction has commited to the log. When the system boots, the file system recovery process scans the log and replays the incomplete transactions that have committed to the disk.
+
+1. Journal write: Write the contents of the transaction (the transaction-begin block and the exact contents of the metadata and data updates) to the log.
+2. Journal commit: Write the transaction commit block to the log
+3. Checkpoint: Write the contents of the metadata and data update to their final on-disk locations
+4. Free: Update the journal superblock to mark the transaction free.
+
+When the system boots, the file system recovery process scans the log and replays the incomplete transactions that have committed to the disk. The file system buffers updates and commits them into a global transaction to avoid excessive writes.
+
+To avoid the high cost of writing data block to disk twice, the **metadata journaling** writes the data block to the final location, and then writes only the metadata to the log. By forcing the data write first, the file system could guarantee that a pointer will never point to garbage.
