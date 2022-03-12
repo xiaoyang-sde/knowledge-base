@@ -1,5 +1,27 @@
 # Persistence
 
+## Hard Disk Drive
+
+- Platter: The circular hard surface on which data is stored persistenly. Each platter has two surfaces.
+- Spindle: The platters are bound around the spindle, which is connected to a motor that spins the platters around at a fixed rate. The rate of rotation is measured in rotations per minute.
+- Sector: The disk consists of a large number of sectors (512-byte blocks), each of which could be read or written.
+- Track: The surface consists of multiple concentric circles of sectors.
+- Disk head and disk arm: The process of reading and writing is accomplished by the disk head. There's one disk head per surface of the drive. The disk head is attached to a single disk arm, which moves across the surface to position the head over the desired track.
+
+### I/O Time
+
+The I/O time is the sum of three major components: $T_{I/O} = T_{\text{seek}} + T_{\text{rotation}} + T_{\text{transfer}}$. The transfer rate is defined as $R_{\text{I/O}} = \frac{\text{Size}_{Transfer}}{T_{\text{I/O}}}$. There's a huge different bewteen sequential $R_{\text{I/O}}$ and random $R_{\text{I/O}}$.
+
+- The **seek time** is the time it takes the disk arm to move to the desired track.
+- The **rotational delay** is the time it takes the disk head to move to the desired sector.
+- The **transfer time** is the time it takes the disk head to read or write the data to the desired sector.
+
+### Disk Scheduling
+
+- **Shortest Seek Time First** (SSTF): The disk scheduler orders the queue of I/O requests by track, picking requests on the nearest track to complete first. The policy could lead to starvation of I/O requests.
+- **Elevator**: The disk scheduler moves the disk head back and forth across the tracks to serve requests. If a request comes for a block on a track that has been serviced on the current sweep, it's queued until the next sweep.
+- **Shortest Positioning Time First** (SPTF): The disk scheduler orders the queue of I/O requests by the positioning time ($T_{\text{seek}} + T_{\text{rotation}}$), picking requests on the nearest track to complete first.
+
 ## File and Directory
 
 ### File
