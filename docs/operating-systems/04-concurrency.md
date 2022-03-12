@@ -213,3 +213,45 @@ void sem_post(sem_t *s) {
   Mutex_unlock(&s->lock);
 }
 ```
+
+## Common Concurrency Problem
+
+### Atomicity Violation
+
+The atomicity violation problem is that the desired serializability among multiple memory accesses is violated. For example, a code region is intended to be atomic, but the atomicity is not enforced during execution. The solution is to add locks around the shared variable references.
+
+```c
+void thread_1() {
+  if (thd->proc_info) {
+    fputs(thd->proc_info, ...);
+  }
+  ...
+}
+
+void thread_2() {
+  thd->proc_info = NULL;
+  ...
+}
+```
+
+### Order Violation
+
+The order violation problem is that the desired order between two groups of memory accesses is flipped. A should always be executed before B, but the order is not enforced during execusion. The solution is to use a condition variable to implement the synchronization.
+
+```c
+void thread_init() {
+  mThread = PR_CreateThread(mMain, ...);
+  ...
+}
+
+void thread_main() {
+  mState = mThread->State;
+}
+```
+
+### Deadlock Bugs
+
+- Mutual exclusion: Threads claim exclusive control of resources. The requirement could be solved with lock-free data structures.
+- Hold-and-wait: Threads hold resources allocated to them while waiting for additional resources. The requirement could be solved with an atomic allocation of all locks.
+- No preemption: Resources can't be forcibly removed from the threads that are holding them. The requirement could be solved with the `pthread_mutex_trylock()` routine, which either grabs the lock or returns an error indicating the lock is held.
+- Circular wait: There's a circular chain of threads that each thread holds resources that are being requested by the next thread in the chain. The requirement could be solved with a total ordering on lock acquisition.
