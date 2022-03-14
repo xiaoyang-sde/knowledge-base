@@ -22,6 +22,24 @@ The I/O time is the sum of three major components: $T_{I/O} = T_{\text{seek}} + 
 - **Elevator**: The disk scheduler moves the disk head back and forth across the tracks to serve requests. If a request comes for a block on a track that has been serviced on the current sweep, it's queued until the next sweep.
 - **Shortest Positioning Time First** (SPTF): The disk scheduler orders the queue of I/O requests by the positioning time ($T_{\text{seek}} + T_{\text{rotation}}$), picking requests on the nearest track to complete first.
 
+## RAID (Redundant Arrays of Inexpensive Disks)
+
+- The **RAID level 0** stripes blocks across the disk of the system in a round-robin fashion. The approach is designed to extract the most parallelism from the contiguous chunks. The chunk size of a RAID array is the size of block placed to each disk.
+- The **RAID level 1** replicates blocks across the disk of the system to telerate disk failures. The read operation could be served by any of the disks, and the write operation must be applied to all disks.
+- The **RAID level 4** stripes blocks across the disk of the system and adds a single parity block that stores the redundant information for each stripe of blocks. The redundant information is calculated with XOR of all bits in the stripe. If a disk in the stripe fails, the system could reconstruct the disk with the parity information.
+- **The RAID level 5** is identical to RAID level 4, expect that it rotates the parity blocks across drives to address the small-write problem.
+
+|| RAID 0 | RAID 1 | RAID 4 | RAID 5 |
+| --- | --- | --- | --- | --- |
+| Capacity | $N \cdot B$ | $(N \cdot B) / 2 $ | $(N - 1) \cdot B$ | $(N - 1) \cdot B$ |
+| Reliability | 0 | 1 | 1 | 1| 1 |
+| Sequential Read | $N \cdot S$ | $(N / 2) \cdot S$ | $(N - 1) \cdot S$ | $(N - 1) \cdot S$ |
+| Sequential Write| $N \cdot S$ | $(N / 2) \cdot S$ | $(N - 1) \cdot S$ | $(N - 1) \cdot S$ |
+| Random Read | $N \cdot R$ | $N \cdot R$ | $(N - 1) \cdot R$ | $N \cdot R$ |
+| Random Write| $N \cdot R$ | $(N / 2) \cdot R$ | $\frac{1}{2} \cdot R$ | $\frac{N}{4} \cdot R$ |
+| Read Latency| $T$ | $T$ | $T$ | $T$ |
+| Write Latency | $T$ | $T$ | $2T$ | $2T$ |
+
 ## File and Directory
 
 ### File
