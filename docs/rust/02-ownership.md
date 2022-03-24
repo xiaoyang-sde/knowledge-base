@@ -50,14 +50,14 @@ println!("{}, world!", s1);
 
 #### Copy and Clone
 
-The data type that stores information on stack or implements the `Copy`trait copies the actual value instead of the pointer. The data type that implements the `Copy` trait couldn't implement the `Drop` trait.
+The data type that stores information on stack or implements the `Copy` trait copies the actual value instead of the pointer. The data type that implements the `Copy` trait couldn't implement the `Drop` trait.
 
 ```rs
 let x = 5;
 let y = x;
 
 println!("x = {}, y = {}", x, y);
-````
+```
 
 For data type such as `String` that stores data on the heap, the `clone` method copies the heap data.
 
