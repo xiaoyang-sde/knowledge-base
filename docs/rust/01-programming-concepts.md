@@ -4,20 +4,20 @@
 
 The variable defined by the `let` keyword is immutable by default. The `mut` in front of the variable name could make the variable mutable.
 
-```rs
+```rust
 let mut x = 5;
 x = 6;
 ```
 
 The constant defined by the `const` keyword is immutable, and the type of the value must be annotated. The value of constant must be a constant expression, and the compiler is able to evaluate a limited set of operations at compile time.
 
-```rs
+```rust
 const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 ```
 
 The previously defined variable could be shadowed by another variable definition. The later definition could reuse the same variable name, but change its data type.
 
-```rs
+```rust
 let spaces = "    ";
 let spaces = spaces.len();
 ```
@@ -57,7 +57,7 @@ The character type is represented as `char`, which is one byte in size. It store
 
 The tuple is a fixed-length compound type, which is represented as a comma-separated list of values inside parentheses. The elements in a tuple could have different types. The tuple supports destructing assignment.
 
-```rs
+```rust
 let tup: (i32, f64, char) = (500, 6.4, '1');
 let one_char = x.2;
 let (x, y, z) = tup;
@@ -69,7 +69,7 @@ The tuple without any values, `()`, is a special type that has only one value, a
 
 The array is fixed-length compound type, which is represented as a comma-separated list inside square brackets and could be allocated on the stack. The elements in an array must have the same type.
 
-```rs
+```rust
 let arr: [i32; 3] = [1, 2, 3];
 let first = arr[0];
 let second = arr[1];
@@ -79,7 +79,7 @@ let second = arr[1];
 
 Function definition starts with `fn` and has a set of parentheses after the function name. The type of each parameter must be declared in the function signature.
 
-```rs
+```rust
 fn print_labeled_measurement(
   value: i32,
   unit_label: char,
@@ -97,7 +97,7 @@ The return value of the function is the value of the final expression in the blo
 
 The `if` expression branches the code depending on conditions, which starts with the keyword `if` and is followed by a condition that evaluates to `bool`.
 
-```rs
+```rust
 if number < 5 {
   println!("number is less than 5");
 } else if number > 10 {
@@ -109,7 +109,7 @@ if number < 5 {
 
 The `if` expression could be used on the right side of a `let` statement, because the block of code evaluate to the last expression in it.
 
-```rs
+```rust
 let number = if condition { 5 } else { 6 };
 ```
 
@@ -119,7 +119,7 @@ The `loop` keyword executes a block of code infinitely until it encounters a `br
 
 The loop has an optional label that could be used with `break` or `continue`. The `break` statement accepts an optional value that will become the return value of the loop.
 
-```rs
+```rust
 'outer_loop': loop {
   loop {
     break 'outer_loop';
@@ -129,7 +129,7 @@ The loop has an optional label that could be used with `break` or `continue`. Th
 
 The `while` loop executes a block of code until it's condition is `false`.
 
-```rs
+```rust
 let mut number = 3;
 while number != 0 {
     println!("{}!", number);
@@ -139,7 +139,7 @@ while number != 0 {
 
 The `for` loop executes a block of code for each item in a collection, such as an array or a tuple.
 
-```rs
+```rust
 let numbers = [10, 20, 30, 40, 50];
 
 for number in numbers {
