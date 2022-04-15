@@ -67,8 +67,8 @@ Proof: Let $D$ be a DFA with less than $2^k$ states. If the input is $2^k$ strin
   - $L \emptyset = \emptyset$, $\emptyset L = \emptyset$
   - $L \{ \epsilon \} = L$, $\{ \epsilon \} L = L$
 
-- **Kleene star**: If $L$ is regular, then $L*$ is regular. The kleene star of $L$ is defined as $L^* = \{ w: w \text{ is the concatenation of zero or more strings in L} \}$. To construct an NFA that recognizes $L*$ from the NFA that recognizes $L$, create a accepting dummy start state, add an $\epsilon$ arrow from the dummy start state to $q_0$ and $\epsilon$ arrows from states in $F$ to $q_0$, and then add the dummy start state to $F$.
-  - Example: Let $L = \{ a, b \}$, then $L* = \{ \epsilon, a, b, aa, ab, ba, bb, \dots \}$.
+- **Kleene star**: If $L$ is regular, then $L^*$ is regular. The kleene star of $L$ is defined as $L^* = \{ w: w \text{ is the concatenation of zero or more strings in L} \}$. To construct an NFA that recognizes $L^*$ from the NFA that recognizes $L$, create a accepting dummy start state, add an $\epsilon$ arrow from the dummy start state to $q_0$ and $\epsilon$ arrows from states in $F$ to $q_0$, and then add the dummy start state to $F$.
+  - Example: Let $L = \{ a, b \}$, then $L^* = \{ \epsilon, a, b, aa, ab, ba, bb, \dots \}$.
 
 - **Reverse**: If $L$ is regular, then $L^R$ is regular. The reverse of $w = w_1 w_2 \dots w_n$ is defined as $w^R = w_n, w_{n - 1}, \dots, w_1$. The reverse of $L$ is defined as $L^R = \{ w^R \in L \}$. To construct an NFA that recognizes $L^R$ from the NFA that recognizes $L$, reverse all arrows, create new start state and link it with $\epsilon$ to states in $F$, and set $F$ to $\{ q_0 \}$.
 
