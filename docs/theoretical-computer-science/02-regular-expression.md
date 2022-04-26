@@ -2,7 +2,7 @@
 
 ## Definition
 
-The regular expression is $\empty$, $\{ \epsilon \}$, or $\{ \sigma \}$ for $\sigma$ in  $\Sigma$. The regular expression $R$, $R_1$, and $R_2$ could be combined into $(R^*)$, $(R_1 \cup R_2)$, or $(R_1 \cdot R_2)$. The $\{ \}$, $()$, and $\cdot$ operators could be removed and the precedence of operators is $*$, $\cdot$, and $\cup$.
+The regular expression is $\empty$, $\{ \epsilon \}$, or $\{ \sigma \}$ for $\sigma$ in  $\Sigma$. The regular expression $R$, $R_1$, and $R_2$ could be combined into $(R^*)$, $(R_1 \cup R_2)$, or $(R_1 \cdot R_2)$. The $\{ \}$, $()$, and $\cdot$ operators could be removed and the precedence of operators is $*$ (repeat `0` or more times), $\cdot$ (concatenation), and $\cup$ (or).
 
 - $R^k = (R \cdot R \dots R \cdot R)$
 - $R^+ = (R \cdot (R^*))$
@@ -30,7 +30,9 @@ The regular expression is $\empty$, $\{ \epsilon \}$, or $\{ \sigma \}$ for $\si
 
 The language of the regular expression is regular. The simplist regular expressions are $\empty$, $\{ \epsilon \}$, and $\{ \sigma \}$ for $\sigma$ in $\Sigma$, which correspond to the trivial automata. Because regular languages are closed under kleene star, union, and concatenation, $(R^*)$, $(R_1 \cup R_2)$, or $(R_1 \cdot R_2)$ are regular.
 
-- To convert an NFA to a regular expression, create new start state and new unique accept state.
+### Convert NFA to Regular Expression
+
+- Create a new start state that connects to the start state with $\epsilon$ and a new unique accept state that connects to all accept states with $\epsilon$.
 - Choose a state other than the start and accept state. The state splits the other states into donors and receivers. For each pair of donor and receiver, a shortcut could be added with the kleene star, and then the chosen state could be removed. If there's no donors or receivers, the chosen state could be removed.
 - Union the multiple shortcuts on the same pair of states. If there are states other than the start or accept, execute the last step again.
 - The edge between the start state and the end state is the regular expression.
