@@ -13,7 +13,7 @@ The regular expression is $\empty$, $\{ \epsilon \}$, or $\{ \sigma \}$ for $\si
 - $\{ w: w \text{ contains exactly one } 1 \} = 0^{*} 1 0^{*}$
 - $\{ w: w \text{ contains at least one } 1 \} = \Sigma^{*} 1 \Sigma^{*}$
 - $\{ w: w \text{ doesn't contain 00 } 1 \} = 1^{*} (01^{+})^* (0 \cup \epsilon)$
-- $\{ w: w \text{ w contains } 001 \} = \Sigma^{*} 001 \Sigma^{*}$
+- $\{ w: w \text{ contains } 001 \} = \Sigma^{*} 001 \Sigma^{*}$
 - $\{ w: |w| \text{ is even} \} = (\Sigma \Sigma)^{*}$
 - $\{ w: |w| \text{ is a multiple of } 5\} = (\Sigma^5)^{*}$
 - $\{ w: w \text{ starts and ends with same symbol} \} = \Sigma \cup 0\Sigma^{*}0 \cup 1\Sigma^{*}1$
