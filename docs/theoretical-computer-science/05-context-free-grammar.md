@@ -29,4 +29,8 @@ Let $L$ be all valid programs defined in the table below} and $\Sigma = \{ a, b,
 
 ## Ambiguious Grammar
 
-The context free grammar is ambiguous if some string has more than one parse tree. Otherwise, the grammar is unambiguous. For example, $(\{ S, S^{'}, S^{''} \}, \{ a, b \}, \{ S \rightarrow S^{'}|S^{''}, S^{'} \rightarrow {aS^{'}b}|\epsilon, S^{''} \rightarrow {aS^{''}}|\epsilon \}, S)$ is ambiguous because of $\epsilon$, and $(\{ P\}, \{ a, b\}, \{ P \rightarrow PP|aPb|ab \}, S)$ is ambiguous because of $ababab$.
+The context free grammar is ambiguous if some string has more than one parse tree. Otherwise, the grammar is unambiguous.
+
+- $(\{ S, S^{'}, S^{''} \}, \{ a, b \}, \{ S \rightarrow S^{'}|S^{''}, S^{'} \rightarrow {aS^{'}b}|\epsilon, S^{''} \rightarrow {aS^{''}}|\epsilon \}, S)$ is ambiguous because of $\epsilon$.
+- $(\{ P \}, \{ a, b \} \{ P \rightarrow PP|aPb|ab \}, S)$ is ambiguous because of $ababab$.
+- $(\{ P \}, \{ a, b \}, \{ P \rightarrow ab | aPb | abP | aPbP \})$ is unambiguous.
