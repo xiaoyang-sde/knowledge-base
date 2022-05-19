@@ -5,7 +5,7 @@ The **context free grammar** is a tuple $(V, \Sigma, R, S)$ where $V$ is the set
 ## Example
 
 - $(\{ S, A, B \}, \{ a, b \}, \{ S \rightarrow A | B, A \rightarrow aAb | \epsilon, B \rightarrow bBa | \epsilon \}, S)$ represents the language $L = a^n b^n \cup b^n a^n (n \geq 0)$.
-- $(\{ S, A \}, \{ a, b \}, \{ S \rightarrow AA, A \rightarrow A \}, S)$ represents the language $L = \emptyset $.
+- $(\{ S, A \}, \{ a, b \}, \{ S \rightarrow AA, A \rightarrow A \}, S)$ represents the language $L = \emptyset$.
 - $(\{ S \}, \{ a, b \}, \{ S \rightarrow abS | a \}, S)$ represents the language $L = (ab)^* a$.
 - $(\{ S, B \}, \{ a, b \}, \{ S \rightarrow aSa | B, B \rightarrow bB | \epsilon \}, S)$ represents the language $L = a^n b^* a^n (n \geq 0)$.
 - $(\{ S, A, B \}, \{ a, b \}, \{ S \rightarrow AB, A \rightarrow aAa |\epsilon, B \rightarrow bBb | \epsilon \}, S)$ represents the language $L = (aa)^{*} (bb)^{*}$.
