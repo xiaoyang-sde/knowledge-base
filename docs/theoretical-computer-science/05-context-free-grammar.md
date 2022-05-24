@@ -31,6 +31,14 @@ Let $L$ be all valid programs defined in the table below} and $\Sigma = \{ a, b,
 
 The context free grammar is ambiguous if some string has more than one parse tree. Otherwise, the grammar is unambiguous.
 
-- $(\{ S, S^{'}, S^{''} \}, \{ a, b \}, \{ S \rightarrow S^{'}|S^{''}, S^{'} \rightarrow {aS^{'}b}|\epsilon, S^{''} \rightarrow {aS^{''}}|\epsilon \}, S)$ is ambiguous because of $\epsilon$.
-- $(\{ P \}, \{ a, b \} \{ P \rightarrow PP|aPb|ab \}, S)$ is ambiguous because of $ababab$.
-- $(\{ P \}, \{ a, b \}, \{ P \rightarrow ab | aPb | abP | aPbP \})$ is unambiguous.
+- The number of $b$'s is equal to the number of $a$'s in the string. The number of $b$'s is less than or equal to the number of $a$'s in each prefix of the string.
+  - $P \rightarrow ab | aPb | abP | aPbP$
+- The number of $b$'s is equal to the number of $a$'s in the string.
+  - $S \rightarrow S' | S'' | \epsilon$
+  - $S' \rightarrow P | PS''$
+  - $S'' \rightarrow Q | QS'$
+  - $P \rightarrow ab | aPb | abP | aPbP$
+  - $Q \rightarrow ba | bQa | baQ | bQaQ$
+- Each prefix of the string has at least same number of $a$'s as $b$'s.
+  - $S \rightarrow \epsilon | P | aS | PaS$
+  - $P \rightarrow ab | aPb | abP | aPbP$

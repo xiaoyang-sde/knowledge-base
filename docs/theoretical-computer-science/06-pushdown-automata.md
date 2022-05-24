@@ -1,5 +1,7 @@
 # Pushdown Automata
 
+## Definition
+
 The **pushdown automata** is a finite state machine with a stack that could remember an infinite amount of information. The transition in the pushdown automata is consists of the input symbol to read or $\epsilon$, the symbol to pop from the stack or $\epsilon$, and the symbol to push to the stack or $\epsilon$.
 
 The **pushdown automata** is defined as a tuple $(Q, \Sigma, \Gamma, \delta, q_0, F)$, where $Q$ is the set of the states, $\Sigma$ is the input alphabet, $\Gamma$ is the stack alphabet, $\delta: Q \times (\Sigma \cup \{ \epsilon \} \times (\Gamma \cup \{ \epsilon \})) \rightarrow (Q \times (\Gamma \cup \{ \epsilon \}))$ is the transition function, $q_0$ is the start state, and $F$ is the set of accept states.
