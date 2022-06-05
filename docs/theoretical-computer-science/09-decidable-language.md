@@ -4,7 +4,7 @@
 
 The Turing machine $M$ decides $L$ if $M$ recognizes $L$ and $M$ halts on all inputs, which means that either acceptance or rejection are both explicit. $L$ is decidable if some Turing machine decides it.
 
-$L$ is decidable if $L$ and $\bar{L}$ are Turing-recognizable. Let $M$ be a Turing machine that decides $L$. If $L$ is decidable, run $M$ to recognize $L$, and then flip the answer to recognize $\bar{L}$. If $L$ and $\bar{L}$ are Turing-recognizable, run $M$ and $M'$ simultaneously, and either one of them must halt.
+The language $L$ is decidable if $L$ is Turing-recognizable and $\bar{L}$ is Turing-recognizable. Let $M_1$ be a recognizer for $L$ and $M_2$ be a recongnizer for $\bar{L}$. Let $M$ be a Turing machine that runs both $M_1$ and $M_2$ on input $w$ in parallel. $M$ accepts if $M_1$ accepts, and rejects if $M_2$ rejects. $M$ is a decider of $L$ because it accepts all strings in $L$ and rejects all strings not in $L$.
 
 ## Example
 
