@@ -31,7 +31,7 @@ The I/O time is the sum of three major components: $T_{I/O} = T_{\text{seek}} + 
 
 || RAID 0 | RAID 1 | RAID 4 | RAID 5 |
 | --- | --- | --- | --- | --- |
-| Capacity | $N \cdot B$ | $(N \cdot B) / 2 $ | $(N - 1) \cdot B$ | $(N - 1) \cdot B$ |
+| Capacity | $N \cdot B$ | $(N \cdot B) / 2$ | $(N - 1) \cdot B$ | $(N - 1) \cdot B$ |
 | Reliability | 0 | 1 | 1 | 1| 1 |
 | Sequential Read | $N \cdot S$ | $(N / 2) \cdot S$ | $(N - 1) \cdot S$ | $(N - 1) \cdot S$ |
 | Sequential Write| $N \cdot S$ | $(N / 2) \cdot S$ | $(N - 1) \cdot S$ | $(N - 1) \cdot S$ |
