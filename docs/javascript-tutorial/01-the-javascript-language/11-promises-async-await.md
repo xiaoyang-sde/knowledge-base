@@ -139,7 +139,7 @@ In the browser we can catch such errors using the event `unhandledrejection`.
 
 ### Promise.all
 
-`Promise.all` takes an of promises and values and returns a new promise. The new promise returns the array of the results in the same order as the iterable.
+`Promise.all` takes an array of promises and values and returns a new promise. The new promise returns the array of the results in the same order as the iterable.
 
 If any of the promises is rejected, the promise returned by `Promise.all` immediately rejects with that error, and the results of other promises are ignored but not canceled.
 

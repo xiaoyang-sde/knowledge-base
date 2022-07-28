@@ -61,7 +61,7 @@ If `finally` exists, it runs in all cases:
 
 The `finally` clause is often used when we start doing something and want to finalize it in any case of outcome.
 
-Variables are local inside 1try..catch..finally\`.
+Variables are local inside `try..catch..finally`.
 
 Before the `try` returns the code, `finally` is executed just before it.
 
