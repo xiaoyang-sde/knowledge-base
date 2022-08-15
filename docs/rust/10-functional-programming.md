@@ -2,7 +2,7 @@
 
 ## Closure
 
-```rs
+```rust
 let expensive_closure = |num: u32| -> u32 {
     thread::sleep(Duration::from_secs(2));
     num
@@ -29,14 +29,14 @@ The iterator pattern performs some task on a sequence of items in turn. In Rust,
 - `iter_mut()` returns an iterator of mutable references
 - `into_iter()` takes the ownership of the `Vec` and returns an iterator of owned values
 
-```rs
+```rust
 let v1 = vec![1, 2, 3];
 let v1_iter = v1.iter();
 ```
 
 The iterator implements the `Iterator` trait. `type Item` is an associated type with this trait, which means that implementing this trait requires a defined `Item` type. The trait requires the `next` method, which returns one item of the iterator at a time wrapped in `Some`, and returns `None` when the iteration ends.
 
-```rs
+```rust
 pub trait Iterator {
     type Item;
 

@@ -10,7 +10,7 @@ The smart pointer is a data structure that acts like a pointer but have addition
 
 The most straightforward smart pointer is a box, whose type is written `Box<T>`. `Box` stores data on the heap rather than the stack, while leaving the pointer to the heap data on the stack. `Box` is suitable for types whose size can't be known at compile time, large amount of data that should not be copied, or trait objects.
 
-```rs
+```rust
 fn main() {
   let b = Box::new(5);
   println!("b = {}", b);
@@ -19,7 +19,7 @@ fn main() {
 
 `Box` allows recursive types. The value of recursive type can have another value of the same type as part of itself. The compiler doesn't know how much space a type takes up, so it should be wrapped with a `Box`, which has a fixed size regardless of which value it points to. For example, a cons list (from Lisp) that holds `i32` values could be defined as:
 
-```rs
+```rust
 enum List {
   Cons(i32, Box<List>),
   Nil,
@@ -32,7 +32,7 @@ let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
 
 The `Deref` trait customizes the behavior of the dereference operator `*`. The trait requires a `deref` method that borrows `self` and returns a reference to the inner data.
 
-```rs
+```rust
 struct MyBox<T>(T);
 
 impl<T> MyBox<T> {
@@ -56,7 +56,7 @@ Deref coercion converts a reference to a type that implements the `Deref` trait 
 
 The `Drop` trait customizes the behavior when a value is about to go out of scope, which could be used to release resources like files or network connections. The `Drop` trait requires a `drop` method that takes a mutable reference to `self`. For example, `Drop` of `Box<T>` is used to deallocate the space on the heap that the box points to.
 
-```rs
+```rust
 impl Drop for CustomSmartPointer {
   fn drop(&mut self) {
     println!("Dropping CustomSmartPointer with data `{}`!", self.data);
@@ -70,7 +70,7 @@ The `drop` method (destructor) is not allowed to be called, because it still cal
 
 There are cases when a single value might have multiple owners. `Rc<T>` type is a reference counting smart pointer that keep trakcs of the number of references to a value to determine whether or not the value is still in use. `Rc::clone()` increments the reference count and clones the `Rc<T>` type.
 
-```rs
+```rust
 enum List {
   Cons(i32, Rc<List>),
   Nil,
@@ -91,7 +91,7 @@ The `borrow` method of `RefCell<T>` returns a `Ref<T>`, and the `borrow_mut` met
 
 `RefCell<T>` could be combined with `Rc<T>` to have multiple references to a mutable data.
 
-```rs
+```rust
 enum List {
   Cons(Rc<RefCell<i32>>, Rc<List>),
   Nil,
@@ -109,7 +109,7 @@ let c = Cons(Rc::new(RefCell::new(4)), Rc::clone(&a));
 
 It's possible to create references where items refer to each other in cycle, which causes memory leaks. For example, this code creates two lists `a` and `b`, which contains a reference cycle.
 
-```rs
+```rust
 enum List {
   Cons(i32, RefCell<Rc<List>>),
   Nil,
@@ -134,7 +134,7 @@ if let Some(link) = a.tail() {
 
 `Rc::clone` increases the `strong_count` of an `Rc<T>` instance, and it's cleaned up when `strong_count == 0`. The weak reference to the value in an `Rc<T>` instance could be created with `Rc::downgrade`. `Weak<T>` increments the `weak_count`, which isn't required to be `0` for the `Rc<T>` instance to be cleaned up. The `upgrade` method of `Weak<T>` returns an `Option<Rc<T>>`, which resolves to `Some` if `Rc<T>` is not cleaned up. For example, in a `TreeNode`, the node should refer to its parent instead of owning it.
 
-```rs
+```rust
 struct TreeNode {
   value: i32,
   parent: RefCell<Weak<TreeNode>>,
