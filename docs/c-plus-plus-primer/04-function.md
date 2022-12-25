@@ -123,3 +123,49 @@ void compare(
 int (*f1(int))(int*, int);
 auto f1(int) -> int (*)(int*, int);
 ```
+
+## Lambda Expression
+
+```cpp
+[capture_list](argument_list) mutable exception_specification -> return_type {
+  // function
+}
+```
+
+The lambda expression could use a variable if it's listed in the `capture_list`. The variable could be captured as value or reference. The abbreviations `[=]` and `[&]` enable the compiler to deduce the `capture_list`. Reference captures could be modified. Value captures could be modified if `mutable` is set.
+
+## `std::function`
+
+`std::function` is a type erasure object, erases the details of how some operations happen, and provides a uniform run time interface to them. `std::function` could contain all objects that act like a function pointer. The signature is `std::function<return_type(argument_type_list)>`.
+
+```cpp
+#include <functional>
+
+function<void(int, int)> depth_first_search = [&](
+  int node, int parent
+) {
+  for (auto child : graph[node]) {
+    if (child == parent) {
+      continue;
+    }
+    depth_first_search(child, node);
+  }
+};
+```
+
+The function pointer have the disadvantage of not being able to capture some context for lambda expression. It's adviced to use `std::function` unless there's a reason not to do so.
+
+## `std::bind` and `std::placeholder`
+
+```cpp
+#include <functional>
+
+int sum(int a, int b, int c) {
+  return a + b + c;
+}
+
+int main() {
+  auto bind_sum = std::bind(sum, std::placeholders::_1, std::placeholders::_2, 1);
+  assert(bind_sum(1, 1) == 3);
+}
+```
