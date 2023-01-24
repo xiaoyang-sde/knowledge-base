@@ -53,4 +53,3 @@ With $n$ data points, a model could be evaluated by calculating the **likelihood
 ### Bayes' Theorem
 
 $P(A|B) = \frac{P(B|A)P(A)}{P(B)}$ where $A$ and $B$ are events and $P(B) \neq 0$.
-

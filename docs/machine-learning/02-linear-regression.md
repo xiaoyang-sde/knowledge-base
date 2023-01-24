@@ -30,19 +30,3 @@ def least_squares(X, y):
 The polynomial regression is an extension of the linear regression, which could be modeled as $y = \theta_0 + \theta_1 x + \theta_2 x^2 \dots + \epsilon$. The design matrix $X$ for polynomial regression of order $k$ is $\mathbf{X} = \big[ \boldsymbol 1 , \mathbf{x}^1, \mathbf{x}^2 , \ldots , \mathbf{x}^k \big]$, where $\mathbf{x}^p$ is the vector $\mathbf{x}$ with all elements raised to the power $p$.
 
 For inputs with more than one feature, the design matrix could be defined as $\mathbf{X} = \big[ \boldsymbol 1 , \mathbf{x}_m^1, \mathbf{x}_n^1, \mathbf{x}_m^2 , \mathbf{x}_n^2\ldots , \mathbf{x}_m^k , \mathbf{x}_n^k \big]$, where $\mathbf{x}_m$ is a vector of one feature per data point.
-
-## Model Selection
-
-- **Training data**: The data used for the fitting procedure for a given model.
-- **Test data**: The data not used during the fitting procedure for a given model.
-
-### Bias-Variance Trade-off
-
-- **Bias** is the difference between the prediction of the model and the corresponding true output variables. Models with high bias will not fit the training data well since the predictions are quite different from the true data (**underfitting**).
-- **Variance** is the variability of model predictions for a given input. Models with high variance are highly dependent on the exact training data used, which will not generalize to the test data (**overfitting**).
-
-### Cross Validation
-
-Different models have different quality of predictions on the training data and on the test data. The **validation data** is not used for the fitting procedure but is used to select the best model.
-
-The **k-fold cross-validation** method divides the training data into $k$ subsets, trains the model on the first $k - 1$ folds, and then compute the error on the last fold. The procedure is repeated $k$ times on each $k - 1$ folds of the data, and the average error of the $k$ trained models could be used to evaluate the model performance.
