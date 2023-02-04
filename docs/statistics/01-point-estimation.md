@@ -56,3 +56,29 @@ Let $F(x)$ be the cdf of $X$, then the random variable $F(X)$ has a uniform dist
 - The expected value of the random area between adjacent order statistics is $E[F(Y_r) - F(Y_{r - 1})] = E[F(Y_r)] - E[F(Y_{r - 1})] = \frac{1}{n + 1}$.
 
 Therefore, the order statistics $Y_1 < Y_2 < \dots < Y_n$ partition the domain of $X$ info $n + 1$ parts, which has the area equals $\frac{1}{n + 1}$.
+
+## Maximum Likelihood Estimation
+
+Consider a randdom variable for which the functional form of the pmf or pdf is known, but the distribution depends on an unknown parameter $\theta$ that has an value in a set $\Omega$ called the parameter space. The experimenter needs a point estimate of the parameter $\theta$.
+
+The first step is to repeat the experiment $n$ independent times, observe the sample $X_1 \dots X_n$, and estimate the value of $\theta$ using the observations $x_1, \dots x_n$. The function $u(X_1 \dots X_n)$ is an estimator of $\theta$, and the value of $u(x_1, \dots x_n)$ should close to $\theta$. Since $u$ is estimating a member of $\theta \in \Omega$, the estimator is a point estimator.
+
+### Definition
+
+Let $X_1, \dots, X_n$ be a random sample from a distribution that depends on one or more unknown parameters $\theta_1, \dots, \theta_m$ with pmf or pdf that is denoted as $f(x; \theta_1, \dots, \theta_m)$. The joint pmf or pdf of $X_1, \dots, X_n$ is $L(\theta_1, \dots, \theta_m) = f(x_1; \theta_1, \dots, \theta_m) f(x_2; \theta_1, \dots, \theta_m) \dots f(x_n; \theta_1, \dots, \theta_m)$, which is the likelihood function.
+
+Let the $m$-tuple in $\Omega$ that maximzes $L$ be $[u_1(x_1, \dots, x_n), \dots, u_m(x_1, \dots, x_n)]$. The $\hat{\theta_1} = u_1(X_1, \dots, X_n), \dots, \hat{\theta_m} = u_m(X_1, \dots, X_n)$ are maximum likelihood estimators of $\theta_1, \dots, \theta_m$. The observaed values of these statistics $u_1(x_1, \dots, x_n), \dots, u_m(x_1, \dots, x_n)$ are maximum likelihood estimates.
+
+If $E[u(X_1, \dots, X_n)] = \theta$, then the statistics $u(X_1, \dots, X_n)$ is an unbiased estimator of $\theta$. Otherwise, it's biased.
+
+### Example
+
+Let $X$ be $b(1, p)$, thus the pmf of $X$ is $f(x; p) = p^x (1 - p)^{1 - x}, x = 0, 1$. The parameter $p \in \Omega$. Given a random sample $X_1, \dots X_n$, the problem is to find an estimator $u(X_1, \dots, X_n)$ such that $u(x_1, \dots, x_n)$ is a good point estimate of $p$.
+
+The probability of drawing these samples is $P(X_1 = x_1, \dots, X_n = x_n) = \Pi_{i = 1}^n p^{x_i} (1 - p)^{1 - x_i} = p^{\sum x_i} (1 - p)^{n - \sum x_i}$. The joint pmf, when regarded as a function of $p$, is the likelihood function. $L(p) = L(p; x_1, \dots, x_n) = p^{\sum x_i} (1 - p)^{n - \sum x_i}$.
+
+- If $\sum x_i = 0$, $L(p) = (1 - p)^n$, which has a maximum at $\hat{p} = 0$.
+- If $\sum x_i = 1$, $L(p) = p^n$, which has a maximum at $\hat{p} = 0$.
+- Find the derivative of $L(p)$, which equals to $0$ when $p = \bar{x}$.
+
+Therefore, the maximum likelihood estimator is $\hat{p} = \bar{X}$.
