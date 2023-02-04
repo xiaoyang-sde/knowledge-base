@@ -63,3 +63,14 @@ features that the perceptron is most sensitive to for making positive, and the f
 The perceptron algorithm converges when it iterates through the entire training data without making an update, which means that it has correctly classified all training data. In this case, the data is linearly separable, which means that there's a hyperplane that separates positive and negative data. The perceptron algorithm will converge if such hyperplane exists.
 
 The margin is the distance between the hyperplane and the nearest point. Given a data set $D$, a weight vector $w$, and bias $b$, $\text{margin}(D, w, b) = \min_{(x, y) \in D} y(w \cdot x + b)$ if $w$ separates $D$. The margin of a data set is the largest attainable margin on the data.
+
+The perceptron convergence theorem states that if the perceptron algorithm is run on a linearly separable data set $D$ with margin $\gamma > 0$, and $||x|| \le 1$ for all $x \in D$, then the algorithm will converge after at most $\frac{1}{\gamma^2}$ updates.
+
+## Voting and Averaging
+
+- Voting: As the perceptron learns, it remembers how long each hyperplane survives. At test time, each hyperplane encountered during training votes on the class of a test example. Let $(w, b)^{(1)}, \dots, (w, b)^{(k)}$ be the $K + 1$ weight vectors encountered during training, and $c^{(1)}, \dots, c^{(k)}$ be the survival times for each weight vectors. The prediction on a test point is $\hat{y} = \text{sign}(\sum_{k = 1}^{K} c^{(k)} \text{sign}(w^{(k)} \cdot \hat{x} + b^{(k)}))$. However, this approach requires an absurd amount of storage.
+- Averaging: As the perceptron learns, it maintains a running sum of the averaged weight vector and averaged bias. At test time, it predicts based on the average weight vector. $\hat{y} = \text{sign}(\sum_{k = 1}^{K} c^{(k)} w^{(k)} \cdot \hat{x} + b^{(k)}) = \text{sign}((\sum_{k = 1}^{K} c^{(k)} w^{(k)}) \cdot \hat{x} + \sum_{k = 1}^{K} c^{(k)} b^{(k)})$.
+
+## Limitation
+
+The limitation of perceptron is that its decision boundaries are linear. For data sets that are not linearly seperable, the algorithm could not separate the data. The feature combination approach could address the problem, but it will increase computation and result in overfitting.
