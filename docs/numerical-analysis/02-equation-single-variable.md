@@ -1,11 +1,5 @@
 # Solution of Equation in One Variable
 
-## Convergence Order
-
-Suppose that $p_n \rightarrow p$ as $n \rightarrow \infty$ with $p_n \ne p$ for all $n$. If $\lambda, \alpha > 0$ exist with $\lim_{n \rightarrow \infty} \frac{|p_{n + 1} - p|}{|p_n - p|^\alpha} = \lambda$, then ${p_n}_{n = 0}^{\infty}$ converges to $p$ of order $\alpha$, with asymptotic error constant $\lambda$.
-
-$\alpha$ reflects the convergence speed more than $\lambda$. Larger $\alpha$ implies faster convergence.
-
 ## Bisection Method
 
 If $f$ is a continuous function defined on the interval $[a, b]$, with $f(a)$ and $f(b)$ of opposite sign. The Intermediate Value Theorem implies that a number $p$ exists in $(a, b)$ with $f(p) = 0$. The bisection method calls for a repated bisecting of subintervals of $[a, b]$ and loating the half containing $p$.
@@ -76,11 +70,11 @@ auto fixed_point_iteration(
 
 Let $g \in C[a, b]$ be such that $g(x) \in [a, b]$ for all $x$ in $[a, b]$. Suppose that $g'$ exists on $(a, b)$ and a constant $0 < k < 1$ exists with $|g'(x)| \le k$ for all $x$ in $[a, b]$. For $p_0$ in $[a, b]$, the sequence $p_n = g(p_{n - 1})$ converges to the unique fixed point $p$ in $[a, b]$.
 
+### Convergence
+
 If $g'(p) = g''(p) = \dots = g^{(\alpha - 1)}(p) = 0$ but $g^{(\alpha)}(p) \ne 0$, then the sequence converges to $p$ for all $p_0$ close to $p$ with order $\alpha$.
 
-If $|g'(x)| \le k$, the bounds for the error involved in using $p_n$ to approximate $p$ is $|p_n - p| \le k^n \max{(p_0 - a, b - p_0)}$ and $|p_n - p| \le \frac{k^n}{1 - k} |p_1 - p_0|$ for all $n \ge 1$. When $k$ is closer to $0$, the converge is faster.
-
-Therefore, the fixed-point iteration will be fast if the absolute value of its first derivative is small.
+If $|g'(x)| \le k$, the bounds for the error involved in using $p_n$ to approximate $p$ is $|p_n - p| \le k^n \max{(p_0 - a, b - p_0)}$ and $|p_n - p| \le \frac{k^n}{1 - k} |p_1 - p_0|$ for all $n \ge 1$. When $k$ is closer to $0$, the converge is faster. Therefore, the fixed-point iteration will be fast if the absolute value of its first derivative is small.
 
 ## Newton's Method
 
@@ -164,3 +158,32 @@ The initial approximations $p_0$ and $p_1$ should meet the requirement that $f(p
 
 - If $f(p_2) \cdot f(p_1) < 0$, then $p_1$ and $p_2$ bracket a root. Choose $p_3$ as the x-intercept of the line joining $(p_1, f(p_1))$ and $(p_2, f(p_2))$.
 - If not, choose $p_3$ as the x-intercept of the line joining $(p_0, f(p_0))$ and $(p_2, f(p_2))$, and swap $p_0$ and $p_1$. The relabeling ensures that the root is bracketed between successive iterations.
+
+## Error Analysis for Iterative Method
+
+### Order of Convergence
+
+Suppose that $p_n \rightarrow p$ as $n \rightarrow \infty$ with $p_n \ne p$ for all $n$. If $\lambda, \alpha > 0$ exist with $\lim_{n \rightarrow \infty} \frac{|p_{n + 1} - p|}{|p_n - p|^\alpha} = \lambda$, then ${p_n}_{n = 0}^{\infty}$ converges to $p$ of order $\alpha$, with asymptotic error constant $\lambda$.
+
+$\alpha$ reflects the convergence speed more than $\lambda$. Larger $\alpha$ implies faster convergence.
+
+### Multiple Root
+
+The solution $p$ of $f(x) = 0$ is a zero of multiplicity $m$ of $f$ if for $x \ne p$, $f(x) = (x - p)^m q(x)$$, where $\lim_{x \rightarrow p} q(x) \ne 0$.
+
+- The function $f \in C^1 [a, b]$ has a zero of multiplicity $1$ (simple zero) at $p$ in $(a, b)$ if and only if $f(p) = 0$, but $f'(p) \ne 0$.
+- The function $f \in C^m [a, b]$ has a zero of multiplicity $m$ at $p$ in $(a, b)$ if and only if $f(p) = f'(p) = f''(p) = \dots f^{(m - 1)}(p) = 0$, but $f^{(m)}(p) \ne 0$.
+
+For Newton's and the Secant method, quadratic convergence might not occur if $f'(p) = 0$ when $f(p) = 0$ (the zero is not simple).
+
+Newton's method and the Secant method have problem if $f'(p) = 0$ when $f(p) = 0$. To handle this problem, define $\mu(x) = \frac{f(x)}{f'(x)} = (x - p)\frac{q(x)}{mq(x) + (x - p)q'(x)}$, which has a simple zero at $p$, because $\frac{q(x)}{mq(x) + (x - p)q'(x)} \ne 0$. Therefore, the solution of $\mu(x)$ is the solution of $f(x)$.
+
+The modified Netwon's method is $g(x) = x - frac{\mu(x)}{\mu'(x)} = x - \frac{f(x)f'(x)}{[f'(x)]^2 - f(x)f''(x)}$. The method converges to the zero $p$ of $f$ quadratically.
+
+## Accelerating Convergence
+
+### Aitken's $\Delta^2$ Method
+
+Suppose ${p_n}_{n = 0}^{\infty}$ is a linearly convergent sequence with limit $p$. The Aitken's $\Delta^2$ method converts the sequence to $\hat{p_n} = p_n - \frac{(p_{n + 1} - p_n)^2}{p_{n + 2} - 2p_{n + 1} + p_n}$, which converges more rapidly to $p$ than the original sequence.
+
+For a given sequence ${p_n}_{n = 0}^{\infty}$, the forward difference $\Delta p_n$ is defined as $\Delta p_n = p_{n + 1} - p_n$, and higher powers of $\Delta$ are defined as $\Delta^k p_n = \Delta(\Delta^{k - 1} p_n)$. Therefore, $\Delta^2 p_n = \Delta(p_{n + 1} - p_n) = (p_{n + 2} - p_{n + 1}) - (p_{n + 1} - p_n)$, thus $\hat{p_n} = p_n - \frac{(\Delta p_n)^2}{\Delta^2 p_n}$.
