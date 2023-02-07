@@ -82,3 +82,19 @@ The probability of drawing these samples is $P(X_1 = x_1, \dots, X_n = x_n) = \P
 - Find the derivative of $L(p)$, which equals to $0$ when $p = \bar{x}$.
 
 Therefore, the maximum likelihood estimator is $\hat{p} = \bar{X}$.
+
+## Linear Regression
+
+Let $Y$ be a random variable. The problem is to predict the mean of $Y$ given a particular $x$ ($E(Y|x)$). $E(Y|x) = \mu(x)$ is assumed to be of a given form, such as linear, quadratic, or exponential. To estimate $E(Y|x) = \mu(x)$, observe the random variable $Y$ for each of $n$ different values of $x$, and use the results $(x_1, y_1), \dots, (x_n, y_n)$ to estimate the regression.
+
+Assume that $Y_i = \alpha_1 + \beta x_i + \epsilon_i$, where $\epsilon_i \in N(0, \sigma^2)$, which is the difference from the mean.
+
+To find the maximum likelihood estimates, for $\alpha_1, \beta, \sigma^2$. Let $\alpha_1 = \alpha - \beta \bar{x}$, where $\bar{x} = \frac{1}{n} \sum_{i = 1}^{n} x_i$.
+
+The likelihoood function is $L(\alpha, \beta, \sigma^2) = \Pi_{i = 1}^{n} \frac{1}{\sqrt{2\pi \sigma^2}} \exp{-\frac{[y_i - \alpha - \beta(x_i, \bar{x})]^2}{2 \sigma^2}}$. Maximize $L(\alpha, \beta, \sigma^2)$ is equivalent to minimize $-\ln L(\alpha, \beta, \sigma^2) = \frac{n}{2} \ln(2 \pi \sigma^2) + \frac{\sum_{i = 1}^{n} [y_i - \alpha - \beta(x_i - \bar{x})]^2}{2 \sigma^2}$. Therefore, $H(\alpha, \beta) = \sum_{i = 1}^{n} [y_i - \alpha - \beta(x_i - \bar{x})]^2$ should be maximized.
+
+$y_i - \alpha - \beta(x_i - \bar{x})$ is the vertical distance from the point $(x_i, y_i)$ to the line $y = \mu(x)$, thus $H(\alpha, \beta)$ represents the sum of the squares of those distances. Therefore, the least squares estimate is the maximum likelihood estimate of $\alpha$ and $\beta$.
+
+- $\hat{\alpha} = \bar{y}$
+- $\hat{\beta} = \frac{\sum y_i(x_i - \bar{x})}{\sum (x_i - \bar{x})^2}$
+- $\hat{\sigma^2} = \frac{1}{n} \sum [y_i - \hat{\alpha} - \hat{\beta}(x_i - \bar{x})]^2$
