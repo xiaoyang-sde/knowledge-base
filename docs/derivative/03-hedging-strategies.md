@@ -49,10 +49,49 @@ As time passes, the spot price and the futures price for a particular month do n
 
 From the definition of the basis, $b_1 = S_1 - F_1$ and $b_2 = S_2 - F_2$.
 
-- The hedger takes a short position at $t_1$ and sells the asset at $t_2$. The price realized for the asset is $S_2$ and the profit of the futures is $F_1 - F_2$. The total profit is $S_2 + F_1 - F_2 = F_1 + b_2$.
-- The hedger takes a long position at $t_1$ and purchases the asset at $t_2$. The cost of the asset is $S_2$ and the loss of the futures is $F_1 - F_2$. The total loss is $S_2 + F_1 - F_2 = F_1 + b_2$.
+- The hedger takes a short position at $t_1$ and sells the asset at $t_2$. The price realized for the asset is $S_2$ and the profit of the futures is $F_1 - F_2$. The total profit is $S_2 + F_1 - F_2 = F_1 + b_2$. In a perfect hedge, $S_2 = F_2$, thus the total profit is $F_1$.
+- The hedger takes a long position at $t_1$ and purchases the asset at $t_2$. The cost of the asset is $S_2$ and the loss of the futures is $F_1 - F_2$. The total loss is $S_2 + F_1 - F_2 = F_1 + b_2$. In a perfect hedge, $S_2 = F_2$, thus the total loss is $F_1$.
 
 ### Choice of Contract
 
 - The choice of the asset of the futures contract: A careful analysis is required to determine the futures contract that are closely correlated with the price of the asset being hedged.
 - The choice of the delivery month: A good rule of thumb is to choose a delivery month that is as close as possible to, but later than, the expiration of the hedge.
+
+## Cross Hedging
+
+Cross hedging occurs when the asset in the futures contract is different from the asset whose price is being hedged. The hedge ratio is the ratio of the size of the position taken in futures contracts to the size of the exposure. The hedge ratio is 1.0 for a non-cross hedging.
+
+### Minimum Variance Hedge Ratio
+
+Assume that there's no daily settlement of futures contracts. The minimum variance hedge ratio represents the optimal proportion of futures contracts required to hedge an asset.
+
+- $\Delta S$: Change in spot price during a period of time equal to the life of the hedge
+- $\Delta F$: Change in futures price during a period of time equal to the life of the hedge
+
+Assume that there's a linear relationship, $\Delta S = a + b \Delta F + \epsilon$. Let $h$ be the hedge ratio, which means that a percentage $h$ of the exposure to $S$ is hedged with futures. The change in the value of the position per unit of exposure to $S$ is $\Delta S - h \Delta F = a + (b - h) \Delta F + \epsilon$. The minimum variance hedge ratio is $h^* = b$.
+
+Based on the linear regression model, $h^* = \rho \frac{\sigma_S}{\sigma_F}$, where $\rho$ is the coefficient of correlation between $\Delta S$ and $\Delta F$.
+
+The hedge effectiveness is defined as the proportion of the variance that is eliminated with hedging. It's the $R^2$ of the regression, which is equal to $\rho^2$. These parameters are estimated from historical data on $\Delta S$ and $\Delta F$.
+
+### Optimal Number of Contracts
+
+To calculate the number of contracts that should be used in hedging, define:
+
+- $Q_A$: Size of position beging hedged
+- $Q_F$: Size of one futures contract
+- $N^*$: Optimal number of futures contracts for hedging
+
+The futures contracts should be on $h^{*} Q_A$ units of the asset. The number of futures contracts required is $N^{*} = \frac{h^{*} Q_A}{Q_F}$.
+
+### Impact of Daily Settlement
+
+The daily settlement of futures contract means that, when futures contracts are used, there are a series of one-day hedges. The hedge portfolio could be re-balanced each day to ensure that the hedge ratio remains optimal.
+
+- $\hat{\sigma}_S$: Standard deviation of percentage one-day changes in the spot price
+- $\hat{\sigma}_F$: Standard deviation of percentage one-day changes in the futures price
+- $\hat{\rho}$: Correlation between percentage one-day changes in the spot and futures
+- Optimal hedge ratio based on prices: $h^{*} = \hat{\rho} \frac{\hat{\sigma}_S S}{\hat{\sigma}_F F}$
+- Optimal futures contracts based on prices: $N^{*} = \frac{h^{*} Q_A}{Q_F}$
+- Optimal hedge ratio based on percentage changes: $\hat{h} = \hat{\rho} \frac{\hat{\sigma}_S}{\hat{\sigma}_F}$
+- Optimal futures contracts based on percentage changes: $N^{*} = \frac{h^{*} V_A}{V_F}$, where $V_A = SQ_A$ (the value of the positioin being hedged) and $V_F = FQ_F$ (the price of a futures contract)
