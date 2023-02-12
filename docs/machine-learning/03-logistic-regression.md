@@ -6,14 +6,21 @@ In classification, the dataset is represented with $D = \{(\mathbf{x}_1, y_1), \
 
 ## Cost Function
 
-Logistic regression represents a linear model that probabilistically captures the confidence of the classified point. The closer the point is to the decision boundary, the less confidence
-the model has in its value. If the probability is greater than 0.5, the point is classified as 1.
+Logistic regression represents a linear model that probabilistically captures the confidence of the classified point. The closer the point is to the decision boundary, the less confidence the model has in its value. If the probability is greater than 0.5, the point is classified as 1.
 
 The cost function of logistic regression is defined as $J(\theta) = \dfrac{1}{m} \sum_{i=1}^m \mathrm{Cost}(h_\theta(x^{i}),y^{i})$, where $\mathrm{Cost}(h_\theta(x),y) = -\log(h_\theta(x))$ if $y = 1$ and $\mathrm{Cost}(h_\theta(x),y) = -\log(1-h_\theta(x))$ if $y = 0$. The cost function could be simplified to $J(\theta) = \frac{1}{m} \cdot \left(-y^{T}\log(h)-(1-y)^{T}\log(1-h)\right)$. The cost function approaches to $\infty$ if the predicted label is different from the actual label.
 
 ## Gradient Descent
 
 The gradient descent is an iterative first-order optimization algorithm used to find a local minimum or maximum of a given function. The method to find the $\theta$ that minimizes the cost function of logistic regression is updating the values of $\theta$ with the gradient rule $\theta_j^{t+1} = \theta_j^t - \alpha \frac{dL(\theta)}{d\theta^t_j}$, where $\frac{dL(\theta)}{d\theta^t_j} = \sum^{n}_{i = 1} (\frac{1}{1 + e^{-(\theta^T x_i)}} - y_i)x^j_i$ or $X^T ((\frac{1}{1 + e^{-(X \theta^T)}}) - \vec{y})$.
+
+The general form of minimizing $f(\theta)$ is $\theta^{t + 1} \leftarrow \theta^t - \alpha \Delta f(\theta^t)$, where $\alpha$ is the step size. With a suitable choice of $\alpha$, the iterative procedure converges to a point where $\Delta f(\theta) = 0$.
+
+### Convex Function
+
+The function $f(x)$ is convex if $f(\lambda a + (1 - \lambda) b) \le \lambda f(a) + (1 - \lambda) f(b)$ for $0 \le \lambda \le 1$ or if $f''(x) \ge 0$.
+
+For a multi-variate function, $f(x)$ is convex if the Hessian is positive semi-definite. The matrix $H$ is positive semi-definite if $z^T H z = \sum_{j, k} H_{j, k} z_j z_k \ge 0$ for all $z$. The Hessian of $f(x)$ is defined as $H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$.
 
 ## Multiclass Classification
 
