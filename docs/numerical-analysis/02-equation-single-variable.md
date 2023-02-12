@@ -89,7 +89,7 @@ Since $(p - p_0)^2$ is small, $0 \approx f(p_0) + (p - p_0) f'(p_0)$, thus $p \a
 The Newton's method starts with an initial approximation $p_0$ and generates the sequence ${p_n}_{n = 0}^{\infty}$ with $p_n = p_{n - 1} - \frac{f(p_{n - 1})}{f'(p_n - 1)}$ for $n \ge 1$.
 
 ```cpp
-const double epsilon = pow(1, -9);
+const double epsilon = pow(10, -9);
 
 auto newton_method(
   function<double(double)> f,
@@ -106,6 +106,8 @@ auto newton_method(
     }
     p_0 = p;
   }
+
+  return 0;
 }
 ```
 
@@ -126,7 +128,7 @@ Given that $f'(p_{n - 1}) = lim_{x \rightarrow p_{n - 1}} \frac{f(x) - f(p_{n - 
 Substitute $f'(p_{n - 1})$ in Newton's formula, $$p_n = p_{n - 1} - \frac{f(p_{n - 1})(p_{n - 1} - p_{n - 2})}{f(p_{n - 1}) - f(p_{n - 2})}$$.
 
 ```cpp
-const double epsilon = pow(1, -9);
+const double epsilon = pow(10, -9);
 
 auto secant_method(
   function<double(double)> f,
@@ -145,6 +147,8 @@ auto secant_method(
     p_0 = p_1;
     p_1 = p;
   }
+
+  return 0;
 }
 ```
 
@@ -169,7 +173,7 @@ $\alpha$ reflects the convergence speed more than $\lambda$. Larger $\alpha$ imp
 
 ### Multiple Root
 
-The solution $p$ of $f(x) = 0$ is a zero of multiplicity $m$ of $f$ if for $x \ne p$, $f(x) = (x - p)^m q(x)$$, where $\lim_{x \rightarrow p} q(x) \ne 0$.
+The solution $p$ of $f(x) = 0$ is a zero of multiplicity $m$ of $f$ if for $x \ne p$, $f(x) = (x - p)^m q(x)$, where $\lim_{x \rightarrow p} q(x) \ne 0$.
 
 - The function $f \in C^1 [a, b]$ has a zero of multiplicity $1$ (simple zero) at $p$ in $(a, b)$ if and only if $f(p) = 0$, but $f'(p) \ne 0$.
 - The function $f \in C^m [a, b]$ has a zero of multiplicity $m$ at $p$ in $(a, b)$ if and only if $f(p) = f'(p) = f''(p) = \dots f^{(m - 1)}(p) = 0$, but $f^{(m)}(p) \ne 0$.
@@ -178,7 +182,7 @@ For Newton's and the Secant method, quadratic convergence might not occur if $f'
 
 Newton's method and the Secant method have problem if $f'(p) = 0$ when $f(p) = 0$. To handle this problem, define $\mu(x) = \frac{f(x)}{f'(x)} = (x - p)\frac{q(x)}{mq(x) + (x - p)q'(x)}$, which has a simple zero at $p$, because $\frac{q(x)}{mq(x) + (x - p)q'(x)} \ne 0$. Therefore, the solution of $\mu(x)$ is the solution of $f(x)$.
 
-The modified Netwon's method is $g(x) = x - frac{\mu(x)}{\mu'(x)} = x - \frac{f(x)f'(x)}{[f'(x)]^2 - f(x)f''(x)}$. The method converges to the zero $p$ of $f$ quadratically.
+The modified Netwon's method is $g(x) = x - \frac{\mu(x)}{\mu'(x)} = x - \frac{f(x)f'(x)}{[f'(x)]^2 - f(x)f''(x)}$. The method converges to the zero $p$ of $f$ quadratically.
 
 ## Accelerating Convergence
 
