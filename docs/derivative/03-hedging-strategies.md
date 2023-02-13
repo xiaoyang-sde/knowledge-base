@@ -95,3 +95,21 @@ The daily settlement of futures contract means that, when futures contracts are 
 - Optimal futures contracts based on prices: $N^{*} = \frac{h^{*} Q_A}{Q_F}$
 - Optimal hedge ratio based on percentage changes: $\hat{h} = \hat{\rho} \frac{\hat{\sigma}_S}{\hat{\sigma}_F}$
 - Optimal futures contracts based on percentage changes: $N^{*} = \frac{h^{*} V_A}{V_F}$, where $V_A = SQ_A$ (the value of the positioin being hedged) and $V_F = FQ_F$ (the price of a futures contract)
+
+## Stock Index Futures
+
+A stock index tracks changes in the value of a hypothetical portfolio of stocks. The percentage increase in the stock index over a small interval of time is set equal to the percentage increase in the value of the hypothetical portfolio.
+
+### Hedging an Equity Portfolio
+
+Stock index futures can be used to hedge a well-diversified equity portfolio. If the portfolio mirrors the index, $\beta = 1.0$. The number of futures contracts should be shorted is $N^* = \beta \frac{V_A}{V_F}$, which reduces the $\beta$ of the portfolio to $0$.
+
+- $V_A$: Current value of the portfolio
+- $V_F$: Current value of one futures contract
+- $\beta$: The slope of the best-fit line of the excess return on the portfolio over the excess return of the index
+
+In general, to change the $\beta$ of the portfolio from $\beta$ to $\beta^*$, a short position in $(\beta - \beta^*) \frac{V_A}{V_F}$ is required.
+
+## Stack and Roll
+
+Sometimes the expiration date of the hedge is later than the delivery dates of all the futures contracts that can be used. The hedger must then roll the hedge forward by closing out one futures contract and taking the same position in a futures contract with a later delivery date. The procedure is known as stack and roll.
