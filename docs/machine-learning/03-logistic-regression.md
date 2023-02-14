@@ -8,7 +8,7 @@ In classification, the dataset is represented with $D = \{(\mathbf{x}_1, y_1), \
 
 Logistic regression represents a linear model that probabilistically captures the confidence of the classified point. The closer the point is to the decision boundary, the less confidence the model has in its value. If the probability is greater than 0.5, the point is classified as 1.
 
-The cost function of logistic regression is defined as $J(\theta) = \dfrac{1}{m} \sum_{i=1}^m \mathrm{Cost}(h_\theta(x^{i}),y^{i})$, where $\mathrm{Cost}(h_\theta(x),y) = -\log(h_\theta(x))$ if $y = 1$ and $\mathrm{Cost}(h_\theta(x),y) = -\log(1-h_\theta(x))$ if $y = 0$. The cost function could be simplified to $J(\theta) = \frac{1}{m} \cdot \left(-y^{T}\log(h)-(1-y)^{T}\log(1-h)\right)$. The cost function approaches to $\infty$ if the predicted label is different from the actual label.
+The likelihood of a single training sample $(x_n, y_n)$ is $p(y_n|x_n; b; w) = h_{w, b}(x_n)^{y_n}[1 - h_{w, b}(x_n)]^{1 - y_n}$, where $h_{w, b}(x_n) = \sigma(b + w^T x_n)$. The negative log-likelihood of the whole training data is $J(\theta) = -\sum_{n} {y_n \log h_{\theta} (x_n) + (1 - y_n) \log [1 - h_{\theta}(x_n)]}$. The cost function approaches to $\infty$ if the predicted label is different from the actual label.
 
 ## Gradient Descent
 
@@ -21,6 +21,49 @@ The general form of minimizing $f(\theta)$ is $\theta^{t + 1} \leftarrow \theta^
 The function $f(x)$ is convex if $f(\lambda a + (1 - \lambda) b) \le \lambda f(a) + (1 - \lambda) f(b)$ for $0 \le \lambda \le 1$ or if $f''(x) \ge 0$.
 
 For a multi-variate function, $f(x)$ is convex if the Hessian is positive semi-definite. The matrix $H$ is positive semi-definite if $z^T H z = \sum_{j, k} H_{j, k} z_j z_k \ge 0$ for all $z$. The Hessian of $f(x)$ is defined as $H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$.
+
+### Stochastic Gradient Descent
+
+The Stochastic Gradient Descent algorithm updates the model parameters based on a random training example in each iteration, rather than using the entire training set. The approach is faster for large-scale models.
+
+## Implementation
+
+```cpp
+// Given a input feature vector and the parameter vector,
+// predict the likelihood that the target output is `1`
+auto hypothesis(
+  const vector<double>& x,
+  const vector<double>& theta
+) -> double {
+  double z = std::inner_product(x.cbegin(), x.cend(), theta.cbegin(), 0.0);
+  return 1.0 / (1.0 + exp(-z));
+}
+
+// Implement the Gradient Descent algorithm
+// to optimize the parameter vector
+auto gradient_descent(
+  const vector<vector<double>>& X,
+  const vector<double>& y,
+  vector<double>& theta,
+  double alpha,
+  int iteration_limit
+) -> vector<double> {
+  for (int i = 0; i < num_iters; ++i) {
+    vector<double> gradient(theta.size());
+    for (int j = 0; j < m; ++j) {
+      const vector<double>& x = X[j];
+      double h = logistic_regression_hypothesis(x, theta);
+      for (int k = 0; k < theta.size(); ++k) {
+        gradient[k] += (h - y[j]) * x[k];
+      }
+    }
+    for (int k = 0; k < theta.size(); ++k) {
+      theta[k] -= alpha * gradient[k] / m;
+    }
+  }
+  return theta;
+}
+```
 
 ## Multiclass Classification
 
