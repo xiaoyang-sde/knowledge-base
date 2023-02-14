@@ -113,3 +113,9 @@ In general, to change the $\beta$ of the portfolio from $\beta$ to $\beta^*$, a 
 ## Stack and Roll
 
 Sometimes the expiration date of the hedge is later than the delivery dates of all the futures contracts that can be used. The hedger must then roll the hedge forward by closing out one futures contract and taking the same position in a futures contract with a later delivery date. The procedure is known as stack and roll.
+
+## Capital Asset Pricing Model
+
+The capital asset pricing model is a model that can be used to relate the expected return from an asset to the risk of the return. The risk in the return from an asset is divided into two parts: systematic risk and non-systematic risk. CAPM argues that the return should depend on systematic risk.
+
+The CAPM formula is $\text{Expected return on asset} = R_F + \beta(R_M - R_F)$, where $R_M$ is the return on the portfolio of all available investments (such as S&P 500), $R_F$ is the return on the risk-free investment, and $\beta$ is a measure of the sensitivity of the asset's returns to returns from the market.
