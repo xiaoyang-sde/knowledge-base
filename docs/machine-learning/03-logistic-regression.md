@@ -52,7 +52,7 @@ auto gradient_descent(
     vector<double> gradient(theta.size());
     for (int j = 0; j < m; ++j) {
       const vector<double>& x = X[j];
-      double h = logistic_regression_hypothesis(x, theta);
+      double h = hypothesis(x, theta);
       for (int k = 0; k < theta.size(); ++k) {
         gradient[k] += (h - y[j]) * x[k];
       }
@@ -71,10 +71,3 @@ For multiclass classification problems, the labels $y_i \in \{0, 1, \dots, K - 1
 
 - The **one-vs-all** approach divides the problem into $K$ binary classification problems, and trains a logistic regression classifier $h_\theta(x)$ for each problem to predict the probability that $y = K_i$.
 - The **all-vs-all** approach divides the problem into $K \choose{2}$ binary classification problems. For example, if $K = 3$, there are 3 matches: $K_1$ and $K_2$, $K_1$ and $K_3$, $K_2$ and $K_3$. The label of the test point is determined by the most frequent class.
-
-## Regularization
-
-The regularization is a technique that discourages a more complex or flexible model to avoid the risk of overfitting. The cost function $L$ is modified to $L_{\text{reg}}(\theta) = L(\theta) + \lambda R(\theta)$. The $\lambda$ parameter is a scalar that represents the weight of the regularization term.
-
-- **Ridge**: $L_{\text{Ridge}} = L(\theta) + \lambda \sum_{j = 1}^{J} \theta_j^2$
-- **LASSO**: $L_{\text{Ridge}} = L(\theta) + \lambda \sum_{j = 1}^{J} |\theta_j|$
