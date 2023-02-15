@@ -98,3 +98,15 @@ $y_i - \alpha - \beta(x_i - \bar{x})$ is the vertical distance from the point $(
 - $\hat{\alpha} = \bar{y}$
 - $\hat{\beta} = \frac{\sum y_i(x_i - \bar{x})}{\sum (x_i - \bar{x})^2}$
 - $\hat{\sigma^2} = \frac{1}{n} \sum [y_i - \hat{\alpha} - \hat{\beta}(x_i - \bar{x})]^2$
+
+## Sufficient Statistics
+
+Factorization Theorem: Let $X_1, \dots, X_n$ denote random variables with joint pdf $f(x_1, x_2, \dots, x_n; \theta) = \Pi_{i = 1}^{n} f(x_i; \theta)$, which depends on the parameter $\theta$. The statistics $Y = u(X_1, X_2, \dots, X_n)$ is sufficient for $\theta$ if $f(x_1, \dots, x_n; \theta) = \phi[u(x_1, \dots, x_n); \theta]h(x_1, \dots, x_n)$, where $\phi$ depends on $u$ and $h$ doesn't depend on $\theta$.
+
+For example, the joint pdf of a Poisson distribution is $\Pi_{i = 1}^{n} f(x_i; \theta) = \frac{\lambda^{\sum x_i} e^{-n\lambda}}{x_{1}!x_{2}! \dots x_{n}!}$ = $(\lambda^{n \bar{x}} e^{-n\lambda})(\frac{1}{x_{1}!x_{2}! \dots x_{n}!})$. Therefore, $\bar{x}$ is a sufficient statistic for $\lambda$, which is the maximum likelihood estimator.
+
+If $Y$ is sufficient for a parameter $\theta$, then all single-valued invertible functions of $Y$ not involving $\theta$ is sufficient for $\theta$. For example, if $W = v(Y)$ and $Y = v^{-1}(W)$ is unique, then the factorization theorem is $f(x_1, \dots X_n; \theta) = \phi[v^{-1}{v[u(x_1, \dots, x_n)]}; \theta]h(x_1, \dots, x_n)$.
+
+Let $X_1, \dots X_n$ be a random sample from a distribution with a pdf of the exponential form $f(x; \theta) = \exp[K(x)p(\theta) + S(x) + q(\theta)]$ on a support free of $\theta$. The statistic $\sum_{i = 1}^{n} K(X_i)$ is sufficient for $\theta$.
+
+For example, the pdf of a distribution is $f(x; \theta) = \frac{1}{\theta} e^{\frac{-x}{\theta}} = \exp[x(-\frac{1}{\theta}) - \ln \theta]$. Since $K(x) = x$, then $\sum_{i = 1}^{n} X_i$ is sufficient for $\theta$.
