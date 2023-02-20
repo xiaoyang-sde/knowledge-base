@@ -43,6 +43,23 @@ The divided differences of $f$ with respect to $x_0, x_1, \dots, x_n$ are used t
 - The $0$-th divided difference respect to $x_i$ is $f[x_i] = f(x_i)$.
 - The $1$-st divided difference respect to $x_i$ and $x_{i + 1}$ is $f[x_i, x_{i + 1}] = \frac{f[x_{i + 1}] - f[x_i]}{x_{i + 1} - x_i}$.
 - The $2$-nd divided difference respect to $x_i, x_{i + 1}$ and $x_{i + 2}$ is $f[x_i, x_{i + 1}, x_{i + 2}] = \frac{f[x_{i + 1}, x_{i + 2}] - f[x_i, x_{i + 1}]}{x_{i + 2} - x_i}$.
-- The $k$-nd divided difference respect to $x_i, \dots x_{i + k}$ is $f[x_i, x_{i + 1}, \dots, x_{i + k}] = \frac{f[x_{i + 1}, \dots, x_{i + k}] - f[x_{i + 1}, \dots, x_{i + k - 1}]}{x_{i + k} - x_i}$.
+- The $k$-th divided difference respect to $x_i, \dots x_{i + k}$ is $f[x_i, x_{i + 1}, \dots, x_{i + k}] = \frac{f[x_{i + 1}, \dots, x_{i + k}] - f[x_i, \dots, x_{i + k - 1}]}{x_{i + k} - x_i}$.
+- The $kn$-th divided difference respect to $x_0, \dots x_{n}$ is $f[x_0, x_2, \dots, x_n] = \frac{f[x_1, \dots, x_n] - f[x_0, \dots, x_{n - 1}]}{x_{n} - x_0}$.
 
 The $P_n(x)$ could be rewritten in the Newton's Divided-Difference: $P_n(x) = f[x_0] + \sum_{k = 1}^{n} f[x_0, x_1, \dots, x_k](x - x_0) \dots (x - x_{k - 1})$
+
+### Forward Difference
+
+Assume that the nodes are arranged with equal spacing. Let $h = x_{i + 1} - x_i$ for each $i = 0, \dots, n - 1$ and let $x = x_0 + sh$. The difference is $x - x_i = (s - i)h$.
+
+Therefore, $P_n(x) = P_n(x_0 + sh) = f[x_0] + sh f[x_0, x_1] + s(s - 1)h^2 f[x_0, x_1] + \dots + s(s - 1) \dots (s - n + 1) h^n f[x_0, x_1, \dots, x_n] = f[x_0] + \sum_{k = 1}^{n} s(s - 1) \dots (s - k + 1) h^k f[x_0, x_1, \dots, x_k] = f[x_0] + \sum_{k = 1}^{n} {s \choose k} k! h^k f[x_0, \dots, x_k]$.
+
+### Newton's Forward Difference Formula
+
+The $\Delta$ notation from Aitken's $\Delta^2$ method is defined as $\Delta p_n = p_{n + 1} - p_n$, and higher powers of $\Delta$ are defined as $\Delta^k p_n = \Delta(\Delta^{k - 1} p_n)$. Let $h$ be the difference bewteen two consective nodes.
+
+- $f[x_0, x_1] = \frac{f(x_1) - f(x_0)}{x_1 - x_0} = \frac{1}{h} (f(x_1) - f(x_0)) = \frac{1}{h} \Delta f(x_0)$
+- $f[x_0, x_1, x_2] = \frac{1}{2h} \frac{\Delta f(x_1) - \Delta f(x_0)}{h} = \frac{1}{h} (f(x_1) - f(x_0)) = \frac{1}{2h^2} \Delta^2 f(x_0)$
+- $f[x_0, x_1, \dots, x_k] = \frac{1}{k! h^k} \Delta^k f(x_0)$
+
+Therefore, $P_n(x) = f[x_0] + \sum_{k = 1}^{n} {s \choose k} \Delta^k f(x_0)$.
