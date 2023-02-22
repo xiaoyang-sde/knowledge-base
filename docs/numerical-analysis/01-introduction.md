@@ -39,7 +39,7 @@ The 64-bit representation is used for a real floating-point number, which contai
 - The number that is less than $2^{-1022}$ results in underflow.
 - The number that is greater than $2^{2023} (2 - 2^{-52})$ results in overflow.
 
-The floating-point representative $fl(x)$ for a real number $x$ is defined to be a number in $F$ that is nearest to $x$. The standard permits several tie-breakers when the distances are equal. If $2^{-1022} \le |x| \le 2^2023 (2 - 2^{-52})$, then $fl(x) = x(1 + \delta)$ where $|\delta| \le 2^{-53}$.
+The floating-point representative $fl(x)$ for a real number $x$ is defined to be a number in $F$ that is nearest to $x$. The standard permits several tie-breakers when the distances are equal. If $2^{-1022} \le |x| \le 2^{2023} (2 - 2^{-52})$, then $fl(x) = x(1 + \delta)$ where $|\delta| \le 2^{-53}$.
 
 The epsilon machine $\epsilon_M$ represents the order of rounding error in a floating point number. The $\epsilon_M$ of double-precision floating point is $2^{-52}$.
 
@@ -55,7 +55,9 @@ If $p^*$ is an approximation to $p$. The actual error is $p - p^*$, the absolute
 The number $p^*$ is said to approximate $p$ to $t$ significant digits if $t$ is the largest non-negative integer for which $\frac{|p - p^*|}{|p|} \le 5 \times 10^{-t}$. The floating-point representation $fl(a)$ for $a$ has the relative error $|\frac{a - fl(a)}{a}|$.
 
 - $k$-digit chopping: For $a = 0.d_1 d_2 d_3 \dots \times 10^n$, $|\frac{a - fl(a)}{a}| = |\frac{0.d_{k + 1} d_{k + 2} \dots \times 10^{(n - k)}}{0.d_1 d_2 d_3 \dots \times 10^n}| = |\frac{0.d_{k + 1} d_{k + 2} \dots}{0.d_1 d_2 d_3 \dots}| \times 10^{-k} \le \frac{10^{-k}}{0.1} = 10^{-k + 1}$, which results in $k - 1$ significant digits.
-- $k$-digit rounding: For $a = 0.d_1 d_2 d_3 \dots \times 10^n$, $|\frac{a - fl(a)}{a}| = |\frac{0.d_{k + 1} d_{k + 2} \dots \times 10^{(n - k)}}{0.d_1 d_2 d_3 \dots \times 10^n}| = |\frac{0.d_{k + 1} d_{k + 2} \dots}{0.d_1 d_2 d_3 \dots}| \times 10^{-k} \le \frac{10^{-k}}{0.1} = 10^{-k + 1}$, which results in $k - 1$ significant digits.
+- $k$-digit rounding
+  - When $d_{k + 1} < 5$: For $a = 0.d_1 d_2 d_3 \dots \times 10^n$, $|\frac{a - fl(a)}{a}| = |\frac{0.d_{k + 1} d_{k + 2} \dots \times 10^{(n - k)}}{0.d_1 d_2 d_3 \dots \times 10^n}| = |\frac{0.d_{k + 1} d_{k + 2} \dots}{0.d_1 d_2 d_3 \dots}| \times 10^{-k} \le \frac{0.5}{0.1} 10^{-k} = 5 \cdot 10^{-k}$, which results in $k$ significant digits.
+  - When $d_{k + 1} \ge 5$: For $a = 0.d_1 d_2 d_3 \dots \times 10^n$, $|\frac{a - fl(a)}{a}| = |\frac{0.{(9 - d_{k + 1})} {(9 - d_{k + 2})} \dots \times 10^{(n - k)}}{0.d_1 d_2 d_3 \dots \times 10^n}| = |\frac{0.{(9 - d_{k + 1})} {(9 - d_{k + 2})} \dots}{0.d_1 d_2 d_3 \dots}| \times 10^{-k} \le \frac{0.5}{0.1} 10^{-k} = 5 \cdot 10^{-k}$, which results in $k$ significant digits.
 
 ### Finite-Digit Arithmetic
 
@@ -71,4 +73,4 @@ An algorithm is a procedure that describes, in an unambiguous manner, a finite s
 
 Suppose ${\beta_n}_{n = 1}^{\infty}$ is a sequence known to converge to zero and ${\alpha_n}_{n = 1}^{\infty}$ converges to a number $\alpha$. If a positive constant $K$ and an integer $N$ exist such that $|\alpha_n - \alpha| \le K|\beta_n|$ for all $n \ge N$, then ${\alpha_n}_{n = 1}^{\infty}$ converges to $\alpha$ with rate of convergence $O(\beta_n)$. Therefore, $\alpha_n = \alpha + O(\beta_n)$.
 
-Suppose that $\lim_{h \rightarrow 0} G(h) = 0$ and $lim_{h \rightarrow 0} F(h) = L$. If a positive constant $K$ exists with $|F(h) - L| \le K |G(h)|$ for a small $h$, then $F(h) = L + O(G(h))$.
+Suppose that $\lim_{h \rightarrow 0} G(h) = 0$ and $\lim_{h \rightarrow 0} F(h) = L$. If a positive constant $K$ exists with $|F(h) - L| \le K |G(h)|$ for a small $h$, then $F(h) = L + O(G(h))$.

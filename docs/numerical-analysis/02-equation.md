@@ -123,7 +123,7 @@ Let $f \in C^2 [a, b]$. If $p \in (a, b)$ is such that $f(p) = 0$ and $f'(p) \ne
 
 Newton's method is a powerful technique, but it has a major weakness: the need to know the value of the derivative of $f$ at each approximation.
 
-Given that $f'(p_{n - 1}) = lim_{x \rightarrow p_{n - 1}} \frac{f(x) - f(p_{n - 1})}{x - p_{n - 1}}$. If $p_{n - 2}$ is close to $p_{n - 1}$, then $f'(p_{n - 1}) \approx \frac{f(p_{n - 1}) - f(p_{n - 2})}{p_{n - 1} - p_{n - 2}}$.
+Given that $f'(p_{n - 1}) = \lim_{x \rightarrow p_{n - 1}} \frac{f(x) - f(p_{n - 1})}{x - p_{n - 1}}$. If $p_{n - 2}$ is close to $p_{n - 1}$, then $f'(p_{n - 1}) \approx \frac{f(p_{n - 1}) - f(p_{n - 2})}{p_{n - 1} - p_{n - 2}}$.
 
 Substitute $f'(p_{n - 1})$ in Newton's formula, $$p_n = p_{n - 1} - \frac{f(p_{n - 1})(p_{n - 1} - p_{n - 2})}{f(p_{n - 1}) - f(p_{n - 2})}$$.
 
