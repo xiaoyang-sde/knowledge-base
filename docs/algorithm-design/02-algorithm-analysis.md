@@ -48,7 +48,7 @@ Example: $T(n)$ is $\Omega (n^{2})$ and $O(n^{2})$, thus $T(n)$ is $\Theta (n^{2
 
 #### Limit
 
-Let f and g be two functions that $lim_{n \to \infty} \frac{f(n)}{g(n)}$ exists.
+Let f and g be two functions that $\lim_{n \to \infty} \frac{f(n)}{g(n)}$ exists.
 
 - If the limit is equal to 0. Then $f(n) = O(g(n)), f(n) \neq \Theta (g(n))$.
 - If the limit is equal to some number c > 0. Then $f(n) = \Theta (g(n))$.
