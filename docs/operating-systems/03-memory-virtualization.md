@@ -9,7 +9,7 @@ The abstraction of address space is the running program's view of the memory in 
 - **Stack**: The allocation and deallocation of the stack memories are managed by the compiler. The variable declarations in a function allocates memories in the stack, when the function returns, these memories are deallocated.
 - **Heap**: The allocation and deallocation of the heap memories requires explicit `malloc` API calls. The address of the memories allocated by `malloc` are stored in the stack.
 
-The `malloc()` call takes a parameter `size_t size` which describes the number of bytes to be allocated and returns a pointer with the `void` type that points to the allocated heap memory. The pointer needs to be casted to the desired type. The `sizeof()` operator returns the amount of space for specifc type.
+The `malloc()` call takes a parameter `size_t size` which describes the number of bytes to be allocated and returns a pointer with the `void` type that points to the allocated heap memory. The pointer needs to be casted to the desired type. The `sizeof()` operator returns the amount of space for specific type.
 
 The `free()` call deallocates the memory allocated by `malloc()`.
 
@@ -67,7 +67,7 @@ The **linear page table** is an array which maps a virtual page number to a page
 
 ## Paging: Faster Translation (TLB)
 
-The translation-lookaside buffer (TLB) inside the MMU is a hardware cache of virtual-to-physical address translations. The system extracts the virtual page number from the virtual address and check if the TLB holds the translation. If there's a TLB miss, the hardware raises an exception to raise the priviledge level to kernel mode and jumps to a trap handler that retrieves the translation from the page table and updates the TLB, and then the system resumes execution at the instruction that caused trap.
+The translation-lookaside buffer (TLB) inside the MMU is a hardware cache of virtual-to-physical address translations. The system extracts the virtual page number from the virtual address and check if the TLB holds the translation. If there's a TLB miss, the hardware raises an exception to raise the privilege level to kernel mode and jumps to a trap handler that retrieves the translation from the page table and updates the TLB, and then the system resumes execution at the instruction that caused trap.
 
 The TLB could hold translations from different processes at the same time since each entry contains an **address space identifier** that identifies the process that it belongs to. The TLB could use LRU or random cache replacement policy if the entries reach its capacity.
 
@@ -125,4 +125,4 @@ The Linux decides which pages to remove to free up space with the 2Q replacement
 
 The **buffer overflow** could happen when the program copies an input that is longer than the buffer and overwrites the target memory. The malicious programmer could inject their own code into the target system with specific input, which could cause privilege escalation. However, the system could set an NX bit in the PTEs of a certain regions of the page table to prevent injected code from being executed.
 
-The **return-oriented programming** could allow the attacker execute code sequences without injecting code. The attacker could use a lot of bits of code (**gadgets**) within a program's address space and then overwrite the stack to redirect the return address in the executing function to a malicious instruction, followed by a return instruction. However, the system could use the **addres space layout randomization** technique to place the code, stack, and heap into random locations.
+The **return-oriented programming** could allow the attacker execute code sequences without injecting code. The attacker could use a lot of bits of code (**gadgets**) within a program's address space and then overwrite the stack to redirect the return address in the executing function to a malicious instruction, followed by a return instruction. However, the system could use the **address space layout randomization** technique to place the code, stack, and heap into random locations.

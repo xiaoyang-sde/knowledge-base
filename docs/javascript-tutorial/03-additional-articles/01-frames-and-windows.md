@@ -58,7 +58,7 @@ To close a window: `win.close()`.
 
 * `win.moveBy(x,y)` \(relative\)
 * `win.moveTo(x,y)` \(absolute\)
-* `win.resizeBy(width,height)` \(relativ\)
+* `win.resizeBy(width,height)` \(relative\)
 * `win.resizeTo(width,height)` \(absolute\)
 
 JavaScript has no way to minify or maximize a window.
@@ -142,7 +142,7 @@ The `postMessage` interface allows windows to talk to each other no matter which
 
 If we want to send the message to `win`, we should call `win.postMessage(data, targetOrigin)`.
 
-* `data`: Any data strucutre \(only strings in IE\)
+* `data`: Any data structure \(only strings in IE\)
 * `targetOrigin`: Only a window from the given origin will get the message. \(`*` to ignore the check\)
 
 #### onmessage
@@ -153,7 +153,7 @@ To receive a message, the target window should have a handler on the `message` e
 * `origin`
 * `source`: The reference to the sender window.
 
-Use `addEventListener` to set hte handler for this event.
+Use `addEventListener` to set the handler for this event.
 
 ## 1.3 The clickjacking attack
 

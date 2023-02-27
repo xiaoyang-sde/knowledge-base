@@ -149,7 +149,7 @@ The root node `document.documentElement` \(`<html>`\) has document as its parent
 
 If an element has the `id` attribute, we can get the element using the method `document.getElementById(id)`. There can be only one element in the document with the given `id`.
 
-It's also available as a global varaible, but it will be overwritten by varaibles declared in the script. Don’t use id-named global variables to access elements.
+It's also available as a global variable, but it will be overwritten by variables declared in the script. Don’t use id-named global variables to access elements.
 
 ### querySelectorAll
 
@@ -469,7 +469,7 @@ Don’t take width/height from CSS
 
 They provide the width/height without the scrollbar.
 
-In modern HTML we should always write `DOCTYPE`. Without it, top-level geomtry properties may work a little bit different.
+In modern HTML we should always write `DOCTYPE`. Without it, top-level geometry properties may work a little bit different.
 
 ### Width/height of the document
 

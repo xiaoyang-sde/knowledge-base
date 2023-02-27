@@ -21,7 +21,7 @@ As the delivery period for a futures contract is approached, the futures price c
 ### Settlement
 
 - Initial margin: The amount that must be deposited at the time the contract is entered into.
-- Maintaince margin: f the balance in the margin account falls below the maintenance margin, the trader receives a margin call and is expected to top up the margin account to the initial margin level within a short period of time.
+- Maintained margin: f the balance in the margin account falls below the maintenance margin, the trader receives a margin call and is expected to top up the margin account to the initial margin level within a short period of time.
 - Settlement: At the end of each trading day, the margin account is adjusted to reflect the trader's gain or loss.
 
 ### Clearing House
@@ -106,7 +106,7 @@ Positions in futures contracts are treated as if they are closed out on the last
 ## Forward vs. Futures Contract
 
 - Forward
-  - Private contract bewteen two parties
+  - Private contract between two parties
   - Not standardized
   - One specified delivery date
   - The gain and loss is settled at end of contract

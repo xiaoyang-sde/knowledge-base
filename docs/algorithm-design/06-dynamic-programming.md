@@ -108,7 +108,7 @@ Let $OPT(j)$ be the maximum number of base pairs in a structure on $b_1, b_2, \d
 - $j$ is not involved in a pair: $OPT(j) = OPT(j - 1)$
 - $j$ pairs with $t$ for some $t< j - 4$: $OPT(j) = OPT(t - 1) +$ the optimal solution between $t + 1$ and $j - 1$.
 
-Since there's no way to represent the optimal solution between $t + 1$ and $j - 1$, a seperate variable is introduced.
+Since there's no way to represent the optimal solution between $t + 1$ and $j - 1$, a separate variable is introduced.
 
 ### Dynamic Programming over Intervals
 
@@ -177,7 +177,7 @@ The algorithm divides $G_{XY}$ along its center column and compute the value of 
 
 ### Analyzing the Algorithm
 
-The algorithm maintains an array with at most $m + n$ entires, which holds nodes on the shortest corner-to-corner path as they are discovered. Therefore, the space complexity is $O(m + n)$.
+The algorithm maintains an array with at most $m + n$ entries, which holds nodes on the shortest corner-to-corner path as they are discovered. Therefore, the space complexity is $O(m + n)$.
 
 Let $T(m, n)$ denote the maximum running time of the algorithm on strings of length $m$ and $n$.
 

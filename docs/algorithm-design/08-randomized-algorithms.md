@@ -16,7 +16,7 @@ Given a set of $n$ numbers $S$ and a number $k$ between 1 and $n$, consider the 
 
 The basic structure of the algorithm is selecting an element $a \in S$ as the pivot,and form the sets $S^- = {a_j: a_j < a_i}$ and $S^+ = {a_j: a_j > a_i}$, and then determining which of $S^-$ or $S^+$ contains the k-th largest element, and iterate only on this one.
 
-The algorithm is called recursively on strictly smaller set, thus it must terminate. Regardless of how the pivot is choosen, the algorithm returns the k-th largest element oof $S$.
+The algorithm is called recursively on strictly smaller set, thus it must terminate. Regardless of how the pivot is chosen, the algorithm returns the k-th largest element oof $S$.
 
 #### Choose the Pivot
 

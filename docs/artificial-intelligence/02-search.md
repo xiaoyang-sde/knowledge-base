@@ -67,7 +67,7 @@ The bidirectional search runs two simultaneous searches. The forward search star
 
 ## Informed search strategies
 
-Informed search strategies use problem-specific knowledge beyond the definition of the problem itself to find solutions more efficiently. The general approach is **best-first search**, which selects the node with the lowest cost estimate function $f(n)$. The algorithm is implemented with a priority queue based on $f(n)$. The algorithm uses a heuristic function $h(n)$ as a component of $f(n)$, which is tje estimated cost of the cheapest path from node $n$ to a goal state.
+Informed search strategies use problem-specific knowledge beyond the definition of the problem itself to find solutions more efficiently. The general approach is **best-first search**, which selects the node with the lowest cost estimate function $f(n)$. The algorithm is implemented with a priority queue based on $f(n)$. The algorithm uses a heuristic function $h(n)$ as a component of $f(n)$, which is the estimated cost of the cheapest path from node $n$ to a goal state.
 
 ### Greedy best-first search
 

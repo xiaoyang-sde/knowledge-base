@@ -8,7 +8,7 @@ If we want to define a new class which have all methods in the `SLList` but new 
 public class RotatingSLList<Item> extends SLList<Item>
 ```
 
-With `extends` key word, the subclass withh inhert all these components:
+With `extends` key word, the subclass with inhert all these components:
 
 * All instance and static variables
 * All methods
@@ -16,7 +16,7 @@ With `extends` key word, the subclass withh inhert all these components:
 
 ## VengefulSLList
 
-We could build a `VengefulSLList` class to make a list that could remeber the deleted items. `super` key word could be used to call the corresponding method in the super class.
+We could build a `VengefulSLList` class to make a list that could remember the deleted items. `super` key word could be used to call the corresponding method in the super class.
 
 ```java
 public class VengefulSLList<Item> extends SLList<Item> {
@@ -42,7 +42,7 @@ public class VengefulSLList<Item> extends SLList<Item> {
 
 ## Constructors
 
-While constructors are not inherited, Java requires that all constructors must start with a call to one of its superclass's constructors. If you don't call it explicitly, Java will automatically call it for you. If we forget to specify which contructor to use, Java will call the default one without parameters.
+While constructors are not inherited, Java requires that all constructors must start with a call to one of its superclass's constructors. If you don't call it explicitly, Java will automatically call it for you. If we forget to specify which constructor to use, Java will call the default one without parameters.
 
 ## The Object Class
 

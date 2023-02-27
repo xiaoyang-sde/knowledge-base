@@ -532,7 +532,7 @@ xhr.upload.onprogress = function(event) {
 
 ### Not-so-useful progress event
 
-The event triggers when the data is sent, instead of receving by the server. Maybe it was buffered by a local network proxy, or maybe the remote server process just died and couldn’t process them.
+The event triggers when the data is sent, instead of receiving by the server. Maybe it was buffered by a local network proxy, or maybe the remote server process just died and couldn’t process them.
 
 ### Algorithm
 

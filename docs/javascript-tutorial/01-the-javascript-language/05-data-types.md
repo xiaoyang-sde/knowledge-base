@@ -649,7 +649,7 @@ for (let [key, value] of Object.entries(user)) {
 }
 ```
 
-#### Swap varaibles trick
+#### Swap variables trick
 
 ```javascript
 [guest, admin] = [admin, guest];

@@ -59,7 +59,7 @@ The scope is the part of the program in which a name has a particular meaning. T
 
 ### Declaration and Definition
 
-To separate a program into multiple files, the variables should be shared across files. C++ distinguishes between declarations and defintions. To use the same variable in multiple files, it must be defined once and declared in all other files.
+To separate a program into multiple files, the variables should be shared across files. C++ distinguishes between declarations and definitions. To use the same variable in multiple files, it must be defined once and declared in all other files.
 
 - Declarations make names known to the program.
 - Definitions create the associated entities.
@@ -88,7 +88,7 @@ The null pointer has the value of `nullptr` or `0`, which doesn't point to an ob
 
 ## `const` Qualifier
 
-The `const` variable can't be assigned after initialization, such as `const int buf_size = 512`. If the value of the constant variable is a complie-time constant, the compiler will replace uses of the variable with its value.
+The `const` variable can't be assigned after initialization, such as `const int buf_size = 512`. If the value of the constant variable is a compile-time constant, the compiler will replace uses of the variable with its value.
 
 Constant variables are defined as local to the file. To share a constant variable across multiple files, the `extern` keyword could be used on both its definition and declaractions.
 

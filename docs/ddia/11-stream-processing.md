@@ -21,7 +21,7 @@ The message broker uses acknowledgements to ensure that the message is not lost.
 
 ### Partitioned Logs
 
-In the tranditional message broker, the consumer is destructive if the acknowledgment causes the received messages to be deleted from the broker. The log-based message broker (Apache Kafka, Amazon Kinesis Streams, etc.) combines the durable storage of the database with the low-latency notification facilities of messaging. The log is an append-only sequence of records on disk. The producer sends a message by appending it to the end of the log, and a consumer receives messages by reading the log sequentially.
+In the transitional message broker, the consumer is destructive if the acknowledgment causes the received messages to be deleted from the broker. The log-based message broker (Apache Kafka, Amazon Kinesis Streams, etc.) combines the durable storage of the database with the low-latency notification facilities of messaging. The log is an append-only sequence of records on disk. The producer sends a message by appending it to the end of the log, and a consumer receives messages by reading the log sequentially.
 
 To scale to higher throughput, the log could be partitioned, and each topic could hold a group of partitions. Different partitions could be hosted on different machines, making each partition a separate log. Within each partition, the broker assigns a monotonically increasing sequence number  to every message, but there is no ordering guarantee across different partitions. Therefore, all messages that need to be ordered consistently need to be routed to the same partition.
 

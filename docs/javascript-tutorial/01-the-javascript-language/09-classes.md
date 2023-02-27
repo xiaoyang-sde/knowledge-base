@@ -191,9 +191,9 @@ There’s no own constructor in `Rabbit`, so `Animal` constructor is called. Par
 Explain: The class field is initialized:
 
 * Before constructor for the base class \(that doesn’t extend anything\).
-* Imediately after `super()` for the derived class.
+* Immediately after `super()` for the derived class.
 
-So that when the `Rabbit` constructor implicity calls `super()`, its class field has not been initialized yet, and that’s why the parent fields are used.
+So that when the `Rabbit` constructor implicitly calls `super()`, its class field has not been initialized yet, and that’s why the parent fields are used.
 
 ### Super: internals, \[\[HomeObject\]\]
 

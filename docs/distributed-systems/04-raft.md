@@ -2,7 +2,7 @@
 
 Raft is a consensus algorithm for managing a replicated log. Consensus algorithms allow a collection of machines to work as a coherent group that can survive the failures of some members.
 
-- **Strong leader**: Raft requires log entires only flow from the leader to other servers.
+- **Strong leader**: Raft requires log entries only flow from the leader to other servers.
 - **Leader election**: Raft uses randomized timers to elect leaders.
 - **Membership changes**: Raft uses a joint consensus approach where the majorities of two configurations overlap during transitions to change the set of servers in the cluster.
 
@@ -32,12 +32,12 @@ The leader sends periodic heartbeats to followers to maintain its authority. If 
 
 ### Log replication
 
-The leader handles client requests that contains a command to be executed. The leader appends the command to its log, and issues `AppendEntries` RPCs to the servers to replicate the entry. The leader then applies the entry to its state machine and returns the result to the client. If followers crash, the leader retries the RPC indefinitely until all folowers store all log entires. The log entry is commited if the leader has replicated it on a majority of the servers.
+The leader handles client requests that contains a command to be executed. The leader appends the command to its log, and issues `AppendEntries` RPCs to the servers to replicate the entry. The leader then applies the entry to its state machine and returns the result to the client. If followers crash, the leader retries the RPC indefinitely until all followers store all log entries. The log entry is committed if the leader has replicated it on a majority of the servers.
 
-To ensure log consistency, the leader sends the highest index of the commited entry and the index and term of the entry in its log that immediately precedes the new entries in the `AppendEntries` RPC. If the follower doesn't find an entry with the same index and term in its log, it refuses the new entries.
+To ensure log consistency, the leader sends the highest index of the committed entry and the index and term of the entry in its log that immediately precedes the new entries in the `AppendEntries` RPC. If the follower doesn't find an entry with the same index and term in its log, it refuses the new entries.
 
 The leader maintains a `nextIndex` for each follower, which is the index of the next log entry the leader will send to that follower. The value is initialized to the index after the last one in the leader's log. If a `AppendEntries` RPC is rejected because of inconsistency, the value is decremented until it reaches the point that the logs diverge.
-Therefore, subsequent `AppendEntries` RPC will success and overwrite the conflicting entires.
+Therefore, subsequent `AppendEntries` RPC will success and overwrite the conflicting entries.
 
 ### Safety
 
@@ -47,7 +47,7 @@ The leader won't commit log entries from previous term by counting replicas beca
 
 If the follower and candidate crashes, future RPCs will fail and be retried indefinitely until the crashed server restarts. Because the RPCs are idempotent, duplicated RPCs won't change the state of the server.
 
-To ensure the system is making process, the `boardcastTime` should be an order of magnitude less than the `electionTimeout`, and the `electionTimeout` should be a few order of magnitude less than the `MTBF`, the average time between failures for a single server.
+To ensure the system is making process, the `broadcastTime` should be an order of magnitude less than the `electionTimeout`, and the `electionTimeout` should be a few order of magnitude less than the `MTBF`, the average time between failures for a single server.
 
 ### Log compaction
 

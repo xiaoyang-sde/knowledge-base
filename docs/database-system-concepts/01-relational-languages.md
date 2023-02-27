@@ -38,7 +38,7 @@ $$\text{course\_fall} \leftarrow \Pi_{\text{course\_id}} (\sigma_{\text{semester
 
 $$\rho_{\text{i}}(instructor)$$
 
-## SQL Query Langauge
+## SQL Query Language
 
 ### Data Definition
 
@@ -51,7 +51,7 @@ The `COALESCE(e_1, e_2, ...)` expression returns the first non-null value in `e_
 #### String Data Types
 
 - `CHAR(n)`: The fixed-length character string with user-specified length `n`
-- `VARCHAR(n)`: The variable-length character string with user-specifed maximum length `n`
+- `VARCHAR(n)`: The variable-length character string with user-specified maximum length `n`
 - `SET(val1, val2, ...)`: The string object that could have 0 or more values chosen fom a list of possible values.
 
 #### Numeric Data Types
@@ -86,13 +86,13 @@ Integrity constraints ensure that changes made to the database by authorized use
 
 - `PRIMARY KEY`: The attributes `param1, param2` form the primary key of the relation. The primary-key attributes are required to be non-null and unique.
 - `FOREIGN KEY(param1, param2, ...) REFERENCES s`: The foreign key specification defines that the values of `param1, param2` must correspond to values of the primary key
-atrributes in relation `s`.
+attributes in relation `s`.
 - `NOT NULL`: The constraint specifies that the null value is not allowed for the specific attribute.
 - `UNIQUE`: The values in this column have to be unique.
 - `CHECK(predicate)`: The value in this column must satisfies the predicate. (e.g. `CHECK(budget > 0)`)
 - `AUTOINCREMENT`: The integer value is automatically filled in and incremented with each row insertion.
 
-The `ALTER TABLE` statement adds attriburtes to an existing relation. The new attributes is specified with `DEFAULT` or assigned `NULL` for all tuples in the relation.
+The `ALTER TABLE` statement adds attributes to an existing relation. The new attributes is specified with `DEFAULT` or assigned `NULL` for all tuples in the relation.
 
 ```sql
 ALTER TABLE relation ADD attribute domain DEFAULT default_value;
@@ -143,7 +143,7 @@ DELETE FROM table_name WHERE condition;
 
 ### Basic Query Structure
 
-The `SELECT` statment retrieves data from a database. The data returned is stored in a result table. The `DISTINCT` is used to discard duplicate value.
+The `SELECT` statement retrieves data from a database. The data returned is stored in a result table. The `DISTINCT` is used to discard duplicate value.
 
 ```sql
 SELECT column1, column2, ... FROM table_name;
@@ -153,7 +153,7 @@ SELECT DISTINCT column1, column2, ... FROM table_name;
 SELECT * FROM table_name;
 ```
 
-The `WHERE` clause specifies the constraints to filter the result. The constraints could be constrcuted with `AND` or `OR` logical keywords.
+The `WHERE` clause specifies the constraints to filter the result. The constraints could be constructed with `AND` or `OR` logical keywords.
 
 ```sql
 SELECT column1, column2, ...
@@ -229,7 +229,7 @@ The `JOIN` clause supports several join conditions that specifies when to combin
 
 - The `NATURAL` condition joins two tuples if all of their columns with the same name have the same value.
 - The `USING (column_1, column_2, ...)` condition joins two tuples if `column_1, column_2, ...` have the same value.
-- The `ON condtion_1 AND/OR condition_2 ...` condition joins two tuples if they matches `condtion_1 AND/OR condition_2 ...`.
+- The `ON condition_1 AND/OR condition_2 ...` condition joins two tuples if they matches `condition_1 AND/OR condition_2 ...`.
 
 ### Queries with Aggregates
 
@@ -336,7 +336,7 @@ CREATE VIEW view_name AS query_expression;
 CREATE VIEW view_name(column_1, column_2, ...) AS query_expression;
 ```
 
-If a view meets the following conditions, it supports tthe `UPDATE`, `INSERT`, and `DELETE` operations.
+If a view meets the following conditions, it supports the `UPDATE`, `INSERT`, and `DELETE` operations.
 
 - The `FROM` clause has only one database relation.
 - The `SELECT` clause contains only attribute names of the relation and does not have any expressions, aggregates, or distinct specification.

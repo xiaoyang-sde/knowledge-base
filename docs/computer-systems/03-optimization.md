@@ -2,7 +2,7 @@
 
 ## Capabilities and Limitations of Optimizing Compilers
 
-Compilers must be careful to apply only safe optimizations to a program. The resuling program must have the exact same behavior as the unoptimized version.
+Compilers must be careful to apply only safe optimizations to a program. The resulting program must have the exact same behavior as the unoptimized version.
 
 - Memory aliasing: Two pointers may designate the same memory location.
 - Side effect: The function that modifies some part of the global program state.
@@ -102,7 +102,7 @@ void combine4(vec_ptr v, data_t *dest) {
 
 Loop unrolling is a program transformation that reduces the number of iterations for a loop by increasing the number of elements computed on each iteration.
 
-- Reduce the number of opreations that don't contribute directly to the result of the program
+- Reduce the number of operations that don't contribute directly to the result of the program
 - Expose ways that could transform the code to reduce the number of operations in the critical path
 
 'k x 1 loop unrolling' refers to the transformation that unroll by a factor of `k` but accumulate values in a single variable.
@@ -135,9 +135,9 @@ The number of overhead operations is reduced, and then the latency bound of 1.00
 
 ### Modern CPU Design
 
-Definition: Most modern CPU are superscalar. A superscalar processor can issue and execut multiple instructions in one cycle. The instructions are retrieved from a sequential instruction stream and are scheduled dynamically.
+Definition: Most modern CPU are superscalar. A superscalar processor can issue and execute multiple instructions in one cycle. The instructions are retrieved from a sequential instruction stream and are scheduled dynamically.
 
-Benifit: Without programming effort, superscalar processor can take advantage of the instruction level parallelism.
+Benefit: Without programming effort, superscalar processor can take advantage of the instruction level parallelism.
 
 Pipelined functional units divides computation into stages and passes partial computation from stage to stage. Stage `i` can start on new computation once values passed to `i + 1`.
 

@@ -117,7 +117,7 @@ for (String city : s) {
 }
 ```
 
-The code above is equal to the following ugly implementaion.
+The code above is equal to the following ugly implementation.
 
 ```java
 Set<String> s = new HashSet<>();

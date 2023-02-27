@@ -12,7 +12,7 @@
 
 ### Middle End
 
-- Intermediate Representation: The code is stored in an **intermediate representation** that is not tied to either the source or the destination forms. The intermediate representation enables the compiler to support multiple source languages (e.g. Pascal, C, Fortan) and target different platforms (e.g. x86, ARM).
+- Intermediate Representation: The code is stored in an **intermediate representation** that is not tied to either the source or the destination forms. The intermediate representation enables the compiler to support multiple source languages (e.g. Pascal, C, Fortran) and target different platforms (e.g. x86, ARM).
 
 - Optimization: The optimizer swaps the user program with a different one that has the same semantics but more efficient.
 
@@ -30,9 +30,9 @@
 
 - Tree-walk Interpreter: Some programming languages execute code right after parsing it to an AST. To run the program, the interpreter traverses the syntax tree one branch and leaf at a time, evaluating each node as it goes.
 
-- Transpiler: The transpiler compiles a language to another source language as if it's an intermediate representation. The code generator produces a string of correct source code in the target language. The output could then be compiled with that target langauge's existing compliation pipeline. TypeScript and CoffeeScript are transpiled to JavaScript.
+- Transpiler: The transpiler compiles a language to another source language as if it's an intermediate representation. The code generator produces a string of correct source code in the target language. The output could then be compiled with that target language's existing compilation pipeline. TypeScript and CoffeeScript are transpiled to JavaScript.
 
-- Just-in-time (JIT) Compilation: Some virtual machines use the JIT compliation technique, which loads a bytecode program and compiles it to native code. The most sophisticated JIT inserts profiling hooks into the generated code to see which regions are most performance critical and what kind of data is flowing through them. Then, it will recompile those hot spots with more advanced optimizations.
+- Just-in-time (JIT) Compilation: Some virtual machines use the JIT compilation technique, which loads a bytecode program and compiles it to native code. The most sophisticated JIT inserts profiling hooks into the generated code to see which regions are most performance critical and what kind of data is flowing through them. Then, it will recompile those hot spots with more advanced optimizations.
 
 ## Compilers and Interpreters
 

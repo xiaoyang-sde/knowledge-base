@@ -92,7 +92,7 @@ If an instruction violates these permissions, the CPU triggers a general protect
 
 ## Address Translation
 
-Address translation is a mapping between the elements of an N-element virtual address space (VAS) and an M-element physical address space (PAS).
+Address translation is a mapping between the elements of an N-element virtual address space (WAS) and an M-element physical address space (PAS).
 
 - **PTBR**: The page table base register that points to the current page table
 - The n-bit virtual address

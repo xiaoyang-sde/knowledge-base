@@ -4,7 +4,7 @@ The sturct is a custom data type that packages together multiple related values 
 
 ## Define and Instantiate Struct
 
-The keyword `struct` could define a struct and the curly brackets define the field names and types. The struct is instantiated by specifing the fields and their values. The `<struct_name>.<field_name>` could be used to access or mutate the value in the field.
+The keyword `struct` could define a struct and the curly brackets define the field names and types. The struct is instantiated by specifying the fields and their values. The `<struct_name>.<field_name>` could be used to access or mutate the value in the field.
 
 ```rust
 struct User {

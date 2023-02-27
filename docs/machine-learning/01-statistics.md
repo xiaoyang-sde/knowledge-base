@@ -23,7 +23,7 @@ If the trail has $n$ possible outcomes with probabilities $p_1, p_2, \dots, p_n$
 
 ### Gaussian (Normal) Distribution
 
-The Gaussian distribution is continuous. The center of the Gaussian distribution is defined with the mean $\mu$ and the spread is defined with its standard deviation $\sigma$ or variance $\sigma^2$. The equation for a Gaussian probability density function is $f(x; \mu, \sigma^2) = N(\mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{(\frac{-(x - \mu)^2}{2 \sigma^2})}$. The `np.random.normal` function draws samples from a Gaussian distrubtion.
+The Gaussian distribution is continuous. The center of the Gaussian distribution is defined with the mean $\mu$ and the spread is defined with its standard deviation $\sigma$ or variance $\sigma^2$. The equation for a Gaussian probability density function is $f(x; \mu, \sigma^2) = N(\mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{(\frac{-(x - \mu)^2}{2 \sigma^2})}$. The `np.random.normal` function draws samples from a Gaussian distribution.
 
 ```py
 np.random.normal(mu, sigma, size = (n_samples,))
@@ -48,7 +48,7 @@ Let $P_i$ be a vector of the probabilities of the current state and $T$ be the t
 
 ### Likelihood
 
-With $n$ data points, a model could be evaluated by calculating the **likelihood** of the model having generated all of the data points $x_i$. The likelihood function of the whole data set is defined as $L(\mu, \sigma) = P(\bar{x}|\mu, \sigma) = \Pi^{n}_{i = 1} N(x_i, \mu, \sigma)$. Statistical inference is the process of finding the paramaters $\mu$ and $\sigma$ that are most likely to generate the given sample data set. The maximum likelihood estimate is $(\hat{\mu}, \hat{\sigma}) = \text{argmax}_{\mu, \sigma} L(\mu, \sigma) = \text{argmax}_{\mu, \sigma} \Pi^{n}_{i = 1} N(x_i, \mu, \sigma)$.
+With $n$ data points, a model could be evaluated by calculating the **likelihood** of the model having generated all of the data points $x_i$. The likelihood function of the whole data set is defined as $L(\mu, \sigma) = P(\bar{x}|\mu, \sigma) = \Pi^{n}_{i = 1} N(x_i, \mu, \sigma)$. Statistical inference is the process of finding the parameters $\mu$ and $\sigma$ that are most likely to generate the given sample data set. The maximum likelihood estimate is $(\hat{\mu}, \hat{\sigma}) = \text{argmax}_{\mu, \sigma} L(\mu, \sigma) = \text{argmax}_{\mu, \sigma} \Pi^{n}_{i = 1} N(x_i, \mu, \sigma)$.
 
 ### Bayes' Theorem
 

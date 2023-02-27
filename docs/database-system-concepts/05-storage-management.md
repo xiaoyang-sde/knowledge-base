@@ -2,18 +2,18 @@
 
 ## Overview
 
-The disk-oriented database management system stores its data on a non-volatile disk. The database file is divided into pages, with the first page being the directory page. The buffer pool manager moves pages between disk and memory. The execution engine relies on the buffer pool to access pages. The design goal is to maximize sequential access. Even though the DBMS could use `mmap` to store the contents of a file into the address space of a program, most implementaions decide to avoid it.
+The disk-oriented database management system stores its data on a non-volatile disk. The database file is divided into pages, with the first page being the directory page. The buffer pool manager moves pages between disk and memory. The execution engine relies on the buffer pool to access pages. The design goal is to maximize sequential access. Even though the DBMS could use `mmap` to store the contents of a file into the address space of a program, most implementations decide to avoid it.
 
-## Data Representaion
+## Data Representation
 
 - File storage: The DBMS stores a database as one or more files on disk in a proprietary format. The storage manager organizes the files as a collection of pages and schedules for reads and writes to improve spatial and temporal locality of pages.
   - Page: The database page is a fixed-size block of data with a unique identifier, which contains tuples, meta-data, indexes, and log records. The DBMS maps page identifiers to physical locations, such as file offsets. The DBMS could store pages in a heap, a tree, sequential, or hashing file organization.
-  - Page header: Each page contains a header of metadata about the page's contents, such as page size, checksum, version, and transaction visiblities.
+  - Page header: Each page contains a header of metadata about the page's contents, such as page size, checksum, version, and transaction visibilities.
   - Heap file: The heap is an unsorted collection of pages where tuples are stored in random order. The DBMS maintains special pages that tracks the metadata of data pages, such as location and number of free slots.
 - Tuple storage: The DBMS stores tuples in a page in different methods.
   - Tuple-oriented: The page contains a few slots for tuples and a slot list that maps slots to the tuples' starting position offsets. The header keeps track of the number of used slots and the offset of the last slot used. This approach could cause fragmentation and random disk I/O.
   - Log-structured: The page contains a chronological sequence of log records that contain changes to tuples. Each log record contains the tuple's unique identifier. The DBMS needs to compact pages to reduce wasted space. To read a tuple with a given identifier, the DBMS finds the latest log record with an index. This approach could use sequential disk I/O.
-- Tuple representation: Each tuple is a sequence of bytes, which is prefixed with a header that contians meta-data. Each tuple is assigned a unique record identifier.
+- Tuple representation: Each tuple is a sequence of bytes, which is prefixed with a header that contains meta-data. Each tuple is assigned a unique record identifier.
   - Overflow page: To store values that are larger than a page, the DBMS uses separate overflow storage pages.
   - External storage: To store values that can't fit in a page, the DBMS uses external files. The external files don't have transaction protections.
 - System catalog: The DBMS stores meta-data about databases in its internal catalogs, such as tables, columns, indexes, users, permissions, and internal statistics. The catalog is stores as an internal table of the database.
@@ -67,7 +67,7 @@ The page table keeps track of pages that are in the buffer pool. It maintains me
 - Multiple buffer pool: The DBMS could use a buffer pool for each database to reduce latch contention. Each buffer pool can adopt local policies tailored for its data. The DBMS could map each page to their buffer pool with a separate object identifier or hashing.
 - Pre-fetching: The DBMS could pre-fetch pages for a query plan that involves sequential reads.
 - Scan sharing: The DBMS could reuse data retrieved from storage or operator computations. It allows multiple queries to attach to a single cursor that scans a table.
-- Buffer pool bypass: The sequential scan opeartor might not store fetched pages in the buffer pool to avoid overhead. It works well if the operator needs to read a large sequence of pages that are continuous on disk.
+- Buffer pool bypass: The sequential scan operator might not store fetched pages in the buffer pool to avoid overhead. It works well if the operator needs to read a large sequence of pages that are continuous on disk.
 
 ### Replacement Policies
 
@@ -143,7 +143,7 @@ The set of buckets is fixed at the time the index is created. If the relation gr
 
 Extendable hashing copes with changes in database size by splitting and merging buckets as the database grows and shrinks. Extendable hashing requires an additional level of indirection, since the system must access the bucket address table before accessing the bucket itself.
 
-The hash function generates values over $b$-bit binary integers, and the first $i$ bits are used by the table of bucket address. The value of $i$ grows and shrinks with the size of the database. Several consecutive table entires could point to the same bucket, thus each bucket $j$ has an integer $i_j$ that represents the length of the common hash prefix of its records.
+The hash function generates values over $b$-bit binary integers, and the first $i$ bits are used by the table of bucket address. The value of $i$ grows and shrinks with the size of the database. Several consecutive table entries could point to the same bucket, thus each bucket $j$ has an integer $i_j$ that represents the length of the common hash prefix of its records.
 
 #### Query and Update
 

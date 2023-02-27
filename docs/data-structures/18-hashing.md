@@ -50,7 +50,7 @@ public class DataIndexedIntegerSet {
 
 ### First Attempt
 
-Suppose we want to insert "cat" to the data strucutre, we could use the first letter as index. \(a = 1, b = 2, ... , z = 26\)
+Suppose we want to insert "cat" to the data structure, we could use the first letter as index. \(a = 1, b = 2, ... , z = 26\)
 
 However, other words may start with 'c' or special characters.
 
@@ -62,7 +62,7 @@ We could se all digits by multiplying each by a power of 27.
 * The index of "cat" is \(3 x 27^2\)  + \(1 x 27^1\) + \(20 x 27^0\) = 2234.
 * The index of "bee" is \(2 x 27^2\)  + \(5 x 27^1\) + \(5 x 27^0\) = 1598.
 
-As long as we pick a base &gt;= 26, this algorithm is guaranteed to give each lowercase English word a unqiue number. Thus, we will never have a collision.
+As long as we pick a base &gt;= 26, this algorithm is guaranteed to give each lowercase English word a unique number. Thus, we will never have a collision.
 
 ```java
 // englishToInt() is a helper method which could turn string to index.
@@ -115,7 +115,7 @@ For example, `asciiToInt(omens)` will return `-1,867,853,901` instead of `28,196
 
 From the smallest to the largest possible integers, there are a total of 4,294,967,296 integers in Java, which means that collision is inevitable, and we need to find a way to avoid it.
 
-Pigeonhole princeple tells us that if there are more than 4,294,967,296 possible items, multiple items will share the same hash code. \(The official term of the number we are computing.\)
+Pigeonhole principle tells us that if there are more than 4,294,967,296 possible items, multiple items will share the same hash code. \(The official term of the number we are computing.\)
 
 * Resolve hash code collisions. \(collision handling\)
 * Compute a hash code for arbitrary objects. \(computing a hash code\)
@@ -146,7 +146,7 @@ What we've just created is called a hash table.
 
 ## Dynamic Growth
 
-We could dynamicly adjust the number of buckets to make the data structure more efficient. Suppose we have M buckets and N items, the load factor is `N/M`, and we need to keep that factor low. When the load factor reaches certain threshold, we double M:
+We could dynamically adjust the number of buckets to make the data structure more efficient. Suppose we have M buckets and N items, the load factor is `N/M`, and we need to keep that factor low. When the load factor reaches certain threshold, we double M:
 
 * Create a new HashTable with 2M buckets.
 * Iterate through all the items in the old HashTable, and add them into this new HashTable.

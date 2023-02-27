@@ -27,7 +27,7 @@ let change_color_message = Message::ChangeColor(0, 0, 0);
 
 ## The `Option` Enum
 
-The standard library defines the `Option<T>` enum type that encodes the scenario in which a value could be something or it could be nothing. To prevent compliation error, the program should handle each variant in order to use an `Option<T>` value.
+The standard library defines the `Option<T>` enum type that encodes the scenario in which a value could be something or it could be nothing. To prevent compilation error, the program should handle each variant in order to use an `Option<T>` value.
 
 ```rust
 enum Option<T> {

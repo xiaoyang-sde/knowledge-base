@@ -80,7 +80,7 @@ Use a single set to create a collection of all edges.
 
 ### Adjacency Lists
 
-Use an array of lists, indexed by vertex number. Each index contains the index of its adjancent vertices.
+Use an array of lists, indexed by vertex number. Each index contains the index of its adjacent vertices.
 
 ![Adjacency Lists](https://joshhug.gitbooks.io/hug61b/content/assets/Screen%20Shot%202019-03-27%20at%202.05.55%20AM.png)
 

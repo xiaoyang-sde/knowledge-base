@@ -83,7 +83,7 @@ The  constructor initializer list specifies initial values for one or more data 
 
 When a field is initialized with the initializer list, the constructor will be called once and the object will be constructed and initialized in one operation. However, for a field that is assigned in the constructor, the field will be first default initialized and then reassigned.
 
-Members that are `const` or references must be initialized. Classess without the default constructor must be initialized. Members are initialized in the order of the class definition.
+Members that are `const` or references must be initialized. Classes without the default constructor must be initialized. Members are initialized in the order of the class definition.
 
 ### Delegating Constructor
 
@@ -99,7 +99,7 @@ public:
 
 ### Conversion Constructor
 
-The conversion constructor is a consturctor with a single argument, which is an implicit conversion from the argument type to the class type. The compiler supports implicit one-step conversion. For example, converting string literal to `string`, and then to class type is a two-step converesion. The `explicit` keyword before the constructor declaration could disable the implicit conversion.
+The conversion constructor is a constructor with a single argument, which is an implicit conversion from the argument type to the class type. The compiler supports implicit one-step conversion. For example, converting string literal to `string`, and then to class type is a two-step converesion. The `explicit` keyword before the constructor declaration could disable the implicit conversion.
 
 ```cpp
 sales_data book_1 = "test"; // implicit
@@ -109,7 +109,7 @@ sales_data book_1 = sales_data("test"); // explicit (equivalent to `static_cast`
 
 ## Access Control and Encapsulation
 
-C++ has access specifiers to enforce encapsulation. The difference bewteen `class` and `struct` is the access level. For the `struct` keyword, the members defined before the first access specifier are public. For the `class` keyword, the members are private.
+C++ has access specifiers to enforce encapsulation. The difference between `class` and `struct` is the access level. For the `struct` keyword, the members defined before the first access specifier are public. For the `class` keyword, the members are private.
 
 - Members defined after a `public` specifier are accessible to all parts of the program. The public members define the interface to the class.
 - Members defined after a `private` specifier are accessible to the member functions of the class but are not accessible to code that uses the class. The private sections encapsulate the implementation.

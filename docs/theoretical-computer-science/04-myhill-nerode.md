@@ -1,12 +1,12 @@
 # Myhill-Nerode Theorem
 
-The Myhill-Nerode theorem is a fundamental result in the theory of regular languages. It can be used to prove whether or not a language $L$ is regular and it can be used to find the minimal number of states in a DFA which recognizes $L$ if $L$ is regular. **The Myhill-Nerode theorem states that for a language $L$, the minimum number of states in a DFA for $L$ is equal to the number of equivalence classes of $L$. If the number of equivalence classes is infinite, the langauge is non-regular.**
+The Myhill-Nerode theorem is a fundamental result in the theory of regular languages. It can be used to prove whether or not a language $L$ is regular and it can be used to find the minimal number of states in a DFA which recognizes $L$ if $L$ is regular. **The Myhill-Nerode theorem states that for a language $L$, the minimum number of states in a DFA for $L$ is equal to the number of equivalence classes of $L$. If the number of equivalence classes is infinite, the language is non-regular.**
 
 The motivation of the theorem is that the pumping lemma is not sufficient to prove that a language is non-regular. (Example: $\{ L = 0^{*} 1^{*} \cup \{ 1^m 0^n 1^n: m \geq 1, n \geq 0 \} \}$)
 
 ## Indistinguishable
 
-For the langauge $L$, the strings $x$ and $y$ are $L$-indistinguishable if for all strings $w$, $xw \in L \iff yw \in L$. For example, let $L = \{ w: |w| \text{ is divisible by } 3 \}$, then $1 \equiv_L 0$, $\epsilon \equiv_L 000$, and $\epsilon \not \equiv_L 00$.
+For the language $L$, the strings $x$ and $y$ are $L$-indistinguishable if for all strings $w$, $xw \in L \iff yw \in L$. For example, let $L = \{ w: |w| \text{ is divisible by } 3 \}$, then $1 \equiv_L 0$, $\epsilon \equiv_L 000$, and $\epsilon \not \equiv_L 00$.
 
 For the language $L$, the $\equiv_L$ is an equivalence relation, which means that $x \equiv_L x$ (reflective), $x \equiv_L y \iff y \equiv_L x$ (symmetric), and $x \equiv_L y, y \equiv_L z \implies x \equiv_L z$ (transitive). The set $\Sigma^*$ could be divided into several classes of equivalence relations, such that a class is either in $L$ or in $\bar{L}$.
 
@@ -18,7 +18,7 @@ For the language $L$, the $\equiv_L$ is an equivalence relation, which means tha
 
 - Let $L = \{ w: w \text{ contains as many 0s as 1s} \}$. The language is non-regular. The set $\Sigma^*$ could be divided into $C_i = \{w: \text{the number of 0s in } w - \text{ the number of 1s in } w = i \}$.
 
-- Let $L = \{ w: w^{R} = w \}$. The langauge represents all palindromes formed with $\Sigma$. Each string in $\Sigma^*$ is an equivalence class.
+- Let $L = \{ w: w^{R} = w \}$. The language represents all palindromes formed with $\Sigma$. Each string in $\Sigma^*$ is an equivalence class.
 
 ## Proof of Myhill-Nerode Theorem
 

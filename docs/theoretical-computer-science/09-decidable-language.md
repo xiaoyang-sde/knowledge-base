@@ -16,7 +16,7 @@ Let $A_{\text{NFA}} = \{ (B, w) | B \text{ is an NFA that accepts } w \}$. The l
 
 Let $A_{\text{REX}} = \{ (R, w) | R \text{ is a regular expression that accepts } w \}$. The language is decidable. Let $M$ be a Turing machine that converts $R$ to a DFA and simulates the DFA on the input $w$.
 
-Let $E_{\text{DFA}} = \{ (A) | A \text{ is a DFA and } L(A) = \emptyset \}$. The language represents the DFA that doesn't accept any string. The language is decidable. Let $M$ be a Turing machine that iteratively marks the states that have a transtion coming into it from other marked states. If no accept state is marked, $M$ accepts the input $(A)$.
+Let $E_{\text{DFA}} = \{ (A) | A \text{ is a DFA and } L(A) = \emptyset \}$. The language represents the DFA that doesn't accept any string. The language is decidable. Let $M$ be a Turing machine that iteratively marks the states that have a transition coming into it from other marked states. If no accept state is marked, $M$ accepts the input $(A)$.
 
 Let $EQ_{\text{DFA}} = \{ (A, B) | A, B \text{ are DFAs and } L(A) = L(B) \}$. The language represents the equivalence paris of DFAs. The language is decidable. Let $C$ be a DFA that accepts the strings that are accepted by either $A$ or $B$ but not both. $L(C) = (L(A) \cap \bar{L(B)}) \cup (\bar{L(A)} \cap L(B))$. If $L(C) = \emptyset$, then $L(A) = L(B)$.
 

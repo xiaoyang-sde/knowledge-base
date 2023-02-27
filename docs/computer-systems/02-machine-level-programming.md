@@ -247,10 +247,10 @@ test Src1, Src2
 - `setl`: Less (Signed)
 - `setle`: Less or equal (Signed)
 
-- `seta`: Above (Unigned)
-- `setae`: Above or equal (Unigned)
-- `setb`: Below (Unigned)
-- `setbe`: Below or equal (Unigned)
+- `seta`: Above (Unsigned)
+- `setae`: Above or equal (Unsigned)
+- `setb`: Below (Unsigned)
+- `setbe`: Below or equal (Unsigned)
 
 ```s
 comp:
@@ -277,10 +277,10 @@ comp:
 - `jl`: Less (Signed)
 - `jle`: Less or equal (Signed)
 
-- `ja`: Above (Unigned)
-- `jae`: Above or equal (Unigned)
-- `jb`: Below (Unigned)
-- `jbe`: Below or equal (Unigned)
+- `ja`: Above (Unsigned)
+- `jae`: Above or equal (Unsigned)
+- `jb`: Below (Unsigned)
+- `jbe`: Below or equal (Unsigned)
 
 #### Jump Instruction Encodings
 
@@ -293,7 +293,7 @@ Conditional data tranfser moves compute the result of both conditional branches,
 
 #### Conditional Move Instructions
 
-The source and destination values of `cmov` can be 16, 32, or 64 bits long. Unlike the unconditional instructions, the assembler can infer the operand length of a conditional move insturction from the name of the destination register.
+The source and destination values of `cmov` can be 16, 32, or 64 bits long. Unlike the unconditional instructions, the assembler can infer the operand length of a conditional move instruction from the name of the destination register.
 
 ```s
 cmov Src, Dest
@@ -309,10 +309,10 @@ cmov Src, Dest
 - `cmovl`: Less (Signed)
 - `cmovle`: Less or equal (Signed)
 
-- `cmova`: Above (Unigned)
-- `cmovae`: Above or equal (Unigned)
-- `cmovb`: Below (Unigned)
-- `cmovbe`: Below or equal (Unigned)
+- `cmova`: Above (Unsigned)
+- `cmovae`: Above or equal (Unsigned)
+- `cmovb`: Below (Unsigned)
+- `cmovbe`: Below or equal (Unsigned)
 
 ```cpp
 long cread(long *xp) {
@@ -409,11 +409,11 @@ Jump table is an array where entry `i` is the address of a code segment implemen
   .quad .L7 # x = 6
 ```
 
-The compiler selects the method of trasnlating a switch statement based on the number of cases and the sparsity of the case values. Jump tables are used when there are a nubmer of cases and they span a small range of values. Otherwise, the compiler will use a sequence of if-else statements.
+The compiler selects the method of trasnlating a switch statement based on the number of cases and the sparsity of the case values. Jump tables are used when there are a number of cases and they span a small range of values. Otherwise, the compiler will use a sequence of if-else statements.
 
 #### Assembly Code
 
-- Direct Jump: Jump directely to the target. (`jmp .L8`)
+- Direct Jump: Jump directly to the target. (`jmp .L8`)
 - Indirect Jump: Fetch target from effective address. (`jmp *.L4(, %rdi, 8)`)
 
 ```s
@@ -485,7 +485,7 @@ Stack allocates the state for single procedure instantiation in frames.
 Contents in register may be overwritten by other functions. The function could save the content of registers on stack (saved register context), alter them, and retrieve them back from stack before returning.
 
 - Callee saved: Callee must preserve the values of these registers, ensuring that they have the same values before and after the function is executed. (`%rbx`, `%r12`, `%r13`, `%r14`, `%rbp`)
-- Caller saved: All other registers except for `%rsp` could be modified by any functin. The caller should save the data before making the call when necessary. (`%r10`, `%r11`)
+- Caller saved: All other registers except for `%rsp` could be modified by any function. The caller should save the data before making the call when necessary. (`%r10`, `%r11`)
 
 ### Illustration of Recursion
 

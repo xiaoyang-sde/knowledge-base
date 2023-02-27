@@ -52,7 +52,7 @@ The range for-loop could process all characters the vector holds. To access indi
 
 ## Iterator
 
-Iterator provides indirect access to elements in the containers. The `begin` method returns an iterator that points to the first element, while the `end` method returns an iterator that points to an element past the last element. The iterator could be dereferenced to access the elememt it points to. The `cbegin` and `cend` methods return constant iterators. Iterator allows arithmetic operations to move the iterator to different positions of the container.
+Iterator provides indirect access to elements in the containers. The `begin` method returns an iterator that points to the first element, while the `end` method returns an iterator that points to an element past the last element. The iterator could be dereferenced to access the element it points to. The `cbegin` and `cend` methods return constant iterators. Iterator allows arithmetic operations to move the iterator to different positions of the container.
 
 ```cpp
 vector<char> char_list(10);

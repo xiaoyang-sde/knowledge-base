@@ -77,7 +77,7 @@ Let $p(\cdot)$ be a polynomial function for the input $s$, $A$ has a polynomial 
 
 ### Efficient Certification
 
-To check a solution, let $t$ be a certificate string that contians the evidence that $s$ is a "yes" instance of a problem $X$.
+To check a solution, let $t$ be a certificate string that contains the evidence that $s$ is a "yes" instance of a problem $X$.
 
 $B$ is an efficient certifier for a problem $X$ if:
 

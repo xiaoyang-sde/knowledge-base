@@ -310,7 +310,7 @@ let sum = new Function('a', 'b', 'return a + b');
 
 When a function is created using new Function, its `[[Environment]]` is set to reference not the current Lexical Environment, but the global one.
 
-If `new Function` had access to outer variables, it would have problems with minifiers because outer varaibles are renamed into shorter ones.
+If `new Function` had access to outer variables, it would have problems with minifiers because outer variables are renamed into shorter ones.
 
 ## 6.8 Scheduling: setTimeout and setInterval
 

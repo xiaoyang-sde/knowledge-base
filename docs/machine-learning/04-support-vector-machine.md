@@ -2,13 +2,13 @@
 
 ## Decision Boundaries
 
-The decision boundary in logistic regression seperates the training classes in the feature space. If the dataset is linearly separable, the regularized logistic regression produces the model with the smallest coefficients that can separate the classes. However, the boundary that maximizes the margin between the boundary and both classes could be choosed to prevent overfitting.
+The decision boundary in logistic regression separates the training classes in the feature space. If the dataset is linearly separable, the regularized logistic regression produces the model with the smallest coefficients that can separate the classes. However, the boundary that maximizes the margin between the boundary and both classes could be choosed to prevent overfitting.
 
 ## Hard Margin
 
-Let the linear boundary be $w^T x + b = 0$, which is a general equation of a hyperplane. The coefficient vector $\vec{w}$ represents the normal vector of the hyperplane. The Euclidean distance bewteen $x$ and the hyperplane is $r = \frac{w^T x + b}{||w||}$. The unsigned distance is equal to $y_n (w^T x_n + b)$, in which $y_n \in \{ -1, 1 \}$.
+Let the linear boundary be $w^T x + b = 0$, which is a general equation of a hyperplane. The coefficient vector $\vec{w}$ represents the normal vector of the hyperplane. The Euclidean distance between $x$ and the hyperplane is $r = \frac{w^T x + b}{||w||}$. The unsigned distance is equal to $y_n (w^T x_n + b)$, in which $y_n \in \{ -1, 1 \}$.
 
-The optimization problem could be formulated as to find a decision boundary that maximizes the distance to both classes, which is $\text{argmax}_{w, b} \frac{1}{||w||} \min_{n} y_n (w^T x_n + b)$. Because the distance bewteen the hyperplane and the closet point is $\frac{1}{||w||}$, the problem could be reformulated as minimizing $||w||$: $\text{argmin}_{w, b} \frac{1}{2} ||w||^2$ where $y_n (w^T x_n + b) \geq 1$.
+The optimization problem could be formulated as to find a decision boundary that maximizes the distance to both classes, which is $\text{argmax}_{w, b} \frac{1}{||w||} \min_{n} y_n (w^T x_n + b)$. Because the distance between the hyperplane and the closet point is $\frac{1}{||w||}$, the problem could be reformulated as minimizing $||w||$: $\text{argmin}_{w, b} \frac{1}{2} ||w||^2$ where $y_n (w^T x_n + b) \geq 1$.
 
 - Active point: $y_n (w^T x_n + b) = 1$ (The points closest to the decision boundary)
 - Inactive point: $y_n (w^T x_n + b) \geq 1$

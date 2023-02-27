@@ -6,8 +6,8 @@ The container holds a collection of objects of a specified type. The order of th
 
 The sequential containers provide fast sequential access to their elements. However, these containers offer different performance trade-offs relative to the costs to add or delete elements to the container and the costs to perform non-sequential access to elements of the container.
 
-- `vector`: Flexible-size list that supports fast random access. Inserting or deleteing elements at the back is efficient.
-- `deque`: Double-ended queue that supports fast random access. Inserting or deleteing elements at the front and back is efficient.
+- `vector`: Flexible-size list that supports fast random access. Inserting or deleting elements at the back is efficient.
+- `deque`: Double-ended queue that supports fast random access. Inserting or deleting elements at the front and back is efficient.
 - `list`: Doubly linked list that supports bidirectional sequential access. Fast insert or delete in the list.
 - `forward_list`: Singly linked list that supports sequential access in one direction. Fast insert or delete in the list.
 - `array`: Fixed-size list that supports fast random access.
@@ -25,7 +25,7 @@ The sequential containers provide fast sequential access to their elements. Howe
   - `const_reference`
 - Construction
   - Default constructor: `Container container`
-  - Constructor: `Contaienr container(size, [initializer])`
+  - Constructor: `Container container(size, [initializer])`
   - Constructor: `Container container(container_1)`
   - Constructor: `Container container(iterator_begin, iterator_end)`
   - List initializer: `Container container{1, 2, 3}`

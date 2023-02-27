@@ -8,7 +8,7 @@ The constraint satisfaction problem consists of three components, $X$, $D$, and 
 - $D$ is a set of variables, ${ D_1, \dots, D_n }$, for each variable. Each domain $D_i$ consists of a set of allowable values, ${ v_1, \dots, v_k }$ for variable $X_i$.
 - $C$ is a set of constraints that specifies allowable combinations of variables. Each constraint $C_i$ consists of a pair $<\text{scope}, \text{rel}>$, where $\text{scope}$ is a tuple of variables that participate in the constraint and $\text{rel}$ is a relation that defines the values that those variables can take on. The relation could be defined as an explicit list of tuples of values or an abstract relation.
 
-Each state in a CSP is defined by an assignment of values to some or all of the variables, ${X_i = v_i, \dots}$. The assignment that does not violate constraints is the consistent assigment. The complete assignment is one in which each variable is assigned, and the solution to a CSP is a consistent and complete assignment.
+Each state in a CSP is defined by an assignment of values to some or all of the variables, ${X_i = v_i, \dots}$. The assignment that does not violate constraints is the consistent assignment. The complete assignment is one in which each variable is assigned, and the solution to a CSP is a consistent and complete assignment.
 
 ### Variation of Constraint
 
@@ -45,6 +45,6 @@ The backtracking search algorithm is a depth-first search that chooses values fo
 
 ## Problem Structure
 
-The tree-structured CSP could be solved in $O(nd^2)$ time. The algorithm picks a node as the root, produces the topological sort of the constraint graph, and makes the graph directed arc-consistent. Because the graph doesn't contain loop, the solution could be produced by selecting a value for each variable.
+The tree-structured CSP could be solved in $O(and^2)$ time. The algorithm picks a node as the root, produces the topological sort of the constraint graph, and makes the graph directed arc-consistent. Because the graph doesn't contain loop, the solution could be produced by selecting a value for each variable.
 
 To reduce a general constraint graph to a tree, the **cutset conditioning** algorithm instantiates a set of variables such that the remaining constraint graph is a tree. If the cutset size is $c$, the time complexity is $O(d^c \cdot (n - c)d^2)$.

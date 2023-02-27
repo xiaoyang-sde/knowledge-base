@@ -35,4 +35,4 @@ CIDR (Classless Inter-Domain Routing) is a method of assigning IPv4 address that
 
 ## Longest Prefix Match
 
-The routers use the longest prefix match algorithm to choose matching entries from forwarding table. The forwarding table is a set of CIDR entries. The incoming packet could match multiple entires, and the algorithm selects the entry with the longest matching prefix.
+The routers use the longest prefix match algorithm to choose matching entries from forwarding table. The forwarding table is a set of CIDR entries. The incoming packet could match multiple entries, and the algorithm selects the entry with the longest matching prefix.

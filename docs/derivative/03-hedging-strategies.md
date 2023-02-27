@@ -26,7 +26,7 @@ Assume that a copper fabricator knows it will require 100,000 pounds of copper o
 
 The arguments in favor of hedging are obvious. Most nonfinancial companies are in the business of manufacturing or retailing, which can't predict commodity prices. It makes sense for them to hedge the risks to avoid unpleasant surprises.
 
-- Hedging and shareholds: One argument is that the shareholders can do the hedging themselves. However, the commissions are more expensive.
+- Hedging and shareholders: One argument is that the shareholders can do the hedging themselves. However, the commissions are more expensive.
 - Hedging and competitors: If hedging is not the norm in a certain industry, it doesn't make sense for one particular company to choose to hedge.
 - Hedging and worse outcome: A hedge using futures contracts can result in a decrease or an increase in the profits relative to the position without hedging.
 

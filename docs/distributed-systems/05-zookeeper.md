@@ -45,4 +45,4 @@ The read request are handled locally at each server. Each read request is proces
 
 The application could call the `sync` primitive followed by the read request to avoid stale values. The FIFO order guarantee of client operations and the global guarantee of sync enable the result of the read operation to reflect the changes that happened before `sync` was issued.
 
-ZooKeeper server uses timeouts to detect client session failures. The client sends a heartbeat messsage to the server and connects to a different ZooKeeper server to re-establish its session when the message fails.
+ZooKeeper server uses timeouts to detect client session failures. The client sends a heartbeat message to the server and connects to a different ZooKeeper server to re-establish its session when the message fails.

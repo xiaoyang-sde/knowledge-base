@@ -1,6 +1,6 @@
 # Quick Sort
 
-## Partitoning
+## Partitioning
 
 To partition an array a\[\] on element x = a\[i\] is to rearrange a\[\] so that:
 
@@ -8,7 +8,7 @@ To partition an array a\[\] on element x = a\[i\] is to rearrange a\[\] so that:
 * All entries to the left of x are &lt;= x.
 * All entries to the right of x are &gt;= x.
 
-## Partiton Sort \(Quick Sort\)
+## Partition Sort \(Quick Sort\)
 
 Quicksorting N items:
 

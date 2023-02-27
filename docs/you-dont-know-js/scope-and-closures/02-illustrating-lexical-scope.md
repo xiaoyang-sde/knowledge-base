@@ -53,7 +53,7 @@ The determination of colored buckets, and the marbles they contain, happens duri
 
 Let's take the first line as an example:
 
-1. Encountering `var students`, Compiler will ask Scope Manager to see if a variable named `students` already exists for that particular scope bucket, and then ceate it or ignore it and move on.
+1. Encountering `var students`, Compiler will ask Scope Manager to see if a variable named `students` already exists for that particular scope bucket, and then create it or ignore it and move on.
 2. Compiler then produces code for Engine to later execute, to handle the `students = []` assignment. The code Engine runs will ask Scope Manager if there is a variable called `students` accessible in the current scope bucket or parent scopes. Then it will assign the reference of the `[...]` array to it.
 
 ## Nested Scope

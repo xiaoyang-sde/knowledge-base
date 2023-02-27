@@ -41,7 +41,7 @@ Every type not included in the primitive types is a **reference type**, such as 
 
 ### Object Instantiation
 
-When we instantiate an object, Java first allocates a box of bits for each instance variable of the class and fills them with a default value. The constructer usually fill them with other values.
+When we instantiate an object, Java first allocates a box of bits for each instance variable of the class and fills them with a default value. The constructor usually fill them with other values.
 
 Typically, object will have overheads in addition to the memory used by its instance variables.
 

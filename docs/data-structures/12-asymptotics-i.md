@@ -66,7 +66,7 @@ Disadvantage: Tedious to compute. Array size was arbitrary. Doesn’t tell you a
 
 Count possible operations in terms of input array size N.
 
-For example, the `<` operater in `dup1` runs for 2 to \(N^2+3N+2\)/2 times.
+For example, the `<` operator in `dup1` runs for 2 to \(N^2+3N+2\)/2 times.
 
 Advantage: Machine independent. Input dependence captured in model. Tells you how algorithm scales.
 

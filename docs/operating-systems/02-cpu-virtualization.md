@@ -44,7 +44,7 @@ The limited direct execution mechanism runs the program directly on the CPU with
 ### Restricted Operation
 
 - User mode: The code that runs in the user mode is restricted from certain instructions, such as issuing I/O requests. The code should execute a system call to perform the privileged operations.
-- Kernel mode: The opearting system runs in the kernel mode could execute privileged operations and restricted insturctions.
+- Kernel mode: The operating system runs in the kernel mode could execute privileged operations and restricted insturctions.
 
 The kernel sets up a trap table at boot time to define the handlers of certain events (system call, keyboard interrupt, etc.) and inform the hardware of the locations of these trap handlers.
 
@@ -60,7 +60,7 @@ The operating system regains control of the CPU to switch between processes with
 - Cooperative approach (Legacy): The system regains control by waiting for a system call or an illegal operation to take place.
 - Non-cooperative approach: The system regains control by defining a timer device that periodically raises a timer interrupt to halt the running process.
 
-The timer interrupt instructs the hardware to save the registers to the kernel stack of the running process A, and enters the kernel. The scheduler makes the decision to continue the current process or execute the context switch routine. The context switch saves current reigster values into the process structure of process A, and restores the registers of another process B from its process structure, and then changes the stack pointer. The `return-from-trap` instruction instructs the hardware to restore the registers of process B and starts running it.
+The timer interrupt instructs the hardware to save the registers to the kernel stack of the running process A, and enters the kernel. The scheduler makes the decision to continue the current process or execute the context switch routine. The context switch saves current register values into the process structure of process A, and restores the registers of another process B from its process structure, and then changes the stack pointer. The `return-from-trap` instruction instructs the hardware to restore the registers of process B and starts running it.
 
 ## Scheduling: Introduction
 
@@ -104,7 +104,7 @@ The Linux system uses the Completely Fair Scheduler to implement proportional-sh
 - **sched_latency**: the time that in which each process could expect to get a share of the processor
 - **min_granularity**: the minimal time slice allocated to each process
 
-The CFS enables users to give some processes a higher share of CPU with the **nice** parameter of a process, which ranges from $-20$ to $19$ and defautls to $0$. Positive nice values imply lower priority and negative nice values imply higher priority. The nice value of each process is mapped to a **weight**, which could be used to compute the effective time slice of each process. (e.g. a nice value of $0$ corresponds to a weight of $1024$)
+The CFS enables users to give some processes a higher share of CPU with the **nice** parameter of a process, which ranges from $-20$ to $19$ and defaults to $0$. Positive nice values imply lower priority and negative nice values imply higher priority. The nice value of each process is mapped to a **weight**, which could be used to compute the effective time slice of each process. (e.g. a nice value of $0$ corresponds to a weight of $1024$)
 
 $$\text{time\_slice}_k = \frac{\text{weight}_k}{\sum_{i = 0}^{n - 1} \text{weight}_i} \cdot \text{sched\_latency}$$
 
@@ -118,5 +118,5 @@ The CFS implements a red-black tree to keep running processes. If a process goes
   - The approach requires the lock to ensure the scheduler on multiple CPUs could access the proper data. The lock reduces performance as the number of CPUs in the systems grows.
   - The approach moves the job between different CPUs, which could affect cache affinity.
 - **MQMS** (multi-queue multiprocessor scheduling): The multiple queues with specific scheduling policies handle the jobs to be scheduled. Each CPU picks the next job from a specific queue.
-  - The approach does not require the lock and perserve cache affinity.
+  - The approach does not require the lock and preserve cache affinity.
   - The approach could cause load imbalance. The problem could be solved with migration. The work stealing approach enables the queue queue that is low on jobs to steal jobs from the target queues that are more full than the source queue.

@@ -8,7 +8,7 @@ The memory in Rust is managed through a system of ownership with a set of rules 
 
 The stack stores values in the order it gets them and removes the values in the opposite order. All data stored on the stack must have a known, fixed size.
 
-The heap stores values with an unknown size at compile time or a size that might change. The memory allocator finds an empty spot in the heap that is larg enough, marks it as being in use, and returns a pointer, which is the address of that location. The pointer is stored on th stack because it has known, fixed size.
+The heap stores values with an unknown size at compile time or a size that might change. The memory allocator finds an empty spot in the heap that is large enough, marks it as being in use, and returns a pointer, which is the address of that location. The pointer is stored on th stack because it has known, fixed size.
 
 ### Ownership Rules
 

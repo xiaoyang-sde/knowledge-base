@@ -22,7 +22,7 @@ public static void main(String[] args) {
 }
 ```
 
-The problem is that the `Dog` object can't work with the `>` operater. To fix this problem, we may change the function slightly.
+The problem is that the `Dog` object can't work with the `>` operator. To fix this problem, we may change the function slightly.
 
 ```java
 public static Dog maxDog(Dog[] dogs) {
@@ -118,7 +118,7 @@ public class Dog implements Comparable<Dog> {
 
 ## Comparator
 
-We could only implement one `compareTo` method for each class. However, if we want to add more orders of comparasion, we could implement `Comparator` interface.
+We could only implement one `compareTo` method for each class. However, if we want to add more orders of comparison, we could implement `Comparator` interface.
 
 ```java
 public interface Comparator<T> {

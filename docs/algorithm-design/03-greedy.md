@@ -116,7 +116,7 @@ A priority queue could be used to maintain the attachment costs for each node in
 
 ## The Union-Find Data Structure
 
-- `MakeUnionFind(S)`: Return a Union-Find data structure on set $S$ where all elements are in seperate sets.
+- `MakeUnionFind(S)`: Return a Union-Find data structure on set $S$ where all elements are in separate sets.
 - `Find(u)`: Return the name of the st containing $u$. The time complexity is $O(logn)$.
 - `Union(A, B)`: Merge the sets $A$ and $B$ into a single set. The time complexity is $O(logn)$.
 

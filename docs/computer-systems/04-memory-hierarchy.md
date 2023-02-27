@@ -232,7 +232,7 @@ If there's only one set in a cache that contains all of the cache lines, the set
 
 ### Anatomy of a Real Cache Hierarchy
 
-Caches could hold both instructions and data. With two seperate caches, the processor could read an instruction word and a data word at the same time. For example, each core of the Intel Core i7 processor has private L1 i-cache, L1 d-cache, and L2 unified cache, and a shared on-chip L3 unified cache.
+Caches could hold both instructions and data. With two separate caches, the processor could read an instruction word and a data word at the same time. For example, each core of the Intel Core i7 processor has private L1 i-cache, L1 d-cache, and L2 unified cache, and a shared on-chip L3 unified cache.
 
 - **d-cache**: The cache that holds program data.
 - **i-cache**: The read-only cache that holds instructions.
@@ -242,8 +242,8 @@ Caches could hold both instructions and data. With two seperate caches, the proc
 
 Cache performance is evaluated with a number of metrics:
 
-- **Miss rate**: The fraction of memory refrences that miss. (`#misses / #references`)
-- **Hit rate**: The fraction of memory refrences that hit. (`1 - Miss rate`)
+- **Miss rate**: The fraction of memory references that miss. (`#misses / #references`)
+- **Hit rate**: The fraction of memory references that hit. (`1 - Miss rate`)
 - **Hit time**: The time to deliver a word in the cache to the CPU, including set selection, line identification, and word selection.
 - **Miss penalty**: Any additional line required because of a miss. The penalty for L1 misses served from L2 is on the order of 10 cycles.
 
@@ -288,7 +288,7 @@ int sum_array_rows(int a[M][N]) {
 
 ### The Memory Mountain
 
-The read throughput (read bandwith) is defined as the rate that a program reads data from the memory system. (MB/s)
+The read throughput (read bandwidth) is defined as the rate that a program reads data from the memory system. (MB/s)
 
 The memory mountain characterizes the capabilities of its memory system. It's a two-dimensional function of read throughput versus temporal (size of working set) and spatial locality (number of strides).
 

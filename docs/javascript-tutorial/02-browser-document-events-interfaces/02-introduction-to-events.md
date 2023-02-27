@@ -75,7 +75,7 @@ element.removeEventListener(event, handler, [options]);
 * * `capture`: the phase where to handle the event
 * * `passive`: the handler will not call `preventDefault()`
 
-To remvoe a listener, we need to use the same function. If we don’t store the function in a variable, then we can’t remove it.
+To remove a listener, we need to use the same function. If we don’t store the function in a variable, then we can’t remove it.
 
 ### Event object
 

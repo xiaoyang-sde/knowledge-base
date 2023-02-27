@@ -92,7 +92,7 @@ Overall runtime: `O(V * log(V) + V * log(V) + E * logV)`. Assuming E &gt; V, thi
 
 ### Implementation
 
-Adding an edge to MST means that add the edge to the ArrayList and connect the two vertices in the `WeightedQuickUnion`. If the two vertices are already connected, the edge should be ingored since adding it will create a cycle.
+Adding an edge to MST means that add the edge to the ArrayList and connect the two vertices in the `WeightedQuickUnion`. If the two vertices are already connected, the edge should be ignored since adding it will create a cycle.
 
 ```java
 public class KruskalMST {

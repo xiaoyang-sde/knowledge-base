@@ -33,7 +33,7 @@ For $0 < p < 1$, the sample percentiles is the $(n + 1)p$-th order statistic if 
 - The first, second, and third quartiles are the $25$-th, $50$-th, and $75$-th percentiles.
 - The deciles of the sample are the $10$-th, $20$-th, ..., and $90$-th percentiles.
 - The five-number summary of a data set are the minimum, the first quartile, the median, the third quartile, and the maximum.
-- The interquartile range (IQR) is the difference bewteen the third and first quartiles.
+- The interquartile range (IQR) is the difference between the third and first quartiles.
 
 ## Order Statistics
 

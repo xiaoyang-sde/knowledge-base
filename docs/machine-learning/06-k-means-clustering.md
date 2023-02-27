@@ -20,4 +20,4 @@ Hierarchical clustering is a method of cluster analysis which seeks to build a h
   - Simple linkage: Merge clusters $G$ and $H$ whose two members are closest.
   - Complete linkage: Merge clusters $G$ and $H$ whose distance is the smallest. The distance between clusters equals the distance between those two elements that are farthest away from each other.
   - Group average: Merge clusters $G$ and $H$ whose average dissimilarity is the smallest.
-- Divisive: All observations start in one cluster, and the cluster is splitted when the overall distortion is reduced.
+- Divisive: All observations start in one cluster, and the cluster is split when the overall distortion is reduced.

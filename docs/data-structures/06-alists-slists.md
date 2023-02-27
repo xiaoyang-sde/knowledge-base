@@ -62,7 +62,7 @@ public int removeLast() {
 
 The limitation of the above data structure is that the size of array is fixed.
 
-To solve that problem, we could simply build a new array that is big enough to accomodate the new data. For example, we can imagine adding the new item as follows:
+To solve that problem, we could simply build a new array that is big enough to accommodate the new data. For example, we can imagine adding the new item as follows:
 
 ```java
 public void addLast(int x) {

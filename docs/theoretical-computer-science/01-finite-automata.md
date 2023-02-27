@@ -7,7 +7,7 @@
 - The **alphabet** is a finite set of symbols. (e.g. ${ a, b, c, \dots, z }$)
 - The **string** is a finite sequence of symbols from a given alphabet. The string could be empty.
 - The **language** is a set of strings over a given alphabet. The language could be empty.
-- The **computational device** is a mechanism that inputs a string and either accpets or rejects it.
+- The **computational device** is a mechanism that inputs a string and either accepts or rejects it.
 
 ### Definition
 
@@ -16,7 +16,7 @@ The **deterministic finite automata** is defined as a tuple $\{Q, \Sigma, \delta
 - The deterministic finite automata accepts a string $w = w_1 w_2 \dots w_n$ if and only if $\delta(\dots \delta(\delta(q_0, w_1), w_2) \dots, w_n) \in F$.
 - The deterministic finite automata recognizes the language $L$ if and only if $L = \{w: D \text{ accepts } w\}$.
 
-The deterministic finite automata could be represented with a diagram that consists of a specific alphabet, the start state, the accept states, and the transitions of the states for all symbols. The language of a deterministic finite automata is the set of all strings it accpets.
+The deterministic finite automata could be represented with a diagram that consists of a specific alphabet, the start state, the accept states, and the transitions of the states for all symbols. The language of a deterministic finite automata is the set of all strings it accepts.
 
 ## Non-deterministic Finite Automata
 

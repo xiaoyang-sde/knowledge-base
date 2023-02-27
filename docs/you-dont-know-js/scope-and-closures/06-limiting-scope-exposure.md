@@ -97,7 +97,7 @@ In other words, we're defining a function expression that's then immediately inv
 
 Beware that using an IIFE to define a scope can have some unintended consequences, depending on the code around it.
 
-1. Non-arrow function IIFEs will change the binding of a `this` keyword. 
+1. Non-arrow function IFEs will change the binding of a `this` keyword. 
 2. Statements like `break` and `continue` won't operate across an IIFE function boundary to control an outer loop or block.
 
 ## Scoping with Blocks

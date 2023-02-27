@@ -10,7 +10,7 @@
 
 ### I/O Time
 
-The I/O time is the sum of three major components: $T_{I/O} = T_{\text{seek}} + T_{\text{rotation}} + T_{\text{transfer}}$. The transfer rate is defined as $R_{\text{I/O}} = \frac{\text{Size}_{Transfer}}{T_{\text{I/O}}}$. There's a huge different bewteen sequential $R_{\text{I/O}}$ and random $R_{\text{I/O}}$.
+The I/O time is the sum of three major components: $T_{I/O} = T_{\text{seek}} + T_{\text{rotation}} + T_{\text{transfer}}$. The transfer rate is defined as $R_{\text{I/O}} = \frac{\text{Size}_{Transfer}}{T_{\text{I/O}}}$. There's a huge different between sequential $R_{\text{I/O}}$ and random $R_{\text{I/O}}$.
 
 - The **seek time** is the time it takes the disk arm to move to the desired track.
 - The **rotational delay** is the time it takes the disk head to move to the desired sector.
@@ -157,7 +157,7 @@ The system could crash or lose power between two writes, and thus the on-disk st
 
 For example, the workload that appends a single data block to an existing file is accomplished by updating the inode, the new data block, and the data bitmap.
 
-- The data block is written to disk: The data is on the disk, but there's no inode that points to it and no bitmap that marks the block as allocated. The write seems like never occured.
+- The data block is written to disk: The data is on the disk, but there's no inode that points to it and no bitmap that marks the block as allocated. The write seems like never occurred.
 - The inode is written to disk: The inode points to the new data block, but the data block is not exist. The system could read garbage data from the location of the new data block. There's also an inconsistency between the data bitmap and the inode.
 - The bitmap is written to disk: The bitmap indicates that the block is allocated, but there's no inode that points to it. There's a space leak since the location of the new block could never be used by the file system.
 - The inode and bitmap are written to disk: The system could read garbage data from the location of the new data block.
@@ -178,7 +178,7 @@ For example, the workload that appends a single data block to an existing file i
 
 ### Journaling
 
-The journaling method could recover from a crash happened after the transaction has commited to the log. When the system boots, the file system recovery process scans the log and replays the incomplete transactions that have committed to the disk.
+The journaling method could recover from a crash happened after the transaction has committed to the log. When the system boots, the file system recovery process scans the log and replays the incomplete transactions that have committed to the disk.
 
 1. Journal write: Write the contents of the transaction (the transaction-begin block and the exact contents of the metadata and data updates) to the log.
 2. Journal commit: Write the transaction commit block to the log

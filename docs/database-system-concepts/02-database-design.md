@@ -40,7 +40,7 @@ The general cardinality notation limits the number of participation of each enti
 
 ### Primary Key
 
-The primary key for an entity is a set of attributes that suffice to distinguish entites from each other.
+The primary key for an entity is a set of attributes that suffice to distinguish entities from each other.
 
 The primary key for a relation depends on its mapping cardinality.
 
@@ -54,7 +54,7 @@ The relationship associating the weak entity set with the identifying entity set
 
 ### Superclass and Subclass
 
-The entity set could include subgroupings of entites that are distinct in some way from other entities in the set. The attributes and relationship participation of the superclass are inherited by the subclass. The ISA relationship is represented by hollow arrows from the subclass to the superclass.
+The entity set could include subgroupings of entities that are distinct in some way from other entities in the set. The attributes and relationship participation of the superclass are inherited by the subclass. The ISA relationship is represented by hollow arrows from the subclass to the superclass.
 
 - Specialization: The refinement from an initial entity set into successive levels of entity subgroupings (from superclass to subclass)
 - Generalization: The synthesization from multiple entity sets into a higher-level entity set on the basis of common features (from subclass to superclass)
@@ -92,7 +92,7 @@ The basic idea of normalization uses functional dependencies to decompose table 
 
 ### Functional Dependency
 
-$u[x]$ denotes the values for the attributes $X$ of the tuple $u$. The functional dependeny $X \rightarrow Y$ means that for any $u_1, u_2 \in R$, if $u_1[X] = u_2[X]$, then $u_1[Y] = u_2[Y]$.
+$u[x]$ denotes the values for the attributes $X$ of the tuple $u$. The functional dependency $X \rightarrow Y$ means that for any $u_1, u_2 \in R$, if $u_1[X] = u_2[X]$, then $u_1[Y] = u_2[Y]$.
 
 - Trivial FD: $X \rightarrow Y$ is trivial if $Y \subseteq X$.
 - Non-trivial FD: $X \rightarrow Y$ is non-trivial if $Y \not\subseteq X$.

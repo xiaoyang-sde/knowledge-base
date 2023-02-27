@@ -93,7 +93,7 @@ customElements.define("time-formatted", TimeFormatted);
 
 ### Custom elements upgrade
 
-If the browser encounters any customzied elements before `customElements.define`, that’s not an error.
+If the browser encounters any customized elements before `customElements.define`, that’s not an error.
 
 When `customElement.define` is called, they are upgraded.
 

@@ -23,11 +23,11 @@ Let $L$ be all valid programs defined in the table below} and $\Sigma = \{ a, b,
 |Field|Definition|Context Free Grammar|
 |-|-|-|
 |Identifier|$(a \cup \dots \cup z)(a\cup \dots \cup z \cup 0 \cup \dots \cup 9)^*$ |$L \rightarrow a\|b\|\dots\|z$ <br /> $I \rightarrow ID\|IL\|L$|
-|Number|Positive Integer|$D^+ \rightarrow 1\|2\|\dots\|9$ <br /> $D \rightarrow 0\|D^+$ <br /> $N \rightarrow ND \| D^+$ <br /> $Q \rightarrow I \| N $|
+|Number|Positive Integer|$D^+ \rightarrow 1\|2\|\dots\|9$ <br /> $D \rightarrow 0\|D^+$ <br /> $N \rightarrow AND \| D^+$ <br /> $Q \rightarrow I \| N $|
 |Statement|Assignment, Conditional| $W \rightarrow \text{space} \| \text{newline} \| WW$ (Conditional) <br /> $W^{'} \rightarrow W \| \epsilon$ <br /> $T \rightarrow QW^{'} = W^{'}Q \| QW^{'} < W^{'}Q \| QW^{'} > W^{'}Q$ (Test) <br /> $A \rightarrow IW^{'} = W^{'}Q$ (Assignment) <br /> $C \rightarrow \text{if}WTW\text{then}WS \| \text{if}WTW\text{then}WSW\text{else}WS$ |
 |Program|Single statement|$S \rightarrow A\|C$|
 
-## Ambiguious Grammar
+## Ambiguous Grammar
 
 The context free grammar is ambiguous if some string has more than one parse tree. Otherwise, the grammar is unambiguous.
 

@@ -4,7 +4,7 @@
 
 **Linear least squares regression** is an optimization procedure used for data fitting. Each data point contains the independent variable $x_i$ and dependent variable $y_i$. If the dependent variables are proportional to the independent variables with some measurement errors $\epsilon_i$, then $y_i = \theta x_i + \epsilon_i$.
 
-The **residuals** is the difference bewteen observed and predicted data. The **mean squared error** (MSE) is defined as $\min_{\theta} \frac{1}{N} \sum^{N}_{i = 1} (y_i  - \theta x_i)^2$. The $\hat{\theta}$ that minimizes the MSE is $\hat{\theta} = \frac{\vec{x}^{T} \vec{y}}{\vec{x}^{T} \vec{x}}$.
+The **residuals** is the difference between observed and predicted data. The **mean squared error** (MSE) is defined as $\min_{\theta} \frac{1}{N} \sum^{N}_{i = 1} (y_i  - \theta x_i)^2$. The $\hat{\theta}$ that minimizes the MSE is $\hat{\theta} = \frac{\vec{x}^{T} \vec{y}}{\vec{x}^{T} \vec{x}}$.
 
 ## Bootstrapping and Confidence Interval
 

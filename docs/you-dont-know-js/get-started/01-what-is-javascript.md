@@ -70,7 +70,7 @@ Transpilers like Babel typically detect which polyfills your code needs and prov
 
 ## What's in an Interpretation?
 
-JS is a compiled language instead of a interpreted \(scripting\) langauge. Languages regarded as "compiled" usually produce a binary representation of the program that is distributed for execution later.
+JS is a compiled language instead of a interpreted \(scripting\) language. Languages regarded as "compiled" usually produce a binary representation of the program that is distributed for execution later.
 
 * In scripted or interpreted languages, an error on line 5 of a program won't be discovered until lines 1 through 4 have already executed.
 * In the languages that parse the code before any execution occurs, an invalid command \(such as broken syntax\) on line 5 would be caught before exccuting.

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Multi-Dimensional data strucutres could perform operations on a set of Body objects in space.
+Multi-Dimensional data structures could perform operations on a set of Body objects in space.
 
 * 2D Range Finding: Count the objects in a specific region.
 * Nearest Neighbors: Find the closest object to another object.

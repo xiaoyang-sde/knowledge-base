@@ -38,4 +38,4 @@ While there's a man m who is free and hasn't proposed to every women
 
 ## Extension
 
-All executions of the algorithm yeild the same matching that each man ends up with the best possible partner. If a woman w is a valid partner of a man m if there's a stable matching that contains the pair $(m, w)$. If no woman whom m ranks higher than w is a valid partner of his, w is the best valid partner. However, in the stable matching, each woman is paired with her worst valid partner.
+All executions of the algorithm yield the same matching that each man ends up with the best possible partner. If a woman w is a valid partner of a man m if there's a stable matching that contains the pair $(m, w)$. If no woman whom m ranks higher than w is a valid partner of his, w is the best valid partner. However, in the stable matching, each woman is paired with her worst valid partner.

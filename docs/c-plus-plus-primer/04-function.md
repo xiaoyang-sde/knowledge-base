@@ -153,7 +153,7 @@ function<void(int, int)> depth_first_search = [&](
 };
 ```
 
-The function pointer have the disadvantage of not being able to capture some context for lambda expression. It's adviced to use `std::function` unless there's a reason not to do so.
+The function pointer have the disadvantage of not being able to capture some context for lambda expression. It's advised to use `std::function` unless there's a reason not to do so.
 
 ## `std::bind` and `std::placeholder`
 

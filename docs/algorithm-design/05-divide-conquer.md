@@ -66,7 +66,7 @@ Given $n$ points in the plane, find the pair that is closest together.
 
 ### The Algorithm
 
-Let the set of points be $P = {p_1, \dots, p_n}$, where $p_i$ has coordinats $(x_i, y_i)$. The Euclidan distance between two points is $d(p_i, p_j)$. The algorithm holds the assumption that no two points in $P$ have the same x-coordinate or the same y-coordinate.
+Let the set of points be $P = {p_1, \dots, p_n}$, where $p_i$ has coordinates $(x_i, y_i)$. The Euclidan distance between two points is $d(p_i, p_j)$. The algorithm holds the assumption that no two points in $P$ have the same x-coordinate or the same y-coordinate.
 
 #### The Recursion
 

@@ -49,7 +49,7 @@ auto test_perceptron(
 
 The hyperparameter of the perceptron algorithm is `max_iteration`, the number of passes to make over the training data. The algorithm might overfit if `max_iteration` is high, and might underfit if `max_iteration` is low.
 
-## Geometric Intrepretation
+## Geometric Interpretation
 
 The decision boundary of a perceptron is where the sign of the activation $a$ changes from $-1$ to $1$, which is the set of points $x$ that achieve zero activation: $\mathbb{B} = \{ x : \sum_{d} w_d x_d = w \cdot x = 0 \}$. The decision boundary is the plane perpendicular to $w$. The bias shifts the decision boundary from the origin by $b$ units in the direction of $w$.
 
@@ -73,4 +73,4 @@ The perceptron convergence theorem states that if the perceptron algorithm is ru
 
 ## Limitation
 
-The limitation of perceptron is that its decision boundaries are linear. For data sets that are not linearly seperable, the algorithm could not separate the data. The feature combination approach could address the problem, but it will increase computation and result in overfitting.
+The limitation of perceptron is that its decision boundaries are linear. For data sets that are not linearly separable, the algorithm could not separate the data. The feature combination approach could address the problem, but it will increase computation and result in overfitting.

@@ -35,7 +35,7 @@ Bark!
 * Classes can contain not just methods, but also data, such as the `size` of each dog.
 * Classes can be instantiated as objects. For example, we will create a single Dog class, and then create instances of this Dog.
 
-Here's a Dog class which provdes a blueprint of Dog objects.
+Here's a Dog class which provides a blueprint of Dog objects.
 
 ```java
 public class Dog {

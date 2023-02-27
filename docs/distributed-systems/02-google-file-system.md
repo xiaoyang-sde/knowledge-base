@@ -18,7 +18,7 @@ The GFS cluster consists of a single master and multiple chunkservers and is acc
 - The file data mutations depends on the status of the operation. The region is **consistent** if the clients will see the same data across all replicas. The region is **defined** if the clients will see consistent data and what the mutation writes in its entirety across all replicas.
   - Successful serial write: defined
   - Successful concurrent write: consistent and undefined (mixed fragments from multiple mutations)
-  - Successful record append: defined interspersed with inconsistent (padding or duplicate regions bewteen consistent records)
+  - Successful record append: defined interspersed with inconsistent (padding or duplicate regions between consistent records)
   - Failed write or record append: inconsistent and undefined
 
 ## Implementation
@@ -40,7 +40,7 @@ The mutation is an operation that changes the contents or metadata of a chunk. T
 ### Read Operation
 
 - The client translates the file name and byte offset specified by the application into a chunk index within the file and sends a request to the master.
-- The master replies with the cooresponding chunk handle and locations of the replicas.
+- The master replies with the corresponding chunk handle and locations of the replicas.
 - The client caches the locations using the file name and chunk index as the key.
 - The client sends the chunk handle and byte range to the closest replica to read the data.
 

@@ -24,9 +24,9 @@ If $L$ has a context-free grammar, then $L$ could be recognized by a pushdown au
 
 ### Convert Pushdown Automata to Context-Free Grammar
 
-- The pushdown automata has a unique accept state. (Create a new sentinel accpet state.)
+- The pushdown automata has a unique accept state. (Create a new sentinel accept state.)
 - The pushdown automata empties the stack before accepting the input. (Rewind the stack before the sentinel accept state.)
-- Each transition is either a push or a pop. (Break a single push-pop step into two seperate steps.)
+- Each transition is either a push or a pop. (Break a single push-pop step into two separate steps.)
 
 If $L$ is recognized by a pushdown automata, then $L$ has a context-free grammar. Convert the pushdown automata into a new pushdown automata with the assumptions above with $\{ Q, \Sigma, \Gamma, S, q_0, \{ q_f \}\}$, $L$.
 

@@ -49,7 +49,7 @@ public interface List61B<Item> {
 }
 ```
 
-Next, we will modify the definition of both classs to make a promise that both of them implement all the method defined in the interface `List61B`.
+Next, we will modify the definition of both class to make a promise that both of them implement all the method defined in the interface `List61B`.
 
 ```text
 public class SLList<Item> implements List61B<Item>{...}
@@ -88,7 +88,7 @@ In order to re-implement the default method in a subclass, we must use the `Over
 
 #### Dynamic Method Selection
 
-In Java, variables have two phases of types: static type and dynamic type. In the code below, `lst` has a static type of `List61B` and a dynamic type `SLList`. When Java runs a method that is overriden, it searches for the appropriate method signature in it's **dynamic type** and runs it.
+In Java, variables have two phases of types: static type and dynamic type. In the code below, `lst` has a static type of `List61B` and a dynamic type `SLList`. When Java runs a method that is overridden, it searches for the appropriate method signature in it's **dynamic type** and runs it.
 
 ```java
 List61B<String> lst = new SLList<String>();

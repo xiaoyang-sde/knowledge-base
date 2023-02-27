@@ -70,7 +70,7 @@ The earliest solution used to provide mutual exclusion is to disable interrupts 
 - The approach requires the thread to perform a privileged operation. Malicious programs could never enable the interrupt to prevent the system to regain control.
 - The approach doesn't work on multiprocessors since turning off the interrupts on a core doesn't affect other cores.
 - The approach turns off interrupts for extended periods of time, which could lead to interrupts becoming lost.
-- The approach uses the instruction that masks or unmasks interrupts is inefficient in moderm CPUs.
+- The approach uses the instruction that masks or unmasks interrupts is inefficient in modern CPUs.
 
 ### `test-and-set` and `compare-and-swap`
 
@@ -172,7 +172,7 @@ The condition variable is an explicit queue that threads could put themselves on
 
 ## Semaphore
 
-The semaphore is an object with an integer value that could be manipulated with the `sem_wait()` and `sem_post()` routines. The semaphore is initialized to a specifc integer that represents the number of resources that will be given away immediately after initialization.
+The semaphore is an object with an integer value that could be manipulated with the `sem_wait()` and `sem_post()` routines. The semaphore is initialized to a specific integer that represents the number of resources that will be given away immediately after initialization.
 
 - The `sem_wait()` routine decrements the value of the semaphore by 1 and waits if the value of the semaphore is negative.
 - The `sem_post()` routine increments the value of the semaphore by 1 and wakes a waiting thread.
@@ -236,7 +236,7 @@ void thread_2() {
 
 ### Order Violation
 
-The order violation problem is that the desired order between two groups of memory accesses is flipped. A should always be executed before B, but the order is not enforced during execusion. The solution is to use a condition variable to implement the synchronization.
+The order violation problem is that the desired order between two groups of memory accesses is flipped. A should always be executed before B, but the order is not enforced during execution. The solution is to use a condition variable to implement the synchronization.
 
 ```c
 void thread_init() {

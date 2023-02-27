@@ -102,7 +102,7 @@ Example:
 - True Sum: 1101 + 0101 = 10010 (18)
 - Discard Carry: 0010 (18 mod 16 = 2)
 
-Two's complement addition and unsigned addition have idential bit-level behavior.
+Two's complement addition and unsigned addition have identical bit-level behavior.
 
 - If true sum $>= 2^{w - 1}$, the actual result becomes negative.
 - If true sum $< -2^{w - 1}$, the actual result becomes positive.

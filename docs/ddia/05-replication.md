@@ -39,7 +39,7 @@ Each follower keeps a log of the data changes it has received from the leader. I
 
 1. Determine that the leader has failed: If the leader doesn't respond for some period of time, it's assumed to be dead.
 2. Choose a new leader: The new leader is chosen through a election process. The best candidate is the replica with the most up-to-date data changes from the old leader.
-3. Reconfigure the system: The write reuqests should be routed to the new leader. The old leader should become a follower and recognizes the new leader.
+3. Reconfigure the system: The write requests should be routed to the new leader. The old leader should become a follower and recognizes the new leader.
 
 ### Implementation of Replication Logs
 
@@ -65,7 +65,7 @@ The logical log for a relational database is usually a sequence of records descr
 
 #### Trigger-based replication
 
-The trigger in the database is executed when a data change occurs. The trigger could log the change into a seperate table, which could be read by an external process. The external process could apply any transformation and replicate the data change to another system.
+The trigger in the database is executed when a data change occurs. The trigger could log the change into a separate table, which could be read by an external process. The external process could apply any transformation and replicate the data change to another system.
 
 ### Problems with Replication Lag
 
@@ -76,7 +76,7 @@ In the read-scaling architecture, the capacity for serving read-only requests co
   - Track the time of the last update, and for a specific amount of time after the last update, make all reads from the leader.
   - The client remembers the timestamp of its most recent write, and the system ensures that the replica serving any reads for that user reflects updates until that timestamp.
 - **Monotic reads** is a guarantee that if the user makes several reads in sequence, they will not read older data after having previously read newer data. The system could implement this guarantee by choosing the replica based on a hash of the user ID.
-- **Consistent prefix reads** is a guarantee that if a sequence of writes happends in a certain order, then anyone reading those writes will see them appear in the same order.
+- **Consistent prefix reads** is a guarantee that if a sequence of writes happens in a certain order, then anyone reading those writes will see them appear in the same order.
 
 ## Multi-Leader Replication
 
@@ -131,7 +131,7 @@ The replication topology describes the communication paths along which writes ar
 
 ## Leaderless Replication
 
-The leaderless replication abandons the concept of a leader and allows replica to directly accept writes from clients. The client sends its writes to several replicas or a cooridnator node, which doesn't enforce an ordering of writes.
+The leaderless replication abandons the concept of a leader and allows replica to directly accept writes from clients. The client sends its writes to several replicas or a coordinator node, which doesn't enforce an ordering of writes.
 
 ### Writing to the Database When a Node Is Down
 
@@ -167,7 +167,7 @@ Dynamo-style databases allow several clients to concurrently write to the same k
 
 #### Last write wins
 
-Last write wins is an approach to achieve eventual convergence, which ensures that each replica ned only store the most recent value. The client could attach a timestamp to each write, and the node accepts the write with the largest timestamp.
+Last write wins is an approach to achieve eventual convergence, which ensures that each replica need only store the most recent value. The client could attach a timestamp to each write, and the node accepts the write with the largest timestamp.
 
 #### Capturing the happens-before relationship
 

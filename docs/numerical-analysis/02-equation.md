@@ -44,7 +44,7 @@ Given a root-finding problem $f(p) = 0$. Let a function $g$ with a fixed point a
 
 ### Approximation
 
-To approximate the fixed point of a function $g$, choose an intial approximation $p_0$ and generate the sequence ${p_n}_{n = 0}^{\infty}$ with $p_n = g(p_{n - 1})$ for each $n \ge 1$.
+To approximate the fixed point of a function $g$, choose an initial approximation $p_0$ and generate the sequence ${p_n}_{n = 0}^{\infty}$ with $p_n = g(p_{n - 1})$ for each $n \ge 1$.
 
 If the sequence converges to $p$ and $g$ is continuous, then $p = \lim_{n \rightarrow \infty} p_n = \lim_{n \rightarrow \infty} g(p_{n - 1}) = g(\lim_{n \rightarrow \infty} p_{n - 1}) = g(p)$, which is a solution to $x = g(x)$. The method is fixed-point iteration.
 
@@ -156,9 +156,9 @@ auto secant_method(
 
 Each successive pair of approximations in the Bisection method brackets a root p of the equation. For each $n$, $|p_n - p| \le \frac{1}{2} |a_n - b_n|$. However, root bracketing is not guaranteed for either Newton's method or the Secant method.
 
-The method of False Position generates approximations in the same manner as the Secant method, but it includes a test to ensure that the root is bracketed bewteen successive iterations.
+The method of False Position generates approximations in the same manner as the Secant method, but it includes a test to ensure that the root is bracketed between successive iterations.
 
-The initial approximations $p_0$ and $p_1$ should meet the requirement that $f(p_0) \cdot f(p_1) < 0$. The approximation $p_2$ is choosen in the same manner as in the Secant method.
+The initial approximations $p_0$ and $p_1$ should meet the requirement that $f(p_0) \cdot f(p_1) < 0$. The approximation $p_2$ is chosen in the same manner as in the Secant method.
 
 - If $f(p_2) \cdot f(p_1) < 0$, then $p_1$ and $p_2$ bracket a root. Choose $p_3$ as the x-intercept of the line joining $(p_1, f(p_1))$ and $(p_2, f(p_2))$.
 - If not, choose $p_3$ as the x-intercept of the line joining $(p_0, f(p_0))$ and $(p_2, f(p_2))$, and swap $p_0$ and $p_1$. The relabeling ensures that the root is bracketed between successive iterations.

@@ -41,7 +41,7 @@ pub fn generic_function_1(item: &impl Summary) {
 
 The main aim of lifetimes is to prevent dangling references, which cause a program to reference data other than the data it’s intended to reference. The borrow checker of the Rust compiler compares scopes to determine whether all borrows are valid.
 
-The lifetime annotation describes the relationships of the lifetimes of multiple references to each other without affecting the lifetime and informs the borrow checker to reject values that don't adhere to these constraints. The `'<lifetime_paramater>` syntax is used to define the lifetime annotation. The special `'static` lifetime means the reference could live for the entire duration of the program. The content of the reference is stored directly in the program's binary, which is always available.
+The lifetime annotation describes the relationships of the lifetimes of multiple references to each other without affecting the lifetime and informs the borrow checker to reject values that don't adhere to these constraints. The `'<lifetime_parameter>` syntax is used to define the lifetime annotation. The special `'static` lifetime means the reference could live for the entire duration of the program. The content of the reference is stored directly in the program's binary, which is always available.
 
 The Rust compiler implements deterministic lifetime elision rules. If Rust applies the rules but there is still ambiguity as to what lifetimes the references have, the compiler will throw an error. Lifetimes on function or method parameters are called input lifetimes, and lifetimes on return values are called output lifetimes.
 

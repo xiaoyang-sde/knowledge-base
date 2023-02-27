@@ -117,10 +117,10 @@ A C B E G F D
 
 ### More Definitions
 
-* Verticies with an edge between are adjacent.
-* Vertices or edges may have lables or weights.
-* A sequence of vertices connectted by edges is a path.
-* A path of which first and last verticies are the same is a cycle.
+* Vertices with an edge between are adjacent.
+* Vertices or edges may have labels or weights.
+* A sequence of vertices connected by edges is a path.
+* A path of which first and last vertices are the same is a cycle.
 * Two vertices are connected when there is a path between them.
 * If all vertices are connected, the graph is connected.
 
@@ -147,7 +147,7 @@ for child in unmarked_neighbors(s):
 return false;
 ```
 
-The algorithm marks the verticies it has already visited to avoid infinite loop.
+The algorithm marks the vertices it has already visited to avoid infinite loop.
 
 ### DFS \(Depth First Search\)
 
@@ -158,7 +158,7 @@ This kind of traversal could help us to find a path from s to every other reacha
 To implement this traversal algorithm, two arrays, `marked` and `edgeTo`, are required to record whether an vertex is marked and the parent of the vertex.
 
 * Mark v.
-* For each unmarked adjancent vertex w:
+* For each unmarked adjacent vertex w:
 * * Set `edgeTo[w] = v`.
 * * Run these steps for w.
 

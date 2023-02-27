@@ -15,7 +15,7 @@ The compiler driver invokes the language preprocessor, compiler, assembler, and 
 
 The static linker (e.g. `ld` program) takes a collection of relocatable object files and command-line arguments to generate a fully linked executable object file that could be loaded and run.
 
-- Symbol resolution: Object files define and reference symbols, where each symbol corresponds to a function, a global variable, or a static variable. The linker associates each symbol referenece with one symbol definition.
+- Symbol resolution: Object files define and reference symbols, where each symbol corresponds to a function, a global variable, or a static variable. The linker associates each symbol reference with one symbol definition.
 - Relocation: The linker relocates the code and data sections by associating a memory location with each symbol definition, and pointing all references to the symbols to this memory location.
 
 ## Object Files
@@ -28,7 +28,7 @@ The static linker (e.g. `ld` program) takes a collection of relocatable object f
 
 Modern x86-64 Linux systems use Executable and Linkable Format (ELF) for object files.
 
-- ELF Header: Word size and byte ordering of the system. The size of ELF header, the object file type (relocatable, etc.), the machine type (x86-64, etc.), the offset of the section header table, and the size and number of entires in the section header table.
+- ELF Header: Word size and byte ordering of the system. The size of ELF header, the object file type (relocatable, etc.), the machine type (x86-64, etc.), the offset of the section header table, and the size and number of entries in the section header table.
 - `.text`: The machine code of the compiled program.
 - `.rodata`: Read-only data such as jump tables.
 - `.data`: Initialized global and static variables. Local variables are maintained on the stack at run time.
@@ -36,7 +36,7 @@ Modern x86-64 Linux systems use Executable and Linkable Format (ELF) for object 
 - `.symtab`: The symbol table with information about functions and global variables that are defined and referenced in the program.
 - `.rel.text`: The list of locations in the `.text` section that will need to be modified when the linker combines the file with others. Any instruction that calls an external function or reference a global variable should be modified.
 - `.rel.data`: Relocation information for any global variables that are referenced or defined by the module. Any global variable whose initial value is the address of a global variable or external function should be modified.
-- `.debug`: The debugging symbol table with entires for local variables, typedefs, global variables, and original C source file.
+- `.debug`: The debugging symbol table with entries for local variables, typedefs, global variables, and original C source file.
 - `.line`: The mapping between line numbers in the original C source file and machine code instructions in the `.text` section.
 - `.strtab`: The string table (a sequence of null-terminated character strings) for the symbol tables in the `symtab` and `.debug` section, and the section names in the section headers.
 - Section header table: The locations and sizes of the various sections.
@@ -60,9 +60,9 @@ typedef struct {
 } Elf64_Symbol;
 ```
 
-Pseudosections that don't have entires in the section header table:
+Pseudosections that don't have entries in the section header table:
 
-- ABS: symbols that shoudn't be relocated
+- ABS: symbols that shouldn't be relocated
 - UNDEF: undefined symbols
 - COMMON: uninitialized global variables (GCC assigns these symbols to COMMON instead of `.bss`.)
 
@@ -127,7 +127,7 @@ typedef struct {
   long type:32, // Relocation type
       symbol:32; // Symbol table index
   long addend; // Constant part of relocation expression
-} Elf64_Rela;
+} Elf64_Real;
 ```
 
 ELF defines 32 relocation types. The two most basic relocation types are `R_X86_64_PC32` and `R_X86_64_32`.
@@ -148,7 +148,7 @@ The .init section defines a small function, called `_init`, that will be called 
 The static libraries has some significant disadvantages.
 
 - The code for common static libraries (e.g. `scanf`, `printf`, etc.) is duplicated in the text segment of each running process, which is a waste of memory.
-- If the library has been updated, the applicatin has to be explicitly relinked.
+- If the library has been updated, the application has to be explicitly relinked.
 
 The shared library is an object module that, at either run time or load time, can be loaded at an arbitrary memory address and linked with a program in memory. This dynamic linking process is performed by the dynamic linker. Shared libraries are referred to as shared objects on Linux and dynamic link libraries (DLLs) on Windows.
 

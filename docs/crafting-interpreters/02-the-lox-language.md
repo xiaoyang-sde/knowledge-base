@@ -2,7 +2,7 @@
 
 - Dynamic Type: Variables in Lox can store values of any type, and a single variable can even store values of different types at different times. The type checking is deferred to runtime.
 
-- Automatic Memory Management: Lox uses tracing grabage collection to manage its memory allocation.
+- Automatic Memory Management: Lox uses tracing garbage collection to manage its memory allocation.
 
 - Data Type
   - Boolean: `true` or `false`

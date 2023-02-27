@@ -3,7 +3,7 @@
 ## Computational Tractability
 
 1. An algorithm is efficient if, when implemented, it runs quickly on real input instances.
-2. An algorithm is efficient if it achieves qualittatively better worst-case peformance, at an analytical level, than brute-force search.
+2. An algorithm is efficient if it achieves qualittatively better worst-case performance, at an analytical level, than brute-force search.
 3. An algorithm is efficient if it has a polynomial running time. The running time is polynomial if it's bounded by $cN^{d}$ primitive computational steps.
 
 ## Asymptotic Order of Growth

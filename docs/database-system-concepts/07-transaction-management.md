@@ -17,7 +17,7 @@ The transaction is a unit of program execution that accesses and updates various
 
 ### Transaction Isolation
 
-- Dirty read: The transaction A accesses data updated by the uncommited transaction B.
+- Dirty read: The transaction A accesses data updated by the uncommitted transaction B.
 - Non-repeatable read: The transaction A attempts to access the same data twice, and the transaction B modifies the data between the transaction A's read attempts.
 - Phantom: The transaction A attempts to retrieve a set of rows satisfying a given condition, and the transaction B inserts or updates a row that meets the condition between the transaction A's read attempts.
 

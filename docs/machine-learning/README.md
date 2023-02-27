@@ -41,4 +41,4 @@ Each data could be represented as a feature vector in a multi-dimensional featur
 
 - For a real-valued feature, its value maps to a feature vector.
 - For a binary feature, `true` maps to `1` and `false` maps to `0`.
-- For a categorical feature with $V$ possible categories, each value is mapped to $V$-dimension binary indicator features. (If a consective sequence of numbers are assigned to each category, the unordered set will turn into an ordered set, which has a negative effect on the geometric view.)
+- For a categorical feature with $V$ possible categories, each value is mapped to $V$-dimension binary indicator features. (If a consecutive sequence of numbers are assigned to each category, the unordered set will turn into an ordered set, which has a negative effect on the geometric view.)

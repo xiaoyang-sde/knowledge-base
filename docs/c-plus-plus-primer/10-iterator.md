@@ -20,7 +20,7 @@ There are several additional kinds of iterators in the `iterator` header:
 The insert iterator is an iterator adaptor that takes a container and yields an iterator that adds elements to the specified container. When a value is assigned to the iterator, the iterator calls a container operation to add an element at a specified position in the given container.
 
 - `back_inserter(container)`: `push_back`
-- `front_inserter(cotainer)`: `push_front`
+- `front_inserter(container)`: `push_front`
 - `inserter(container, iterator)`: `insert` before `iterator`
 
 ## `iostream` Iterator

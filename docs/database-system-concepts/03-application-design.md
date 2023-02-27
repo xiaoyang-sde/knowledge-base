@@ -319,7 +319,7 @@ The `$group` stage could group input documents by the specified `_id` expression
 - `$addToSet`: the array of unique expression values
 
 ```ts
-collection.aggregrate([
+collection.aggregate([
   {
     $group: {
       _id: '$name',
@@ -336,7 +336,7 @@ collection.aggregrate([
 The `$out` stage takes the document returned by the aggregation pipeline and writes them to a specified collection. The `$out` stage must be the last stage in the pipeline.
 
 ```ts
-collection.aggregrate([
+collection.aggregate([
   {
     $group: {
       _id: '$name',

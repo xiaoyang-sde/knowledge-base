@@ -11,7 +11,7 @@ Cookies are small strings of data that are stored directly in the browser. They 
 alert( document.cookie );
 ```
 
-Use regular expresssion or array functions to split that string and find a particular cookie.
+Use regular expression or array functions to split that string and find a particular cookie.
 
 ### Writing to document.cookie
 
@@ -217,7 +217,7 @@ An object store can only be created/modified while updating the DB version, in `
 To perform database version upgrade:
 
 * Implement per-version upgrade functions.
-* Get a list of existing object stores as `db.objectStoreNames`. That object is a sa that provides `contains(name)` method to check for existance.
+* Get a list of existing object stores as `db.objectStoreNames`. That object is a sa that provides `contains(name)` method to check for existence.
 
 ### Transactions
 

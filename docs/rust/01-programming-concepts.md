@@ -89,7 +89,7 @@ fn print_labeled_measurement(
 }
 ```
 
-The return value of the function is the value of the final expression in the block of the function body. The value could also be returned from a fucntion with the `return` keyword.
+The return value of the function is the value of the final expression in the block of the function body. The value could also be returned from a function with the `return` keyword.
 
 ## Control Flow
 
