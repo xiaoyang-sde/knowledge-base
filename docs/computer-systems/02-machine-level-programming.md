@@ -583,7 +583,7 @@ void echo() {
 }
 ```
 
-The code above reads the standard input into a character array. If the input is longer than 7, `gets` will overwrite some of the information stored on the stack. If the return address is overrided, the program will jump to a totally unexpected location.
+The code above reads the standard input into a character array. If the input is longer than 7, `gets` will overwrite some of the information stored on the stack. If the return address is overrode, the program will jump to a totally unexpected location.
 
 - 0-7: Safe
 - 9-23: Unused stack space

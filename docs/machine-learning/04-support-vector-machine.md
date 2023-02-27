@@ -2,7 +2,7 @@
 
 ## Decision Boundaries
 
-The decision boundary in logistic regression separates the training classes in the feature space. If the dataset is linearly separable, the regularized logistic regression produces the model with the smallest coefficients that can separate the classes. However, the boundary that maximizes the margin between the boundary and both classes could be choosed to prevent overfitting.
+The decision boundary in logistic regression separates the training classes in the feature space. If the dataset is linearly separable, the regularized logistic regression produces the model with the smallest coefficients that can separate the classes. However, the boundary that maximizes the margin between the boundary and both classes could be chosen to prevent overfitting.
 
 ## Hard Margin
 

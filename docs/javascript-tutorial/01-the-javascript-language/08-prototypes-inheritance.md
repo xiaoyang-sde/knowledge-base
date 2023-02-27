@@ -101,7 +101,7 @@ obj.join(','); // Hello,world!
 
 The internal algorithm of the built-in `join` method only cares about the correct indexes and the `length` property. It doesn’t check if the object is indeed an array.
 
-This can also be done by chaning the `__proto__` property of the `obj`, but remember that we only can inherit from one object at a time.
+This can also be done by changing the `__proto__` property of the `obj`, but remember that we only can inherit from one object at a time.
 
 ## 8.4 Prototype methods, objects without **proto**
 

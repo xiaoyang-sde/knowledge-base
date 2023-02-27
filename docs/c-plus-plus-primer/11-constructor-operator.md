@@ -88,7 +88,7 @@ void f(T&& x) {
 
 The move constructor and move-assignment operator could take over the allocated objects of the moved-from object. The move constructor and operator must ensure that the moved-from object is left in a state such that destroying that object will be harmless, since after an object is moved from, that object continues to exist. Move constructors and move-assignment operators that won't throw exceptions should be marked as `noexcept`, which informs the compiler that the constructor is safe to use.
 
-The compiler will synthesize a move constructor or a move-assignment operator if the class doesn't define copy-control members and if all non-static data member of the class can be moved. The compiler can move members of built-in type and members of class type if the member's class has the corresponding move operation. If the class doens't have a move constructor or operator, both lvalues and rvalues will be copied.
+The compiler will synthesize a move constructor or a move-assignment operator if the class doesn't define copy-control members and if all non-static data member of the class can be moved. The compiler can move members of built-in type and members of class type if the member's class has the corresponding move operation. If the class doesn't have a move constructor or operator, both lvalues and rvalues will be copied.
 
 ### Member Function
 

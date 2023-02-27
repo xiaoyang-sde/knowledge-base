@@ -41,7 +41,7 @@ The backtracking search algorithm is a depth-first search that chooses values fo
 ### Interleaving search and inference
 
 - The forward checking algorithm runs the constraint inference in the course of a search. When a variable $X$ is assigned, the forward checking algorithm establishes arc consistency for it. For each unassigned variable $Y$ that is connected to $X$ by a constraint, delete from $Y$'s domain any value that is inconsistent.
-- The MAC (maintaining arc consisteny) algorithm is more effective than forward checking. When a variable $X$ is assigned, the MAC algorithm adds $(X_j, X_i)$ where $X_j$ is an unassigned neighbor of $X_i$ to the queue, and then runs the AC-3 algorithm to perform constraint propagation.
+- The MAC (maintaining arc consistency) algorithm is more effective than forward checking. When a variable $X$ is assigned, the MAC algorithm adds $(X_j, X_i)$ where $X_j$ is an unassigned neighbor of $X_i$ to the queue, and then runs the AC-3 algorithm to perform constraint propagation.
 
 ## Problem Structure
 

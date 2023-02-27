@@ -218,7 +218,7 @@ The total count of the elements in the array is its length property.
 
 ### Internals
 
-Array is an object and thus behaves like an object. It is copied by reference. If we add propertie to the array, the engine will disable all of its array-specific optimizations.
+Array is an object and thus behaves like an object. It is copied by reference. If we add propertiesto the array, the engine will disable all of its array-specific optimizations.
 
 Methods push/pop run fast O\(1\), while shift/unshift are slow O\(N\).
 

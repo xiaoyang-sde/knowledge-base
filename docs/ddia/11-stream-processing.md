@@ -46,4 +46,4 @@ The sequence of events that caused the change of the application state is immuta
 
 - The consumers of the event log are asynchronous, thus the user might write to the log, then read from a log-derived view, and find that the write hasn't been reflected in the read view.
 - If the events contains a high rate of updates and deletes on a comparatively small dataset, the immutable history might contain fragmentation. Therefore, the performance of compaction and garbage collection becomes crucial for operation robustness.
-- The immutable data might be required to be deleted for legal reasons (e.g. GDPR). The history should be rewrited to pretend that the data was never written to the system.
+- The immutable data might be required to be deleted for legal reasons (e.g. GDPR). The history should be rewritten to pretend that the data was never written to the system.

@@ -26,7 +26,7 @@ The good choice of pivot should produce $S^-$ and $S^+$ that are approximately e
 - If the pivot is reasonably well-centered and could reduce the sets in the recursive call by a factor of $\epsilon$, the recurrence is $T(n) \leq T((1- \epsilon)n) + cn$. The solution of the recurrence is $T(n) = O(n)$.
 - If the pivot is always the minimum, the recurrence is $T(n) \leq T(n - 1) + cn$. The solution of the recurrence is $T(n) = O(n^2)$.
 
-Since a fairly large fraction of the elements are reasonably well-centered, the pivot could be choosed at random.
+Since a fairly large fraction of the elements are reasonably well-centered, the pivot could be chosen at random.
 
 #### Analyzing the Algorithm
 

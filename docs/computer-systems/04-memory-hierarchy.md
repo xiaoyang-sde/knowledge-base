@@ -66,7 +66,7 @@ movq %rax, A
 
 #### Capacity
 
-Disk capacity is the maximum number of bits that can be sotred. Vendors express capacity in units of gigabytes, where 1 GB = 10e9 bytes.
+Disk capacity is the maximum number of bits that can be stored. Vendors express capacity in units of gigabytes, where 1 GB = 10e9 bytes.
 
 Disks partition tracks into disjoint subsets called recording zones. Each track in a zone has the same number of sectors, and each zone has a different number of sectors or tracks.
 

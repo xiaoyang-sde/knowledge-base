@@ -16,7 +16,7 @@ Recurrence relation: $T(n) \leq 2T(n / 2) + cn = 2T(n / 2) + O(n)$ for $n > 2$, 
 
 ### Solving Recurrences
 
-- **Unrolling**: Find the running time of the first few levels and identify a patten that can be continued as the recursion expands.
+- **Unrolling**: Find the running time of the first few levels and identify a pattern that can be continued as the recursion expands.
 - **Substituting**: Guess for a solution and substitute it into the recurrence relation to check whether it works with an argument by induction on $n$.
 
 #### Unrolling the Mergesort Recurrences

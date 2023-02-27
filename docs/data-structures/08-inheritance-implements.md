@@ -60,7 +60,7 @@ Now we can edit our `longest` method to take in a `List61B`. Because `AList` and
 
 ### Method Overriding
 
-Method overriding means that you implement a method as the same structure as it is defined in a interface, while overloaded methods could have different parameters. In this course, we will add `@Override` tag above each overrided methods. Although this tag is unnecessary, it's useful in debugging.
+Method overriding means that you implement a method as the same structure as it is defined in a interface, while overloaded methods could have different parameters. In this course, we will add `@Override` tag above each overrode methods. Although this tag is unnecessary, it's useful in debugging.
 
 Different from the Golden Rules of Equal, if X is a subclass of Y, the memory box of X may contain Y. For instance, this piece of code will works well:
 

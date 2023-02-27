@@ -56,7 +56,7 @@ Therefore, $P_n(x) = P_n(x_0 + sh) = f[x_0] + sh f[x_0, x_1] + s(s - 1)h^2 f[x_0
 
 ### Newton's Forward Difference Formula
 
-The $\Delta$ notation from Aitken's $\Delta^2$ method is defined as $\Delta p_n = p_{n + 1} - p_n$, and higher powers of $\Delta$ are defined as $\Delta^k p_n = \Delta(\Delta^{k - 1} p_n)$. Let $h$ be the difference bewteen two consective nodes.
+The $\Delta$ notation from Aitken's $\Delta^2$ method is defined as $\Delta p_n = p_{n + 1} - p_n$, and higher powers of $\Delta$ are defined as $\Delta^k p_n = \Delta(\Delta^{k - 1} p_n)$. Let $h$ be the difference between two consecutive nodes.
 
 - $f[x_0, x_1] = \frac{f(x_1) - f(x_0)}{x_1 - x_0} = \frac{1}{h} (f(x_1) - f(x_0)) = \frac{1}{h} \Delta f(x_0)$
 - $f[x_0, x_1, x_2] = \frac{1}{2h} \frac{\Delta f(x_1) - \Delta f(x_0)}{h} = \frac{1}{h} (f(x_1) - f(x_0)) = \frac{1}{2h^2} \Delta^2 f(x_0)$
