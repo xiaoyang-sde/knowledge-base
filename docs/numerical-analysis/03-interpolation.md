@@ -63,3 +63,23 @@ The $\Delta$ notation from Aitken's $\Delta^2$ method is defined as $\Delta p_n 
 - $f[x_0, x_1, \dots, x_k] = \frac{1}{k! h^k} \Delta^k f(x_0)$
 
 Therefore, $P_n(x) = f[x_0] + \sum_{k = 1}^{n} {s \choose k} \Delta^k f(x_0)$.
+
+## Cubic Spline Interpolation
+
+The piecewise-polynomial approximation divides the approximation interval into a collection of subintervals and construct a difference approximating polynomial on each subinterval. The piecewise-linear interpolation might not produce differentiable approximation.
+
+### Cubic Spline
+
+The cubic spline interpolation approximates each subinterval with a cubic polynomial. Given a function $f$ defined on $[a, b]$ and a set of nodes $a = x_0 < x_1 < \dots < x_n = b$, a cubic spline interpolant $S$ for $f$ is a function that satisfies the following conditions:
+
+- $S_j(x)$ is a cubic polynomial on $[x_j, x_{j + 1}]$ for each $j \in [0, n - 1]$.
+- $S_j(x_j) = f(x_j)$ and $S_j(x_{j + 1}) = f(x_{j + 1})$ for each $j \in [0, n - 1]$.
+- $S_{j + 1}(x_{j + 1}) = S_j(x_{j + 1})$ for each $j \in [0, n - 2]$.
+- $S'_{j + 1}(x_{j + 1}) = S'_j(x_{j + 1})$ for each $j \in [0, n - 2]$.
+- $S''_{j + 1}(x_{j + 1}) = S''_j(x_{j + 1})$ for each $j \in [0, n - 2]$.
+- $S''(x_0) = S''(x_n) = 0$ (natural) or $S'(x_0) = f'(x_0) \land S'(x_n) = f'(x_n)$ (clamped)
+
+The cubic polynomial for the $j$-th subinterval is $S_j(x) = a_j + b_j (x - x_j) + c_j (x - x_j)^2 + d_j (x - x_j)^3$, which has $4$ unknowns. For a function with $n$ subintervals, there are $4n$ unknowns to be solved.
+
+- If $f$ is defined at $a = x_0 < x_1 < \dots < x_n = b$, then $f$ has a unique natural spline interpolant $S$ on the nodes $x_0, x_1, \dots, x_n$, which satisfies $S''(a) = S''(b) = 0$.
+- If $f$ is defined at $a = x_0 < x_1 < \dots < x_n = b$ and differentiable at $a$ and $b$, then $f$ has a unique clamped spline interpolant $S$ on the nodes $x_0, x_1, \dots, x_n$, which satisfies $S'(a) = f'(a) \land S'(b) = f'(b)$.
