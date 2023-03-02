@@ -24,7 +24,7 @@ Let $EQ_{\text{DFA}} = \{ (A, B) | A, B \text{ are DFAs and } L(A) = L(B) \}$. T
 
 Let $A_{\text{CFG}} = \{ (G, w) | G \text{ is a CFG that generates string } w \}$. The language is decidable. Let $M$ be a Turing machine that converts $G$ into Chomsky normal form and lists all derivations with $2n - 1$ steps, where $n$ is the length of $w$. If some derivations generate $w$, $M$ accepts.
 
-Let $E_{\text{CFG}} = \{ (G) | G \text{ is a CFG and } L(A) = \emptyset \}$. The language is decidable. Let $M$ be a Turing machine that marks all terminal symbols in $G$ and iteratively marks the variable $A$ where $G$ has a rule $A \rightarrow U_1 U_2 \dots U_k$ that each $U$ has been marked. $M$ accepts if the start variable is not marked.
+Let $E_{\text{CFG}} = \{ (G) | G \text{ is a CFG and } L(A) = \emptyset \}$. The language is decidable. Let $M$ be a Turing machine that marks all terminal symbols in $G$ and iteratively marks the variable $A$ where $G$ has a rule $A \to U_1 U_2 \dots U_k$ that each $U$ has been marked. $M$ accepts if the start variable is not marked.
 
 Let $EQ_{\text{CFG}} = \{ (G, H) | G, H \text{ are CFGs and } L(G) = L(H) \}$. The language is undecidable because CFGs are not closed under complement or intersection.
 

@@ -22,27 +22,27 @@ Let $L$ be non-context-free. **For all** $P \in N$ such that **there exists** an
 
 ### Union
 
-Let $L', L''$ be context-free languages, then $L' \cup L''$ is a context-free language. Let $L'$ be $(V', \Sigma, R', S')$ and $L''$ be $(V'', \Sigma, R'', S'')$. The context-free grammar for $L' \cup L''$ is $(V' \cup V'' \cup \{ \epsilon \}, \Sigma, R' \cup R'' \cup \{ S \rightarrow S' | S'' \}, S)$.
+Let $L', L''$ be context-free languages, then $L' \cup L''$ is a context-free language. Let $L'$ be $(V', \Sigma, R', S')$ and $L''$ be $(V'', \Sigma, R'', S'')$. The context-free grammar for $L' \cup L''$ is $(V' \cup V'' \cup \{ \epsilon \}, \Sigma, R' \cup R'' \cup \{ S \to S' | S'' \}, S)$.
 
 ### Concatenation
 
-Let $L', L''$ be context-free languages, then $L' L''$ is a context-free language. Let $L'$ be $(V', \Sigma, R', S')$ and $L''$ be $(V'', \Sigma, R'', S'')$. The context-free grammar for $L' L''$ is $(V' \cup V'' \cup \{ \epsilon \}, \Sigma, R' \cup R'' \cup \{ S \rightarrow S' S'' \}, S)$.
+Let $L', L''$ be context-free languages, then $L' L''$ is a context-free language. Let $L'$ be $(V', \Sigma, R', S')$ and $L''$ be $(V'', \Sigma, R'', S'')$. The context-free grammar for $L' L''$ is $(V' \cup V'' \cup \{ \epsilon \}, \Sigma, R' \cup R'' \cup \{ S \to S' S'' \}, S)$.
 
 ### Kleene Star
 
-Let $L$ be a context-free language, then $L^*$ is a context-free language. Let $L$ be $(V, \Sigma, R, S)$. The context-free grammar for $L^*$ $(V \cup \{ S_{\text{new}} \}, \Sigma, R \cup {S_{\text{new}} \rightarrow SS_{\text{new}} | \epsilon, S_{\text{new}} })$.
+Let $L$ be a context-free language, then $L^*$ is a context-free language. Let $L$ be $(V, \Sigma, R, S)$. The context-free grammar for $L^*$ $(V \cup \{ S_{\text{new}} \}, \Sigma, R \cup {S_{\text{new}} \to SS_{\text{new}} | \epsilon, S_{\text{new}} })$.
 
 ### Prefix
 
-Let $L$ be a context-free language, then $\text{prefix}(L)$ is a context-free language. Let $P$ be a pushdown automata for $L$ and $P'$ be a transformed pushdown automata for $L$ in which $\sigma, \gamma \rightarrow \gamma'$ is changed to $\epsilon, \gamma \rightarrow \gamma'$, and the cloned state in $q$ is directed to $q'$ with $\epsilon, \epsilon \rightarrow \epsilon$. Therefore, if the string $w$ ends in $P$, it moves to $P'$ and tries to reach an accepted state.
+Let $L$ be a context-free language, then $\text{prefix}(L)$ is a context-free language. Let $P$ be a pushdown automata for $L$ and $P'$ be a transformed pushdown automata for $L$ in which $\sigma, \gamma \to \gamma'$ is changed to $\epsilon, \gamma \to \gamma'$, and the cloned state in $q$ is directed to $q'$ with $\epsilon, \epsilon \to \epsilon$. Therefore, if the string $w$ ends in $P$, it moves to $P'$ and tries to reach an accepted state.
 
 ### Suffix
 
-Let $L$ be a context-free language, then $\text{suffix}(L)$ is a context-free language. Let $P$ be a pushdown automata for $L$ and $P'$ be a transformed pushdown automata for $L$ in which $\sigma, \gamma \rightarrow \gamma'$ is changed to $\epsilon, \gamma \rightarrow \gamma'$, and the cloned state in $q'$ is directed to $q$ with $\epsilon, \epsilon \rightarrow \epsilon$. Therefore, if the string $w$ ends in $P$, it moves to $P'$ and tries to reach an accepted state.
+Let $L$ be a context-free language, then $\text{suffix}(L)$ is a context-free language. Let $P$ be a pushdown automata for $L$ and $P'$ be a transformed pushdown automata for $L$ in which $\sigma, \gamma \to \gamma'$ is changed to $\epsilon, \gamma \to \gamma'$, and the cloned state in $q'$ is directed to $q$ with $\epsilon, \epsilon \to \epsilon$. Therefore, if the string $w$ ends in $P$, it moves to $P'$ and tries to reach an accepted state.
 
 ### Reverse
 
-Let $L$ be a context-free language, then $L^R$ is a context-free language. Let $G$ be a context-free grammar of $L$, then a clone of $G$ with all rules reversed (from $X \rightarrow Y_1 Y_2 \dots Y_m$ to $X \rightarrow Y_m \dots Y_2 Y_1$) is a context-free grammar of $L^R$.
+Let $L$ be a context-free language, then $L^R$ is a context-free language. Let $G$ be a context-free grammar of $L$, then a clone of $G$ with all rules reversed (from $X \to Y_1 Y_2 \dots Y_m$ to $X \to Y_m \dots Y_2 Y_1$) is a context-free grammar of $L^R$.
 
 ## Non-Closure
 

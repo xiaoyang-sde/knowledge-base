@@ -65,7 +65,7 @@ def least_squares(X, y):
 
 ## Non-linear Classification
 
-For a training data set that is not linearly separable, the feature vector could be transformed to $\phi(x): x \in R^N \rightarrow z \in R^M$, where $M$ is the dimension of the transformed feature. The prediction is based on $\theta^T \phi(x)$, thus the residual sum squares is $J(\theta) = \sum_n [\theta^T \phi(x_n) - y_n]^2$, where $\theta \in R^M$.
+For a training data set that is not linearly separable, the feature vector could be transformed to $\phi(x): x \in R^N \to z \in R^M$, where $M$ is the dimension of the transformed feature. The prediction is based on $\theta^T \phi(x)$, thus the residual sum squares is $J(\theta) = \sum_n [\theta^T \phi(x_n) - y_n]^2$, where $\theta \in R^M$.
 
 Let $\Phi \in R^{N \times M}$ be the transformed training set, $\hat{\theta} = (\Phi^T \Phi^{-1}) \Phi^{T} y$.
 

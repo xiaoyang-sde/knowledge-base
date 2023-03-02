@@ -92,11 +92,11 @@ The basic idea of normalization uses functional dependencies to decompose table 
 
 ### Functional Dependency
 
-$u[x]$ denotes the values for the attributes $X$ of the tuple $u$. The functional dependency $X \rightarrow Y$ means that for any $u_1, u_2 \in R$, if $u_1[X] = u_2[X]$, then $u_1[Y] = u_2[Y]$.
+$u[x]$ denotes the values for the attributes $X$ of the tuple $u$. The functional dependency $X \to Y$ means that for any $u_1, u_2 \in R$, if $u_1[X] = u_2[X]$, then $u_1[Y] = u_2[Y]$.
 
-- Trivial FD: $X \rightarrow Y$ is trivial if $Y \subseteq X$.
-- Non-trivial FD: $X \rightarrow Y$ is non-trivial if $Y \not\subseteq X$.
-- Completely non-trivial FD: $X \rightarrow Y$ is completely non-trivial if $X \cap Y = \emptyset$.
+- Trivial FD: $X \to Y$ is trivial if $Y \subseteq X$.
+- Non-trivial FD: $X \to Y$ is non-trivial if $Y \not\subseteq X$.
+- Completely non-trivial FD: $X \to Y$ is completely non-trivial if $X \cap Y = \emptyset$.
 
 ### Logical Implication and Closure
 
@@ -104,7 +104,7 @@ The closure of functional dependency set $F$ is denoted as $F^+$, which contains
 
 The closure of attribute set $X$ is denoted as $X^+$, which contains all attributes that are functionally determined by $X$.
 
-$X$ is a key of $R$ if and only if $X^+ = R$ or $X \rightarrow \text{all attributes of R}$ and $X$ is minimal.
+$X$ is a key of $R$ if and only if $X^+ = R$ or $X \to \text{all attributes of R}$ and $X$ is minimal.
 
 ### Decomposition
 
@@ -113,6 +113,6 @@ $X$ is a key of $R$ if and only if $X^+ = R$ or $X \rightarrow \text{all attribu
 
 ### Boyce-Codd Normal Form (BCNF)
 
-The relation $R$ is in Boyce-Codd Normal Form with regard to the set of functional dependencies $F$ if and only if for every non-trivial functional dependency $X \rightarrow Y \in F^+$, $X$ contains a key of $R$.
+The relation $R$ is in Boyce-Codd Normal Form with regard to the set of functional dependencies $F$ if and only if for every non-trivial functional dependency $X \to Y \in F^+$, $X$ contains a key of $R$.
 
 If a relation $R$ violates the BCNF condition, it should be decomposed until all decomposed relations are in BCNF. For the functional dependency $X$, compute $X^+$ and decompose $R$ into $R_1 (X^+)$ and $R_2 (X, Z)$ where $Z$ is all attributes in $R$ except $X^+$.

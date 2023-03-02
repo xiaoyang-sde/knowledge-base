@@ -46,7 +46,7 @@ Given a root-finding problem $f(p) = 0$. Let a function $g$ with a fixed point a
 
 To approximate the fixed point of a function $g$, choose an initial approximation $p_0$ and generate the sequence ${p_n}_{n = 0}^{\infty}$ with $p_n = g(p_{n - 1})$ for each $n \ge 1$.
 
-If the sequence converges to $p$ and $g$ is continuous, then $p = \lim_{n \rightarrow \infty} p_n = \lim_{n \rightarrow \infty} g(p_{n - 1}) = g(\lim_{n \rightarrow \infty} p_{n - 1}) = g(p)$, which is a solution to $x = g(x)$. The method is fixed-point iteration.
+If the sequence converges to $p$ and $g$ is continuous, then $p = \lim_{n \to \infty} p_n = \lim_{n \to \infty} g(p_{n - 1}) = g(\lim_{n \to \infty} p_{n - 1}) = g(p)$, which is a solution to $x = g(x)$. The method is fixed-point iteration.
 
 ```cpp
 const double epsilon = pow(1, -9);
@@ -123,7 +123,7 @@ Let $f \in C^2 [a, b]$. If $p \in (a, b)$ is such that $f(p) = 0$ and $f'(p) \ne
 
 Newton's method is a powerful technique, but it has a major weakness: the need to know the value of the derivative of $f$ at each approximation.
 
-Given that $f'(p_{n - 1}) = \lim_{x \rightarrow p_{n - 1}} \frac{f(x) - f(p_{n - 1})}{x - p_{n - 1}}$. If $p_{n - 2}$ is close to $p_{n - 1}$, then $f'(p_{n - 1}) \approx \frac{f(p_{n - 1}) - f(p_{n - 2})}{p_{n - 1} - p_{n - 2}}$.
+Given that $f'(p_{n - 1}) = \lim_{x \to p_{n - 1}} \frac{f(x) - f(p_{n - 1})}{x - p_{n - 1}}$. If $p_{n - 2}$ is close to $p_{n - 1}$, then $f'(p_{n - 1}) \approx \frac{f(p_{n - 1}) - f(p_{n - 2})}{p_{n - 1} - p_{n - 2}}$.
 
 Substitute $f'(p_{n - 1})$ in Newton's formula, $$p_n = p_{n - 1} - \frac{f(p_{n - 1})(p_{n - 1} - p_{n - 2})}{f(p_{n - 1}) - f(p_{n - 2})}$$.
 
@@ -167,13 +167,13 @@ The initial approximations $p_0$ and $p_1$ should meet the requirement that $f(p
 
 ### Order of Convergence
 
-Suppose that $p_n \rightarrow p$ as $n \rightarrow \infty$ with $p_n \ne p$ for all $n$. If $\lambda, \alpha > 0$ exist with $\lim_{n \rightarrow \infty} \frac{|p_{n + 1} - p|}{|p_n - p|^\alpha} = \lambda$, then ${p_n}_{n = 0}^{\infty}$ converges to $p$ of order $\alpha$, with asymptotic error constant $\lambda$.
+Suppose that $p_n \to p$ as $n \to \infty$ with $p_n \ne p$ for all $n$. If $\lambda, \alpha > 0$ exist with $\lim_{n \to \infty} \frac{|p_{n + 1} - p|}{|p_n - p|^\alpha} = \lambda$, then ${p_n}_{n = 0}^{\infty}$ converges to $p$ of order $\alpha$, with asymptotic error constant $\lambda$.
 
 $\alpha$ reflects the convergence speed more than $\lambda$. Larger $\alpha$ implies faster convergence.
 
 ### Multiple Root
 
-The solution $p$ of $f(x) = 0$ is a zero of multiplicity $m$ of $f$ if for $x \ne p$, $f(x) = (x - p)^m q(x)$, where $\lim_{x \rightarrow p} q(x) \ne 0$.
+The solution $p$ of $f(x) = 0$ is a zero of multiplicity $m$ of $f$ if for $x \ne p$, $f(x) = (x - p)^m q(x)$, where $\lim_{x \to p} q(x) \ne 0$.
 
 - The function $f \in C^1 [a, b]$ has a zero of multiplicity $1$ (simple zero) at $p$ in $(a, b)$ if and only if $f(p) = 0$, but $f'(p) \ne 0$.
 - The function $f \in C^m [a, b]$ has a zero of multiplicity $m$ at $p$ in $(a, b)$ if and only if $f(p) = f'(p) = f''(p) = \dots f^{(m - 1)}(p) = 0$, but $f^{(m)}(p) \ne 0$.

@@ -4,7 +4,7 @@
 
 The **Turing machine** uses an infinite tape that contains the input string and a tape head that could read and write symbols and move around the tape. The machine continues computing until it reaches an accept or reject state.
 
-The Turing machine is defined as a tuple $(Q, \Sigma, \Gamma, \delta, q_0, q_{\text{accept}}, q_{\text{reject}})$, in which $Q$ is the set of states, $\Sigma$ is the input alphabet ($\epsilon \notin \Sigma$), $\Gamma$ ($\Sigma \subseteq \Gamma$) is the tape alphabet, $q_\text{accept}$ is the accept state, and $q_\text{reject}$ is the reject state. The transition function $\delta$ is $Q \times \Gamma \rightarrow Q \times \Gamma \rightarrow \{ L, R \}$. For example, $\delta(q, a) \rightarrow (r, b, L)$ indicates that the machine writes $b$ to replace $a$, transists to state $r$, and moves the head to the right.
+The Turing machine is defined as a tuple $(Q, \Sigma, \Gamma, \delta, q_0, q_{\text{accept}}, q_{\text{reject}})$, in which $Q$ is the set of states, $\Sigma$ is the input alphabet ($\epsilon \notin \Sigma$), $\Gamma$ ($\Sigma \subseteq \Gamma$) is the tape alphabet, $q_\text{accept}$ is the accept state, and $q_\text{reject}$ is the reject state. The transition function $\delta$ is $Q \times \Gamma \to Q \times \Gamma \to \{ L, R \}$. For example, $\delta(q, a) \to (r, b, L)$ indicates that the machine writes $b$ to replace $a$, transists to state $r$, and moves the head to the right.
 
 The Turing machine receives the input on the leftmost $|w|$ squares of the tape, and the head starts on the leftmost square of the tape. The first blank on the tape marks the end of the input. The head couldn't move to the left of the first square of the tape.
 
@@ -24,13 +24,13 @@ side of $\#$ to check whether these positions contain the same symbol. The machi
 
 ### Multi-tape Turing Machine
 
-The multi-tape Turing machine is a Turing machine with several tapes. Each tape has its own head for reading and writing. The input appears on tape $1$ and the others are blank. The transition function $\delta: Q \times \Gamma^k \rightarrow Q \times \Gamma^k \times \{ L, R, S \}$ allows for reading, writing, and moving the heads on some or all of the tapes at the same time. Each multi-tape Turing machine $M$ has an equivalent single-tape Turing machine $S$.
+The multi-tape Turing machine is a Turing machine with several tapes. Each tape has its own head for reading and writing. The input appears on tape $1$ and the others are blank. The transition function $\delta: Q \times \Gamma^k \to Q \times \Gamma^k \times \{ L, R, S \}$ allows for reading, writing, and moving the heads on some or all of the tapes at the same time. Each multi-tape Turing machine $M$ has an equivalent single-tape Turing machine $S$.
 
 $S$ could simulate $M$. If $M$ has $k$ tapes, $S$ stores their information on its single tape to simulate the effect of $k$ tapes. $S$ uses a new symbol $#$ as a delimiter to separate the contents of different tapes. $S$ writes a tape symbol with a dot to track the location of the heads.
 
 ### Non-deterministic Turing Machine
 
-The transition function of a non-deterministic Turing machine is $\delta: Q \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma \times \{ L, R \})$, which allows several legal next moves. If some branch of the computation leads to the accept state, the machine accepts its input. Each non-deterministic Turing machine $N$ has an equivalent deterministic Turing machine $D$.
+The transition function of a non-deterministic Turing machine is $\delta: Q \times \Gamma \to \mathcal{P}(Q \times \Gamma \times \{ L, R \})$, which allows several legal next moves. If some branch of the computation leads to the accept state, the machine accepts its input. Each non-deterministic Turing machine $N$ has an equivalent deterministic Turing machine $D$.
 
 $D$ could simulate $N$. $D$ searches on all possible branches of $N$'s computation, and if some branch accepts, $D$ accepts the input. Otherwise, $D$ enters a loop. $D$ could use a breadth-first search to avoid infinite computation branch.
 

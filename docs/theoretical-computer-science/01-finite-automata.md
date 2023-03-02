@@ -11,7 +11,7 @@
 
 ### Definition
 
-The **deterministic finite automata** is defined as a tuple $\{Q, \Sigma, \delta, q_0, F\}$, in which $Q$ is the set of states, $\Sigma$ is the alphabet, $\delta$ is the transition function ($\delta: Q \times \Sigma \rightarrow Q$), $q_0$ is the start state ($q_0 \in Q$), and $F$ is the set of accept states ($F \subseteq Q$).
+The **deterministic finite automata** is defined as a tuple $\{Q, \Sigma, \delta, q_0, F\}$, in which $Q$ is the set of states, $\Sigma$ is the alphabet, $\delta$ is the transition function ($\delta: Q \times \Sigma \to Q$), $q_0$ is the start state ($q_0 \in Q$), and $F$ is the set of accept states ($F \subseteq Q$).
 
 - The deterministic finite automata accepts a string $w = w_1 w_2 \dots w_n$ if and only if $\delta(\dots \delta(\delta(q_0, w_1), w_2) \dots, w_n) \in F$.
 - The deterministic finite automata recognizes the language $L$ if and only if $L = \{w: D \text{ accepts } w\}$.
@@ -20,7 +20,7 @@ The deterministic finite automata could be represented with a diagram that consi
 
 ## Non-deterministic Finite Automata
 
-The **non-deterministic finite automata** is defined as a tuple $\{Q, \Sigma, \delta, q_0, F\}$, in which $Q$ is the set of states, $\Sigma$ is the alphabet, $\delta$ is the transition function ($\delta: Q \times ( \Sigma \cup \{\epsilon \} ) \rightarrow \mathcal{P}(Q)$), $q_0$ is the start state ($q_0 \in Q$), and $F$ is the set of accept states ($F \subseteq Q$).
+The **non-deterministic finite automata** is defined as a tuple $\{Q, \Sigma, \delta, q_0, F\}$, in which $Q$ is the set of states, $\Sigma$ is the alphabet, $\delta$ is the transition function ($\delta: Q \times ( \Sigma \cup \{\epsilon \} ) \to \mathcal{P}(Q)$), $q_0$ is the start state ($q_0 \in Q$), and $F$ is the set of accept states ($F \subseteq Q$).
 
 - The non-deterministic finite automata accepts a string $w = \sigma_1 \sigma_2 \dots \sigma_{m - 1}$ if and only if $\exists q_1, \dots, q_m \in Q, \sigma_1, \dots, \sigma_{m - 1} \in \Sigma \cup \{ \epsilon \}$, there's $q_1 \in \delta(q_0, \sigma_0), \dots, q_m \in \delta(q_{m - 1}, \sigma_{m - 1})$ and $q_{m} \in F$, which means an accept state is reachable from $q_0$ through some path on input $w$.
 - The non-deterministic finite automata recognizes the language $L$ if and only if $L = \{w: N \text{ accepts } w\}$.

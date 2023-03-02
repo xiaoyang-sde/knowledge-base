@@ -9,8 +9,8 @@ Complex decision tree has low bias and high variance, which is able to capture m
 - Set of possible instances $\mathbb{X}$
   - Each instance $x \in \mathbb{X}$ is feature vector
 - Set of possible labels $\mathbb{Y}$
-- Unknown target function $f: \mathbb{X} \rightarrow \mathbb{Y}$
-- Model: $H = \{ h | h: \mathbb{X} \rightarrow \mathbb{Y} \}$, in which each hypothesis $h$ is a decision tree
+- Unknown target function $f: \mathbb{X} \to \mathbb{Y}$
+- Model: $H = \{ h | h: \mathbb{X} \to \mathbb{Y} \}$, in which each hypothesis $h$ is a decision tree
 - Goal: Train a function $h$ that maps instance to label
 - Learn: The structure of the tree, the threshold values $\theta_i$, and the values for the leaves
 

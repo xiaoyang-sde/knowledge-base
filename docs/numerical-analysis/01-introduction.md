@@ -4,15 +4,15 @@
 
 ### Limit
 
-The function $f$ defined on a set $X$ of real numbers has the limit $L$ at $x_0$, denoted as $\lim_{x \rightarrow x_0} f(x) = L$, if, for all real number $\epsilon > 0$, there exists a real number $\delta > 0$ such that $|f(x) - L| < \epsilon$, whenever $x \in X$ and $0 < |x - x_0| < \epsilon$.
+The function $f$ defined on a set $X$ of real numbers has the limit $L$ at $x_0$, denoted as $\lim_{x \to x_0} f(x) = L$, if, for all real number $\epsilon > 0$, there exists a real number $\delta > 0$ such that $|f(x) - L| < \epsilon$, whenever $x \in X$ and $0 < |x - x_0| < \epsilon$.
 
-The function $f$ defined on a set $X$ of real numbers is continuous at $x_0 \in X$ if $\lim_{x \rightarrow x_0} f(x) = f(x_0)$. $f$ is continuous on $X$ if it's continuous at each number in $X$. The set of all functions that are continuous on the set $X$ is denoted $C(X)$. When $X$ is an interval of the real line, the parentheses are omitted.
+The function $f$ defined on a set $X$ of real numbers is continuous at $x_0 \in X$ if $\lim_{x \to x_0} f(x) = f(x_0)$. $f$ is continuous on $X$ if it's continuous at each number in $X$. The set of all functions that are continuous on the set $X$ is denoted $C(X)$. When $X$ is an interval of the real line, the parentheses are omitted.
 
-Let $\{ x_n \}_{n = 1}^{\infty}$ be an infinite sequence of real numbers. The sequence converges to $x$ if for all $\epsilon > 0$, there exists a positive integer $N(\epsilon)$ such that $|x_n - x| < \epsilon$, whenever $n > N(\epsilon)$. The notation $x_n \rightarrow x$ means that the sequence converges to $x$.
+Let $\{ x_n \}_{n = 1}^{\infty}$ be an infinite sequence of real numbers. The sequence converges to $x$ if for all $\epsilon > 0$, there exists a positive integer $N(\epsilon)$ such that $|x_n - x| < \epsilon$, whenever $n > N(\epsilon)$. The notation $x_n \to x$ means that the sequence converges to $x$.
 
 ### Differentiation
 
-Let $f$ be a function defined in an open interval that contains $x_0$. $f$ is differentiable at $x_0$ if $f'(x_0) = \lim_{x \rightarrow x_0} \frac{f(x) - f(x_0)}{x - x_0}$ exists. $f'(x_0)$ is the derivative of $f$ at $x_0$. $f$ is differentiable on $X$ if it has a derivative at each number in $X$.
+Let $f$ be a function defined in an open interval that contains $x_0$. $f$ is differentiable at $x_0$ if $f'(x_0) = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}$ exists. $f'(x_0)$ is the derivative of $f$ at $x_0$. $f$ is differentiable on $X$ if it has a derivative at each number in $X$.
 
 The set of all functions that have $n$ continuous derivatives on $X$ is denoted $C^n (X)$. The set of functions that have derivatives of all orders on $X$ is denoted $C^\infty (X)$.
 
@@ -23,7 +23,7 @@ The set of all functions that have $n$ continuous derivatives on $X$ is denoted 
 
 ### Integration
 
-The Riemann integral of $f$ on $[a, b]$ is the limit $\int_a^b f(x) dx = \lim_{\max \Delta x_i \rightarrow 0} \sum_{i = 1}^n f(z_i) \Delta_{x_i}$, where $x_0, x_1, \dots, x_n$ satisfies $a = x_0 \le x_1 \le \dots \le x_n = b$, where $\Delta x_i = x_i - x_{i - 1}$, and $z_i$ is a random number chosen in $[x_{i - 1}, x_i]$.
+The Riemann integral of $f$ on $[a, b]$ is the limit $\int_a^b f(x) dx = \lim_{\max \Delta x_i \to 0} \sum_{i = 1}^n f(z_i) \Delta_{x_i}$, where $x_0, x_1, \dots, x_n$ satisfies $a = x_0 \le x_1 \le \dots \le x_n = b$, where $\Delta x_i = x_i - x_{i - 1}$, and $z_i$ is a random number chosen in $[x_{i - 1}, x_i]$.
 
 - Mean Value Theorem: If $f \in C[a, b]$, then there exists a $c \in (a, b)$ with $\int_a^b f(x) dx = \frac{1}{b - a} \int_a^b f(x) dx$.
 - Weighted Mean Value Theorem: If $f \in C[a, b]$, the Riemann integral of $g$ exists on $[a, b]$, and $g(x)$ doesn't change sign on $[a, b]$, then there exists a $c \in (a, b)$ with $\int_a^b f(x)g(x) dx = f(c) \int_a^b g(x) dx$.
@@ -73,4 +73,4 @@ An algorithm is a procedure that describes, in an unambiguous manner, a finite s
 
 Suppose ${\beta_n}_{n = 1}^{\infty}$ is a sequence known to converge to zero and ${\alpha_n}_{n = 1}^{\infty}$ converges to a number $\alpha$. If a positive constant $K$ and an integer $N$ exist such that $|\alpha_n - \alpha| \le K|\beta_n|$ for all $n \ge N$, then ${\alpha_n}_{n = 1}^{\infty}$ converges to $\alpha$ with rate of convergence $O(\beta_n)$. Therefore, $\alpha_n = \alpha + O(\beta_n)$.
 
-Suppose that $\lim_{h \rightarrow 0} G(h) = 0$ and $\lim_{h \rightarrow 0} F(h) = L$. If a positive constant $K$ exists with $|F(h) - L| \le K |G(h)|$ for a small $h$, then $F(h) = L + O(G(h))$.
+Suppose that $\lim_{h \to 0} G(h) = 0$ and $\lim_{h \to 0} F(h) = L$. If a positive constant $K$ exists with $|F(h) - L| \le K |G(h)|$ for a small $h$, then $F(h) = L + O(G(h))$.
