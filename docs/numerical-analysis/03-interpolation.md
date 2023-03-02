@@ -20,7 +20,7 @@ $L_{n, k}(x) = \frac{(x - x_0) \dots (x - x_{k - 1}) (x - x_{k + 1}) \dots (x - 
 
 $P(x) = f(x_0)L_{n, 0}(x) + \dots + f(x_n)L_{n, n}(x) = \sum_{i = 1}^{n} f(x_k) L_{n, k} (x)$, where $P(x_i) = f(x_i)$ for each $i = 0, 1, 2, \dots, n$.
 
-Suppose $x_0, \dots x_n$ are distinct numbers in $[a, b]$ and $f \in c^{n + 1} [a, b]$. For each $x$ in $[a, b]$, a number $\epsilon(x)$ between $\min{x_0, \dots, x_n}$ and $\max{x_0, \dots, x_n}$ exists with $f(x) = P(x) + \frac{f^{(n + 1)}(\epsilon(x))}{(n + 1)!} (x - x_0) \dots (x - x_n)$.
+Suppose $x_0, \dots x_n$ are distinct numbers in $[a, b]$ and $f \in c^{n + 1} [a, b]$. For each $x$ in $[a, b]$, a number $\xi(x)$ between $\min{x_0, \dots, x_n}$ and $\max{x_0, \dots, x_n}$ exists with $f(x) = P(x) + \frac{f^{(n + 1)}(\xi(x))}{(n + 1)!} (x - x_0) \dots (x - x_n)$.
 
 ## Neville's Method
 
