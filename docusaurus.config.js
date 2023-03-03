@@ -16,7 +16,7 @@ module.exports = {
   organizationName: 'xiaoyang-sde',
   projectName: 'programming-note',
   stylesheets: [
-    'https://fonts.googleapis.com/css2?family=Inter&display=swap',
+    'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap',
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
       type: 'text/css',
