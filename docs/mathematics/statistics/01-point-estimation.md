@@ -134,7 +134,7 @@ Based on the Bayes' theorem, the posterior pmf of $\theta$ is $P(\Theta = \theta
 
 ### Error Function
 
-The estimator $\hat{\theta}$ should minimizes the squared loss function, which is represented as $E[(\theta - u(X_1, \dots, X_n))^2 | X_1, \dots, X_n] = \sum_\theta (\theta - u(X_1, \dots, X_n))^2 P_\Theta (\theta | X_1, \dots, X_n)$. $E[\theta | X_1, \dots, X_n]$ is the minimium of the squared loss function.
+The estimator $\hat{\theta}$ should minimizes the squared loss function, which is represented as $E[(\theta - u(X_1, \dots, X_n))^2 | X_1, \dots, X_n] = \sum_\theta (\theta - u(X_1, \dots, X_n))^2 P_\Theta (\theta | X_1, \dots, X_n)$. $E[\theta | X_1, \dots, X_n]$ is the minimum of the squared loss function.
 
 - Discrete $\Theta$: $E[\theta | X_1, \dots, X_n] = \sum_\Theta \theta P_\Theta (\theta | X_1, \dots, X_n)$
 - Continuous $\Theta$: $E[\theta | X_1, \dots, X_n] = \int \theta f_\Theta (\theta | X_1, \dots, X_n) d\theta$
