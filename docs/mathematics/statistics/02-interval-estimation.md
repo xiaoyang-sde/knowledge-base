@@ -21,13 +21,13 @@ If the variance $\sigma^2$ is unknown, the sample variance $S^2 = \frac{1}{n - 1
 
 ## Confidence Interval of the Differentce of Two Means
 
-Let $X_1, \dots, X_n$ be samples drawn from a distrubtion $X \sim N(\mu_x, \sigma_x^2)$ and $Y_1, \dots, Y_n$ be samples drawn from a distrubtion $Y \sim N(\mu_y, \sigma_y^2)$, where $\mu_x$ and $\mu_y$ are unknown, and $\bar{X}$ and $\bar{Y}$ are unbiased estimators of $\mu_x$ and $\mu_y$. The confidence interval for $\mu_x - \mu_y$ is the interval $[\bar{X} - \bar{Y} - \epsilon, \bar{X} - \bar{Y} + \epsilon]$ such that $\mu_x - \mu_y$ is contained in the interval with a probability of at least $1 - \alpha$.
+Let $X_1, \dots, X_n$ be samples drawn from a distribution $X \sim N(\mu_x, \sigma_x^2)$ and $Y_1, \dots, Y_n$ be samples drawn from a distribution $Y \sim N(\mu_y, \sigma_y^2)$, where $\mu_x$ and $\mu_y$ are unknown, and $\bar{X}$ and $\bar{Y}$ are unbiased estimators of $\mu_x$ and $\mu_y$. The confidence interval for $\mu_x - \mu_y$ is the interval $[\bar{X} - \bar{Y} - \epsilon, \bar{X} - \bar{Y} + \epsilon]$ such that $\mu_x - \mu_y$ is contained in the interval with a probability of at least $1 - \alpha$.
 
 - Let $X \sim N(\mu_x, \sigma_x^2)$, then $\bar{X} = \frac{1}{n_x} \sum_{i = 1}^{n_x} X_i \sim N(\mu_x, \frac{\sigma_x^2}{n_x})$.
 - Let $Y \sim N(\mu_y, \sigma_y^2)$, then $\bar{Y} = \frac{1}{n_y} \sum_{i = 1}^{n_y} Y_i \sim N(\mu_y, \frac{\sigma_y^2}{n_y})$.
 - Therefore, $W = \bar{X} - \bar{Y} \sim N(\mu_x - \mu_y, \frac{\sigma^2_x}{n_x} + \frac{\sigma^2_y}{n_y})$.
 
-Since $P(-z_{\frac{\alpha}{2}} \le \frac{\bar{X} - \bar{Y} - (\mu_x - \mu_y)}{\sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}} \le z_{\frac{\alpha}{2}}) = 1 - \alpha$, which is equivalent to $P(\mu_x - \mu_y \in [\bar{X} - \bar{Y} - z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}, \bar{X} + z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}]) = 1 - \alpha$, then $\bar{X} \pm z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}$ is the $1 - \alpha$ confidence interval for $\mu$. For example, $\bar{X} \pm 1.96 \frac{\sigma}{\sqrt{n}}$ is the $0.95$ confidence interval.
+Since $P(-z_{\frac{\alpha}{2}} \le \frac{\bar{X} - \bar{Y} - (\mu_x - \mu_y)}{\sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}} \le z_{\frac{\alpha}{2}}) = 1 - \alpha$, which is equivalent to $P(\mu_x - \mu_y \in [\bar{X} - \bar{Y} - z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}, \bar{X} + z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}]) = 1 - \alpha$, then $\bar{X} \pm z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}$ is the $1 - \alpha$ confidence interval for $\mu_X - \mu_y$.
 
 ### Unknown Distribution
 
@@ -38,4 +38,12 @@ If the distribution is not normal, the central limit theorem implies that the ra
 If the variances $\sigma_x^2$ and $\sigma_y^2$ are unknown, the sample variances $S_x^2 = \frac{1}{n_x - 1} \sum_{i = 1}^{n_x} (X_i - \bar{X})^2$ and $S_y^2 = \frac{1}{n_y - 1} \sum_{i = 1}^{n_y} (Y_i - \bar{Y})^2$ can be used as its estimation since $S_x^2$ and $S_y^2$ are an unbiased estimators of $\sigma_x^2$ and $\sigma_y^2$.
 
 - If the sample size is large enough, $\frac{\bar{X} - \bar{Y} - (\mu_x - \mu_y)}{\sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}} \sim N(0, 1)$.
-- If the sample size is small, the confidence interval is $(\bar{X} - \bar{Y} \pm t_0 S_p \sqrt{\frac{1}{n_x} + \frac{1}{n_y}})$, where $S_p = \sqrt{\frac{(n - 1) S_x^2 + (m - 1) S_y^2}{n + m - 2}}$.
+- If the sample size is small, the confidence interval is $(\bar{X} - \bar{Y} \pm t_0 S_p \sqrt{\frac{1}{n_x} + \frac{1}{n_y}})$, where $S_p = \sqrt{\frac{(n_x - 1) S_x^2 + (n_y - 1) S_y^2}{n_x + n_y - 2}}$. When $\sigma_x = \sigma_y$, the degree of freedom is $n_x + n_y - 2$.
+
+## Confidence Interval for Proportion
+
+Let $X_1, \dots, X_n$ be samples drawn from a distribution $X$ and $E_k$ be the event that $X_k \in [a, b]$, where $P(X_k \in [a, b]) = p$. Let $Y \sim b(n, p)$ be the number of measurements in $[a, b]$ out of the $n$ observations, which is an unbiased estimator of $p$. The confidence interval for $p$ is the interval $[\frac{Y}{n} - \epsilon, \frac{Y}{n} + \epsilon]$ such that $p$ is contained in the interval with a probability of at least $1 - \alpha$.
+
+Let $\frac{Y}{n} \sim N(p, \frac{p(1 - p)}{n})$, which implies that $\frac{\frac{Y}{n} - p}{\sqrt{\frac{p(1 - p)}{n}}} \sim N(0, 1)$. Since $P(-z_{\frac{\alpha}{2}} \le \frac{\frac{Y}{n} - p}{\sqrt{\frac{p(1 - p)}{n}}} \le z_{\frac{\alpha}{2}}) \approx 1 - \alpha$, which is equivalent to $P(p \in [\frac{Y}{n} - z_{\frac{\alpha}{2}} \sqrt{\frac{p(1 - p)}{n}}, \frac{Y}{n} + z_{\frac{\alpha}{2}} \sqrt{\frac{p(1 - p)}{n}}]) = 1 - \alpha$, then $\frac{Y}{n} \pm z_{\frac{\alpha}{2}} \sqrt{\frac{p(1 - p)}{n}}$ is the $1 - \alpha$ confidence interval for $p$.
+
+However, the unknown value $p$ appears in the confidence interval, thus it can be replaced as its unbiased estimator $\frac{Y}{n}$, which results in $\frac{Y}{n} \pm z_{\frac{\alpha}{2}} \sqrt{\frac{\frac{Y}{n}(1 - \frac{Y}{n})}{n}}$.
