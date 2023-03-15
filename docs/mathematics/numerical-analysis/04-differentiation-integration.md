@@ -36,7 +36,7 @@ Therefore, $4f'(x_0) - f'(x_0) = 4D_{\frac{h}{2}} - \frac{h^2}{6}f^{(3)}(x_0) - 
 
 ## Numerical Integration
 
-The numerical integration formua (quadrature rule)  is defined as $I_f = \int_a^b f(x) dx \approx \sum_{j = 0}^n a_j f(x_j)$ for a finite interval $[a, b]$ and an integrable function $f$, which has nodes $x_j$ and weights $a_j$.
+The numerical integration formula (quadrature rule)  is defined as $I_f = \int_a^b f(x) dx \approx \sum_{j = 0}^n a_j f(x_j)$ for a finite interval $[a, b]$ and an integrable function $f$, which has nodes $x_j$ and weights $a_j$.
 
 Newton-Cotes formulas is a collection of formula based on polynomial interpolation at equidisttant abscissae. If the endpoints $a$ and $b$ are included in the abscissae $x_0 < x_1 < \dots < x_n$ ($x_0 = a$ and $x_n = b$), then the formula is closed. Otherwise, the formula is open.
 
@@ -68,3 +68,11 @@ Let ${x_0, x_1, \dots, x_n}$  be the set of distinct nodes from the interval $[a
 - $n = 0$ (Midpoint rule): $\int_{x_{-1}}^{x_1} f(x) dx = 2hf(x_0) + \frac{h^3}{3} f''(\xi)$, where $x_{-1} < \xi < x_1$.
 - $n = 1$: $\int_{x_{-1}}^{x_2} f(x) dx = \frac{3h}{2} [f(x_0) + f(x_1)] + \frac{3h^3}{4} f''(\xi)$, where $x_{-1} < \xi < x_2$.
 - $n = 2$: $\int_{x_{-1}}^{x_2} f(x) dx = \frac{4h}{3} [2f(x_0) - f(x_1) + 2f(x_2)] + \frac{14h^5}{45} f^{(4)}(\xi)$, where $x_{-1} < \xi < x_3$.
+
+## Composite Integration Formula
+
+Newton-Cotes formulas, based on interpolation polynomials using equidistant nodes, are inaccurate over large intervals due to Runge's phenomenon. However, a piecewise approach could be adopted with lower-order Newton-Cotes formulas at each subinterval.
+
+- Composite Trapezoidal rule: Let $n$ be an integer, $x_j = a + jh$, and $h = \frac{b - a}{n}$, thus $\int_{a}^{b} f(x) dx = \frac{h}{2} [f(a) + 2 \sum_{j = 1}^{n - 1} f(x_j) + f(b)] - \frac{b - a}{12} h^2 f''(\mu)$, where $\mu \in (a, b)$.
+- Composite Simpson's rule: Let $n$ be an even integer, $x_j = a + jh$, and $h = \frac{b - a}{n}$, thus $\int_{a}^{b} f(x) dx = \sum_{j = 1}^{\frac{n}{2}} \int_{2j - 2}^{2j} f(x) dx = \sum_{j = 1}^{\frac{n}{2}} \{ \frac{h}{3} [f(x_{2j - 2}) + 4f(x_{2j - 1}) + f(x_{2j})] - \frac{h^5}{90} f^{(4)}(\xi) \} = \frac{h}{3} [f(a) + 2 \sum_{j = 1}^{\frac{n}{2} - 1} f(x_{2j}) + 4 \sum_{j = 1}^{\frac{n}{2}} f(x_{2j - 1}) + f(b)] - \frac{b - a}{180} h^4 f^{(4)}(\mu)$, where $\mu \in (a, b)$.
+- Composite Midpoint rule: Let $n$ be an even integer, $x_j = a + jh$, and $h = \frac{b - a}{n + 2}$, thus $\int_{a}^{b} f(x) dx = 2h \sum_{j = 0}^{\frac{n}{2}} f(x_{2j}) + \frac{b - a}{6} h^2 f''(\mu)$, where $\mu \in (a, b)$.
