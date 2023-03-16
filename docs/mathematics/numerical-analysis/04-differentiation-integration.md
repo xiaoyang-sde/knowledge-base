@@ -38,7 +38,7 @@ Therefore, $4f'(x_0) - f'(x_0) = 4D_{\frac{h}{2}} - \frac{h^2}{6}f^{(3)}(x_0) - 
 
 The numerical integration formula (quadrature rule)  is defined as $I_f = \int_a^b f(x) dx \approx \sum_{j = 0}^n a_j f(x_j)$ for a finite interval $[a, b]$ and an integrable function $f$, which has nodes $x_j$ and weights $a_j$.
 
-Newton-Cotes formulas is a collection of formula based on polynomial interpolation at equidisttant abscissae. If the endpoints $a$ and $b$ are included in the abscissae $x_0 < x_1 < \dots < x_n$ ($x_0 = a$ and $x_n = b$), then the formula is closed. Otherwise, the formula is open.
+Newton-Cotes formulas is a collection of formula based on polynomial interpolation at equidistant abscissae. If the endpoints $a$ and $b$ are included in the abscissae $x_0 < x_1 < \dots < x_n$ ($x_0 = a$ and $x_n = b$), then the formula is closed. Otherwise, the formula is open.
 
 ### Closed Newton-Cotes Formula
 
@@ -76,3 +76,18 @@ Newton-Cotes formulas, based on interpolation polynomials using equidistant node
 - Composite Trapezoidal rule: Let $n$ be an integer, $x_j = a + jh$, and $h = \frac{b - a}{n}$, thus $\int_{a}^{b} f(x) dx = \frac{h}{2} [f(a) + 2 \sum_{j = 1}^{n - 1} f(x_j) + f(b)] - \frac{b - a}{12} h^2 f''(\mu)$, where $\mu \in (a, b)$.
 - Composite Simpson's rule: Let $n$ be an even integer, $x_j = a + jh$, and $h = \frac{b - a}{n}$, thus $\int_{a}^{b} f(x) dx = \sum_{j = 1}^{\frac{n}{2}} \int_{2j - 2}^{2j} f(x) dx = \sum_{j = 1}^{\frac{n}{2}} \{ \frac{h}{3} [f(x_{2j - 2}) + 4f(x_{2j - 1}) + f(x_{2j})] - \frac{h^5}{90} f^{(4)}(\xi) \} = \frac{h}{3} [f(a) + 2 \sum_{j = 1}^{\frac{n}{2} - 1} f(x_{2j}) + 4 \sum_{j = 1}^{\frac{n}{2}} f(x_{2j - 1}) + f(b)] - \frac{b - a}{180} h^4 f^{(4)}(\mu)$, where $\mu \in (a, b)$.
 - Composite Midpoint rule: Let $n$ be an even integer, $x_j = a + jh$, and $h = \frac{b - a}{n + 2}$, thus $\int_{a}^{b} f(x) dx = 2h \sum_{j = 0}^{\frac{n}{2}} f(x_{2j}) + \frac{b - a}{6} h^2 f''(\mu)$, where $\mu \in (a, b)$.
+
+## Gaussian Quadrature
+
+The gaussian quadrature chooses the points for evaluation of the Newton-Cotes Formula in an optimal, rather than equidistant, method. The best choice of these points $x_1, \dots, x_n$ and weights $a_1, \dots, a_n$ should minimize the expected error obtained in the approximation $\int_{a}^{b} f(x) dx \approx \sum_{i = 1}^{n} c_i f(x_i)$, which hash the greatest degree of precision.
+
+The degree of precision of a quadrature formula is the largest integer $n$ such that the formula is exact for $x^k$, for $k = 0, 1, \dots, n$. For an interval with $n$ points, there are $2n$ parameters, which results in a degree of precision of at most $2n - 1$.
+
+- For $n = 2$ and an interval of $[-1, 1]$, the Gaussian quadrature formula is $\int_{-1}^{1} f(x)dx = f(\frac{-\sqrt{3}}{3}) + f(\frac{\sqrt{3}}{3})$, which has a degree of precision of $3$.
+- For $n = 3$ and an interval of $[-1, 1]$, the Gaussian quadrature formula is $\int_{-1}^{1} f(x)dx = \frac{5}{9} f(-\sqrt{\frac{3}{5}}) + \frac{8}{9} f(0) + \frac{5}{9} f(\sqrt{\frac{3}{5}})$, which has a degree of precision of $5$.
+
+The error of the $n$-th Gaussian quadrature is $\frac{(b - a)^{2n + 1} (n!)^4}{(2n + 1)((2n)!)^2} f^{(2n)} (\xi)$
+
+### Gaussian Quadrature on Arbitrary Interval
+
+The integral $\int_{a}^{b} f(x) dx$ on $[a, b]$ can be transformed into an integral over $[-1, 1]$ with the change of variables $t = \frac{b - a}{2} x + \frac{b + a}{2}, -1 \le x \le 1$, where the nodes are $t_j = \frac{b - a}{2} x_j + \frac{b + a}{2}$ and the weights are $w_j = \frac{b - a}{2} a_j$.
