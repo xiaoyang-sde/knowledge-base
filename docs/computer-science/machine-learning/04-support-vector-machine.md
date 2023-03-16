@@ -21,9 +21,3 @@ To balance the margin and the error in the dataset, the cost function could take
 
 - **Margin violation**: The points that are on the correct side of the boundary but are inside the margin. ($D(x) = \frac{\epsilon}{||w||}$ where $0 < \epsilon < 1$)
 - **Misclassification**: The points that are on the wrong side of the boundary. ($D(x) = \frac{\epsilon}{||w||}$ where $\epsilon \geq 1$)
-
-## Kernel
-
-If the dataset is not linearly separable in the original space, then it could be mapped from the original space into a higher dimensional feature space in which the dataset is linearly separable. However, there might be a lot of features in the dataset and the transformations involve polynomial combinations of these features, which will lead to impractical computational costs. The kernel trick is a solution to this problem.
-
-The kernel function is a function that takes the input vectors in the original space and returns the dot product of the vectors in the feature space. Because the objective function only involes the dot product of the transformed feature vectors, these terms could be replaced with the kernel function. Therefore, there's no need to explicitly calculate the vectors in the higher dimensional space.
