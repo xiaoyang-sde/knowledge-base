@@ -70,4 +70,4 @@ auto gradient_descent(
 For multiclass classification problems, the labels $y_i \in \{0, 1, \dots, K - 1 \}$.
 
 - The **one-vs-all** approach divides the problem into $K$ binary classification problems, and trains a logistic regression classifier $h_\theta(x)$ for each problem to predict the probability that $y = K_i$.
-- The **all-vs-all** approach divides the problem into $K \choose{2}$ binary classification problems. For example, if $K = 3$, there are 3 matches: $K_1$ and $K_2$, $K_1$ and $K_3$, $K_2$ and $K_3$. The label of the test point is determined by the most frequent class.
+- The **all-vs-all** approach divides the problem into $K \choose{2} = \frac{K(K - 1)}{2}$ binary classification problems. For example, if $K = 3$, there are 3 matches: $K_1$ and $K_2$, $K_1$ and $K_3$, $K_2$ and $K_3$. The label of the test point is determined by the most frequent class.
