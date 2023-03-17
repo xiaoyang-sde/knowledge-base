@@ -42,3 +42,32 @@ Each data could be represented as a feature vector in a multi-dimensional featur
 - For a real-valued feature, its value maps to a feature vector.
 - For a binary feature, `true` maps to `1` and `false` maps to `0`.
 - For a categorical feature with $V$ possible categories, each value is mapped to $V$-dimension binary indicator features. (If a consecutive sequence of numbers are assigned to each category, the unordered set will turn into an ordered set, which has a negative effect on the geometric view.)
+
+## Model Evaluation
+
+### Confusion Matrix
+
+Given a training sample of $P$ positive instances and $N$ negative instances. For a training data, $\hat{y}$ denotes the predicted label and $y$ denotes the true label.
+
+- True positive: $\hat{y} = 1, y = 1$.
+- False positive: $\hat{y} = 1, y = 0$.
+- True negative: $\hat{y} = 0, y = 0$.
+- False negative: $\hat{y} = 0, y = 1$.
+
+### Statistics
+
+- Accuracy: $\frac{TP + TN}{P + N}$.
+- Precision is $\frac{TP}{TP + FP}$.
+- True positive rate (TPR), recall, or sensitivity: $\frac{TP}{P}$.
+- False positive rate (FPR) or specificity: $\frac{TN}{N}$.
+- $F_1$-score: $\frac{1}{\frac{1}{2} \frac{1}{\text{PRECISION}} + \frac{1}{2} \frac{1}{\text{RECALL}}}$.
+
+### Trade-off
+
+- The trade-off between TPR and FPR:
+  - If a model is designed to be very sensitive and identify as many positive cases as possible (high TPR), it might incorrectly identify more negative cases as positive, leading to a higher FPR.
+  - If a model is designed to minimize the number of false positives (low FPR), it might miss some positive cases, leading to a lower TPR.
+
+- The trade-off between precision and recall:
+  - If a model is designed to be precise and make positive predictions when it is very confident, it might miss some true positive cases, leading to a lower recall.
+  - If a model is designed to be sensitive and identify as many positive cases as possible, it might make more false positive predictions, leading to a lower Pprecision.
