@@ -1,16 +1,17 @@
 # K-Means Clustering
 
-K-Means is a method of vector quantization that aims to partition $n$ observations into $k$ clusters in which each observation belongs to the cluster with the nearest mean (cluster centers), serving as a prototype of the cluster.
+K-Means is a method of vector quantization that aims to partition $n$ observations into $k$ clusters in which each observation belongs to the cluster with the nearest mean $\mu_k$ (cluster centroids), serving as a prototype of the cluster.
 
-For $N$ data points that defined as $x_i (1 \leq i \leq N)$ define an indicator variable $r_{nk} = 1$ if $x_n$ is assigned to cluster $k$, and $r_{nk} = 0$ otherwise. The distortion measure is defined as $J = \sum_{n = 1}^{N} \sum_{k = 1}^{k} r_{nk} || x_n - \mu_k ||^2$, where $\mu_k$ is the prototype of the class $k$. The goal of the algorithm is to minimize the distortion.
+For $N$ data points that defined as $x_i (1 \leq i \leq N)$ define an indicator variable $r_{nk} = 1$ if $x_n$ is assigned to cluster $k$, and $r_{nk} = 0$ otherwise. The distortion measure (clustering objective function) is defined as $J = \sum_{n = 1}^{N} \sum_{k = 1}^{K} r_{nk} || x_n - \mu_k ||^2$, where $\mu_k$ is the prototype of the class $k$. The goal of the algorithm is to minimize the distortion, which is a non-convex objective function.
 
-## Procedure
+## Llyod's Algorithm
 
 The K-means algorithm iterates through the assignment and refitting steps until a stopping criterion is satisfied such as the distortion doesn't decrease.
 
-- Initialization: The algorithm starts with the initialization of the cluster centroid. Pick the first cluster centroid as one of the data points, and pick the second centroid as the data point furthest from the first, and so on.
-- Assignment: For each data point, label it with the cluster centroid that is closest to it. $r_{nk} = 1$ if $k = \text{argmin}_{1 \leq i \leq k} || x_n - \mu_i ||^2$. The assignment step minimizes $J$ respect to the data point.
-- Refitting: Move each cluster centroid to the average of the points assigned to it. $\mu_k = \frac{\sum^{N}_{n = 1} r_{nk} \cdot x_n}{\sum^N_{n = 1} r_{nk}}$. The assignment step minimizes $J$ respect to the cluster centroid.
+- The algorithm starts with the initialization of the cluster centroid $\{ \mu_k \}$ to some values.
+- Assume the value of $\{ \mu_k \}$ is fixed, minimize $J$ over $\{ r_{nk} \}$, which which assigns $x_n$ to its closest centroid. $r_{nk} = 1 \iff k = \min_{j} ||x_n - \mu_j||$.
+- Assume the value of $\{ r_{nk} \}$ is fixed, minimize $J$ over $\{ \mu_k \}$, which move each cluster centroid to the average of the points assigned to it. $\mu_k = \frac{\sum^{N}_{n = 1} r_{nk} x_n}{\sum^N_{n = 1} r_{nk}}$.
+- Terminate if the objective function $J$ doesn't change.
 
 ## Hierarchical Clustering
 
