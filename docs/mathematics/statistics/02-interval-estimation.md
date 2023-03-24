@@ -1,6 +1,6 @@
 # Interval Estimation
 
-## Confidence Interval for Mean
+## Confidence Interval of Mean
 
 Let $X_1, \dots, X_n$ be samples drawn from a distribution $X$ with an unknown mean $\mu$ and a known variance $\sigma^2$, where $\bar{X}$ is an unbiased estimator of $\mu$. The confidence interval for $\mu$ is the interval $[\bar{X} - \epsilon, \bar{X} + \epsilon]$ such that $\mu$ is contained in the interval with a probability of at least $1 - \alpha$.
 
@@ -27,7 +27,7 @@ Let $X_1, \dots, X_n$ be samples drawn from a distribution $X \sim N(\mu_x, \sig
 - Let $Y \sim N(\mu_y, \sigma_y^2)$, then $\bar{Y} = \frac{1}{n_y} \sum_{i = 1}^{n_y} Y_i \sim N(\mu_y, \frac{\sigma_y^2}{n_y})$.
 - Therefore, $W = \bar{X} - \bar{Y} \sim N(\mu_x - \mu_y, \frac{\sigma^2_x}{n_x} + \frac{\sigma^2_y}{n_y})$.
 
-Since $P(-z_{\frac{\alpha}{2}} \le \frac{\bar{X} - \bar{Y} - (\mu_x - \mu_y)}{\sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}} \le z_{\frac{\alpha}{2}}) = 1 - \alpha$, which is equivalent to $P(\mu_x - \mu_y \in [\bar{X} - \bar{Y} - z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}, \bar{X} + z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}]) = 1 - \alpha$, then $\bar{X} \pm z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}$ is the $1 - \alpha$ confidence interval for $\mu_X - \mu_y$.
+Since $P(-z_{\frac{\alpha}{2}} \le \frac{\bar{X} - \bar{Y} - (\mu_x - \mu_y)}{\sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}} \le z_{\frac{\alpha}{2}}) = 1 - \alpha$, which is equivalent to $P(\mu_x - \mu_y \in [\bar{X} - \bar{Y} - z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}, \bar{X} - \bar{Y} + z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}]) = 1 - \alpha$, then $\bar{X} - \bar{Y} \pm z_{\frac{\alpha}{2}} \sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}$ is the $1 - \alpha$ confidence interval for $\mu_X - \mu_y$.
 
 ### Unknown Distribution
 
@@ -40,7 +40,7 @@ If the variances $\sigma_x^2$ and $\sigma_y^2$ are unknown, the sample variances
 - If the sample size is large enough, $\frac{\bar{X} - \bar{Y} - (\mu_x - \mu_y)}{\sqrt{\frac{\sigma_x^2}{n_x} + \frac{\sigma_y^2}{n_y}}} \sim N(0, 1)$.
 - If the sample size is small, the confidence interval is $(\bar{X} - \bar{Y} \pm t_0 S_p \sqrt{\frac{1}{n_x} + \frac{1}{n_y}})$, where $S_p = \sqrt{\frac{(n_x - 1) S_x^2 + (n_y - 1) S_y^2}{n_x + n_y - 2}}$. When $\sigma_x = \sigma_y$, the degree of freedom is $n_x + n_y - 2$.
 
-## Confidence Interval for Proportion
+## Confidence Interval of Proportion
 
 Let $X_1, \dots, X_n$ be samples drawn from a distribution $X$ and $E_k$ be the event that $X_k \in [a, b]$, where $P(X_k \in [a, b]) = p$. Let $Y \sim b(n, p)$ be the number of measurements in $[a, b]$ out of the $n$ observations, which is an unbiased estimator of $p$. The confidence interval for $p$ is the interval $[\frac{Y}{n} - \epsilon, \frac{Y}{n} + \epsilon]$ such that $p$ is contained in the interval with a probability of at least $1 - \alpha$.
 
