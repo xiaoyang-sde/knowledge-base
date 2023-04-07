@@ -16,12 +16,12 @@ Let $O_j$ denotes the optimal solution of smaller problems of the form ${1, 2, \
 
 ```py
 def compute_opt(j):
-if j == 0:
-return 0
-return max(
-values[j] + compute_opt(p(j)),
-compute_opt(j - 1)
-)
+  if j == 0:
+    return 0
+  return max(
+    values[j] + compute_opt(p(j)),
+    compute_opt(j - 1)
+  )
 ```
 
 However, the recursion would take exponential time to run in the worst case, since the recursion tree widens quickly due to the recursive branching.
@@ -32,18 +32,18 @@ In fact, the recursive algorithm only solves $n + 1$ different subproblems. To e
 
 ```py
 cache = {
-0: 0
+  0: 0
 }
 
 def mem_compute_opt(j):
-if j in cache:
-return cache[j]
+  if j in cache:
+    return cache[j]
 
-cache[j] = max(
-values[j] + compute_opt(p(j)),
-compute_opt(j - 1)
-)
-return cache[j]
+  cache[j] = max(
+    values[j] + compute_opt(p(j)),
+    compute_opt(j - 1)
+  )
+  return cache[j]
 ```
 
 The progress measure is the number of keys in `cache`. Initially the number is 1, and it will grow to $n + 1$, since there are total `n + 1` unique subproblems. The running time of `mem_compute_opt` is $O(n)$ if the intervals are sorted by their finishing time.
@@ -52,11 +52,11 @@ The progress measure is the number of keys in `cache`. Initially the number is 1
 
 ```py
 def find_solution(j):
-if j == 0:
-return []
-if value[j] + cache[p(j)] > cache[j - 1]:
-return find_solution(p(j)) + [j]
-return find_solution(j - 1)
+  if j == 0:
+    return []
+  if value[j] + cache[p(j)] > cache[j - 1]:
+    return find_solution(p(j)) + [j]
+  return find_solution(j - 1)
 ```
 
 Since the recursive calls only on strictly smaller values, it makes a total of $O(n)$ recursive calls. Therefore, the function returns an optimal solution of the problem in $O(n)$.
@@ -67,12 +67,12 @@ Since the recursive calls only on strictly smaller values, it makes a total of $
 
 ```py
 def iterative_compute_opt:
-cache[0] = 0
-for j in range(1, n + 1):
-cache[j] = max(
-value[j] + cache[p(j)],
-cache[j - 1]
-)
+  cache[0] = 0
+  for j in range(1, n + 1):
+    cache[j] = max(
+      value[j] + cache[p(j)],
+      cache[j - 1]
+    )
 ```
 
 The running time of the iterative algorithm is $O(n)$, since each iteration takes constant time.
@@ -212,6 +212,6 @@ Let $G$ be a graph with $m$ edges and $n$ nodes. Let $n_v$ be the number of node
 
 Rather than recording $OPT(i, v)$ for each value $i$, the algorithm will use and update a single value $OPT(v)$ for each node $v$, the length of the shortest path from $v$ to $t$ that the algorithm have found so far. Therefore, the algorithm still runs for $i = 1, 2, \dots, n - 1$, and $OPT(v) = min(OPT(v), min_{w \in V} (c_{vw} + OPT(w)))$.
 
-To recover the path, the algorithm maintains a map $first$, in which $first[v]$ is the first node (after itself) on the shortest path from $v$ to $t$.
+To recover the path, the algorithm maintains a map  $\text{first}$, in which  $\text{first}[v]$ is the first node (after itself) on the shortest path from $v$ to $t$.
 
-Let $P$ be the dirrected pointer graph whose nodes are $V$, and edges are ${(v, first[v])}$. If the pointer graph contains a cycle, then this cycle must have negative cost. Since $G$ doesn't have negative cycles, $P$ will never have a cycle. Therefore, the shortest path from $v$ to $t$ is $first[v], first[first[v]], \dots, t$.
+Let $P$ be the dirrected pointer graph whose nodes are $V$, and edges are ${(v, \text{first}[v])}$. If the pointer graph contains a cycle, then this cycle must have negative cost. Since $G$ doesn't have negative cycles, $P$ will never have a cycle. Therefore, the shortest path from $v$ to $t$ is  $\text{first}[v], \text{first}[\text{first}[v]], \dots, t$.

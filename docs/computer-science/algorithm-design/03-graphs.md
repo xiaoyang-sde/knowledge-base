@@ -6,7 +6,7 @@ A graph consists of a collection V of nodes (or vertex) and a collection E of ed
 
 ### Paths and Connectivity
 
-Path in an undirected graph G = (V, E) is a sequence P of nodes $v_{1}, v_{2}, ..., v_{k - 1}, v_{k}$ with the property that each consecutive pair $v_{i}, v_{i + 1}$ is joined by an edge in G.
+Path in an undirected graph $G$ = (V, E) is a sequence P of nodes $v_{1}, v_{2}, ..., v_{k - 1}, v_{k}$ with the property that each consecutive pair $v_{i}, v_{i + 1}$ is joined by an edge in G.
 
 An undirected graph is connected if, for every pair of nodes u and v, there's a path from u to v. The distance between u and v is the minimum number of edges in a u-v path.
 
@@ -20,7 +20,7 @@ An undirected graph is a tree if it's connected and doesn't contain a cycle. Eve
 
 ### Connected Component
 
-The connected component of G containing s is the set of nodes that are reachable from the starting node s. BFS is one possible way to produce this component.
+The connected component of $G$ containing s is the set of nodes that are reachable from the starting node s. BFS is one possible way to produce this component.
 
 To find this connected component, we define $R = {s}$. While we find an edge `(u, v)` where $u \in R$ and $v \notin R$, add v to R.
 
@@ -46,7 +46,7 @@ def dfs(u):
 
 For a given recursive call `dfs(u)`, all nodes that are marked "Explored" between the invocation and the end of this recursive call are descendants of u in T.
 
-Let T be a depth-first search tree, where x and y be nodes in T. Let (x, y) be an edge of G that is not an edge of T. Then one of x or y is an ancestor of the other.
+Let T be a depth-first search tree, where x and y be nodes in T. Let (x, y) be an edge of $G$ that is not an edge of T. Then one of x or y is an ancestor of the other.
 
 ### The Set of All Connected Components
 
@@ -54,7 +54,7 @@ For any two nodes s and t in a graph, their connected components are either iden
 
 ## Testing Bipartiteness
 
-The bipartite graph is where the node set V can be partitioned into sets X and Y in such a way that every edge has one end in X and the other end in Y. If a graph is bipartite, then it can't contain an odd cycle.
+The bipartite graph is where the node set $V$ can be partitioned into sets $X$ and $Y$ in such a way that every edge has one end in $X$ and the other end in $Y$. If a graph is bipartite, then it can't contain an odd cycle.
 
 ### Designing the Algorithm
 
@@ -62,11 +62,11 @@ Perform breadth-first search in the graph starting at node s, coloring s red, al
 
 ### Analyzing the Algorithm
 
-Let G be a coonnected graph, and let $L_{1}$, $L_{2}$, ... be the layers produced by breadth-first search starting at node s. Either one of the following two claims must hold.
+Let $G$ be a coonnected graph, and let $L_{1}$, $L_{2}$, ... be the layers produced by breadth-first search starting at node s. Either one of the following two claims must hold.
 
-- There's no edge of G joining two nodes of the same layer. In this case, G is a bipartite graph in which the node ein even-numbered layers can be colored red, and the nodes in odd-numbered layers can be colored blue.
+- There's no edge of $G$ joining two nodes of the same layer. In this case, $G$ is a bipartite graph in which the node ein even-numbered layers can be colored red, and the nodes in odd-numbered layers can be colored blue.
 
-- There's an edge of G joining two nodes of the same layer. In this case, G contains an odd-length cycle, so it can't be bipartite.
+- There's an edge of $G$ joining two nodes of the same layer. In this case, $G$ contains an odd-length cycle, so it can't be bipartite.
 
 ## Connectivity in Directed Graphs
 
@@ -106,7 +106,7 @@ The topological ordering of a graph is an ordering of its nodes $v_1, v_2, \dots
 
 ### Compute the Topological Ordering
 
-If G is a DAG, then G has a topological ordering. In every DAG, there is a node with no incoming edges.
+If $G$ is a DAG, then $G$ has a topological ordering. In every DAG, there is a node with no incoming edges.
 
 To produce an efficient algorithm, we maintain two things:
 

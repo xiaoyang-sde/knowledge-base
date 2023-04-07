@@ -65,7 +65,7 @@ Let $G$ be a graph with $3k$ nodes grouped into $k$ triangles where each represe
 
 If $Z \leq_{p} Y, Y \leq_{p} X$, then $Z \leq_{p} X$.
 
-Therefore, 3-SAT $\leq_{p}$ Independent set \leq_{p} Vertex cover \leq_{p} Set cover.
+Therefore, 3-SAT $\leq_{p}$ Independent set $\leq_{p}$ Vertex cover $\leq_{p}$ Set cover.
 
 ## Efficient Certification and the Definition of NP
 
@@ -115,9 +115,9 @@ The circuit satisfiability problem is to determine whether there's an assignment
 
 Any algorithm that takes a fixed number of bits as input and produces a yes/no answer could be represented by a circuit. (1 -> yes, 0 -> no) If the algorithm takes several polynomial steps, then the circuit has a polynomial size. Algorithms implemented on physical computers could be reduced to the boolean logic gates.
 
-To proof that $X \leq_{p}$ circuit satisfiability, we know that $X$ has an efficient certifier $B()$. To determine whether an input (with length $n$) $s \in X$, we need to determine whether a $t$ of length $p(n)$ exists so that $B(s, t) = yes$.
+To proof that $X \leq_{p}$ circuit satisfiability, we know that $X$ has an efficient certifier $B()$. To determine whether an input (with length $n$) $s \in X$, we need to determine whether a $t$ of length $p(n)$ exists so that $B(s, t) = \text{yes}$.
 
-The question could be answered with the black box for circuit satisfiability. Suppose there's a circuit with $n + p(n)$ inputs, and the first $n$ inputs are hard-coded with the value of $s$. The remaining inputs will be labeled with variables representing $t$. If there's a way to set the input so that the circuit produces an output of 1, then the $t$ ($B(s, t) = yes$) exists, and $s \in X$. Therefore, $X \leq_{p} circuit satisfiability$.
+The question could be answered with the black box for circuit satisfiability. Suppose there's a circuit with $n + p(n)$ inputs, and the first $n$ inputs are hard-coded with the value of $s$. The remaining inputs will be labeled with variables representing $t$. If there's a way to set the input so that the circuit produces an output of 1, then the $t$ ($B(s, t) = yes$) exists, and $s \in X$. Therefore, $X \leq_{p}$ circuit satisfiability.
 
 ### General Strategy for Proving NP-Complete
 

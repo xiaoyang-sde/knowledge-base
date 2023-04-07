@@ -11,11 +11,11 @@ jobs:
     if: github.event_name != 'push'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-      - name: Test Build
+          node-version: '18'
+      - name: Build
         run: |
           npm ci
           npm run build
@@ -23,20 +23,21 @@ jobs:
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=32768
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-      - uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
-      - name: Release to GitHub Pages
-        env:
-          USE_SSH: true
-          GIT_USER: git
+          node-version: '18'
+      - name: Build
         run: |
-          git config --global user.email "siujoeng.lau@gmail.com"
-          git config --global user.name "Xiaoyang Liu"
           npm ci
-          npm run deploy
+          npm run build
+      - uses: peaceiris/actions-gh-pages@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .vitepress/dist
+          publish_branch: gh-pages
+          cname: xiaoyang-liu.com

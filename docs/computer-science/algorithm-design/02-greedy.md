@@ -136,4 +136,4 @@ For this implementation, `Find` takes $O(log n)$ time, `MakeUnionFind(S)` takes 
 
 ### Path Compression
 
-The path of `Find` operation could be compressed by resetting all pointers along the path to point to the current name of the set. It could make subsequent `Find` operations more efficient. The time complexity of a sequence of `Find` operations with path compression is extremely close to linear time. The actual upper bound is `O(n \alpha (n)) $, where$ \alpha (n) $is an extremely slow-growing function called the inverse Ackermann function.
+The path of `Find` operation could be compressed by resetting all pointers along the path to point to the current name of the set. It could make subsequent `Find` operations more efficient. The time complexity of a sequence of `Find` operations with path compression is extremely close to linear time. The actual upper bound is $O(n \alpha (n))$, where $\alpha (n)$ is an extremely slow-growing function called the inverse Ackermann function.

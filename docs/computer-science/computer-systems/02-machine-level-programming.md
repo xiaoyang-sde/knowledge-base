@@ -103,7 +103,7 @@ Example: `0x8(%rdx, rcx, 4)` => `0xf000 + 4 * 0x100 + 0x8`
 
 #### Data Movement Instructions
 
-```s
+```asm
 mov Src, Dest
 ```
 
@@ -117,7 +117,7 @@ mov Src, Dest
 
 `movabsq` can move an arbitrary 64-bit immediate value to a register. (`movq` only support 32-bit immediate value and extend it to 64-bit with sign extension)
 
-```s
+```asm
 movz Src, Dest
 ```
 
@@ -129,7 +129,7 @@ Instructions in the `movz` class fill out the remaining bytes of the destination
 - `movzbq`: Move zero-extended byte to quad word
 - `movzwq`: Move zero-extended word to quad word
 
-```s
+```asm
 movs Src, Dests
 ```
 
@@ -144,7 +144,7 @@ Instructions in the `movs` class fill out the remaining bytes of the destination
 
 #### Pushing and Popping Stack Data
 
-```s
+```asm
 pushq Src
 popq Dest
 ```
@@ -157,14 +157,14 @@ Popping a quad word value involves reading from the top-of-stack location and in
 
 #### Address Computation Instruction
 
-```s
+```asm
 leaq Src, Dst
 ```
 
 - Computing addresses without a memory reference
 - Computing arithmetic expressions of the form `x + k * y`
 
-```s
+```asm
 # t = x + 2 * x + 4 = 3 * x + 4
 leaq 4(%rdi, %rdi, 2), %rax
 ```
@@ -211,7 +211,7 @@ For the logical operations (XOR, etc.), CF and OF are 0. For the shift operation
 
 #### Explicitly Set (cmp instructions)
 
-```s
+```asm
 cmp Src1, Src2
 ```
 
@@ -222,7 +222,7 @@ cmp Src1, Src2
 - ZF: If `Src2 == Src1`
 - SF: If `(Src2 - Src1) < 0`
 
-```s
+```asm
 test Src1, Src2
 ```
 
@@ -252,7 +252,7 @@ test Src1, Src2
 - `setb`: Below (Unsigned)
 - `setbe`: Below or equal (Unsigned)
 
-```s
+```asm
 comp:
   cmpq %rsi, %rdi # Compare x, y
   setg %al # Set the low-order byte of %eax to 1 if x > y
@@ -295,7 +295,7 @@ Conditional data tranfser moves compute the result of both conditional branches,
 
 The source and destination values of `cmov` can be 16, 32, or 64 bits long. Unlike the unconditional instructions, the assembler can infer the operand length of a conditional move instruction from the name of the destination register.
 
-```s
+```asm
 cmov Src, Dest
 ```
 
@@ -395,7 +395,7 @@ test:
 
 Jump table is an array where entry `i` is the address of a code segment implementing the action the program should take when the switch idnex equals `i`.
 
-```s
+```asm
 .section .rodata # read-only data
   .align 8
 
@@ -416,7 +416,7 @@ The compiler selects the method of trasnlating a switch statement based on the n
 - Direct Jump: Jump directly to the target. (`jmp .L8`)
 - Indirect Jump: Fetch target from effective address. (`jmp *.L4(, %rdi, 8)`)
 
-```s
+```asm
 switch_eg:
   movq %rdx, %rcx
   cmpq $6, %rdi # Compare x and 6 (Suppose the max case is 6)
@@ -454,7 +454,7 @@ switch_eg:
 
 ### Control Transfer
 
-```s
+```asm
 call Label # direct
 
 call *Operand # indirect
@@ -514,7 +514,7 @@ int get_digit (int[] z, int digit) {
 }
 ```
 
-```s
+```asm
 # %rdi = z
 # %rsi = digit
 movl (%rdi, %rsi, 4) %eax # z[digit]

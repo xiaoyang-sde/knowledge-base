@@ -38,7 +38,7 @@ Nonvolatile memories retain value even if powered off.
 
 #### Memory Read Transaction
 
-```s
+```asm
 movq A, %rax
 ```
 
@@ -48,7 +48,7 @@ movq A, %rax
 
 #### Memory Write Transaction
 
-```s
+```asm
 movq %rax, A
 ```
 

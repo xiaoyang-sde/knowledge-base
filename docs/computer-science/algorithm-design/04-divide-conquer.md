@@ -38,7 +38,7 @@ The general form of the divide-and-conquer algorithm is creating $q$ subproblems
 
 ### The Case of q > 2 Subproblems
 
-1. The first few levels: The first level takes at most $cn$ time. The second level takes at most $$ (q/2) cn$ time. The third level takes at most $(q^2/4) cn$ time.
+1. The first few levels: The first level takes at most $cn$ time. The second level takes at most $(q/2) cn$ time. The third level takes at most $(q^2/4) cn$ time.
 2. Identifying a pattern: At level $i$, the total work performed is $(q^i/2^i) cn$.
 3. Summing over all levels: $T(n) \leq cn \sum_{j = 0}^{\log_{2} n - 1} (\frac{q}{2})^j \leq (\frac{c}{r-1}) n^{\log_{2}q} = O(n^{\log_{2} q})$.
 
@@ -46,7 +46,7 @@ Therefore, any function $T(\cdot)$ satisfying the recurrence relation with $q > 
 
 ### The Case of q = 1 Subproblem
 
-1. The first few levels: The first level takes at most $cn$ time. The second level takes at most $$ cn / 2$ time. The third level takes at most $cn / 4$ time.
+1. The first few levels: The first level takes at most $cn$ time. The second level takes at most $cn / 2$ time. The third level takes at most $cn / 4$ time.
 2. Identifying a pattern: At level $i$, the total work performed is $cn / 2^i$.
 3. Summing over all levels: $T(n) \leq cn \sum_{j = 0}^{\log_{2} n - 1} \frac {1}{2^j} \leq 2cn = O(n)$.
 
@@ -56,7 +56,7 @@ Therefore, any function $T(\cdot)$ satisfying the recurrence relation with $q = 
 
 Consider a variant form of divide-and-conquer algorithm: Divide the input into two pieces of equal time, solve them by recursion, and combine the resutls in quadratic time. For some constant $c$, $T(n) \leq qT(n/2) + cn^2$ when $n > 2$, and $T(2) \leq c$.
 
-1. The first few levels: The first level takes at most $cn^2$ time. The second level takes at most $$ cn^2 / 2$ time. The third level takes at most $cn^2 / 4$ time.
+1. The first few levels: The first level takes at most $cn^2$ time. The second level takes at most $cn^2 / 2$ time. The third level takes at most $cn^2 / 4$ time.
 2. Identifying a pattern: At level $i$, the total work performed is $cn^2 / 2^i$.
 3. Summing over all levels: $T(n) \leq cn^2 \sum_{j = 0}^{\log_{2} n - 1} \frac {1}{2^j} \leq 2cn^2 = O(n^2)$.
 
@@ -78,9 +78,9 @@ By a single pass through $P'_x$ and $P'_y$, four lists could be produced: $Q_x$.
 
 #### Combine the Solutions
 
-Let $\alpha$ be the minimum of $d(q^*_0, q^*_1)$ and $d(r^*_0, r^*_1)$. Let $L$ be the vertical line that crosses through the rightmost point of $ Q $.
+Let $\alpha$ be the minimum of $d(q^*_0, q^*_1)$ and $d(r^*_0, r^*_1)$. Let $L$ be the vertical line that crosses through the rightmost point of $Q$.
 
-If there exists $q \in Q$ and $ r \in R $for which$ d(q, r) < \alpha $, then each of$ q $and$ r $lies within a distance$ \alpha $of$ L $.
+If there exists $q \in Q$ and $r \in R$ for which $d(q, r) < \alpha$, then each of $q$ and $r$ lies within a distance $\alpha$ of $L$.
 
 Let $S \subseteq P'$ be the set of points in this narrow band and $S_y$ be the points in $S$ that sorted with their y-coordinates. Thus, there exist $q \ in Q$ and $r \in R$ for which $d(q, r) < \alpha$ if and only if there exists $s, s' \in S$ for which $d(s, s') < \alpha$.
 

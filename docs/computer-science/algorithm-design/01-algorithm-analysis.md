@@ -44,14 +44,14 @@ Example: $T(n)$ is $\Omega (n^{2})$ and $O(n^{2})$, thus $T(n)$ is $\Theta (n^{2
 
 - Suppose that f and g are two functions and for some other function h, we have $f = O(h)$ and $g = O(h)$. Then $f + g = O(h)$.
 - Let k be a fixed constant, and let $f_{1}, f_{2}, ..., f_{k}$ and h be functions such that $f_{i} = O(h)$. Then $f_{1} + f_{2} + ... + f_{k} = O(h)$.
-- Suppose that f and g are two functions such that $g = O(f)$. Then $f + g = \Theta(f)$. f is an asymptotically tight bound for the combined function.
+- Suppose that $f$ and $g$ are two functions such that $g = O(f)$. Then $f + g = \Theta(f)$. f is an asymptotically tight bound for the combined function.
 
 #### Limit
 
-Let f and g be two functions that $\lim_{n \to \infty} \frac{f(n)}{g(n)}$ exists.
+Let $f$ and $g$ be two functions that $\lim_{n \to \infty} \frac{f(n)}{g(n)}$ exists.
 
-- If the limit is equal to 0. Then $f(n) = O(g(n)), f(n) \neq \Theta (g(n))$.
-- If the limit is equal to some number c > 0. Then $f(n) = \Theta (g(n))$.
+- If the limit is equal to $0$. Then $f(n) = O(g(n)), f(n) \neq \Theta (g(n))$.
+- If the limit is equal to some number $c > 0$. Then $f(n) = \Theta (g(n))$.
 - If the limit is equal to infinity. Then $f(n) = \Omega (g(n)), f(n) \neq \Theta (g(n))$.
 
 ### Asymptotic Bounds for Common Functions
@@ -101,7 +101,7 @@ Quadratic time arises naturally from a pair of nested loops or performing a sear
 
 More elaborate sets of nested loops often lead to algorithms that run in $O(n ^ {3})$ time.
 
-### O(n^k) Time
+### $O(n^k)$ Time
 
 We obtain a running time of $O(n^{k})$ for any constant k when we search over all subsets of size k.
 
@@ -119,7 +119,7 @@ The running time of binary search is $O(\log n)$, because of the successive shri
 
 ## Priority Queue
 
-A priority queue maintains a set of elements S, where each element v ∈ S has an associated value `key(v)` that denotes the priority of element v; smaller keys represent higher priorities.
+A priority queue maintains a set of elements S, where each element `v` ∈ S has an associated value `key(v)` that denotes the priority of element v; smaller keys represent higher priorities.
 
 A priority queue upports the addition and deletion of elements from the set, and also the selection of the element with smallest key.
 
@@ -164,15 +164,15 @@ The procedure `Heapify-down(H, i)` fixes the heap property in $O(\log n)$ time, 
 
 ### Implementing Priority Queues with Heaps
 
-The heap data structure with the Heapify-down and Heapify-up operations can efficiently implement a priority queue that is constrained to hold at most N elements at any point in time.
+The heap data structure with the Heapify-down and Heapify-up operations can efficiently implement a priority queue that is constrained to hold at most $N$ elements at any point in time.
 
-- `StartHeap(n)`: returns an empty heap with at most N elements. ($O(n)$)
-- `Insert(h, v)`: inserts the item v into heap H. ($O(\log n)$)
-- `Delete(h, v)`: delsete the item v at position i of heap H. ($O(\log n)$)
-- `FindMin(H)`: identifies the minimum element in the heap H. ($O(1)$)
+- `StartHeap(n)`: returns an empty heap with at most $N$ elements. ($O(n)$)
+- `Insert(h, v)`: inserts the item `v` into heap $H$. ($O(\log n)$)
+- `Delete(h, v)`: delsete the item `v` at position $i$ of heap $H$. ($O(\log n)$)
+- `FindMin(H)`: identifies the minimum element in the heap $H$. ($O(1)$)
 - `ExtractMin(H)`: identifies and deletes an element with minimum key value from a heap. ($O(\log n)$)
 
 To be able to access given elements of the priority queue efficiently, we simply maintain an additional array `Position` that stores the current position of each element in the heap.
 
-- To delete the element v, we apply `Delete(H,Position[v])`.
-- To change the key of element v, we identify the position of v, change its key, and fix the heap with `Heapify-up` or `Heapify-down`.
+- To delete the element  `v`, we apply `Delete(H,Position[v])`.
+- To change the key of element  `v`, we identify the position of  `v`, change its key, and fix the heap with `Heapify-up` or `Heapify-down`.

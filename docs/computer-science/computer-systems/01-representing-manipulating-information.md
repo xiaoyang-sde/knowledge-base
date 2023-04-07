@@ -4,11 +4,7 @@
 
 Each bit is 0 or 1. By encoding or interpreting sets of bits in various ways, computers could represent and manipulate numbers, sets, strings, etc.
 
-Why bits? It's easy to store and could be transmitted reliably.
-
 ### Data Representations in C (x86-64)
-
-Each byte is 8 bits.
 
 - `char`: 1 byte
 - `short`: 2 bytes

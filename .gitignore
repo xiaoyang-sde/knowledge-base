@@ -121,13 +121,8 @@ dist
 # Production
 /build
 
-# Generated files
-.docusaurus
-.cache-loader
+# VitePress
+/.vitepress/cache
 
-# Misc
+# macOS
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
