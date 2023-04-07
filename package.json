@@ -7,9 +7,5 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview"
-  },
-  "dependencies": {
-    "@fontsource/merriweather": "^4.5.14",
-    "@fontsource/source-serif-pro": "^4.5.9"
   }
 }
