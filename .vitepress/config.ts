@@ -106,6 +106,11 @@ export default defineConfig({
     },
   },
   themeConfig: {
+    algolia: {
+      appId: "VI4IHQNLIL",
+      apiKey: "6830e4303c886bb38ce73f508d5464c4",
+      indexName: "xiaoyang-liu",
+    },
     sidebar,
     socialLinks: [
       { icon: "github", link: "https://github.com/xiaoyang-sde" },
