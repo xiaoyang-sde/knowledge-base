@@ -7,31 +7,31 @@
         "items": [
           {
             "text": "Basics of Algorithm Analysis",
-            "link": "/computer-science/algorithm-design/01-algorithm-analysis"
+            "link": "/computer-science/algorithm-design/algorithm-analysis"
           },
           {
             "text": "Greedy Algorithms",
-            "link": "/computer-science/algorithm-design/02-greedy"
+            "link": "/computer-science/algorithm-design/greedy"
           },
           {
             "text": "Graphs",
-            "link": "/computer-science/algorithm-design/03-graphs"
+            "link": "/computer-science/algorithm-design/graphs"
           },
           {
             "text": "Divide and Conquer",
-            "link": "/computer-science/algorithm-design/04-divide-conquer"
+            "link": "/computer-science/algorithm-design/divide-conquer"
           },
           {
             "text": "Dynamic Programming",
-            "link": "/computer-science/algorithm-design/05-dynamic-programming"
+            "link": "/computer-science/algorithm-design/dynamic-programming"
           },
           {
             "text": "NP and Computational Intractability",
-            "link": "/computer-science/algorithm-design/06-computational-intractability"
+            "link": "/computer-science/algorithm-design/computational-intractability"
           },
           {
             "text": "Randomized Algorithms",
-            "link": "/computer-science/algorithm-design/07-randomized-algorithms"
+            "link": "/computer-science/algorithm-design/randomized-algorithms"
           }
         ],
         "collapsed": true
@@ -41,35 +41,35 @@
         "items": [
           {
             "text": "Intelligent Agents",
-            "link": "/computer-science/artificial-intelligence/01-intelligent-agents"
+            "link": "/computer-science/artificial-intelligence/intelligent-agents"
           },
           {
             "text": "Solving Problems by Searching",
-            "link": "/computer-science/artificial-intelligence/02-search"
+            "link": "/computer-science/artificial-intelligence/search"
           },
           {
             "text": "Beyond Classical Search",
-            "link": "/computer-science/artificial-intelligence/03-beyond-classical-search"
+            "link": "/computer-science/artificial-intelligence/beyond-classical-search"
           },
           {
             "text": "Adversarial Search",
-            "link": "/computer-science/artificial-intelligence/04-adversarial-search"
+            "link": "/computer-science/artificial-intelligence/adversarial-search"
           },
           {
             "text": "Constraint Satisfaction Problems",
-            "link": "/computer-science/artificial-intelligence/05-constraint-satisfaction-problems"
+            "link": "/computer-science/artificial-intelligence/constraint-satisfaction-problems"
           },
           {
             "text": "Logical Agents",
-            "link": "/computer-science/artificial-intelligence/06-logical-agents"
+            "link": "/computer-science/artificial-intelligence/logical-agents"
           },
           {
             "text": "First-Order Logic",
-            "link": "/computer-science/artificial-intelligence/07-first-order-logic"
+            "link": "/computer-science/artificial-intelligence/first-order-logic"
           },
           {
             "text": "Quantifying Uncertainty",
-            "link": "/computer-science/artificial-intelligence/08-quantifying-uncertainty"
+            "link": "/computer-science/artificial-intelligence/quantifying-uncertainty"
           }
         ],
         "collapsed": true
@@ -79,11 +79,11 @@
         "items": [
           {
             "text": "The Internet and IP",
-            "link": "/computer-science/computer-network/01-internet-ip"
+            "link": "/computer-science/computer-network/internet-ip"
           },
           {
             "text": "Transport",
-            "link": "/computer-science/computer-network/02-transport"
+            "link": "/computer-science/computer-network/transport"
           }
         ],
         "collapsed": true
@@ -93,35 +93,35 @@
         "items": [
           {
             "text": "Representing and Manipulating Information",
-            "link": "/computer-science/computer-systems/01-representing-manipulating-information"
+            "link": "/computer-science/computer-systems/representing-manipulating-information"
           },
           {
             "text": "Machine Level Programming",
-            "link": "/computer-science/computer-systems/02-machine-level-programming"
+            "link": "/computer-science/computer-systems/machine-level-programming"
           },
           {
             "text": "Optimizing Program Performance",
-            "link": "/computer-science/computer-systems/03-optimization"
+            "link": "/computer-science/computer-systems/optimization"
           },
           {
             "text": "The Memory Hierarchy",
-            "link": "/computer-science/computer-systems/04-memory-hierarchy"
+            "link": "/computer-science/computer-systems/memory-hierarchy"
           },
           {
             "text": "Linking",
-            "link": "/computer-science/computer-systems/05-linking"
+            "link": "/computer-science/computer-systems/linking"
           },
           {
             "text": "Exceptional Control Flow",
-            "link": "/computer-science/computer-systems/06-exceptional-control-flow"
+            "link": "/computer-science/computer-systems/exceptional-control-flow"
           },
           {
             "text": "Virtual Memory",
-            "link": "/computer-science/computer-systems/07-virtual-memory"
+            "link": "/computer-science/computer-systems/virtual-memory"
           },
           {
             "text": "Concurrent Programming",
-            "link": "/computer-science/computer-systems/08-concurrent-programming"
+            "link": "/computer-science/computer-systems/concurrent-programming"
           }
         ],
         "collapsed": true
@@ -131,31 +131,31 @@
         "items": [
           {
             "text": "Relational Languages",
-            "link": "/computer-science/database-system-concepts/01-relational-languages"
+            "link": "/computer-science/database-system-concepts/relational-languages"
           },
           {
             "text": "Database Design",
-            "link": "/computer-science/database-system-concepts/02-database-design"
+            "link": "/computer-science/database-system-concepts/database-design"
           },
           {
             "text": "Application Design and Development",
-            "link": "/computer-science/database-system-concepts/03-application-design"
+            "link": "/computer-science/database-system-concepts/application-design"
           },
           {
             "text": "Big Data Analytics",
-            "link": "/computer-science/database-system-concepts/04-big-data-analytics"
+            "link": "/computer-science/database-system-concepts/big-data-analytics"
           },
           {
             "text": "Storage Management",
-            "link": "/computer-science/database-system-concepts/05-storage-management"
+            "link": "/computer-science/database-system-concepts/storage-management"
           },
           {
             "text": "Query Processing",
-            "link": "/computer-science/database-system-concepts/06-query-processing"
+            "link": "/computer-science/database-system-concepts/query-processing"
           },
           {
             "text": "Transaction Management",
-            "link": "/computer-science/database-system-concepts/07-transaction-management"
+            "link": "/computer-science/database-system-concepts/transaction-management"
           }
         ],
         "collapsed": true
@@ -165,23 +165,23 @@
         "items": [
           {
             "text": "MapReduce",
-            "link": "/computer-science/distributed-systems/01-map-reduce"
+            "link": "/computer-science/distributed-systems/map-reduce"
           },
           {
             "text": "Google File System",
-            "link": "/computer-science/distributed-systems/02-google-file-system"
+            "link": "/computer-science/distributed-systems/google-file-system"
           },
           {
             "text": "Fault-Tolerant Virtual Machine",
-            "link": "/computer-science/distributed-systems/03-fault-tolerant-vm"
+            "link": "/computer-science/distributed-systems/fault-tolerant-vm"
           },
           {
             "text": "Raft Consensus Algorithm",
-            "link": "/computer-science/distributed-systems/04-raft"
+            "link": "/computer-science/distributed-systems/raft"
           },
           {
             "text": "ZooKeeper",
-            "link": "/computer-science/distributed-systems/05-zookeeper"
+            "link": "/computer-science/distributed-systems/zookeeper"
           }
         ],
         "collapsed": true
@@ -192,55 +192,55 @@
         "items": [
           {
             "text": "Statistics",
-            "link": "/computer-science/machine-learning/01-statistics"
+            "link": "/computer-science/machine-learning/statistics"
           },
           {
             "text": "Linear Regression",
-            "link": "/computer-science/machine-learning/02-linear-regression"
+            "link": "/computer-science/machine-learning/linear-regression"
           },
           {
             "text": "Logistic Regression",
-            "link": "/computer-science/machine-learning/03-logistic-regression"
+            "link": "/computer-science/machine-learning/logistic-regression"
           },
           {
             "text": "Support-vector Machine",
-            "link": "/computer-science/machine-learning/04-support-vector-machine"
+            "link": "/computer-science/machine-learning/support-vector-machine"
           },
           {
             "text": "Decision Tree",
-            "link": "/computer-science/machine-learning/05-decision-tree"
+            "link": "/computer-science/machine-learning/decision-tree"
           },
           {
             "text": "K-Means Clustering",
-            "link": "/computer-science/machine-learning/06-k-means-clustering"
+            "link": "/computer-science/machine-learning/k-means-clustering"
           },
           {
             "text": "Principal Component Analysis",
-            "link": "/computer-science/machine-learning/07-principal-component-analysis"
+            "link": "/computer-science/machine-learning/principal-component-analysis"
           },
           {
             "text": "Perceptron",
-            "link": "/computer-science/machine-learning/08-perceptron"
+            "link": "/computer-science/machine-learning/perceptron"
           },
           {
             "text": "Deep Learning",
-            "link": "/computer-science/machine-learning/09-deep-learning"
+            "link": "/computer-science/machine-learning/deep-learning"
           },
           {
             "text": "Learning Theory",
-            "link": "/computer-science/machine-learning/10-learning-theory"
+            "link": "/computer-science/machine-learning/learning-theory"
           },
           {
             "text": "Kernel",
-            "link": "/computer-science/machine-learning/11-kernel"
+            "link": "/computer-science/machine-learning/kernel"
           },
           {
             "text": "Ensemble Method",
-            "link": "/computer-science/machine-learning/12-ensemble"
+            "link": "/computer-science/machine-learning/ensemble"
           },
           {
             "text": "Gaussian Mixture Model",
-            "link": "/computer-science/machine-learning/13-gaussian-mixture-model"
+            "link": "/computer-science/machine-learning/gaussian-mixture-model"
           }
         ],
         "collapsed": true
@@ -250,23 +250,23 @@
         "items": [
           {
             "text": "Introduction",
-            "link": "/computer-science/operating-systems/01-introduction"
+            "link": "/computer-science/operating-systems/introduction"
           },
           {
             "text": "CPU Virtualization",
-            "link": "/computer-science/operating-systems/02-cpu-virtualization"
+            "link": "/computer-science/operating-systems/cpu-virtualization"
           },
           {
             "text": "Memory Virtualization",
-            "link": "/computer-science/operating-systems/03-memory-virtualization"
+            "link": "/computer-science/operating-systems/memory-virtualization"
           },
           {
             "text": "Concurrency",
-            "link": "/computer-science/operating-systems/04-concurrency"
+            "link": "/computer-science/operating-systems/concurrency"
           },
           {
             "text": "Persistence",
-            "link": "/computer-science/operating-systems/05-persistence"
+            "link": "/computer-science/operating-systems/persistence"
           }
         ],
         "collapsed": true
@@ -277,7 +277,7 @@
         "items": [
           {
             "text": "Haskell",
-            "link": "/computer-science/programming-language/01-haskell"
+            "link": "/computer-science/programming-language/haskell"
           }
         ],
         "collapsed": true
@@ -287,43 +287,43 @@
         "items": [
           {
             "text": "Finite Automata",
-            "link": "/computer-science/theoretical-computer-science/01-finite-automata"
+            "link": "/computer-science/theoretical-computer-science/finite-automata"
           },
           {
             "text": "Regular Expression",
-            "link": "/computer-science/theoretical-computer-science/02-regular-expression"
+            "link": "/computer-science/theoretical-computer-science/regular-expression"
           },
           {
             "text": "Pumping Lemma",
-            "link": "/computer-science/theoretical-computer-science/03-pumping-lemma"
+            "link": "/computer-science/theoretical-computer-science/pumping-lemma"
           },
           {
             "text": "Myhill-Nerode Theorem",
-            "link": "/computer-science/theoretical-computer-science/04-myhill-nerode"
+            "link": "/computer-science/theoretical-computer-science/myhill-nerode"
           },
           {
             "text": "Context Free Grammar",
-            "link": "/computer-science/theoretical-computer-science/05-context-free-grammar"
+            "link": "/computer-science/theoretical-computer-science/context-free-grammar"
           },
           {
             "text": "Pushdown Automata",
-            "link": "/computer-science/theoretical-computer-science/06-pushdown-automata"
+            "link": "/computer-science/theoretical-computer-science/pushdown-automata"
           },
           {
             "text": "Context-Free Language",
-            "link": "/computer-science/theoretical-computer-science/07-context-free-language"
+            "link": "/computer-science/theoretical-computer-science/context-free-language"
           },
           {
             "text": "Turing Machine",
-            "link": "/computer-science/theoretical-computer-science/08-turing-machine"
+            "link": "/computer-science/theoretical-computer-science/turing-machine"
           },
           {
             "text": "Decidable Language",
-            "link": "/computer-science/theoretical-computer-science/09-decidable-language"
+            "link": "/computer-science/theoretical-computer-science/decidable-language"
           },
           {
             "text": "Undecidable Language",
-            "link": "/computer-science/theoretical-computer-science/10-undecidable-language"
+            "link": "/computer-science/theoretical-computer-science/undecidable-language"
           }
         ],
         "collapsed": true
@@ -339,19 +339,19 @@
         "items": [
           {
             "text": "Introduction",
-            "link": "/finance/hull/01-introduction"
+            "link": "/finance/hull/introduction"
           },
           {
             "text": "Futures Markets and Central Counterparties",
-            "link": "/finance/hull/02-futures-markets"
+            "link": "/finance/hull/futures-markets"
           },
           {
             "text": "Hedging Strategies",
-            "link": "/finance/hull/03-hedging-strategies"
+            "link": "/finance/hull/hedging-strategies"
           },
           {
             "text": "Interest Rates",
-            "link": "/finance/hull/04-interest-rates"
+            "link": "/finance/hull/interest-rates"
           }
         ],
         "collapsed": true
@@ -361,7 +361,7 @@
         "items": [
           {
             "text": "The Trading Industry",
-            "link": "/finance/trading-exchanges/03-the-trading-industry"
+            "link": "/finance/trading-exchanges/the-trading-industry"
           }
         ],
         "collapsed": true
@@ -377,19 +377,19 @@
         "items": [
           {
             "text": "Introduction",
-            "link": "/mathematics/numerical-analysis/01-introduction"
+            "link": "/mathematics/numerical-analysis/introduction"
           },
           {
             "text": "Solution of Equation in One Variable",
-            "link": "/mathematics/numerical-analysis/02-equation"
+            "link": "/mathematics/numerical-analysis/equation"
           },
           {
             "text": "Interpolation",
-            "link": "/mathematics/numerical-analysis/03-interpolation"
+            "link": "/mathematics/numerical-analysis/interpolation"
           },
           {
             "text": "Numerical Differentiation and Integraion",
-            "link": "/mathematics/numerical-analysis/04-differentiation-integration"
+            "link": "/mathematics/numerical-analysis/differentiation-integration"
           }
         ],
         "collapsed": true
@@ -399,15 +399,15 @@
         "items": [
           {
             "text": "Point Estimation",
-            "link": "/mathematics/statistics/01-point-estimation"
+            "link": "/mathematics/statistics/point-estimation"
           },
           {
             "text": "Interval Estimation",
-            "link": "/mathematics/statistics/02-interval-estimation"
+            "link": "/mathematics/statistics/interval-estimation"
           },
           {
             "text": "Hypothesis Test",
-            "link": "/mathematics/statistics/03-hypothesis-test"
+            "link": "/mathematics/statistics/hypothesis-test"
           }
         ],
         "collapsed": true
@@ -423,51 +423,51 @@
         "items": [
           {
             "text": "Variable and Basic Type",
-            "link": "/software-engineering/c-plus-plus-primer/01-basic-type"
+            "link": "/software-engineering/c-plus-plus-primer/basic-type"
           },
           {
             "text": "String and Vector",
-            "link": "/software-engineering/c-plus-plus-primer/02-string-vector"
+            "link": "/software-engineering/c-plus-plus-primer/string-vector"
           },
           {
             "text": "Expression and Statement",
-            "link": "/software-engineering/c-plus-plus-primer/03-expression-statement"
+            "link": "/software-engineering/c-plus-plus-primer/expression-statement"
           },
           {
             "text": "Function",
-            "link": "/software-engineering/c-plus-plus-primer/04-function"
+            "link": "/software-engineering/c-plus-plus-primer/function"
           },
           {
             "text": "Class",
-            "link": "/software-engineering/c-plus-plus-primer/05-class"
+            "link": "/software-engineering/c-plus-plus-primer/class"
           },
           {
             "text": "Sequential Container",
-            "link": "/software-engineering/c-plus-plus-primer/06-sequential-container"
+            "link": "/software-engineering/c-plus-plus-primer/sequential-container"
           },
           {
             "text": "Associative Container",
-            "link": "/software-engineering/c-plus-plus-primer/07-associative-container"
+            "link": "/software-engineering/c-plus-plus-primer/associative-container"
           },
           {
             "text": "Dynamic Memory",
-            "link": "/software-engineering/c-plus-plus-primer/08-dynamic-memory"
+            "link": "/software-engineering/c-plus-plus-primer/dynamic-memory"
           },
           {
             "text": "Generic Algorithm",
-            "link": "/software-engineering/c-plus-plus-primer/09-generic-algorithm"
+            "link": "/software-engineering/c-plus-plus-primer/generic-algorithm"
           },
           {
             "text": "Iterator",
-            "link": "/software-engineering/c-plus-plus-primer/10-iterator"
+            "link": "/software-engineering/c-plus-plus-primer/iterator"
           },
           {
             "text": "Constructor and Operator",
-            "link": "/software-engineering/c-plus-plus-primer/11-constructor-operator"
+            "link": "/software-engineering/c-plus-plus-primer/constructor-operator"
           },
           {
             "text": "Object-Oriented Programming",
-            "link": "/software-engineering/c-plus-plus-primer/12-oop"
+            "link": "/software-engineering/c-plus-plus-primer/oop"
           }
         ],
         "collapsed": true
@@ -477,15 +477,15 @@
         "items": [
           {
             "text": "Replication",
-            "link": "/software-engineering/ddia/05-replication"
+            "link": "/software-engineering/ddia/replication"
           },
           {
             "text": "Partitioning",
-            "link": "/software-engineering/ddia/06-partitioning"
+            "link": "/software-engineering/ddia/partitioning"
           },
           {
             "text": "Stream Processing",
-            "link": "/software-engineering/ddia/11-stream-processing"
+            "link": "/software-engineering/ddia/stream-processing"
           }
         ],
         "collapsed": true
@@ -495,11 +495,11 @@
         "items": [
           {
             "text": "Moving to Modern C++",
-            "link": "/software-engineering/effective-modern-c-plus-plus/03-modern"
+            "link": "/software-engineering/effective-modern-c-plus-plus/modern"
           },
           {
             "text": "Move Semantic",
-            "link": "/software-engineering/effective-modern-c-plus-plus/05-move"
+            "link": "/software-engineering/effective-modern-c-plus-plus/move"
           }
         ],
         "collapsed": true
@@ -509,15 +509,15 @@
         "items": [
           {
             "text": "Monitoring Distributed Systems",
-            "link": "/software-engineering/google-sre/06-monitoring-distributed-systems"
+            "link": "/software-engineering/google-sre/monitoring-distributed-systems"
           },
           {
             "text": "Release Engineering",
-            "link": "/software-engineering/google-sre/08-release-engineering"
+            "link": "/software-engineering/google-sre/release-engineering"
           },
           {
             "text": "Load Balancing at the Frontend",
-            "link": "/software-engineering/google-sre/19-loading-balancing-frontend"
+            "link": "/software-engineering/google-sre/loading-balancing-frontend"
           }
         ],
         "collapsed": true
@@ -527,47 +527,47 @@
         "items": [
           {
             "text": "Programming Concepts",
-            "link": "/software-engineering/rust/01-programming-concepts"
+            "link": "/software-engineering/rust/programming-concepts"
           },
           {
             "text": "Ownership",
-            "link": "/software-engineering/rust/02-ownership"
+            "link": "/software-engineering/rust/ownership"
           },
           {
             "text": "Struct",
-            "link": "/software-engineering/rust/03-struct"
+            "link": "/software-engineering/rust/struct"
           },
           {
             "text": "Enumeration and Pattern Matching",
-            "link": "/software-engineering/rust/04-enum-pattern-matching"
+            "link": "/software-engineering/rust/enum-pattern-matching"
           },
           {
             "text": "Package, Crate, and Module",
-            "link": "/software-engineering/rust/05-package-create-module"
+            "link": "/software-engineering/rust/package-create-module"
           },
           {
             "text": "Collection",
-            "link": "/software-engineering/rust/06-collection"
+            "link": "/software-engineering/rust/collection"
           },
           {
             "text": "Error Handling",
-            "link": "/software-engineering/rust/07-error-handling"
+            "link": "/software-engineering/rust/error-handling"
           },
           {
             "text": "Generic Type, Trait, and Lifetime",
-            "link": "/software-engineering/rust/08-generic"
+            "link": "/software-engineering/rust/generic"
           },
           {
             "text": "Automated Test",
-            "link": "/software-engineering/rust/09-test"
+            "link": "/software-engineering/rust/test"
           },
           {
             "text": "Functional Programming",
-            "link": "/software-engineering/rust/10-functional-programming"
+            "link": "/software-engineering/rust/functional-programming"
           },
           {
             "text": "Smart Pointer",
-            "link": "/software-engineering/rust/11-smart-pointer"
+            "link": "/software-engineering/rust/smart-pointer"
           }
         ],
         "collapsed": true
