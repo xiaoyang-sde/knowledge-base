@@ -523,6 +523,16 @@
         "collapsed": true
       },
       {
+        "text": "Linux System Programming",
+        "items": [
+          {
+            "text": "Process",
+            "link": "/software-engineering/linux-system-programming/process"
+          }
+        ],
+        "collapsed": true
+      },
+      {
         "text": "Rust Programming Language",
         "items": [
           {
