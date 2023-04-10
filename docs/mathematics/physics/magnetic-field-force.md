@@ -2,7 +2,7 @@
 
 ## Magnetic Field
 
-Magnetic field $\vec{B}$ is a vector field. The direction of $\vec{B}$ is the direction in which the north pole of a compass needle tends to point.
+The magnetic field $\vec{B}$ is a vector field. The direction of $\vec{B}$ is the direction in which the north pole of a compass needle tends to point.
 
 The magnetic field exerts a force $\vec{F}$ on other moving charge or current that is present in the field. The formula of $\vec{F}$ is $\vec{F} = q \vec{v} \times \vec{B}$, which has a magnitude of $F = |q| v B \sin \theta$, where $\theta$ is the angle between $\vec{v}$ and $\vec{B}$. The direction of $\vec{F}$ can be determined with the right hand rule of cross product. The force is $0$ when $\vec{v}$ and $\vec{B}$ have the same direction.
 
@@ -28,7 +28,7 @@ If the direction of $\vec{v}$ is not perpendicular to the field, the component o
 
 ## Wire
 
-The magnetic field exerts a force on a wire due to the motion of its charge acrriers. In a short wire segment, each charge carrier feels a force $F_q = q v_d \times B$. Assume that the area is $A$, the length is $l$, and the carrier density is $n$, then the total number of charge carriers in the wire segment is $N = nAl$, and the total magnetic force is $F = N F_q = (nAl)(q v_d \times B) = F = IlB$, where $I$ is the magnitude of the current.
+The magnetic field exerts a force on a wire due to the motion of its charge acrriers. In a short wire segment, each charge carrier feels a force $F_q = q v_d \times B$. Assume that the area is $A$, the length is $l$, and the carrier density is $n$, then the total number of charge carriers in the wire segment is $N = nAl$, and the magnitude of the total magnetic force is $F = N F_q = (nAl)(q v_d B \sin \theta) = F = IlB \sin \theta$, where $I$ is the magnitude of the current.
 
 Let $\vec{l}$ be a vector with direction pointing along the direction of the current, $\vec{F} = I \vec{l} \times \vec{B}$. When the wire is curved and the magnetic field is not uniform, $d\vec{F} = I d\vec{r} \times \vec{B}$.
 

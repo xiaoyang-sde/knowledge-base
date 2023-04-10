@@ -395,6 +395,28 @@
         "collapsed": true
       },
       {
+        "text": "Physics",
+        "items": [
+          {
+            "text": "Electric Field and Force",
+            "link": "/mathematics/physics/electric-field-force"
+          },
+          {
+            "text": "Electrical Potential",
+            "link": "/mathematics/physics/electrical-potential"
+          },
+          {
+            "text": "Magnetic Field and Force",
+            "link": "/mathematics/physics/magnetic-field-force"
+          },
+          {
+            "text": "Source of Magnetic Field",
+            "link": "/mathematics/physics/magnetic-field-source"
+          }
+        ],
+        "collapsed": true
+      },
+      {
         "text": "Statistics",
         "items": [
           {
