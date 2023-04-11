@@ -550,6 +550,10 @@
           {
             "text": "Process",
             "link": "/software-engineering/linux-system-programming/process"
+          },
+          {
+            "text": "Process Management",
+            "link": "/software-engineering/linux-system-programming/process-management"
           }
         ],
         "collapsed": true
