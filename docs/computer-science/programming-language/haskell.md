@@ -113,6 +113,22 @@ data Tree
 tree = Node Leaf 1 (Node Leaf 2 Leaf)
 ```
 
+### Polymorphic Data Type
+
+The polymorphic data type is defined with type variables, which can represent another types. For example, `Failable` or `List` is a type constructor, which takes a type and constructs another type.
+
+```hs
+data Failable a
+  = Failure
+  | OK a
+
+data List a
+  = Nil
+  | Cons a (List a)
+
+list = Cons 1 (Cons 2 (Cons 3 Nil)) :: List Int
+```
+
 ## Function
 
 In haskell, a function is defined with the `fn_name arg_1 arg_2 ... = expression` syntax. The type of the function is `arg_1_type -> ... -> result_type`. Haskell functions are pure and deterministic.
@@ -169,4 +185,64 @@ hailstone :: Integer -> Integer
 hailstone n
   | n `mod` 2 == 0 = n `div` 2
   | otherwise      = 3 * n + 1
+```
+
+## Recursion Pattern
+
+### Map
+
+The `map` function is a higher-order function that applies a given function to each element of a list and returns a new list with the results.
+
+```hs
+map :: (a -> b) -> [a] -> [b]
+map _ [] = []
+map f, (element : remaining_list) = f element : map f remaining_list
+
+list = [1, 2, 3, 4, 5]
+square_list = map (\x -> x * x) list
+```
+
+### Filter
+
+The `filter` function is a higher-order function that keeps elements of a list based on the return value of a function applied to each element.
+
+```hs
+filter :: (a -> Bool) -> [a] -> [a]
+filter _ [] = []
+filter f (element : remaining_list)
+  | f element = element : filter f remaining_list
+  | otherwise = filter f remaining_list
+
+list = [1, 2, 3, 4, 5]
+even_list = filter even list
+```
+
+### Fold
+
+#### `foldl`
+
+The `foldl` function applies a given function to the first element of the list and the initial accumulator value, then to the second element and the result of that, until all elements of the list have been processed.
+
+```hs
+foldl :: (b -> a -> b) -> b -> [a] -> b
+foldl _ accumulate [] = accumulate
+foldl f accumulate (element : remaining_list) = foldl f (f accumulate element) remaining_list
+
+list = [1, 2, 3, 4, 5]
+list_sum_1 = foldl (+) 0 list
+list_sum_2 = foldl (\a b -> a + b) 0 list
+```
+
+#### `foldr`
+
+The `foldr` function applies a given function to the last element of the list and the initial accumulator value, then to the second-to-last element and the result of that, until all elements of the list have been processed.
+
+```hs
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldr _ accumulate [] = accumulate
+foldr f accumulate (element : remaining_list) = f element (foldr f accumulate remaining_list)
+
+list = [1, 2, 3, 4, 5]
+list_sum_1 = foldr (+) 0 list
+list_sum_2 = foldr (\a b -> a + b) 0 list
 ```
