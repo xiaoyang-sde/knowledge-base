@@ -78,12 +78,8 @@
         "text": "Computer Network",
         "items": [
           {
-            "text": "The Internet and IP",
-            "link": "/computer-science/computer-network/internet-ip"
-          },
-          {
-            "text": "Transport",
-            "link": "/computer-science/computer-network/transport"
+            "text": "Application Layer",
+            "link": "/computer-science/computer-network/application-layer"
           }
         ],
         "collapsed": true
