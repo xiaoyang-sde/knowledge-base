@@ -550,6 +550,10 @@
           {
             "text": "Process Management",
             "link": "/software-engineering/linux-system-programming/process-management"
+          },
+          {
+            "text": "Socket",
+            "link": "/software-engineering/linux-system-programming/socket"
           }
         ],
         "collapsed": true
