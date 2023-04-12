@@ -80,7 +80,7 @@ data AlgDataType
 
 ### Enumeration
 
-The enumeration type is an algebraic data type that represents a set of distinct values, which represents as a choice bewteen alternatives. The enumeration type supports pattern matching.
+The enumeration type is an algebraic data type that represents a set of distinct values, which represents as a choice between alternatives. The enumeration type supports pattern matching.
 
 ```hs
 data Thing
