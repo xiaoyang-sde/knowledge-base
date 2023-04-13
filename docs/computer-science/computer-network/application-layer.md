@@ -74,4 +74,39 @@ The HTTP server is stateless. The HTTP cookie is a small piece of data that a se
 
 ### HTTP/2
 
-HTTP/2 is standardized in [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540).
+HTTP/2 is standardized in [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540). HTTP enables request and response multiplexing over a single TCP connection, provide request prioritization and server push, and compress the HTTP header fields.
+
+In HTTP/1.1, a web browser might open multiple TCP connections for a single webpage to avoid the head of line blocking problem. HTTP/2 gets rid of the parallel TCP connections, which reduces the number of socket descriptors opened at the server and allows TCP congestion control to operate as intended.
+
+- Framing: HTTP/2 does break messages into smaller frames and interleave them on the same TCP connection, which allows for concurrent requests and responses to be sent and received. The server can break down multiple responses into frames and send each frame to the client. The client can then reassemble the frames into the original response.
+
+- Response Prioritization: When a client sends concurrent requests to a server, it can assign a weight and dependencies to each message.
+
+- Server Pushing: The server can send multiple responses for a single client request. The server can parse the HTML page,  find the objects that are needed, and send them to the client without explicit requests.
+
+## DNS
+
+The domain name system (DNS) is a distributed database that translates hostnamse to IP addresses. DNS also supports host aliasing, mail server aliasing, and load balancing. The DNS server is a distributed hierarchical database. The mappings are distributed across DNS servers.
+
+- Root DNS server: Root servers provide the IP addresses of the TLD servers.
+- Top-level domain (TLD) server: TLD servers provide the IP addresses for authoritative DNS servers.
+- Authoritative DNS server: Each organization with accessible hosts on the Internet must provide accessible DNS records. The organization's authoritative DNS server houses these DNS records.
+- Local DNS server: Each ISP has a local DNS server that is close to the host.
+
+The initial queries from the client to the local DNS server is recursive. Subsequent queries sent from the local DNS to other DNS servers will be iterative.
+
+- Recursive queries: The local DNS server will perform all queries on behalf of the client to resolve the requested domain name. The client doesn't need to make further queries.
+- Iterative queries: The local DNS server will provide the best information available. If it does not have the requested information in its cache, it will provide a referral to another DNS server.
+
+### DNS Protocol
+
+The DNS protocol is defined in [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034) and [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035), which is an application-layer protocol that allows hosts to send queries to the database.
+
+The DNS servers store resource records, including RRs that provide mappings from hostname to IP addresses. Each DNS response message carries one or more resource records. Each resource record is a tuple defined as `(name, value, type, ttl)`. The authoritative DNS server contains `A` or `AAAA` records for a particular hostname.
+
+- `type` is the type of the resource record.
+  - `A` or `AAAA`: IPv4 or IPv6 addresses
+  - `NS`: hostname of an authoritative DNS server
+  - `CNAME`: canonical hostname for a hostname
+  - `MX`: canonical hostname for a mail server
+- `ttl` is the time to live of the resource record. The cache removes a record when it expires.
