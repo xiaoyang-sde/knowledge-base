@@ -369,6 +369,20 @@
     "text": "Mathematics",
     "items": [
       {
+        "text": "Multivariable Calculus",
+        "items": [
+          {
+            "text": "Multiple Integral",
+            "link": "/mathematics/multivariable-calculus/multiple-integral"
+          },
+          {
+            "text": "Line Integral",
+            "link": "/mathematics/multivariable-calculus/line-integral"
+          }
+        ],
+        "collapsed": true
+      },
+      {
         "text": "Numerical Analysis",
         "items": [
           {
