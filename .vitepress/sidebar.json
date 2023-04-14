@@ -562,8 +562,8 @@
             "link": "/software-engineering/linux-system-programming/process"
           },
           {
-            "text": "Process Management",
-            "link": "/software-engineering/linux-system-programming/process-management"
+            "text": "Scheduling",
+            "link": "/software-engineering/linux-system-programming/scheduling"
           },
           {
             "text": "Socket",
