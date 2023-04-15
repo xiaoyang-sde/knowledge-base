@@ -12,7 +12,7 @@ When a charged particle moves through a region of space where both electric and 
 
 ## Gauss's Law for Magnetism
 
-The magnetic flux $\phi_B$ a measure of the strength of a magnetic field passing through a surface. Let $d \phi_B$ be the magnetic flux of a fraction of the surface, where $d \phi_B = B \cos \theta dA = \vec{B} \cdot d \vec{A}$. The total magnetic flux through the surface is $\phi_B = \int B \cos \theta dA = \int \vec{B} \cdot d \vec{A}$.
+The magnetic flux $\Phi_B$ a measure of the strength of a magnetic field passing through a surface. Let $d \Phi_B$ be the magnetic flux of a fraction of the surface, where $d \Phi_B = B \cos \theta dA = \vec{B} \cdot d \vec{A}$. The total magnetic flux through the surface is $\Phi_B = \int B \cos \theta dA = \int \vec{B} \cdot d \vec{A}$.
 
 The unit of the magnetic flux is **weber** or $Wb$, where $1 Wb = 1 T \cdot m^2$.
 

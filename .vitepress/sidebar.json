@@ -422,6 +422,10 @@
           {
             "text": "Source of Magnetic Field",
             "link": "/mathematics/physics/magnetic-field-source"
+          },
+          {
+            "text": "Induction",
+            "link": "/mathematics/physics/induction"
           }
         ],
         "collapsed": true
