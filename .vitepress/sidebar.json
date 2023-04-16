@@ -426,6 +426,10 @@
           {
             "text": "Induction",
             "link": "/mathematics/physics/induction"
+          },
+          {
+            "text": "Inductance",
+            "link": "/mathematics/physics/inductance"
           }
         ],
         "collapsed": true

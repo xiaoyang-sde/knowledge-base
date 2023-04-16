@@ -2,15 +2,13 @@
 
 ## Moving Charge
 
-The single point charge $q$ moving with $\vec{v}$ could produce a magnetic field. The magnitude of $\vec{B}$ at point $P$ is $B = \frac{\mu_0}{4 \pi} \frac{|q| v \sin \theta}{r^2}$, where $r$ is the distance from the point charge and $\mu_0$ is the magnetic constant. The direction of $\vec{B}$ is perpendicular to the plane containing the line between the point charge and $P$ and $\vec{v}$.
-
-Let $\hat{r} = \frac{\vec{r}}{r}$ be the unit vector from the source to the field point. The $\vec{B}$ is defined as $\vec{B} = \frac{\mu_0}{4 \pi} \frac{q \vec{v} \times \hat{r}}{r^2}$. The value of the magnetic constant is $\mu_0 = 4 \pi \times 10^{-7} \frac{T \cdot m}{A}$.
+The single point charge $q$ moving with $\vec{v}$ could produce a magnetic field. Let $\hat{r} = \frac{\vec{r}}{r}$ be the unit vector from the source to the observation point. The $\vec{B}$ is defined as $\vec{B} = \frac{\mu_0}{4 \pi} \frac{q \vec{v} \times \hat{r}}{r^2}$, where the magnetic constant $\mu_0 = 4 \pi \times 10^{-7} \frac{T \cdot m}{A}$. The magnitude of $\vec{B}$ is $B = \frac{\mu_0}{4 \pi} \frac{|q| v \sin \theta}{r^2}$, where $\theta$ is the angle between $\vec{v}$ and $\hat{r}$. The direction of $\vec{B}$ is perpendicular to the plane containing the line between the point charge and $P$ and $\vec{v}$.
 
 ## Current Element
 
-The magnetic field follows the principle of superposition. For a current in a conductor, the volume of a segment $d \vec{l}$ is $A dl$, where $A$ is the cross-sectional area of the conductor. If there are $n$ moving charged particles per unit volume, each of charge $q$, the total moving charge $dQ = n q A dl$. The magnitude of the field $d \vec{B}$ is $dB = \frac{\mu_0}{4 \pi} \frac{|dQ| v_d \sin \theta}{r^2} = \frac{\mu_0}{4 \pi} \frac{I dl \sin \theta}{r^2}$.
+The magnetic field follows the principle of superposition. For a current in a conductor, the volume of a segment $d \vec{l}$ is $A dl$, where $A$ is the cross-sectional area of the conductor. If there are $n$ moving charged particles per unit volume, each of charge $q$, the total moving charge $dQ = n q A dl$.
 
-Let $\hat{r} = \frac{\vec{r}}{r}$ be the unit vector from the source to the field point. The $\vec{B}$ is defined as $d \vec{B} = \frac{\mu_0}{4 \pi} \frac{I d \vec{l} \times \hat{r}}{r^2}$, where $d \vec{l}$ points in the same direction as the current.
+Let $\hat{r} = \frac{\vec{r}}{r}$ be the unit vector from the source to the field point. The $\vec{B}$ is defined as $d \vec{B} = \frac{\mu_0}{4 \pi} \frac{I d \vec{l} \times \hat{r}}{r^2}$, where $d \vec{l}$ points in the same direction as the current. The magnitude of the field $d \vec{B}$ is $dB = \frac{\mu_0}{4 \pi} \frac{|dQ| v_d \sin \theta}{r^2} = \frac{\mu_0}{4 \pi} \frac{I dl \sin \theta}{r^2}$, where $\theta$ is the angle between $\vec{l}$ and $\hat{r}$.
 
 The law of Biot and Savart states that the magnetic field $\vec{B}$ due to the current in a circuit is $\vec{B} = \frac{\mu_0}{4 \pi} \int \frac{I d \vec{l} \times \hat{r}}{r^2}$.
 
