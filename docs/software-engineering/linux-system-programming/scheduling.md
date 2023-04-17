@@ -58,7 +58,7 @@ CFS assigns $N$ threads each $\frac{1}{N}$ of the processor's time. CFS then adj
 
 The CFS has a target latency variable, which represents the scheduling latency of the system. The scheduler divides the target latency based on the weight of each thread and runs a thread for its fraction. To reduce the overhead of context switching, a thread must run for at least the minimum granularity or until it blocks.
 
-## processor Affinity
+## Processor Affinity
 
 Linux supports multiple processors in a single system. On a multithreading machine, the thread scheduler must decide which threads run on each CPU.
 

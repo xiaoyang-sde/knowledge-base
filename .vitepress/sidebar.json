@@ -584,6 +584,10 @@
           {
             "text": "Socket",
             "link": "/software-engineering/linux-system-programming/socket"
+          },
+          {
+            "text": "Signal",
+            "link": "/software-engineering/linux-system-programming/signal"
           }
         ],
         "collapsed": true
