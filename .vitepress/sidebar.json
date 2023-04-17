@@ -578,6 +578,10 @@
             "link": "/software-engineering/linux-system-programming/scheduling"
           },
           {
+            "text": "Memory",
+            "link": "/software-engineering/linux-system-programming/memory"
+          },
+          {
             "text": "Socket",
             "link": "/software-engineering/linux-system-programming/socket"
           }
