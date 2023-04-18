@@ -566,6 +566,10 @@
         "text": "Linux System Programming",
         "items": [
           {
+            "text": "File Management",
+            "link": "/software-engineering/linux-system-programming/file-management"
+          },
+          {
             "text": "Process",
             "link": "/software-engineering/linux-system-programming/process"
           },
