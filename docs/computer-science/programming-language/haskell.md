@@ -138,6 +138,18 @@ add :: Int -> Int -> Int
 add a b = a + b
 ```
 
+### Partial Function Application
+
+The partial function application is an operation that defines a function `g` with an existing function `f` that takes one or more arguments with default values for one or more of these arguments. `g` is a specialization of `f`, with hard-coded values for some of `f`'s parameters.
+
+```hs
+add_5 = (+) 5
+add_5 100
+
+cuber = map (\x -> x^3)
+cuber [2,3,5]
+```
+
 ### Local Binding
 
 Local binding allows the definition of variables and functions that are accessible within a limited scope, such as within a specific function or block of code. The `let` clause defines one or more bindings to associate a name with an expression and the `in` clause contains an expression where the bindings are used. Each binding is evaluated when it's used and the result is cached.
