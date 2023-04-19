@@ -131,11 +131,24 @@ list = Cons 1 (Cons 2 (Cons 3 Nil)) :: List Int
 
 ## Function
 
-In haskell, a function is defined with the `fn_name arg_1 arg_2 ... = expression` syntax. The type of the function is `arg_1_type -> ... -> result_type`. Haskell functions are pure and deterministic.
+The function is defined with the `fn_name arg_1 arg_2 ... = expression` syntax. The type of the function is `arg_1_type -> ... -> result_type`. Haskell functions are pure and deterministic.
 
 ```hs
 add :: Int -> Int -> Int
 add a b = a + b
+```
+
+### Local Binding
+
+Local binding allows the definition of variables and functions that are accessible within a limited scope, such as within a specific function or block of code. The `let` clause defines one or more bindings to associate a name with an expression and the `in` clause contains an expression where the bindings are used. Each binding is evaluated when it's used and the result is cached.
+
+```hs
+is_nerd gpa =
+  let
+      nerd_score = 1 / (4.01 - gpa)
+  in
+      if nerd_score > 100 then True
+      else False
 ```
 
 ### Pattern Matching
@@ -185,6 +198,16 @@ hailstone :: Integer -> Integer
 hailstone n
   | n `mod` 2 == 0 = n `div` 2
   | otherwise      = 3 * n + 1
+
+qsort :: [a] -> [a]
+qsort lst
+  | null lst = []
+  | otherwise = less_eq ++ [pivot] ++ greater
+  where
+    pivot = head lst
+    rest_lst = tail lst
+    less_eq = qsort [a | a <- rest_lst, a <= pivot]
+    greater = qsort [a | a <- rest_lst, a > pivot]
 ```
 
 ## Recursion Pattern
@@ -245,4 +268,31 @@ foldr f accumulate (element : remaining_list) = f element (foldr f accumulate re
 list = [1, 2, 3, 4, 5]
 list_sum_1 = foldr (+) 0 list
 list_sum_2 = foldr (\a b -> a + b) 0 list
+```
+
+## Type Class
+
+The type class correspond to a set of types which have certain operations defined for them, and the type class polymorphic function works for types which are instances of the type class constraint. For example, `Num`, `Eq`, `Ord`, and `Show` are type classes and `(+)`, `(<)`, and `show` are type class polymorphic function.
+
+```hs
+(+) :: Num a => a -> a -> a
+(<) :: Ord a => a -> a -> Bool
+show :: Show a => a -> String
+```
+
+For example, the `Eq` type class is defined such that its instance must define the `(==)` and `(/=)` functions with the indicated type signatures. The `instance [type class] [data type name]` syntax implements a type class for a data type.
+
+```hs
+class Eq a where
+  (==) :: a -> a -> Bool
+  (/=) :: a -> a -> Bool
+
+data Foo = A Int | B Char
+
+instance Eq Foo where
+  (A i1) == (A i2) = i1 == i2
+  (B c1) == (B c2) = c1 == c2
+  _ == _ = False
+
+  foo1 /= foo2 = not (foo1 == foo2)
 ```
