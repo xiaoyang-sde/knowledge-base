@@ -56,12 +56,16 @@ public:
 };
 ```
 
-### RValue Reference
+### LValue and RValue
 
-The rvalue reference is a reference that must be bound to an rvalue, which is an object that is about to be destroyed, such as literals or temporary objects created when evaluating expressions. Therefore, the resource could be moved from an rvalue reference to another object. The rvalue reference is obtained by using `&&`. The rvalue reference variable is an lvalue.
+- The lvalue is an expression that refers to an object or variable that occupies a specific memory location, which can be used as the operand of the address-of operator (`&`) to obtain its memory address, and it can also appear on the left-hand side of an assignment operator (`=`) to assign a new value to the object or variable. Functions that return lvalue references, assignment, subscript, dereference, and prefix increment or decrement operators, all yield lvalues.
+- The rvalue is an expression that represents a value rather than a memory location, such as literals or temporary objects created when evaluating expressions. Functions that return a non-reference type, arithmetic, relational, bitwise, and postfix increment or decrement operators, all yield rvalues. Either an lvalue reference to `const` or an rvalue reference could be bound to such expressions.
 
-- Functions that return lvalue references, assignment, subscript, dereference, and prefix increment or decrement operators, all yield lvalues.
-- Functions that return a non-reference type, arithmetic, relational, bitwise, and postfix increment or decrement operators, all yield rvalues. Either an lvalue reference to `const` or an rvalue reference could be bound to such expressions.
+### Reference
+
+- The lvalue reference is a reference that must be bound to an lvalue. However, it is possible to bind a const lvalue reference to an rvalue expression.
+
+- The rvalue reference is a reference that must be bound to an rvalue. Therefore, the resource could be moved from an rvalue reference to another object. The rvalue reference is obtained by using `&&`. The rvalue reference variable is an lvalue.
 
 ### `std::move` and `std::forward`
 

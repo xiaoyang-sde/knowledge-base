@@ -1,10 +1,5 @@
 # Expression and Statement
 
-## lvalue and rvalue
-
-- An lvalue (locator value) represents an object that occupies some identifiable location in memory (i.e. has an address).
-- An rvalue is an expression that does not represent an object occupying some identifiable location in memory.
-
 ## `sizeof`
 
 The `sizeof` operator returns the size, in bytes, of an expression or a type name. It takes the form of `sizeof(type)` or `sizeof expression`. `sizeof` a reference type returns the size of an object of the referenced type. `sizeof` a dereferenced pointer returns the size of an object of the type to which the pointer points.
