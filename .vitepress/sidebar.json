@@ -268,17 +268,6 @@
         "collapsed": true
       },
       {
-        "text": "Programming Language",
-        "link": "/computer-science/programming-language/",
-        "items": [
-          {
-            "text": "Haskell",
-            "link": "/computer-science/programming-language/haskell"
-          }
-        ],
-        "collapsed": true
-      },
-      {
         "text": "Theoretical Computer Science",
         "items": [
           {
@@ -320,6 +309,189 @@
           {
             "text": "Undecidable Language",
             "link": "/computer-science/theoretical-computer-science/undecidable-language"
+          }
+        ],
+        "collapsed": true
+      }
+    ],
+    "collapsed": false
+  },
+  {
+    "text": "Programming Language",
+    "link": "/programming-language/",
+    "items": [
+      {
+        "text": "C++",
+        "items": [
+          {
+            "text": "Variable and Basic Type",
+            "link": "/programming-language/c-plus-plus/basic-type"
+          },
+          {
+            "text": "Expression and Statement",
+            "link": "/programming-language/c-plus-plus/expression-statement"
+          },
+          {
+            "text": "Move Semantic",
+            "link": "/programming-language/c-plus-plus/move-semantic"
+          },
+          {
+            "text": "Function",
+            "link": "/programming-language/c-plus-plus/function"
+          },
+          {
+            "text": "Class and Object-Oriented Programming",
+            "link": "/programming-language/c-plus-plus/class-oop"
+          },
+          {
+            "text": "Template",
+            "link": "/programming-language/c-plus-plus/template"
+          },
+          {
+            "text": "STL Container",
+            "link": "/programming-language/c-plus-plus/stl-container"
+          },
+          {
+            "text": "STL Algorithm",
+            "link": "/programming-language/c-plus-plus/stl-algorithm"
+          },
+          {
+            "text": "Smart Pointer",
+            "link": "/programming-language/c-plus-plus/smart-pointer"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Rust",
+        "items": [
+          {
+            "text": "Programming Concepts",
+            "link": "/programming-language/rust/programming-concepts"
+          },
+          {
+            "text": "Ownership",
+            "link": "/programming-language/rust/ownership"
+          },
+          {
+            "text": "Struct",
+            "link": "/programming-language/rust/struct"
+          },
+          {
+            "text": "Enumeration and Pattern Matching",
+            "link": "/programming-language/rust/enum-pattern-matching"
+          },
+          {
+            "text": "Package, Crate, and Module",
+            "link": "/programming-language/rust/package-create-module"
+          },
+          {
+            "text": "Collection",
+            "link": "/programming-language/rust/collection"
+          },
+          {
+            "text": "Error Handling",
+            "link": "/programming-language/rust/error-handling"
+          },
+          {
+            "text": "Generic Type, Trait, and Lifetime",
+            "link": "/programming-language/rust/generic"
+          },
+          {
+            "text": "Automated Test",
+            "link": "/programming-language/rust/test"
+          },
+          {
+            "text": "Functional Programming",
+            "link": "/programming-language/rust/functional-programming"
+          },
+          {
+            "text": "Smart Pointer",
+            "link": "/programming-language/rust/smart-pointer"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Haskell",
+        "link": "/programming-language/haskell/"
+      }
+    ],
+    "collapsed": false
+  },
+  {
+    "text": "Software Engineering",
+    "items": [
+      {
+        "text": "Designing Data-Intensive Applications",
+        "items": [
+          {
+            "text": "Replication",
+            "link": "/software-engineering/ddia/replication"
+          },
+          {
+            "text": "Partitioning",
+            "link": "/software-engineering/ddia/partitioning"
+          },
+          {
+            "text": "Stream Processing",
+            "link": "/software-engineering/ddia/stream-processing"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Google SRE Book",
+        "items": [
+          {
+            "text": "Monitoring Distributed Systems",
+            "link": "/software-engineering/google-sre/monitoring-distributed-systems"
+          },
+          {
+            "text": "Release Engineering",
+            "link": "/software-engineering/google-sre/release-engineering"
+          },
+          {
+            "text": "Load Balancing at the Frontend",
+            "link": "/software-engineering/google-sre/loading-balancing-frontend"
+          }
+        ],
+        "collapsed": true
+      },
+      {
+        "text": "Linux System Programming",
+        "items": [
+          {
+            "text": "File I/O",
+            "link": "/software-engineering/linux-system-programming/file-io"
+          },
+          {
+            "text": "File Management",
+            "link": "/software-engineering/linux-system-programming/file-management"
+          },
+          {
+            "text": "Process",
+            "link": "/software-engineering/linux-system-programming/process"
+          },
+          {
+            "text": "Threading",
+            "link": "/software-engineering/linux-system-programming/threading"
+          },
+          {
+            "text": "Scheduling",
+            "link": "/software-engineering/linux-system-programming/scheduling"
+          },
+          {
+            "text": "Memory",
+            "link": "/software-engineering/linux-system-programming/memory"
+          },
+          {
+            "text": "Socket",
+            "link": "/software-engineering/linux-system-programming/socket"
+          },
+          {
+            "text": "Signal",
+            "link": "/software-engineering/linux-system-programming/signal"
           }
         ],
         "collapsed": true
@@ -448,204 +620,6 @@
           {
             "text": "Hypothesis Test",
             "link": "/mathematics/statistics/hypothesis-test"
-          }
-        ],
-        "collapsed": true
-      }
-    ],
-    "collapsed": false
-  },
-  {
-    "text": "Software Engineering",
-    "items": [
-      {
-        "text": "C++ Primer",
-        "items": [
-          {
-            "text": "Variable and Basic Type",
-            "link": "/software-engineering/c-plus-plus-primer/basic-type"
-          },
-          {
-            "text": "String and Vector",
-            "link": "/software-engineering/c-plus-plus-primer/string-vector"
-          },
-          {
-            "text": "Expression and Statement",
-            "link": "/software-engineering/c-plus-plus-primer/expression-statement"
-          },
-          {
-            "text": "Function",
-            "link": "/software-engineering/c-plus-plus-primer/function"
-          },
-          {
-            "text": "Class",
-            "link": "/software-engineering/c-plus-plus-primer/class"
-          },
-          {
-            "text": "Sequential Container",
-            "link": "/software-engineering/c-plus-plus-primer/sequential-container"
-          },
-          {
-            "text": "Associative Container",
-            "link": "/software-engineering/c-plus-plus-primer/associative-container"
-          },
-          {
-            "text": "Dynamic Memory",
-            "link": "/software-engineering/c-plus-plus-primer/dynamic-memory"
-          },
-          {
-            "text": "Generic Algorithm",
-            "link": "/software-engineering/c-plus-plus-primer/generic-algorithm"
-          },
-          {
-            "text": "Iterator",
-            "link": "/software-engineering/c-plus-plus-primer/iterator"
-          },
-          {
-            "text": "Constructor and Operator",
-            "link": "/software-engineering/c-plus-plus-primer/constructor-operator"
-          },
-          {
-            "text": "Object-Oriented Programming",
-            "link": "/software-engineering/c-plus-plus-primer/oop"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Designing Data-Intensive Applications",
-        "items": [
-          {
-            "text": "Replication",
-            "link": "/software-engineering/ddia/replication"
-          },
-          {
-            "text": "Partitioning",
-            "link": "/software-engineering/ddia/partitioning"
-          },
-          {
-            "text": "Stream Processing",
-            "link": "/software-engineering/ddia/stream-processing"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Effective Modern C++",
-        "items": [
-          {
-            "text": "Moving to Modern C++",
-            "link": "/software-engineering/effective-modern-c-plus-plus/modern"
-          },
-          {
-            "text": "Move Semantic",
-            "link": "/software-engineering/effective-modern-c-plus-plus/move"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Google SRE Book",
-        "items": [
-          {
-            "text": "Monitoring Distributed Systems",
-            "link": "/software-engineering/google-sre/monitoring-distributed-systems"
-          },
-          {
-            "text": "Release Engineering",
-            "link": "/software-engineering/google-sre/release-engineering"
-          },
-          {
-            "text": "Load Balancing at the Frontend",
-            "link": "/software-engineering/google-sre/loading-balancing-frontend"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Linux System Programming",
-        "items": [
-          {
-            "text": "File I/O",
-            "link": "/software-engineering/linux-system-programming/file-io"
-          },
-          {
-            "text": "File Management",
-            "link": "/software-engineering/linux-system-programming/file-management"
-          },
-          {
-            "text": "Process",
-            "link": "/software-engineering/linux-system-programming/process"
-          },
-          {
-            "text": "Threading",
-            "link": "/software-engineering/linux-system-programming/threading"
-          },
-          {
-            "text": "Scheduling",
-            "link": "/software-engineering/linux-system-programming/scheduling"
-          },
-          {
-            "text": "Memory",
-            "link": "/software-engineering/linux-system-programming/memory"
-          },
-          {
-            "text": "Socket",
-            "link": "/software-engineering/linux-system-programming/socket"
-          },
-          {
-            "text": "Signal",
-            "link": "/software-engineering/linux-system-programming/signal"
-          }
-        ],
-        "collapsed": true
-      },
-      {
-        "text": "Rust Programming Language",
-        "items": [
-          {
-            "text": "Programming Concepts",
-            "link": "/software-engineering/rust/programming-concepts"
-          },
-          {
-            "text": "Ownership",
-            "link": "/software-engineering/rust/ownership"
-          },
-          {
-            "text": "Struct",
-            "link": "/software-engineering/rust/struct"
-          },
-          {
-            "text": "Enumeration and Pattern Matching",
-            "link": "/software-engineering/rust/enum-pattern-matching"
-          },
-          {
-            "text": "Package, Crate, and Module",
-            "link": "/software-engineering/rust/package-create-module"
-          },
-          {
-            "text": "Collection",
-            "link": "/software-engineering/rust/collection"
-          },
-          {
-            "text": "Error Handling",
-            "link": "/software-engineering/rust/error-handling"
-          },
-          {
-            "text": "Generic Type, Trait, and Lifetime",
-            "link": "/software-engineering/rust/generic"
-          },
-          {
-            "text": "Automated Test",
-            "link": "/software-engineering/rust/test"
-          },
-          {
-            "text": "Functional Programming",
-            "link": "/software-engineering/rust/functional-programming"
-          },
-          {
-            "text": "Smart Pointer",
-            "link": "/software-engineering/rust/smart-pointer"
           }
         ],
         "collapsed": true

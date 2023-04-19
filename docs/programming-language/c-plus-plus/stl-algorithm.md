@@ -1,4 +1,4 @@
-# Generic Algorithm
+# STL Algorithm
 
 The generic algorithm defined in the `algorithm` header operate in terms of iterators and iterator operations, which makes them independent of the container. With a few exceptions, the algorithms operate over a range of elements, such as `(container.begin(), container.end())`.
 

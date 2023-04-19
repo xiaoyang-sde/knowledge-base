@@ -1,6 +1,4 @@
-# Dynamic Memory
-
-In C++, dynamic memory is managed through a pair of operators: `new`, which allocates  an object in dynamic memory and returns a pointer to that object, and `delete`, which takes a pointer to a dynamic object, destroys that object, and frees the associated memory. However, these operators are error-prune.
+# Smart Pointer
 
 C++ provides smart pointer acts like a regular pointer with the important exception that it could delete the object to which it points. The `shared_ptr` allows multiple pointers to refer to the same object, and the `unique_ptr` which owns the object to which it points. The `weak_ptr` that is a weak reference to an object managed by a `shared_ptr`.
 
