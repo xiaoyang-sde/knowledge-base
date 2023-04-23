@@ -86,12 +86,15 @@ In HTTP/1.1, a web browser might open multiple TCP connections for a single webp
 
 ## DNS
 
+The domain name is organized as a hierarchical name space, which is a tree with a root `.` and multiple nodes, where each leaf node is a DNS name, and each non-leaf node is a domain. The nodes with depth of `1` are top-level domains. There's no defined limit on the depth of DNS names.
+
 The domain name system (DNS) is a distributed database that translates hostnamse to IP addresses. DNS also supports host aliasing, mail server aliasing, and load balancing. The DNS server is a distributed hierarchical database. The mappings are distributed across DNS servers.
 
-- Root DNS server: Root servers provide the IP addresses of the TLD servers.
+There are multiple authoritative DNS servers for each DNS name domain, which serve queries for the names in the domain. Each domain owner must provide multiple authoritative name servers that replicate a master file, which contain all the data records in the domain.
+
+- Root DNS server: Root servers provide the names and IP addresses of the authoritative DNS servers for all top-level domains. There are 13 authoritative root servers, which are named `a` through `m`.
 - Top-level domain (TLD) server: TLD servers provide the IP addresses for authoritative DNS servers.
-- Authoritative DNS server: Each organization with accessible hosts on the Internet must provide accessible DNS records. The organization's authoritative DNS server houses these DNS records.
-- Local DNS server: Each ISP has a local DNS server that is close to the host.
+- Local DNS server: Each ISP has a local DNS server that is close to the host. The local DNS server could cache a record based on its TTL.
 
 The initial queries from the client to the local DNS server is recursive. Subsequent queries sent from the local DNS to other DNS servers will be iterative.
 
