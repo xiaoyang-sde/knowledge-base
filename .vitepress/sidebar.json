@@ -358,6 +358,10 @@
           {
             "text": "Smart Pointer",
             "link": "/programming-language/c-plus-plus/smart-pointer"
+          },
+          {
+            "text": "Coroutine",
+            "link": "/programming-language/c-plus-plus/coroutine"
           }
         ],
         "collapsed": true
