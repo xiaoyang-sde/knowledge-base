@@ -371,6 +371,16 @@
         "collapsed": true
       },
       {
+        "text": "Python",
+        "items": [
+          {
+            "text": "Data Model",
+            "link": "/programming-language/python/data-model"
+          }
+        ],
+        "collapsed": true
+      },
+      {
         "text": "Rust",
         "items": [
           {
