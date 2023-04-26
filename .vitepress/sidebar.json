@@ -610,6 +610,10 @@
           {
             "text": "Inductance",
             "link": "/mathematics/physics/inductance"
+          },
+          {
+            "text": "Alternating Current",
+            "link": "/mathematics/physics/alternating-current"
           }
         ],
         "collapsed": true
