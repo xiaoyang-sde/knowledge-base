@@ -77,6 +77,12 @@
       {
         "text": "Atomic and Lock",
         "link": "/computer-science/atomic-lock/",
+        "items": [
+          {
+            "text": "Atomic",
+            "link": "/computer-science/atomic-lock/atomic"
+          }
+        ],
         "collapsed": true
       },
       {
