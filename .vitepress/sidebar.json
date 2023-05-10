@@ -81,6 +81,10 @@
           {
             "text": "Atomic",
             "link": "/computer-science/atomic-lock/atomic"
+          },
+          {
+            "text": "Ordering",
+            "link": "/computer-science/atomic-lock/ordering"
           }
         ],
         "collapsed": true
