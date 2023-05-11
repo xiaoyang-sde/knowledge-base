@@ -42,7 +42,7 @@ Each variable has a lifetime from its creation to destruction. Each variable's l
 
 - Dynamic scoping: When a variable is referenced in a program, dynamic scoping searches for the variable's declaration in the current execution context or call stack, rather than the static structure of the program.
 
-## Garbage Collection
+### Garbage Collection
 
 Garbage collection is the automatic reclamation of allocated memory that is no longer referenced. The program doesn't control object destruction. When a value of object on the heap is no longer refereed to, the program detects this at runtime and frees the memory associated with it. It eliminates memory leaks, dangling pointers, and double-free bugs.
 
@@ -51,3 +51,21 @@ Garbage collection is the automatic reclamation of allocated memory that is no l
   - Sweep phase: The algorithm scans all heap memory from start to finish, and frees all blocks not marked as being in-use. Each object on the heap has a metadata chunk that stores the size of the current object and a pointer to the next object.
 - Mark and compact: The garbage collector discovers all in-use objects, moves them to a new block of memory, and reclaims the old block of memory.
 - Reference counting: Each object keeps a count of the number of active object references that point at it. When an object's count reaches zero, it's reclaimed.
+
+### Destructor
+
+- Destructors are used in languages with manual memory management. There are deterministic rules that govern when destructors are run, so the descructor could release critical resources such as closing network connections.
+
+- Finalizers are used in languages with garbage collector to release unmanaged resources that aren't garbage collected. Unlike a destructor, a finalizer might not run at a predictable time or at all because the garbage collector is unpredictable.
+
+- Disposal methods are functions that releases the resources, which require an explicit invocation.
+
+## Variable Binding Semantic
+
+- Value semantics: Each variable name could bind to the storage that represents that variable.
+
+- Reference semantics: Each variable name could bind to another variable's storage that holds the value. The reference variable is identical to the referred variable.
+
+- Object reference semantics: Each variable name could be a pointer that points to an object or value. The semantics treat object assignment and field access with a different semantic.
+
+- Name semantics: Each variable name could bind to a pointer that points to an expression graph. The result of each evaluation is memoized to eliminate redundant computations.
