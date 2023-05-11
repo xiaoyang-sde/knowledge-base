@@ -116,7 +116,7 @@ fn f(v: &RefCell<Vec<i32>>) {
 }
 ```
 
-- `RwLock<T>`: `RwLock<T>` is the concurrent version of a `RefCell<T>`. It allows to borrow its value at runtime cost and holds a counter that keeps track of outstanding borrows. Rather than panicing, it blocks the current thread while waiting for conflicting exclusive borrows to disappear.
+- `RwLock<T>`: `RwLock<T>` is the concurrent version of a `RefCell<T>`. It allows to borrow its value at runtime cost and holds a counter that keeps track of outstanding borrows. Rather than panicking, it blocks the current thread while waiting for conflicting exclusive borrows to disappear.
 
 - `Mutex<T>`: `Mutex<T>` is similar to `RwLock<T>`. The difference is that it doesn't allow shared borrows.
 
@@ -131,7 +131,7 @@ fn f(v: &RefCell<Vec<i32>>) {
 Primitive types such as `i32`, `bool`, and `str` are both `Send` and `Sync`. Algebraic data types are `Send` and `Sync` if all fields are `Send` and `Sync`. Raw pointers (`*const T` and `*mut T`) are neither `Send` nor `Sync`.
 
 - The `unsafe impl` block can be used to opt in to either of these traits. `unsafe` implies that the compiler won't check for the correctness.
-- The `PhantomData<T>` can be used to opt out of either of these traits, which is a zero-sized type that make the compiler intrepret it as `T`.
+- The `PhantomData<T>` can be used to opt out of either of these traits, which is a zero-sized type that make the compiler interpret it as `T`.
 
 ```rs
 struct X {

@@ -8,7 +8,7 @@ After compiling from a language like Rust, most of the structure of the original
 
 ### Load and Store
 
-The compiled instruction for the load and store operations on an `&AtomicI32` is identical to the operations on a regular `&mut i32`, because the `mov` and `str` instructions are atomic. The difference between `&mut i32` and `&AtomicI32` is relavent for the compiler checks and optimizations.
+The compiled instruction for the load and store operations on an `&AtomicI32` is identical to the operations on a regular `&mut i32`, because the `mov` and `str` instructions are atomic. The difference between `&mut i32` and `&AtomicI32` is relevant for the compiler checks and optimizations.
 
 ```rs
 pub fn load(x: &AtomicI32) -> i32 {
@@ -48,7 +48,7 @@ a:
   ret
 ```
 
-The `add` instruction on `x86_64` will be splitted into several microinstructions behind the scenes, with separate steps for loading the value and storing the result. Although switching a processor core between threads happens between instructions, multiple cores might execute instructions in parallel.
+The `add` instruction on `x86_64` will be split into several microinstructions behind the scenes, with separate steps for loading the value and storing the result. Although switching a processor core between threads happens between instructions, multiple cores might execute instructions in parallel.
 
 ```asm
 a:
