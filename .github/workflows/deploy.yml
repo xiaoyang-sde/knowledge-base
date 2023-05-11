@@ -23,8 +23,6 @@ jobs:
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    env:
-      NODE_OPTIONS: --max-old-space-size=32768
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -33,7 +31,7 @@ jobs:
       - name: Build
         run: |
           npm ci
-          npm run build
+          NODE_OPTIONS=--max_old_space_size=16384 npm run build
       - uses: peaceiris/actions-gh-pages@v3
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
