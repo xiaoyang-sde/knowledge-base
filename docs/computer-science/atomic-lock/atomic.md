@@ -66,3 +66,5 @@ impl AtomicI32 {
 ```
 
 If the atomic variable changes from some value `A` to `B` and then back to `A` after the `load` operation, but before the `compare_exchange` operation, it would still succeed, even though the atomic variable was changed in the meantime.
+
+The `compare_exchange_weak` function performs the same operations, but it might fail even if the atomic variable was not changed in the meantime. It might be more efficient than `compare_exchange` in some architecture.
