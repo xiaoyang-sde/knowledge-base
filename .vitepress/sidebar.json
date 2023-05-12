@@ -85,6 +85,14 @@
           {
             "text": "Ordering",
             "link": "/computer-science/atomic-lock/ordering"
+          },
+          {
+            "text": "Primitive",
+            "link": "/computer-science/atomic-lock/primitive"
+          },
+          {
+            "text": "Processor",
+            "link": "/computer-science/atomic-lock/processor"
           }
         ],
         "collapsed": true
