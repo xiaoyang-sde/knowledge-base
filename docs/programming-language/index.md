@@ -69,3 +69,25 @@ Garbage collection is the automatic reclamation of allocated memory that is no l
 - Object reference semantics: Each variable name could be a pointer that points to an object or value. The semantics treat object assignment and field access with a different semantic.
 
 - Name semantics: Each variable name could bind to a pointer that points to an expression graph. The result of each evaluation is memoized to eliminate redundant computations.
+
+## Function
+
+### Parameter
+
+- The arguments in the definition of a function are called the formal parameters of the function.
+- The argument passed to the function are called the actual parameters of the function.
+
+In languages that support positional parameters, the order of the arguments must match the order of the formal parameters. In languages that support named parameters, the call could list the name of each formal parameter for each argument.
+
+The formal parameter might have a default value, which makes passing the argument optional. In some languages, default parameters must all be place at the end of the parameter list.
+
+### Variadic Function
+
+The variadic function could receive a random number of arguments. Most languages gather variadic arguments and add them to a container and pass the container to the function for processing.
+
+### Parameter Passing
+
+- Value: The formal parameter gets a clone of the argument’s value or object.
+- Reference: The formal parameter is an alias for the argument's value or object. When a parameter is assigned, ti will affect the original value or object.
+- Object reference: The formal parameter is a pointer to the argument's value or object. When a parameter is assigned, ti won't affect the original value or object.
+- Name: The parameter points to an expression graph that represents the argument.
