@@ -121,6 +121,20 @@
                 "link": "/computer-science/computer-network/transport-layer/rfc-9293"
               }
             ]
+          },
+          {
+            "text": "Network Layer",
+            "link": "/computer-science/computer-network/network-layer/",
+            "items": [
+              {
+                "text": "RFC 791",
+                "link": "/computer-science/computer-network/network-layer/rfc-791"
+              },
+              {
+                "text": "RFC 2460",
+                "link": "/computer-science/computer-network/network-layer/rfc-2460"
+              }
+            ]
           }
         ],
         "collapsed": true
