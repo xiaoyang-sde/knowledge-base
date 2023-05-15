@@ -22,11 +22,11 @@ Transport-layer multiplexing and demultiplexing extends the host-to-host deliver
 
 - If the receiver receives a packet with bit error, it could either discard the packet or sends an acknowledgement with the sequence number of the last correct packet.
 
-- To utilize the bandwith, the sender could buffer packets and send multiple packets at the same time.
+- To utilize the bandwidth, the sender could buffer packets and send multiple packets at the same time.
 
 ### Go-Back-N
 
-In a Go-Back-N protocol, the sender is allowed to tranmit multiple packets without waiting for an acknowledgement, but is constrained to have no more than a window size $N$ of unacknowledged packets in the pipeline. The acknowledgement for a packet is a cumulative acknowledgement.
+In a Go-Back-N protocol, the sender is allowed to transmit multiple packets without waiting for an acknowledgement, but is constrained to have no more than a window size $N$ of unacknowledged packets in the pipeline. The acknowledgement for a packet is a cumulative acknowledgement.
 
 If a timeout occurs, the sender resends all packets that have been sent but that have not been acknowledged. If an ACK is received, the timer is restarted.
 
