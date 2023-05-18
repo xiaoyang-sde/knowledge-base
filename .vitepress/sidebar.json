@@ -395,8 +395,12 @@
             "link": "/programming-language/c-plus-plus/function"
           },
           {
-            "text": "Class and Object-Oriented Programming",
-            "link": "/programming-language/c-plus-plus/class-oop"
+            "text": "Object-Oriented Programming",
+            "link": "/programming-language/c-plus-plus/oop"
+          },
+          {
+            "text": "Object Model",
+            "link": "/programming-language/c-plus-plus/object-model"
           },
           {
             "text": "Template",
