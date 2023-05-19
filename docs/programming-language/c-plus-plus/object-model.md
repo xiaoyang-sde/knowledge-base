@@ -188,7 +188,7 @@ When a class inherits multiple base classes, there are multiple `vptr` fields to
 
 - The `offset_to_top` represents the offset of each base class in the inherited class, which can be used when casting a pointer of the inherited class to a base class.
 
-- The `Thunk` is a small piece of code that adjusts the calling convention of virtual functions. When calling a virtual function from a pointer to one of the base classes, the pointer points to `base_address + offset_to_top` and `Thunk` will adjust the pointer to `base_address`.
+- The `Thunk` is a small piece of code that adjusts the calling convention of virtual functions. When assigning a derived class to a pointer to the base class, the compiler will adjust the pointer to `base_address + offset_to_top` to support the non-static members of the base class. When calling a virtual function through the pointer, the `Thunk` will adjust the pointer to `base_address` to support the virtual functions of the derived class.
 
 ```cpp
 struct A {
@@ -313,3 +313,21 @@ sizeof(D): 48    align: 8      |          |       D::f_0()      |
                                           |       A::bar()      |---------+
                                           +---------------------+
 ```
+
+## The Semantic of Function
+
+### Non-static Member Function
+
+C++ design criterion states that a non-static member function must be as efficient as a non-member function. The member function is transformed to be equivalent to the non-member instance.
+
+- The compiler inserts an implicit argument `T* this` to the member function that provides access to the invoking class object. If the member function is `const`, the implicit `this` pointer is `T* const this`.
+
+- The compiler rewrites each direct access of a non-static data member of the class to access through the `this` pointer.
+
+- The member function is moved into an external function with a mangled name.
+
+### Virtual Member Function
+
+The compiler transforms an invocation of a virtual member function through a reference or pointer to an object of class `T` from `object->virtual_function()` to `(*object->vptr[offset])(object)`, where `vptr` is a pointer to the virtual table of class `T` and `offset` is the function's assigned slot in the virtual table. The compiler will treat an invocation of a virtual member function through a concrete object as the same as an invocation of a non-static member function, because the concrete object doesn't support polymorphism.
+
+Each virtual function is assigned a fixed index in the virtual table. The index remains associated with the particular virtual function throughout the inheritance chain. Therefore, each virtual function in the base class and the overridden function in the derived class share the same offset in their virtual tables.
