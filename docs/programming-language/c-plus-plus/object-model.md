@@ -8,33 +8,37 @@ The default constructor is a constructor which can be called with no arguments. 
 
 The default constructor for class `T` is trivial if the constructor is not user-provided, `T` has no virtual member functions, `T` has no virtual base classes, `T` has no non-static members with default initializers, all direct bases of `T` has a trivial default constructor, and `T` has no non-static members of `class` type with a non-trivial default constructor. The trivial default constructor performs no action, which is similar to the construction of `struct` in C.
 
-To prevent synthesizing multiple default constructors for different translation units, the compiler defines the synthesized default constructor as `inline`. If the function is too complex to be inlined, an explicit non-inline static instance is synthesized.
+#### Order of Construction
 
-There are multiple scenarios when the compiler will synthesize a default constructor, which are discussed in the following sections.
+- The virtual base class constructors must be invoked in a left-to-right, depth-first search of the inheritance chain.
+  - If the class is listed within the member initialization list, the explicit arguments must be passed.
+  - The constructors shouldn't be invoked unless the class object represents the most-derived class.
+- The immediate base class constructors must be invoked in the order of base class declaration.
+  - If the class is listed within the member initialization list, the explicit arguments must be passed.
+  - If a base class is not listed within the member initialization list, the default constructor must be invoked.
+  - The a base class is a subsequent base class, the `this` pointer must be adjusted.
+- The `vptr` is initialized with the address of the virtual table of the class.
+- The member initialization list is expanded in the order of member declaration.
+  - If a member class object is not present in the member initialization list but has an associated default constructor, that default constructor must be invoked.
+- The user-defined constructor is executed.
 
 #### Member Class Object with Default Constructor
 
 If a class contains a member object of a class with a default constructor, the compiler will augment each constructor with code that invokes the default constructors of the member objects prior to the execution of the user-defined constructor. The language requires that the constructor of member objects be invoked in the order of member declaration within the class.
 
-If the class doesn't have a constructor, the compiler needs to synthesize a default constructor for the class. The synthesis takes place if the constructor needs to be invoked.
-
 #### Base Class with Default Constructor
 
 If a class is derived from a base class containing a default constructor, the compiler augments each constructor with the code to invoke all required default constructors of the base classes. If member class objects with default constructors are also present, these default constructors are also invoked after the invocation of all base class constructors.
 
-If the class doesn't have a constructor, the compiler needs to synthesize a default constructor for the class. To a derived class, the synthesized constructor appears no different than that of an user-defined default constructor.
-
 #### Class with a Virtual Function
 
-If a class either declares or inherits a virtual function or its derived from an inheritance chain in which one or more base classes are virtual, the compiler inserts code to initialize the `vptr` for each object with the address of the appropriate virtual table, which contains the addresses of the active virtual functions for that class. Within each class object, an additional pointer member `vptr` is synthesized to hold the address of the associated virtual table.
+If a class either declares or inherits a virtual function or its derived from an inheritance chain in which one or more base classes are virtual, the compiler inserts code to initialize the `vptr` for each object with the address of the appropriate virtual table. The code is added after the invocation of base class constructors but before execution of user-supplied code.
 
-If the class doesn't have a constructor, the compiler needs to synthesize a default constructor for the class.
+Within each class object, a pointer member `vptr` is synthesized to hold the address of the virtual table. The `vptr` is set after invoking the constructors of immediate base classes, which disables polymorphism for virtual functions invoked in a constructor.
 
 #### Class with a Virtual Base Class
 
 If a class is derived from a virtual base class, the compiler makes the virtual base class location within each derived class object available at runtime. For each constructor the class defines, the compiler inserts code that permits runtime access of each virtual base class.
-
-If the class doesn't have a constructor, the compiler needs to synthesize a default constructor for the class.
 
 ### Copy Constructor Construction
 
@@ -59,6 +63,20 @@ The compiler will synthesize a non-trivial copy constructor if the class doesn't
 - When the class declares one or more virtual functions, each object contains a `vptr` that points to the `vtable` of its class. The compiler needs to ensure that the correct `vptr` is used if object slicing occurs, such as an object of a base class is initialized with an object of a derived class.
 
 - When the class is derived from an inheritance chain in which one or more base classes are virtual, each object contains the information about the location of the object of its virtual base class. The compiler needs to initialize the virtual base class pointer or offsest if object slicing occurs, such as an object of a base class is initialized with an object of a derived class.
+
+### Destructor
+
+The destructor of class `T` is a special member function that is called when the lifetime of an object ends.
+
+The destructor for class `T` is trivial if the destructor is not user-provided, the destructor is not virtual, the direct base classes of `T` have trivial destructors, and non-static data members of class type have trivial destructors.
+
+#### Order of Destruction
+
+- The `vptr` is reset with the address of the virtual table of the class.
+- The user-defined destructor is executed.
+- The destructors of the member class objects, if exist, are invoked in the reverse order of their declaration.
+- The immediate base class destructors must be invoked in the reverse order of base class declaration.
+- The virtual base class destructors must be invoked in the reverse order of their construction. The constructors shouldn't be invoked unless the class object represents the most-derived class.
 
 ### Program Transformation Semantic
 

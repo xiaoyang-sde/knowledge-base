@@ -257,8 +257,12 @@ The static type of an object, reference, or pointer determines which members of 
 
 Dynamic binding happens when a virtual member function is called through a reference or a pointer to a base-class type. The compiler generates code to decide at run time which function to call. The function that is called corresponds to the dynamic type of the object.
 
+The base class should define a virtual destructor to allow objects of the derived classes to be dynamically allocated. The destructor is called when a pointer to the dynamically allocated object is deleted. If that pointer points to an object of a derived class, it is possible that the static type of the pointer might differ from the dynamic type of the object being destructed.
+
 ## Abstract Base Class
 
-The virtual function is pure if its declaration ends with `= 0`. The pure virtual function does not have to be defined. The class with a pure virtual function is an abstract base class, which defines an interface for subsequent classes to override. Create an object of an abstract base class is an error.
+The virtual function is pure if its declaration ends with `= 0`. The pure virtual function does not have to be defined. The derived class that needs to be instantiated should override the pure virtual functions. Create an object of an abstract base class is an error.
 
-The base class should define a virtual destructor to allow objects of the derived classes to be dynamically allocated. The destructor is called when a pointer to the dynamically allocated object is deleted. If that pointer points to an object of a derived class, it is possible that the static type of the pointer might differ from the dynamic type of the object being destroyed.
+- If the destructor is a pure virtual function, it has to have an implementation in order to instantiate derived classes.
+
+- If the pure virtual function is declared as `const`, the overridden functions are `const`.
