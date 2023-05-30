@@ -1,5 +1,13 @@
 # Object Model
 
+## Layout
+
+- Trivial (`is_trivial<T>`): When a class or struct has compiler-provided or trivial special member functions (constructor, destructor, etc.), then it is a trivial type. It can have members with different access specifiers and the compiler is free to reorder different sections.
+
+- Standard layout (`is_standard_layout<T>`): When a class or struct does not contain certain language features (virtual functions, virtual base classes, etc.) which are not found in C, and all members have the same access control, it is a standard-layout type. Standard-layout types can have user-defined special member functions.
+
+- Plain Old Data (`is_standard_layout<T>` and `is_trivial<T>`): pass
+
 ## The Semantic of Constructor
 
 ### Default Constructor Construction

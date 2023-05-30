@@ -387,6 +387,10 @@
             "link": "/programming-language/c-plus-plus/expression-statement"
           },
           {
+            "text": "Declaration",
+            "link": "/programming-language/c-plus-plus/declaration"
+          },
+          {
             "text": "Move Semantic",
             "link": "/programming-language/c-plus-plus/move-semantic"
           },
@@ -417,6 +421,10 @@
           {
             "text": "Smart Pointer",
             "link": "/programming-language/c-plus-plus/smart-pointer"
+          },
+          {
+            "text": "Atomic",
+            "link": "/programming-language/c-plus-plus/atomic"
           },
           {
             "text": "Coroutine",

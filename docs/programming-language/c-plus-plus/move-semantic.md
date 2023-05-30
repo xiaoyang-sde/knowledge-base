@@ -102,3 +102,16 @@ void f(T&& x) {
   g(std::forward<T>(x));
 }
 ```
+
+## `std::swap`
+
+`std::swap` swaps the values `a` and `b`. The `std::swap` overload doesn't participate in overload resolution unless `std::is_move_constructible_v<T> && std::is_move_assignable_v<T>` is `true`.
+
+```cpp
+template <typename T> constexpr void swap(T &a, T &b) noexcept {}
+
+template <typename T2, std::size_t N>
+constexpr void swap(T2 (&a)[N], T2 (&b)[N]) noexcept {}
+```
+
+For a type with a `swap` member function, a non-member `swap` that calls the member should be defined. When calling a `swap` function, `using std::swap` should be declared and the `swap` function should be called without namespace qualification, which allows the compiler to use the custom `swap` function if declared or fall back to `std::swap`.
