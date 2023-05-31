@@ -34,3 +34,24 @@ When a `shared_ptr` is copied or assigned, it tracks the number of `shared_ptr`s
 ## `unique_ptr`
 
 `shared_ptr` behaves like `unique_ptr` and the difference is that there's at most one `unique_ptr` that points to the same object. `unique_ptr` can't be copied or assigned, but the object could be transferred to another `unique_ptr` with `std::move`.
+
+## Allocation
+
+- `new`: The compiler calls `operator new`, which allocates raw, untyped space on heap for the object, and the compiler runs the constructor of the object with the initializers.
+- `delete`: The compiler runs the destructor of the object and calls `operator delete`, which deallocates the space on heap.
+
+Applications can define `operator new` and `operator delete` functions in the global scope or as `static` member functions. If the compiler finds a user-defined version, it uses that function to execute the new or delete expression.
+
+```cpp
+void *operator new(size_t);
+void *operator new[](size_t);
+void *operator delete(void *) noexcept;
+void *operator delete[](void *) noexcept;
+
+void *operator new(size_t, nothrow_t &) noexcept;
+void *operator new[](size_t, nothrow_t &) noexcept;
+void *operator delete(void *, nothrow_t &) noexcept;
+void *operator delete[](void *, nothrow_t &) noexcept;
+```
+
+The placement `new` has the form `new(place_address) type`, which accepts an address and initializes the object at the given address.
