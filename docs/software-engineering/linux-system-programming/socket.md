@@ -215,7 +215,7 @@ int send_all(int sockfd, char* buf, int len) {
 int sendto(
   int sockfd, const void* msg,
   int len, unsigned int flags,
-  const struct sockaddr* to, socklen_t tolen
+  const struct sockaddr* to, socklen_t to_len
 );
 
 int recvfrom(
