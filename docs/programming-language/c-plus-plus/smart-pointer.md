@@ -2,27 +2,31 @@
 
 C++ provides smart pointer acts like a regular pointer with the important exception that it could delete the object to which it points. The `shared_ptr` allows multiple pointers to refer to the same object, and the `unique_ptr` which owns the object to which it points. The `weak_ptr` that is a weak reference to an object managed by a `shared_ptr`.
 
+## `unique_ptr`
+
+`unique_ptr` embodies exclusive ownership semantics. Moving a `unique_ptr` transfers ownership from the source pointer to the destination pointer. Upon destruction, a non-null `unique_ptr` destructs its resource. The `unique_ptr` template accepts an argument representing a custom deleter.
+
 ## `shared_ptr`
 
-`shared_ptr` is a template. The default initialized smart pointer holds a null pointer. Dereferencing a smart pointer returns the object to which the pointer points.
+`shared_ptr` embodies shared ownership semantics. The default initialized smart pointer holds a null pointer. Dereferencing a smart pointer returns the object to which the pointer points.
+
+Each `shared_ptr<T>` contains a pointer to an object of type `T` and a pointer to a control block that contains the reference count, weak count, the custom deleter, and the custom allocator.
+
+When a `shared_ptr` is copied or assigned, the pointer to the control block is copied, and the reference count is updated. If the reference count reaches `0`, the object is deallocated.
+
+- `make_shared<T>()` initializes an object and creates a control block through a single allocation call.
+- `shared_ptr(unique_ptr&&)` creates a control block because the `unique_ptr` doesn't have a control block.
+- `shared_ptr(T*)` creates a control block because the raw pointer doesn't have a control block.
+
+`enable_shared_from_this` allows an object that is managed with a `shared_ptr` named `t` to generate `shared_ptr` instances `t_1`, ..., `t_n` that all share ownership with `t`. The `shared_from_this()` member function returns a `shared_ptr` that shares ownership of the object with `t`, which won't duplicate the control block.
 
 ```cpp
-shared_ptr<string> string_1;
-cout << *string_1 << endl;
+class derived_class : public std::enable_shared_from_this<derived_class> {
+  std::shared_ptr<derived_class> get_shared_ptr() {
+    return shared_from_this();
+  }
+};
 ```
-
-`make_shared` allocates a dynamic memory. The function allocates and initializes an object in dynamic memory and returns a `shared_ptr` that points to that object.
-
-```cpp
-shared_ptr<string> string_2 = make_shared<string>(10, 'a');
-shared_ptr<string> string_3 = make_shared<string>("114514");
-```
-
-When a `shared_ptr` is copied or assigned, it tracks the number of `shared_ptr`s point to the same object, which is the reference count. When the count goes to 0, the object it tracks is freed.
-
-- `get()` returns the raw pointer
-- `use_count()` returns the reference count
-- `unique()` returns `true` if `use_count() == 1` (deprecated)
 
 ## `weak_ptr`
 
@@ -30,10 +34,6 @@ When a `shared_ptr` is copied or assigned, it tracks the number of `shared_ptr`s
 
 - `expired()` returns `true` when the object is freed
 - `lock()` returns a `shared_ptr` to the object or a `nullptr` if the object has been freed
-
-## `unique_ptr`
-
-`shared_ptr` behaves like `unique_ptr` and the difference is that there's at most one `unique_ptr` that points to the same object. `unique_ptr` can't be copied or assigned, but the object could be transferred to another `unique_ptr` with `std::move`.
 
 ## Allocation
 

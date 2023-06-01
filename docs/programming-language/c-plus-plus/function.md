@@ -132,7 +132,29 @@ auto f1(int) -> int (*)(int*, int);
 }
 ```
 
-The lambda expression could use a variable if it's listed in the `capture_list`. The variable could be captured as value or reference. The abbreviations `[=]` and `[&]` enable the compiler to deduce the `capture_list`. Reference captures could be modified. Value captures could be modified if `mutable` is set.
+The lambda expression generates a closure, which is runtime object that hold copies of or references to the captured data. The closure is instantiated from a closure class and the statements inside a lambda become executable instructions in the member functions of the closure class.
+
+The lambda expression could capture a variable if it's listed in the `capture_list`. The abbreviations `[=]` and `[&]` enable the compiler to deduce the `capture_list`.
+
+- Value capture copies the variable. The copied variable is mutable if `mutable` is set.
+- Reference capture creates a reference to the variable. The referenced variable is mutable. The closure might live longer than the captured variable, which results in a dangling reference.
+- Init capture specifies the name of a closure data member and an expression that initializes the data member.
+
+```cpp
+auto widget_ptr = std::make_unique<widget>();
+auto lambda = [widget = std::move(widget_ptr)] -> int {
+  return widget->int_member;
+};
+```
+
+Generic lambda expression has an `auto` in its parameter list, which generates a function template. The type of the parameter can be determined with `decltype()`.
+
+```cpp
+auto print = [](auto &&element) { std::cout << element; };
+auto forward_lambda = [print](auto &&element) {
+  print(std::forward<decltype(element)>(element));
+};
+```
 
 ## `std::function`
 
