@@ -75,29 +75,6 @@
         "collapsed": true
       },
       {
-        "text": "Atomic and Lock",
-        "link": "/computer-science/atomic-lock/",
-        "items": [
-          {
-            "text": "Atomic",
-            "link": "/computer-science/atomic-lock/atomic"
-          },
-          {
-            "text": "Ordering",
-            "link": "/computer-science/atomic-lock/ordering"
-          },
-          {
-            "text": "Primitive",
-            "link": "/computer-science/atomic-lock/primitive"
-          },
-          {
-            "text": "Processor",
-            "link": "/computer-science/atomic-lock/processor"
-          }
-        ],
-        "collapsed": true
-      },
-      {
         "text": "Computer Network",
         "items": [
           {
@@ -423,6 +400,10 @@
             "link": "/programming-language/c-plus-plus/smart-pointer"
           },
           {
+            "text": "Thread",
+            "link": "/programming-language/c-plus-plus/thread"
+          },
+          {
             "text": "Atomic",
             "link": "/programming-language/c-plus-plus/atomic"
           },
@@ -463,10 +444,6 @@
             "link": "/programming-language/rust/enum-pattern-matching"
           },
           {
-            "text": "Package, Crate, and Module",
-            "link": "/programming-language/rust/package-create-module"
-          },
-          {
             "text": "Collection",
             "link": "/programming-language/rust/collection"
           },
@@ -489,6 +466,22 @@
           {
             "text": "Smart Pointer",
             "link": "/programming-language/rust/smart-pointer"
+          },
+          {
+            "text": "Thread",
+            "link": "/programming-language/rust/thread"
+          },
+          {
+            "text": "Atomic",
+            "link": "/programming-language/rust/atomic"
+          },
+          {
+            "text": "Ordering",
+            "link": "/programming-language/rust/ordering"
+          },
+          {
+            "text": "Processor",
+            "link": "/programming-language/rust/processor"
           }
         ],
         "collapsed": true

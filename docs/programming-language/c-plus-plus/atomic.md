@@ -1,5 +1,9 @@
 # Atomic
 
+## `std::atomic`
+
+`std::atomic` is a template that defines an atomic type. If different threads are reading and writing to an atomic object, the behavior is well-defined. Accessing to atomic objects could establish inter-thread synchronization with `std::memory_order`.
+
 ## Volatile
 
 The object might have a type that is `volatile`-qualified. Each access, such as write operation or member function call, made through a glvalue expression of volatile-qualified type is treated as a visible side-effect for the purposes of optimization. Within a single thread of execution, volatile accesses can't be optimized out or reordered with visible side effect that is sequenced-before or sequenced-after the volatile access.

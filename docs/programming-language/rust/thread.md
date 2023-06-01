@@ -1,6 +1,6 @@
-# Atomic and Lock
+# Thread
 
-## Thread
+## `std::thread`
 
 The program starts with the main thread, which will execute the `main` function and can be used to spawn more threads if requested. In Rust, threads are spawned using the `std::thread::spawn` function, which takes a function and execute it.
 
@@ -27,7 +27,7 @@ thread::spawn(move || println!("{:?}", number_list)).join().unwrap();
 
 The spawned thread could return a value through the closure, and the return value could be obtained from the `Result` returned from the `join` method.
 
-## Scoped Thread
+## `std::thread::scope`
 
 The `std::thread::scope` function creates a scope for spawning scoped threads. The function passed to scope will be provided a `Scope` object, through which scoped threads can be spawned. These threads can borrow non-`'static` data, as the scope guarantees all threads will be joined at the end of the scope.
 
@@ -144,7 +144,7 @@ unsafe impl Sync for X {}
 
 ## Locking
 
-### Mutex
+### `std::sync::Mutex<T>`
 
 The most common tool for sharing mutable data between threads is a mutex, which ensures threads have exclusive access to some data and blocks other threads that attempt to access it at the same time. When a thread attempts to lock a locked mutex, it will be put to sleep until the mutex is unlocked. Unlocking will cause one of the waiting threads to be woken up.
 
@@ -169,7 +169,7 @@ fn main() {
 
 The mutex gets marked as poisoned when a thread panics while holding the lock. When that happens, the mutex will no longer be locked, but calling its lock method will result in an `Err` to indicate it has been poisoned. It indicates that the data in the mutex might be an inconsistent state, and other threads should either handle it or propagates the panic.
 
-### Read-Write Lock
+### `std::sync::RwLock<T>`
 
 The read-write lock is a more compliated version of a mutex that understands the difference between exclusive and shared access. It allows multiple threads to read the data at the same time.
 
@@ -177,7 +177,7 @@ The read-write lock is a more compliated version of a mutex that understands the
 
 ## Parking and Condition Variable
 
-### Thread Parking
+### `std::thread::park()`
 
 While a mutex allows threads to wait until it becomes unlocked, it's not able to wait for other conditions.
 
@@ -204,8 +204,46 @@ thread::scope(|scope| {
 })
 ```
 
-### Condition Variable
+### `std::sync::Condvar`
 
 The condition variable are common option for waiting for something to happen to data in a mutex. The thread can wait on a condition variable, after which it can be woken up when another thread notifies the same condition variable. Multiple threads can wait on the same condition variable, and notifications can either be sent to one waiting thread, or to all of them.
 
 `std::sync::Condvar` has a `wait` method that takes a `MutexGuard` that proves the thread has been locked. It first unlocks the mutex and goes to sleep. When woken up, it relocks the mutex and returns a new `MutexGuard`. The `wait_timeout` method takes a `Duration` and waits for a notification or a timeout.
+
+## Implementation
+
+## `spin_lock`
+
+The implementation of the `spin_lock` primitive leverages an `atomic_bool` to represent the state of the lock, which follows the [`Mutex` named requirement](https://en.cppreference.com/w/cpp/named_req/Mutex) of C++.
+
+- The `lock()` method waits on `load` rather than `exchange`, because `exchange` might claim exclusive write access to the cache line where the lock is stored.
+
+- The `try_lock()` method first checks if the lock is free before attempting to acquire it to prevent claiming redundant exclusive write access.
+
+```cpp
+#include <atomic>
+#include <thread>
+
+class spin_lock {
+public:
+  auto lock() noexcept -> void {
+    while (lock_.exchange(true, std::memory_order_acquire)) {
+      while (lock_.load(std::memory_order_relaxed)) {
+        std::this_thread::yield();
+      }
+    }
+  }
+
+  auto try_lock() noexcept -> bool {
+    return !lock_.load(std::memory_order_relaxed) &&
+           !lock_.exchange(true, std::memory_order_acquire);
+  }
+
+  auto unlock() noexcept -> void {
+    lock_.store(false, std::memory_order_release);
+  }
+
+private:
+  std::atomic_bool lock_{false};
+};
+```
