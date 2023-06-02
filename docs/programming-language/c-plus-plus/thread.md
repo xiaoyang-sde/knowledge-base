@@ -66,7 +66,7 @@ The `std::packaged_task` class wraps a callable object such that its return valu
 
 ## Condition Variable
 
-The `std::condition_variable` class is a synchronization primitive used with a `std::mutex` to block one or more threads until a seperated thread both modifies a shared variable and notifies the `std::condition_variable`.
+The `std::condition_variable` class is a synchronization primitive used with a `std::mutex` to block one or more threads until a separated thread both modifies a shared variable and notifies the `std::condition_variable`.
 
 - The thread that intends to change the shared variable must acquire a `std::mutex`, change the shared variable, and call `notify_one` or `notify_all` on the `std::condition_variable`, which can be done after releasing the lock.
 - The thread that intends to wait on a a `std::condition_variable` must acquire a `std::unique_lock<std::mutex>` to protect the shared variable and invokes the predicated `wait` on the `std::condition_variable`.
@@ -104,4 +104,42 @@ for (int i = 0; i < 128; ++i) {
     semaphore.release();
   });
 }
+```
+
+## Implementation
+
+## `spin_lock`
+
+The implementation of the `spin_lock` primitive leverages an `atomic_bool` to represent the state of the lock, which follows the [`Mutex` named requirement](https://en.cppreference.com/w/cpp/named_req/Mutex) of C++.
+
+- The `lock()` method waits on `load` rather than `exchange`, because `exchange` might claim exclusive write access to the cache line where the lock is stored.
+
+- The `try_lock()` method first checks if the lock is free before attempting to acquire it to prevent claiming redundant exclusive write access.
+
+```cpp
+#include <atomic>
+#include <thread>
+
+class spin_lock {
+public:
+  auto lock() noexcept -> void {
+    while (lock_.exchange(true, std::memory_order_acquire)) {
+      while (lock_.load(std::memory_order_relaxed)) {
+        std::this_thread::yield();
+      }
+    }
+  }
+
+  auto try_lock() noexcept -> bool {
+    return !lock_.load(std::memory_order_relaxed) &&
+           !lock_.exchange(true, std::memory_order_acquire);
+  }
+
+  auto unlock() noexcept -> void {
+    lock_.store(false, std::memory_order_release);
+  }
+
+private:
+  std::atomic_bool lock_{false};
+};
 ```
