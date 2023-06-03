@@ -533,6 +533,16 @@
         "collapsed": true
       },
       {
+        "text": "Linux Kernel Development",
+        "items": [
+          {
+            "text": "Process",
+            "link": "/software-engineering/linux-kernel-development/process"
+          }
+        ],
+        "collapsed": true
+      },
+      {
         "text": "Linux System Programming",
         "items": [
           {

@@ -11,7 +11,7 @@ Each process is represented by a unique identifier, the process ID, or pid. The 
 
 The kernel imposes a maximum pid value of `32768`, which can be modified with `/proc/sys/kernel/pid_max`. The kernel does not reuse pid values until it wraps around from the top, which guarantees the uniqueness of pid values in a short period of time.
 
-## Process Hierarchy
+## Process Tree
 
 The process that spawns a new process is known as the parent and the new process is known as the child. Except for the `init` process, each process is spawned from another process.
 
