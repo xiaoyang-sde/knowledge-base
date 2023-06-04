@@ -546,6 +546,10 @@
           {
             "text": "Interrupt",
             "link": "/software-engineering/linux-kernel-development/interrupt"
+          },
+          {
+            "text": "Synchronization",
+            "link": "/software-engineering/linux-kernel-development/synchronization"
           }
         ],
         "collapsed": true
