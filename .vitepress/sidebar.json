@@ -542,6 +542,10 @@
           {
             "text": "System Call",
             "link": "/software-engineering/linux-kernel-development/system-call"
+          },
+          {
+            "text": "Interrupt",
+            "link": "/software-engineering/linux-kernel-development/interrupt"
           }
         ],
         "collapsed": true
