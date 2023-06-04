@@ -538,6 +538,10 @@
           {
             "text": "Process",
             "link": "/software-engineering/linux-kernel-development/process"
+          },
+          {
+            "text": "System Call",
+            "link": "/software-engineering/linux-kernel-development/system-call"
           }
         ],
         "collapsed": true
