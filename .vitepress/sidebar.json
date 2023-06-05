@@ -550,6 +550,10 @@
           {
             "text": "Synchronization",
             "link": "/software-engineering/linux-kernel-development/synchronization"
+          },
+          {
+            "text": "Allocation",
+            "link": "/software-engineering/linux-kernel-development/allocation"
           }
         ],
         "collapsed": true
