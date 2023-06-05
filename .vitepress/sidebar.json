@@ -554,6 +554,10 @@
           {
             "text": "Allocation",
             "link": "/software-engineering/linux-kernel-development/allocation"
+          },
+          {
+            "text": "Address Space",
+            "link": "/software-engineering/linux-kernel-development/address-space"
           }
         ],
         "collapsed": true
