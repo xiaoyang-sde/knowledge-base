@@ -558,6 +558,10 @@
           {
             "text": "Address Space",
             "link": "/software-engineering/linux-kernel-development/address-space"
+          },
+          {
+            "text": "Page Cache",
+            "link": "/software-engineering/linux-kernel-development/page-cache"
           }
         ],
         "collapsed": true
