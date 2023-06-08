@@ -582,12 +582,12 @@
             "link": "/software-engineering/linux-system-programming/process"
           },
           {
-            "text": "Threading",
-            "link": "/software-engineering/linux-system-programming/threading"
-          },
-          {
             "text": "Scheduling",
             "link": "/software-engineering/linux-system-programming/scheduling"
+          },
+          {
+            "text": "Synchronization",
+            "link": "/software-engineering/linux-system-programming/synchronization"
           },
           {
             "text": "Memory",

@@ -1,4 +1,4 @@
-# Threading
+# Synchronization
 
 Threading is the creation and management of multiple units of execution within a single process. Each process contains one or more threads. Virtualized memory is unique to each process, but shared among threads within the same process. Virtualized processor is unique to threads, allowing a single process to perform multiple tasks at the same time.
 
