@@ -8,6 +8,9 @@
 - `load()` obtains the value of the atomic object in an atomic operation.
 - `compare_exchange_strong()` compares the value of the atomic object with non-atomic argument and performs atomic exchange if equal or atomic load if not.
 - `compare_exchange_weak()` is identical to `compare_exchange_strong()`, with the exception that it might fail even if the value of the atomic object is equal to the argument. When invoked in a loop, `compare_exchange_weak()` will perform better in some platforms.
+- `wait()` takes a value and blocks until the atomic object no longer contains the given value.
+- `notify_one()` notifies at least one thread waiting on the atomic object.
+- `notify_all()` notifies all threads waiting on the atomic object.
 
 If `T` is an integral type, the template implements special methods such as `fetch_add()`, `fetch_sub()`, `fetch_and()`, `fetch_or()`, `fetch_xor()`.
 

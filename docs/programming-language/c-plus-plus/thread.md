@@ -108,7 +108,7 @@ for (int i = 0; i < 128; ++i) {
 
 ## Implementation
 
-## `spin_lock`
+### `spin_lock`
 
 The implementation of the `spin_lock` primitive leverages an `atomic_bool` to represent the state of the lock, which follows the [`Mutex` named requirement](https://en.cppreference.com/w/cpp/named_req/Mutex) of C++.
 
