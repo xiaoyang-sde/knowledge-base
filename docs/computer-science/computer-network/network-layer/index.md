@@ -60,3 +60,21 @@ OSPF is a link-state protocol that uses flooding of link-state information and a
 With OSPF, a router broadcasts routing information to all other routers in the autonomous system. Each router broadcasts link-state information through a link-state packet both in a fixed period and whenever there is a change in a link's state.
 
 OSPF advertisements are contained in OSPF messages that are carried with IP. The OSPF protocol also checks that links are operational (through a HELLO message that is sent to an attached neighbor) and allows an OSPF router to obtain a neighboring router's database of network-wide link state.
+
+### BGP
+
+BGP is an inter-autonomous system routing protocol. In BGP, packets are not routed to a specific destination address, but instead to CIDR prefixes, with each prefix repsenting a subnet. BGP enables each router to obtain prefix information from neighboring ASs and determine the best routes to the prefixes. In BGP, each pair of routers exchange routing information over a BGP connection, where an external BGP connection spans ASs.
+
+Each AS contains gateway routers that connect to other ASs and internal routers that connect to hosts and routes within its own AS. Each router could advertise the path to its subnet or a subnet of its neighbor. The advertisement message includes several BGP attributes, such as `AS-PATH` and `NEXT-HOP`. When a prefix is passed to an AS, the AS adds its ASN to the existing list in the `AS-PATH`. The `NEXT-HOP` is the IP address of the router interface that begins the `AS-PATH`.
+
+#### Hot Potato Routing
+
+In hot potato routing, the route chosen from among all possible routes is that route with the least cost to the `NEXT-HOP` router beginning that route. When a router learns from the BGP protocol that a subnet $a$ is reachable through multiple `NEXT-HOP` routers, it uses routing information from OSPF to determine costs of least-cost paths to each of the `NEXT-HOP` router and determines the corresponding interface $I$ with the forwarding table.
+
+#### Route-Selection Algorithm
+
+For each destination prefix, the input into BGP's route-selection algorithm is the set of all routes to that prefix that the router has learned.
+
+- Each route is assigned a local preference value as an attribute, which could be set in the router or learned from another router in the same AS. The routes with the highest local preference values are selected.
+- For the routes with the maximum local preference, the routes with the shortest `AS-PATH` is selected.
+- For the routes with the minimum `AS-PATH`, hot potato routing is used.
