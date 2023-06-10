@@ -57,22 +57,7 @@ The variable that is initialized gets the specified value at the moment it's cre
 
 The scope is the part of the program in which a name has a particular meaning. The same name could refer to different entities in different scopes. Names defined outside blocks have global scope. Names defined inside blocks have block scope.
 
-### Declaration and Definition
-
-To separate a program into multiple files, the variables should be shared across files. C++ distinguishes between declarations and definitions. To use the same variable in multiple files, it must be defined once and declared in all other files.
-
-- Declarations make names known to the program.
-- Definitions create the associated entities.
-
-```cpp
-extern int i; // declares but doesn't define i
-extern double pi = 3.1415 // declares and defines pi
-int j; // declares and defines j
-```
-
 ## Compound Type
-
-The compound type is a type that is defined in terms of another type. For example, references and pointers are compound types.
 
 ### Reference
 
@@ -117,16 +102,14 @@ const int soft_limit = 20; // implicit constant expression
 constexpr hard_limit = soft_limit * 2; // explicit constant expression
 ```
 
-## Type
-
-### Type Alias
-
-- `typedef` is a keyword that defines type aliases: `typedef double length`
-- Alias declaration: `using length = double`
+## Type Deduction
 
 ### `auto`
 
-The compiler could deduce the type of variables defined with the `auto` type specifier from their initializers. `auto` will drop the top-level `const` unless `const auto` is specified.
+The compiler could deduce the type of variables defined with the `auto` type specifier from their initializers. `auto` follows the same rule as the template argument deduction.
+If the placeholder type specifier is `decltype(auto)`, the deduced type is `decltype(expr)`, where `expr` is the initializer.
+
+For example, given `const auto& i = expr`, the type of `i` is the type of the argument `u` in a template `template<class U> void f(const U& u)` if the function call `f(expr)` was compiled. Therefore, `auto&&` might be deduced either as an lvalue reference or rvalue reference according to the initializer.
 
 ```cpp
 double val_1 = 1.0;
@@ -137,39 +120,13 @@ const auto const_val_3 = val_1 + val_2; // const_val_3 is a const double
 
 ### `decltype`
 
-The compiler could deduce the type of variables defined with the `decltype` type specifier from the parameter of `decltype`. If the parameter is an expression instead of a variable, it yields the type that the expression yields. `decltype` returns a reference type for an expression that yield an object that can be assigned to, such as `*p`. `decltype(variable)` will yield a reference type if the variable is a reference. `decltype((variable))` is guaranteed to yield a reference type because `(variable)` is an expression that yields an object that can be assigned to.
+The compiler could deduce the type of variables defined with the `decltype` type specifier from the parameter of `decltype`. If the parameter is an expression instead of a variable, it returns the type that the expression returns. `decltype` returns a reference type for an expression that returns an lvalue, such as `*p`. `decltype((variable))` is guaranteed to return a reference type because `(variable)` is an expression that returns an lvalue.
+
+`decltype(auto)` deduces a type from its initializer, but it performs the type deduction using the `decltype` rules, instead of the `auto` rules.
 
 ```cpp
 decltype(1) val_1 = 0; // val_1 is an integer
 decltype(1 + 1) val_2 = 0; // val_2 is an integer
 decltype(max()) val_3 = 0; // val_3 is the return type of max
 decltype(val_3) val_4 = 0; // val_4 has the same type as val_3
-```
-
-## Structure
-
-The structure contains a few data members. Each object has its own copy of the data members. If a data member doesn't have an initializer, it is default initialized. The structure could be defined in a header file.
-
-```cpp
-struct sales_data {
-  string book_no;
-  unsigned unit_sold = 0;
-  double revenue = 0.0;
-}
-```
-
-### Header Guard
-
-The preprocessor is a program that runs before the compiler and changes the source code. The header guard is a few preprocessors that prevent a header to be included more than once. It defines preprocessor variables to indicate whether or not the header has been included.
-
-```cpp
-#ifndef SALES_DATA_H
-#define SALES_DATA_H
-#include <string>
-struct sales_data {
-  string book_no;
-  unsigned unit_sold = 0;
-  double revenue = 0.0;
-}
-#endif
 ```

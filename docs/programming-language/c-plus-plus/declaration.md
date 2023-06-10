@@ -37,3 +37,22 @@ Each program has one or more translation units. Each translation unit consists o
 - Dynamic storage duration. The storage for the object is allocated and deallocated using heap allocation functions, such as `new` and `delete`.
 
 Variables declared at block scope with the specifier `static` or `thread_local` have static or thread storage duration but are initialized the first time control passes through their declaration. On all further calls, the declaration is skipped. The destructor for a block-scope `static` variable is called at program exit.
+
+## Header Guard
+
+The header guard is a few preprocessors that prevent a header to be included more than once in a translation unit. It defines preprocessor variables to indicate whether or not the header has been included.
+
+```cpp
+#ifndef SALES_DATA_H
+#define SALES_DATA_H
+
+#include <string>
+
+struct sales_data {
+  string book_no;
+  unsigned unit_sold = 0;
+  double revenue = 0.0;
+}
+
+#endif
+```

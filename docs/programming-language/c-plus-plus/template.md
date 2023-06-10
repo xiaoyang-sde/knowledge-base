@@ -65,9 +65,7 @@ The compiler uses the arguments in a call to determine the template parameters f
 - `const` conversion: Function parameter that is a reference or pointer to an object `const`-qualified type can be passed a reference or pointer to an object of non-`const`-qualified type.
 - Array or function conversion: The array argument will be converted to a pointer to its first element. The function argument will be converted to a pointer to the function's type.
 
-If a template type parameter is used as the type of multiple function parameters, the deduced types, after limited conversions, must be identical.
-
-The function template can be invoked with explicit template arguments. Normal conversion applies to explicit template arguments.
+If a template type parameter is used as the type of multiple function parameters, the deduced types, after limited conversions, must be identical. The function template can be invoked with explicit template arguments. Normal conversion applies to explicit template arguments.
 
 ```cpp
 template <typename T1, typename T2, typename T3>
@@ -81,11 +79,10 @@ sum<long long, long long, long long>(1, 2);
 
 ### Reference
 
-- When a function parameter is an lvalue reference to a template type parameter `T&`, it could accept a `const` or non-`const` lvalue.
-
+- When a function parameter is a template type parameter `T`, it could accept either an lvalue or an rvalue, which will be copied or moved, and the `const` qualification will be dropped.
+- When a function parameter is an lvalue reference to a template type parameter `T&`, it could accept an lvalue, and the `const` qualification will be preserved.
 - When a function parameter is a `const` lvalue reference to a template type parameter `const T&`, it could accept a `const` lvalue or an rvalue.
-
-- When a function parameter is an rvalue reference to a template type parameter `T&&`, it could accept either an lvalue or an rvalue.
+- When a function parameter is an rvalue reference to a template type parameter `T&&`, it could accept either an lvalue or an rvalue, and the `const` qualification will be preserved.
   - When an lvalue `U` is passed to `T&&`, the compiler deduces the template type parameter `T` as the argument's lvalue reference type `U&`.
   - When an rvalue `U` is passed to `T&&`, the compiler deduces the template type parameter `T` as the argument's  type `U`.
   - The reference collapsing rule states that `X& &`, `X& &&`, and `X&& &` collapse to `X&` and `X&& &&` collapses to `X&&`. Therefore, the function parameter `U& &&` collapses to an lvalue reference `U&`.
