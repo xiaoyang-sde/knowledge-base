@@ -4,7 +4,7 @@ import sidebar from "./sidebar.json";
 
 export default defineConfig({
   title: "Xiaoyang's Notes",
-  description: "Lecture notes",
+  description: "Lecture notes on computer science and software engineering",
   srcDir: "./docs",
   markdown: {
     config: (md) => {
