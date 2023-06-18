@@ -1,10 +1,25 @@
 # Coroutine
 
-The coroutine is a function that can suspend execution to be resumed later. In C++, the coroutine is stackless, which means that it returns to the caller when suspending execution, and the state required to resume is stored on heap. It allows sequential code to handle non-blocking I/O without explicit callbacks. The function is a coroutine if it contains either of the `co_await` expression, `co_yield` expression, or `co_return` statement.
+## Introduction
 
-- Each coroutine is associated with the promise object, manipulated from inside the coroutine. The coroutine submits its result or exception through this object. The compiler determines the type of the promise object with `std::coroutine_traits`.
-- Each coroutine is associated with the coroutine handle, manipulated from outside the coroutine. The handle is used to resume or destruct the coroutine.
-- Each coroutine is associated with the coroutine state object allocated on heap, which contains the promise object, the parameters, the state of the current suspension point, and variables whose lifetime spans the suspension point.
+The normal function provides the call operation and the return operation. The call operation creates an activation frame, suspends execution of the calling function and transfers execution to the start of the function being called. The return operation passes the return-value to the caller, deallocates the activation frame and then resumes execution of the caller. The activation frame of a normal function is allocated on stack, which contains parameters, local variables, the return address, and the address of the caller's activation frame.
+
+The coroutine is a function that could suspend execution to be resumed later, which provides the suspend operation, the resume operation, and the destroy operation. Since coroutines could be suspended without deallocating the activation frame, the lifetime of the activation frame are not nested. The frame on heap holds part of the coroutine's activation frame that persists while the coroutine is suspended and the frame on stack exists while the coroutine is executing and is freed when the coroutine suspends and transfers execution back to the caller or resumer.
+
+- Suspend: The suspend operation of a coroutine allows the coroutine to suspend execution and transfer execution back to the caller or resumer of the coroutine. The suspend-points are represented with the `co_await` and `co_yield` operators. When a coroutine hits a suspend-point, it writes the registers to the activation frame, stores an identifier of the current suspend-point, which allows a resume operation to know where to resume execution of the coroutine. The coroutine could execute logic after the coroutine enters the 'suspended' state, which allows the coroutine to be scheduled for resumption without the need for synchronization. The coroutine could choose to either resume execution of the coroutine or transfer execution back to the caller or resumer.
+- Resume: The resume operation could be performed on a suspended coroutine. The coroutine-frame handle provides a `resume()` function, which will transfer execution to the point in the function at which it was last suspended. When the coroutine next suspends or runs to completion, the call to `resume()` will return and resume execution of the calling function.
+- Destroy: The destroy operation could be performed on a suspended coroutine. The coroutine-frame handle provides a `destroy()` function, which will transfer execution to a code-path that calls the destructors of all local variables in-scope at the suspend-point and deallocates the activation frame.
+
+## Awaiter and Awaitable
+
+- The `Awaitable` interface specifies methods that control the semantics of a `co_await` expression. When a value is `co_await`ed, the code is translated into a series of calls to methods on the awaitable object that allow it to define whether to suspend the current coroutine, execute some logic after it has suspended to schedule the coroutine for later resumption, and execute some logic after the coroutine resumes to produce the result of the `co_await` expression.
+- The `Awaiter` type is a type that implements the three special methods that are called as part of a `co_await` expression: `await_ready`, `await_suspend` and `await_resume`.
+
+The `co_await <expr>` operator could be used within the context of a coroutine. It suspends the coroutine and returns control to its caller or resumer.
+
+1. Assume the promise object for the awaiting coroutine have type `Promise` and `promise` is an lvalue reference to the promise object for the coroutine. If the promise type `Promise` has a member named `await_transform`, then `<expr>` is first passed into a call to `promise.await_transform(<expr>)` to obtain the `Awaitable` value, `awaitable`. Otherwise, the result of evaluating `<expr>` is the `Awaitable` object, `awaitable`.
+
+2. If the `Awaitable` object, `awaitable`, has an operator `co_await()` overload, it's called to obtain the `Awaiter` object. Otherwise, `awaitable` is used as the awaiter object.
 
 ## Execution
 
@@ -24,7 +39,7 @@ The coroutine is a function that can suspend execution to be resumed later. In C
 
 ## `co_await`
 
-The operator `co_await` suspends a coroutine and returns control to the caller. Its operand is an expression whose type must either define operator `co_await`, or be convertible to such type with the current coroutine's `promise_type::await_transform()`.
+Its operand is an expression whose type must either define operator `co_await`, or be convertible to such type with the current coroutine's `promise_type::await_transform()`.
 
 The `awaiter.await_ready()` is called, which is a short-cut to avoid the cost of suspension. If its result is `false`, then the coroutine is suspended, `awaiter.await_suspend()` is called with the coroutine handle representing the current coroutine. The function should schedule it to resume on some executor or to be destructed. Because the coroutine is suspended before entering `awaiter.await_suspend()`, the coroutine handle can be transferred across threads, with no additional synchronization.
 
