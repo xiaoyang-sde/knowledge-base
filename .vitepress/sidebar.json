@@ -613,6 +613,10 @@
             "link": "/software-engineering/linux-system-programming/signal"
           },
           {
+            "text": "Namespace",
+            "link": "/software-engineering/linux-system-programming/namespace"
+          },
+          {
             "text": "io_uring",
             "link": "/software-engineering/linux-system-programming/io-uring"
           }
