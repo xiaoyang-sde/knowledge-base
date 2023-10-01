@@ -42,8 +42,8 @@ struct vm_operations_struct {
 ```
 
 - `find_vma()` searches for the area where a specific address resides.
-- `find_vma_prev()` searches for the area such that it preceeds a specific address.
-- `find_vma_intersection()` searches for the area such that it overlapds a specific interval.
+- `find_vma_prev()` searches for the area such that it precedes a specific address.
+- `find_vma_intersection()` searches for the area such that it overlaps a specific interval.
 - `do_mmap()` creates a linear address interval in a specific process address space that is either merged with an existing area or created as a new area. The function maps an optional file at a specific offset for a specific length. The `flags` parameter specifies properties and permissions.
 - `do_munmap()` removes a linear address interval from a specific process address space.
 
