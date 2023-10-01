@@ -22,7 +22,7 @@ To run the `hello_world` program on the system, the individual C statements must
 
 ## Hardware Organization
 
-- The buses are electrical conduits that transmit bytes of information bewteen the components. Buses are designed to transfer fixed-size chunks of bytes known as words.
+- The buses are electrical conduits that transmit bytes of information between the components. Buses are designed to transfer fixed-size chunks of bytes known as words.
 - The I/O devices are the system's connection to the external world. Each I/O device is connected to the I/O bus through either a controller or an adapter.
 - The main memory is a temporary storage device that holds both a program and the data it manipulates while the processor is executing the program. It consists of a collection of DRAM chips and is organized as a linear array of bytes.
 - The CPU is the engine that executes instructions stored in the main memory.
@@ -46,5 +46,5 @@ The operating system provides an abstraction that protects the hardware from mal
 ## Concurrent Execution
 
 - Thread-level parallelism: Multi-core processors have several cores integrated onto a single chip, where each core has its unique L1 and L2 cache. Multi-core processors allow parallel execution of multiple threads.
-- Instruction-level parallelism: Modern processors can execute multiple instructions at the same time. The pipelining technique partitions the actions required to execute an insturction into different steps and the processor is organized as a series of stages, each performing one of these steps. The stages can operate in parallel, working on different parts of different instructions.
+- Instruction-level parallelism: Modern processors can execute multiple instructions at the same time. The pipelining technique partitions the actions required to execute an instruction into different steps and the processor is organized as a series of stages, each performing one of these steps. The stages can operate in parallel, working on different parts of different instructions.
 - SIMD parallelism: Modern processors have special hardware that allows a single instruction to cause multiple operations to be performed in parallel.
