@@ -1,8 +1,4 @@
-# The Processor
-
-## Simple Implementation
-
-The first section of the chapter covers an implementation that includes a subset of the core RISC-V instruction set. It includes `ld`, `sd`, `add`, `sub`, `and`, `or`, and `beq`. It illustrates the key principles used in creating a data path and designing the control.
+# Processor
 
 - The processor sends the program counter to the memory that contains the code to fetch the instruction.
 - The processor reads one or two registers based on the fields of the instruction.
