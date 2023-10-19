@@ -40,9 +40,13 @@ To execute an instruction, it needs to be fetched from the instruction memory, a
 - The program counter is a register that holds the address of the current instruction.
 - The adder is an ALU that performs add operations.
 
+### Arithmetic-Logical Instruction
+
 To execute an arithmetic-logical instruction (R-type), the processor needs to read 2 data words from the register file, calculate the result with ALU, and write 1 data word into the register fie.
 
 - The processor's 32 general-purpose registers are stored in a register file. The register file contains the register state of the computer. Writes are edge-triggered, so that all the write inputs must be valid at the clock edge. It requires a write signal.
+
+### Load-Store Instruction
 
 To execute a load instruction, the processor needs to read 1 data word from a register, calculate the address with ALU, read 1 data word from the address, and write 1 data word into the register file. The 12-bit signed offset needs to be sign-extended to 64 bits.
 
@@ -51,8 +55,29 @@ To execute a load instruction, the processor needs to read 2 data words from a r
 - The immediate generation unit turns a 12-bit signed value to a 64-bit signed value.
 - The data memory is a memory unit with inputs for the address and the write data, and a single output for the read result. It requires a read and a write signal.
 
+### Branch Instruction
+
 To execute a branch instruction, the processor needs to read 2 data words from a register, test the register contents, calculate the branch target address with ALU, and update the PC. The base for the branch target address calculation is the address of the branch instruction. The offset field represents a half word offset (to match the size of an instruction), so it needs to be shifted left 1 bit before calculating the branch target address.
 
 The datapath components could be combined into a single datapath that attempts to execute each instruction in one clock cycle, which means that no datapath resource could be used more than once per instruction. To share a datapath element between two different instruction classes, a multiplexer could be used to select the inputs.
 
+## Control Unit
+
 The control unit must be able to take inputs and generate a write signal for each state element, the selector control for each multiplexer, and the ALU control.
+
+### ALU Control
+
+- For R-type instructions, the ALU needs to perform one of the actions, such as `and`, `or`, `add`, or `subtract`, depending on the value of the 7-bit `funct7` field and 3-bit `funct3` field.
+- For load and store instructions, the ALU adds a value with an immediate to calculate the address.
+- For the conditional branch if equal instruction, the ALU subtracts two operands and tests to see if the result is 0.
+
+The ALU control unit takes `funct7` and `funct3` as inputs and a control field that indicates if ALU should infer the operation from `funct7` and `funct3`.
+
+### Main Control
+
+- `reg_write`: If asserted, write the data input to `rd`.
+- `alu_src`: If asserted, the second ALU operand is the sign-extended 12 bits of `imm`. If deasserted, the second ALU operand is `rs2`.
+- `pc_src`: If asserted, write the branch target to `pc`. If deasserted, write `pc + 4` to `pc`.
+- `mem_read`: If asserted, read the data from the address specified in the input.
+- `mem_write`: If asserted, write the input data to the address specified in the input.
+- `mem_to_reg`: If asserted, the value fed to the register data input comes from the memory. If deasserted, If asserted, the value fed to the register data input comes from the ALU.
