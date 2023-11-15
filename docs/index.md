@@ -23,7 +23,3 @@
 > 我卻像當天的少年
 >
 > 但已是 能接受你所有改變
-
-I am a computer science student residing in California, focusing on trading infrastructure and operating systems. I hold an interest in political science, law (immigration, patent, contract), and financial market microstructure. To organize and reinforce the information I acquire, I maintain thorough notes, some of which are shared with the public.
-
-I completed an internship at a fintech startup and will soon join a quantitative trading firm. Feel free to connect me on LinkedIn to discuss career matters or other related topics.

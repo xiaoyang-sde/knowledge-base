@@ -1,10 +1,9 @@
 import mathjax3 from "markdown-it-mathjax3";
 import { defineConfig } from "vitepress";
-import sidebar from "./sidebar.json";
 
 export default defineConfig({
-  title: "Xiaoyang's Notes",
-  description: "Lecture notes on computer science and software engineering",
+  title: "Xiaoyang Liu",
+  description: "",
   srcDir: "./docs",
   markdown: {
     config: (md) => {
@@ -111,7 +110,6 @@ export default defineConfig({
       apiKey: "6830e4303c886bb38ce73f508d5464c4",
       indexName: "xiaoyang-liu",
     },
-    sidebar,
     socialLinks: [
       { icon: "github", link: "https://github.com/xiaoyang-sde" },
       { icon: "linkedin", link: "https://www.linkedin.com/in/xiaoyang-sde/" },
