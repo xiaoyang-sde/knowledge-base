@@ -24,11 +24,43 @@ Each program has one or more translation units. Each translation unit consists o
   - Variables declared `extern`
   - Classes, member functions, and static data members
 
-`inline` can be applied to a variable or function. The definition of an inline variable or function must be reachable in the translation unit where it is accessed. The inline variable or function with external linkage could have more than one definitions in the program as long as each definition appears in a different translation unit and all definitions are identical. For example, an inline variable or function could be defined in a header file that is included in multiple source files. It must be declared `inline` in all translation units and it has the same address in all translation untis. Function templates and member functions defined inside a class are defined `inline`.
+`inline` can be applied to a variable or function. The definition of an inline variable or function must be reachable in the translation unit where it is accessed. The inline variable or function with external linkage could have more than one definitions in the program as long as each definition appears in a different translation unit and all definitions are identical. For example, an inline variable or function could be defined in a header file that is included in multiple source files. It must be declared `inline` in all translation units and it has the same address in all translation units. Function templates and member functions defined inside a class are defined `inline`.
+
+### Example
+
+```cpp
+extern int extern_variable;
+static int static_variable = 0;
+int global_variable = 0;
+inline int inline_variable = 0;
+```
+
+```console
+$ clang++ -c main.cpp -o main.o
+$ readelf -s main.o
+
+Symbol table '.symtab' contains 9 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND
+     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS main.cpp
+     2: 0000000000000000     0 SECTION LOCAL  DEFAULT    2 .text
+     3: 0000000000000004     4 OBJECT  LOCAL  DEFAULT    6 static_variable
+     4: 0000000000000000     0 SECTION LOCAL  DEFAULT    6 .bss
+     5: 0000000000000000   143 FUNC    GLOBAL DEFAULT    2 main
+     6: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND extern_variable
+     7: 0000000000000000     4 OBJECT  GLOBAL DEFAULT    6 global_variable
+     8: 0000000000000000     4 OBJECT  WEAK   DEFAULT    8 inline_variable
+     9: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND __stack_chk_fail
+```
+
+- `extern_variable`: `GLOBAL` binding in the `UND` (undefined) section
+- `static_variable`: `LOCAL` binding
+- `global_variable`: `GLOBAL` binding
+- `inline_variable`: `WEAK` binding
 
 ## Storage Class
 
-- Atuomatic storage duration: The storage for the object is allocated at the beginning of the enclosing code block and deallocated at the end. Local objects have this storage duration, except those declared `static`, `extern` or `thread_local`.
+- Automatic storage duration: The storage for the object is allocated at the beginning of the enclosing code block and deallocated at the end. Local objects have this storage duration, except those declared `static`, `extern` or `thread_local`.
 
 - Static storage duration: The storage for the object is allocated when the program begins and deallocated when the program ends. Each object has a unique instance. Objects declared at namespace scope have static storage duration.
 
@@ -37,6 +69,11 @@ Each program has one or more translation units. Each translation unit consists o
 - Dynamic storage duration. The storage for the object is allocated and deallocated using heap allocation functions, such as `new` and `delete`.
 
 Variables declared at block scope with the specifier `static` or `thread_local` have static or thread storage duration but are initialized the first time control passes through their declaration. On all further calls, the declaration is skipped. The destructor for a block-scope `static` variable is called at program exit.
+
+## One-Definition Rule
+
+- No translation unit shall contain more than one definition of a variable, function, class type, enumeration type, or template.
+- Each program shall contain one definition of each non-inline function or variable that is odr-used in that program. "odr-used" means that an item is used in a context where the definition of it must be present. (This rule doesn't cover class type, enumeration type, inline function with external linkage, class template, non-static function template, static data member of a class template, member function of a class template, or partial template specialization.)
 
 ## Header Guard
 
