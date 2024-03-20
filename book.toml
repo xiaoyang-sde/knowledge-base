@@ -1,0 +1,14 @@
+[book]
+authors = ["Xiaoyang Liu"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Knowledge Base"
+
+[output.html]
+cname = "xiaoyang-liu.com"
+no-section-label = true
+git-repository-url = "https://github.com/xiaoyang-sde/knowledge-base"
+
+[output.html.print]
+enable = false

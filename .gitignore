@@ -1,0 +1,8 @@
+# Rust Toolchain
+book
+
+# Configuration
+.vscode
+
+# macOS
+.DS_Store
