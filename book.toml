@@ -9,6 +9,7 @@ title = "Knowledge Base"
 cname = "xiaoyang-liu.com"
 no-section-label = true
 git-repository-url = "https://github.com/xiaoyang-sde/knowledge-base"
+additional-css = ["theme/custom.css"]
 
 [output.html.print]
 enable = false

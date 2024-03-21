@@ -1,0 +1,22 @@
+:root {
+  --mono-font: "JetBrains Mono", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace;
+  --code-font-size: 1em
+}
+
+html {
+  font-family: "Merriweather", serif;
+}
+
+body {
+  font-size: 1.8rem;
+}
+
+h2,
+h3 {
+  margin-block-start: 1em;
+}
+
+h4,
+h5 {
+  margin-block-start: 0.5em;
+}
