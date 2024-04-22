@@ -18,7 +18,7 @@ auto main() -> std::int32_t {
 }
 ```
 
-For example, the operator `<<` is not defined in the global namespace, but ADL examines `std` namespace because the argument `std::cout` is defined in `std` and finds `std::operator<<(std::ostream&, const char*)`.
+For example, the operator `<<` is not defined in the global namespace, but ADL examines the `std` namespace because the argument `std::cout` is defined in `std` and finds `std::operator<<(std::ostream&, const char*)`.
 
 ```cpp
 auto main() -> std::int32_t {
@@ -31,13 +31,24 @@ auto main() -> std::int32_t {
 }
 ```
 
-ADL can find a friend function that is defined within a class or class template, even if it was never declared at namespace level.
+## Lookup Set
+
+ADL is not performed if an unqualified lookup finds a declaration of a class member, a declaration of a function at block scope, or a declaration that is not a function or a function template, such as a function object. If ADL is performed, for each argument in the function call expression its type is examined to determine the associated set of namespaces and classes that it will add to the lookup. (The rules are non-exhaustive.)
+
+- For an argument of a class type, the class itself, all of its direct and indirect base classes, and its innermost enclosing namespace are added to the set.
+- For an argument of a class template specialization, the types of all template arguments provided for type template parameters are examined and their associated set of classes and namespaces are added to the set.
+- For an argument of an enumeration type, its innermost enclosing namespace and its enclosing class are added to the set.
+- For an argument of a function type, the function parameter types and the function return type are examined and their associated set of classes and namespaces are added to the set.
+- If a namespace in the associated set of classes and namespaces is an inline namespace, its enclosing namespace is also added to the set.
+- If a namespace in the associated set of classes and namespaces encloses an inline namespace, that inline namespace is added to the set.
+
+After the associated set of classes and namespaces is determined, all declarations found in classes of this set are discarded for further ADL processing, except namespace-scoped friend functions and function templates. (i.e. ADL can find a friend function that is defined within a class or class template even if it's not declared at the namespace level.)
 
 ## Two-Step Idiom
 
 ### Motivation
 
-It's a common practice to specialize a template in `std` for a specific type, given that specialization is more efficient than the default implementation. For example, prior to the introduction of move semantics in C++11, a class that manages heap-allocated resources could provide a specialized `std::swap` that swaps the pointers instead of the resources. There are a few methods to specialize such function templates:
+It's a common practice to specialize a template in `std` for a specific type, given that specialization is more efficient than the default implementation. For example, before the introduction of move semantics in C++11, a class that manages heap-allocated resources could provide a specialized `std::swap` that swaps the pointers instead of the resources. There are a few methods to specialize such function templates:
 
 - Reopen the `std` namespace and define the template specialization in it, which is a bad practice
 
