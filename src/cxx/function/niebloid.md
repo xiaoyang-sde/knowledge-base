@@ -1,6 +1,6 @@
 # Niebloid
 
-Niebloid is an function object that doesn't require explicit template argument lists during invocation, invisible to ADL, and disables ADL if it's called with normal unqualified lookup.
+Niebloid is a function object that doesn't require explicit template argument lists during invocation, invisible to ADL, and disables ADL if it's called with normal unqualified lookup.
 
 The algorithms in `std::ranges` are implemented as Niebloids, which means that the overloads in `std` won't be selected when an algorithm from `std::ranges` is called. In `libc++`, these algorithms are implemented as customization point objects.
 
