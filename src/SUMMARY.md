@@ -4,17 +4,21 @@
 
 - [About Me](index.md)
 
-# C++ WG21
+# C++ Language
 
-- [P0896R4: The One Ranges Proposal](wg21/P0896R4/index.md)
-  - [Ranges](wg21/P0896R4/ranges.md)
-  - [Iterators]()
-  - [Appendix]()
-    - [Argument-Dependent Lookup](wg21/P0896R4/appendix/adl.md)
-    - [Customization Point Object](wg21/P0896R4/appendix/cpo.md)
-    - [Niebloid](wg21/P0896R4/appendix/niebloid.md)
+- [Function]()
+  - [Argument-Dependent Lookup](cxx/function/adl.md)
+  - [Customization Point Object](cxx/function/cpo.md)
+  - [Niebloid](cxx/function/niebloid.md)
+
+# WG21 Proposal
+
+- [N4775: Working Draft, C++ Extensions for Coroutines](wg21/N4775.md)
+- [P0515R3: Consistent comparison](wg21/P0515R3.md)
+- [P0896R4: The One Ranges Proposal](wg21/P0896R4.md)
 - [P1169R4: static `operator()`](wg21/P1169R4.md)
 - [P1456R1: Move-only views](wg21/P1456R1.md)
 - [P2387R3: Pipe support for user-defined range adaptors](wg21/P2387R3.md)
 - [P2415R2: What is a `view`?](wg21/P2415R2.md)
 - [P2442R1: Windowing range adaptors: `views::chunk` and `views::slide`](wg21/P2442R1.md)
+- [P2502R2: `std::generator`: Synchronous Coroutine Generator for Ranges](wg21/P2502R2.md)
