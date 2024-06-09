@@ -16,6 +16,7 @@
 - [N4775: Working Draft, C++ Extensions for Coroutines](wg21/N4775.md)
 - [P0288R9: `move_only_function`](wg21/P0288R9.md)
 - [P0515R3: Consistent comparison](wg21/P0515R3.md)
+- [P0792R14: `function_ref`: a type-erased callable reference](wg21/P0792R14.md)
 - [P0896R4: The One Ranges Proposal](wg21/P0896R4.md)
 - [P1169R4: static `operator()`](wg21/P1169R4.md)
 - [P1456R1: Move-only views](wg21/P1456R1.md)
