@@ -9,7 +9,10 @@
 - [Function]()
   - [Argument-Dependent Lookup](cxx/function/adl.md)
   - [Customization Point Object](cxx/function/cpo.md)
+  - [Function Object](cxx/function/function-object.md)
   - [Niebloid](cxx/function/niebloid.md)
+- [Object]()
+  - [Lifetime](cxx/object/lifetime.md)
 
 # WG21 Proposal
 
