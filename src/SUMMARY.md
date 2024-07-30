@@ -26,5 +26,4 @@
 - [P2255R2: A type trait to detect reference binding to temporary](wg21/P2255R2.md)
 - [P2387R3: Pipe support for user-defined range adaptors](wg21/P2387R3.md)
 - [P2415R2: What is a `view`?](wg21/P2415R2.md)
-- [P2442R1: Windowing range adaptors: `views::chunk` and `views::slide`](wg21/P2442R1.md)
 - [P2502R2: `std::generator`: Synchronous Coroutine Generator for Ranges](wg21/P2502R2.md)
