@@ -27,3 +27,4 @@
 - [P2255R2: A type trait to detect reference binding to temporary](wg21/P2255R2.md)
 - [P2387R3: Pipe support for user-defined range adaptors](wg21/P2387R3.md)
 - [P2415R2: What is a `view`?](wg21/P2415R2.md)
+- [P2440R1: `ranges::iota`, `ranges::shift_left`, and `ranges::shift_right`](wg21/P2440R1.md)
