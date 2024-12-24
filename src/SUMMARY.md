@@ -23,6 +23,7 @@
 - [P0896R4: The One Ranges Proposal](wg21/P0896R4.md)
 - [P1169R4: static `operator()`](wg21/P1169R4.md)
 - [P1456R1: Move-only views](wg21/P1456R1.md)
+- [P2214R2: A Plan for C++23 Ranges](wg21/P2214R2.md)
 - [P2255R2: A type trait to detect reference binding to temporary](wg21/P2255R2.md)
 - [P2387R3: Pipe support for user-defined range adaptors](wg21/P2387R3.md)
 - [P2415R2: What is a `view`?](wg21/P2415R2.md)
