@@ -1,7 +1,7 @@
 # About Me
 
-I'm an undergraduate student at UCLA and I will join [Hudson River Trading](https://www.hudsonrivertrading.com) as an algorithm engineer in August 2024. I'm interested in modern art, classic rock, and options trading.
+Hi! I'm Xiaoyang. I graduated from UCLA in 2024 and recently started working at Hudson River Trading.
 
-I have experience in maintaining open-source projects with C++ and Rust. As of 2024, I'm contributing to `libc++`, focusing on improving the source code and implementing C++23 features. This website is a personal knowledge base, containing notes on WG21 (The C++ Standards Committee) papers, Rust RFCs, and quantitative finance.
+I have experience maintaining open-source projects using C++ and Rust. As of 2024, I'm contributing to libc++, focusing on improving the source code and implementing features from C++23 and C++26. This website serves as a knowledge base, containing notes on WG21 (the C++ Standards Committee) papers, Rust RFCs, and quantitative finance.
 
 ![The Great Wave off Kanagawa](images/kanagawa.jpg)
